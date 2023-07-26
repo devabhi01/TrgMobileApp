@@ -6,6 +6,7 @@ const HomeScreen = () => {
   return (
     <View>
       <Navbar />
+      <Text>Home Screen</Text>
     </View>
   );
 };
