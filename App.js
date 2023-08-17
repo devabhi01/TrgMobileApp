@@ -13,6 +13,8 @@ import TestScreen from "./screen/TestScreen";
 import React, { useState } from 'react'
 import MaterialScreen from './screen/MaterialScreen';
 
+import LoginSignup from './screen/LoginSignup';
+
 const Tab = createMaterialBottomTabNavigator();
 // const Drawer = createDrawerNavigator();
 
@@ -49,7 +51,14 @@ const App = () => {
               <FontAwesome5 name={'info'} size={24} />
             ),
           }} />
+          <Tab.Screen name="Login" component={LoginSignup} options={{
+            tabBarLabel: 'Login/Register',
+            tabBarIcon: ({ color }) => (
+              <FontAwesome5 name={'info'} size={24} />
+            ),
+          }} />
         </Tab.Navigator>
+
       </NavigationContainer>
     </PaperProvider>
   )
