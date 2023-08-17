@@ -1,14 +1,20 @@
-import {View, Text, SafeAreaView, TouchableOpacity} from 'react-native';
+import {View, Text, SafeAreaView, TouchableOpacity, Image} from 'react-native';
 import React from 'react';
-import {Rect} from 'react-native-svg';
-import LoginSVG from '../components/assets/img/LoginSignup.svg';
 
 const LoginSignup = () => {
   return (
     <SafeAreaView style={{flex: 1}}>
       <View>
         <View style={{alignItems: 'center'}}>
-          <LoginSVG width={400} height={400} borderRadius={20} />
+          <Image
+            style={{
+              height: 400,
+              width: 400,
+              borderBottomLeftRadius: 30,
+              borderBottomRightRadius: 30,
+            }}
+            source={require('../components/assets/img/OnboardLogin.jpg')}
+          />
         </View>
         <View
           style={{
