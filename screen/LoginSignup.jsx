@@ -1,7 +1,7 @@
 import {View, Text, SafeAreaView, TouchableOpacity, Image} from 'react-native';
 import React from 'react';
 
-const LoginSignup = () => {
+function LoginSignup({navigation}) {
   return (
     <SafeAreaView style={{flex: 1}}>
       <View>
@@ -38,6 +38,9 @@ const LoginSignup = () => {
         </View>
         <View style={{flexDirection: 'row', justifyContent: 'space-evenly'}}>
           <TouchableOpacity
+            onPress={() => {
+              navigation.navigate('Login');
+            }}
             style={{
               backgroundColor: '#dc3545',
               paddingHorizontal: 50,
@@ -51,6 +54,7 @@ const LoginSignup = () => {
             </Text>
           </TouchableOpacity>
           <TouchableOpacity
+            onPress={() => navigation.navigate('Signup')}
             style={{
               backgroundColor: '#dc3545',
               paddingHorizontal: 50,
@@ -67,6 +71,6 @@ const LoginSignup = () => {
       </View>
     </SafeAreaView>
   );
-};
+}
 
 export default LoginSignup;

@@ -12,10 +12,13 @@ import SettingScreen from "./screen/SettingScreen";
 import TestScreen from "./screen/TestScreen";
 import React, { useState } from 'react'
 import MaterialScreen from './screen/MaterialScreen';
+import { createStackNavigator } from "@react-navigation/stack"
 
 import LoginSignup from './screen/LoginSignup';
 
 const Tab = createMaterialBottomTabNavigator();
+const Stack = createStackNavigator();
+
 // const Drawer = createDrawerNavigator();
 
 const App = () => {
@@ -23,9 +26,14 @@ const App = () => {
   return (
     <PaperProvider>
       <NavigationContainer>
+        <Stack.Navigator screenOptions={{ headerShown: false }}>
+          <Stack.Screen name="LoginSignup" component={LoginSignup} />
+          <Stack.Screen name="Login" component={LoginScreen} />
+          <Stack.Screen name="Signup" component={SignUpScreen} />
+        </Stack.Navigator>
         {/* <Drawer.Navigator>
           <Drawer.Screen name="signup" component={SignUpScreen} />
-        </Drawer.Navigator> */}
+        </Drawer.Navigator>
         <Tab.Navigator>
           <Tab.Screen name="Home" component={HomeScreen} options={{
             tabBarLabel: 'Home',
@@ -57,7 +65,7 @@ const App = () => {
               <FontAwesome5 name={'info'} size={24} />
             ),
           }} />
-        </Tab.Navigator>
+        </Tab.Navigator> */}
 
       </NavigationContainer>
     </PaperProvider>
