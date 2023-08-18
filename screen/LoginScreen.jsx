@@ -148,7 +148,7 @@ const LoginScreen = props => {
         <View style={{flexDirection: 'row', justifyContent: 'center'}}>
           <Text style={{color: '#462530'}}>Not a member? </Text>
           <TouchableOpacity onPress={() => props.navigation.navigate('Signup')}>
-            <Text style={{color: '#A32734'}}>Signup now</Text>
+            <Text style={{color: '#A32734', fontWeight: 500}}>Signup now</Text>
           </TouchableOpacity>
         </View>
       </View>
