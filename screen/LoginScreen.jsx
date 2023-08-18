@@ -61,7 +61,7 @@ const LoginScreen = props => {
         <View>
           <TextInput
             style={styles.input}
-            placeholder="Enter Username / Email"
+            placeholder="Phone number / Email"
             placeholderTextColor={'#241D20'}
             cursorColor={'#dc3545'}
             allowFontScaling

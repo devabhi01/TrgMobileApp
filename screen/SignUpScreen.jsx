@@ -53,7 +53,7 @@ const SignUpScreen = props => {
               fontWeight: 600,
               marginBottom: 30,
             }}>
-            Signup for TRG
+            Create an account
           </Text>
           <View>
             <TextInput

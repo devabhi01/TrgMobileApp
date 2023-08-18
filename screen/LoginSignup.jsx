@@ -1,7 +1,7 @@
 import {View, Text, SafeAreaView, TouchableOpacity, Image} from 'react-native';
 import React from 'react';
 
-function LoginSignup({navigation}) {
+const LoginSignup = props => {
   return (
     <SafeAreaView style={{flex: 1}}>
       <View>
@@ -36,10 +36,15 @@ function LoginSignup({navigation}) {
             Join us to pace your Career
           </Text>
         </View>
-        <View style={{flexDirection: 'row', justifyContent: 'space-evenly'}}>
+        <View
+          style={{
+            flexDirection: 'row',
+            justifyContent: 'space-evenly',
+            marginBottom: 50,
+          }}>
           <TouchableOpacity
             onPress={() => {
-              navigation.navigate('Login');
+              props.navigation.navigate('Login');
             }}
             style={{
               backgroundColor: '#dc3545',
@@ -54,7 +59,7 @@ function LoginSignup({navigation}) {
             </Text>
           </TouchableOpacity>
           <TouchableOpacity
-            onPress={() => navigation.navigate('Signup')}
+            onPress={() => props.navigation.navigate('Signup')}
             style={{
               backgroundColor: '#dc3545',
               paddingHorizontal: 50,
@@ -68,9 +73,33 @@ function LoginSignup({navigation}) {
             </Text>
           </TouchableOpacity>
         </View>
+        <View
+          style={{
+            flexDirection: 'row',
+            justifyContent: 'flex-end',
+            marginRight: 30,
+          }}>
+          <TouchableOpacity
+            onPress={() => props.navigation.navigate('home')}
+            style={{
+              width: 100,
+              backgroundColor: '#dc3545',
+              borderRadius: 10,
+              alignItems: 'center',
+              paddingVertical: 10,
+            }}>
+            <Text
+              style={{
+                color: '#eee',
+                fontWeight: 500,
+              }}>
+              Later
+            </Text>
+          </TouchableOpacity>
+        </View>
       </View>
     </SafeAreaView>
   );
-}
+};
 
 export default LoginSignup;
