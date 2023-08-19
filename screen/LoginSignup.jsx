@@ -13,7 +13,7 @@ const LoginSignup = props => {
               borderBottomLeftRadius: 30,
               borderBottomRightRadius: 30,
             }}
-            source={require('../components/assets/img/OnboardLogin.jpg')}
+            source={require('../assets/img/OnboardLogin.jpg')}
           />
         </View>
         <View

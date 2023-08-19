@@ -11,7 +11,10 @@ import {
 } from 'react-native';
 
 import Feather from 'react-native-vector-icons/Feather';
-import ManSVG from '../components/assets/img/Man.svg';
+
+// Images here
+import ManSVG from '../assets/img/Man.svg';
+import CbseSVG from '../assets/img/cbse.svg';
 
 const HomeScreen = () => {
   return (
@@ -102,6 +105,43 @@ const HomeScreen = () => {
               </Text>
             </TouchableOpacity>
           </View>
+
+          <View
+            style={{
+              margin: 30,
+              flexDirection: 'row',
+              flexWrap: 'wrap',
+              justifyContent: 'space-around',
+              marginBottom: 100,
+            }}>
+            <TouchableOpacity style={styles.ex_categories}>
+              <CbseSVG />
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.ex_categories}>
+              <Image
+                resizeMethod="auto"
+                source={require('../assets/img/icse.png')}
+              />
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.ex_categories}>
+              <Image source={require('../assets/img/ssc.png')} />
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.ex_categories}>
+              <Image source={require('../assets/img/cuet.png')} />
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.ex_categories}>
+              <Image source={require('../assets/img/clat.png')} />
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.ex_categories}>
+              <Image source={require('../assets/img/dsssb.png')} />
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.ex_categories}>
+              <Image source={require('../assets/img/Quiz.png')} />
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.ex_categories}>
+              <Image source={require('../assets/img/test.png')} />
+            </TouchableOpacity>
+          </View>
         </View>
       </ScrollView>
     </SafeAreaView>
@@ -134,5 +174,14 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     marginBottom: 20,
+  },
+  ex_categories: {
+    width: 140,
+    height: 140,
+    borderColor: '#dc3545',
+    borderWidth: 2,
+    marginBottom: 20,
+    borderRadius: 8,
+    padding: 10,
   },
 });

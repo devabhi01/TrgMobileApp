@@ -9,9 +9,10 @@ import {
 
 import React, {useState} from 'react';
 
-import BackgroundImage from '../components/assets/img/bg_redish.jpg';
-import GoogleSVG from '../components/assets/img/google.svg';
-import AppleSVG from '../components/assets/img/apple.svg';
+
+import GoogleSVG from '../assets/img/google.svg';
+import AppleSVG from '../assets/img/apple.svg';
+
 
 const LoginScreen = props => {
   const [email, setEmail] = useState('');

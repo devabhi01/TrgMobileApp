@@ -1,20 +1,15 @@
 // import 'react-native-gesture-handler';
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
-import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
-import { NavigationContainer } from '@react-navigation/native';
+
 import { View, Text, Button, StyleSheet } from 'react-native'
-import { PaperProvider } from 'react-native-paper';
-import SignUpScreen from './screen/SignUpScreen';
-import LoginScreen from './screen/LoginScreen';
-import HomeScreen from "./screen/HomeScreen";
-import SettingScreen from "./screen/SettingScreen";
-import TestScreen from "./screen/TestScreen";
+
+
 import React, { useState } from 'react'
-import MaterialScreen from './screen/MaterialScreen';
+
 import { createStackNavigator } from "@react-navigation/stack"
 
-import LoginSignup from './screen/LoginSignup';
+
+import AuthStack from './navigation/AuthStack';
 
 const Tab = createMaterialBottomTabNavigator();
 const Stack = createStackNavigator();
@@ -24,15 +19,8 @@ const Stack = createStackNavigator();
 const App = () => {
 
   return (
-    <PaperProvider>
-      <NavigationContainer>
-        <Stack.Navigator screenOptions={{ headerShown: false }}>
-          <Stack.Screen name="LoginSignup" component={LoginSignup} />
-          <Stack.Screen name="Login" component={LoginScreen} />
-          <Stack.Screen name="Signup" component={SignUpScreen} />
-          <Stack.Screen name="home" component={HomeScreen} />
-        </Stack.Navigator>
-        {/* <Drawer.Navigator>
+    <><AuthStack />
+      {/* <Drawer.Navigator>
           <Drawer.Screen name="signup" component={SignUpScreen} />
         </Drawer.Navigator>
         <Tab.Navigator>
@@ -66,10 +54,7 @@ const App = () => {
               <FontAwesome5 name={'info'} size={24} />
             ),
           }} />
-        </Tab.Navigator> */}
-
-      </NavigationContainer>
-    </PaperProvider>
+        </Tab.Navigator> */}</>
   )
 }
 

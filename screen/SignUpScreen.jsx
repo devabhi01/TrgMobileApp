@@ -11,9 +11,9 @@ import {
 
 import React, {useState} from 'react';
 import DatePicker from 'react-native-date-picker';
-import {Button} from 'react-native-paper';
-import GoogleSVG from '../components/assets/img/google.svg';
-import AppleSVG from '../components/assets/img/apple.svg';
+
+import GoogleSVG from '../assets/img/google.svg';
+import AppleSVG from '../assets/img/apple.svg';
 
 const SignUpScreen = props => {
   const [name, setName] = React.useState('');
@@ -42,7 +42,7 @@ const SignUpScreen = props => {
                 borderBottomLeftRadius: 30,
                 borderBottomRightRadius: 30,
               }}
-              source={require('../components/assets/img/Signup.jpg')}
+              source={require('../assets/img/Signup.jpg')}
             />
           </View>
           <Text
