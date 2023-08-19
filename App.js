@@ -1,24 +1,15 @@
-
-
-
 import { View, Text, Button, StyleSheet } from 'react-native'
-
-
 import React, { useState } from 'react'
-
-
-
-
+import { NavigationContainer } from '@react-navigation/native';
 import AuthStack from './navigation/AuthStack';
-
-
-
-
 
 const App = () => {
 
   return (
-    <><AuthStack />
+
+    <NavigationContainer>
+      <AuthStack />
+
       {/* <Drawer.Navigator>
           <Drawer.Screen name="signup" component={SignUpScreen} />
         </Drawer.Navigator>
@@ -53,7 +44,9 @@ const App = () => {
               <FontAwesome5 name={'info'} size={24} />
             ),
           }} />
-        </Tab.Navigator> */}</>
+        </Tab.Navigator> */}
+    </NavigationContainer>
+
   )
 }
 

@@ -80,7 +80,7 @@ const LoginSignup = props => {
             marginRight: 30,
           }}>
           <TouchableOpacity
-            onPress={() => props.navigation.navigate('home')}
+            onPress={() => props.navigation.navigate('Home')}
             style={{
               width: 100,
               backgroundColor: '#dc3545',

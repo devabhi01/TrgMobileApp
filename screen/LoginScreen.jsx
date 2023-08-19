@@ -90,7 +90,7 @@ const LoginScreen = props => {
             Forgot Password
           </Text>
         </TouchableOpacity>
-        <TouchableOpacity
+        <TouchableOpacity onPress={()=> props.navigation.navigate('Home')}
           style={{
             backgroundColor: '#dc3545',
             margin: 12,

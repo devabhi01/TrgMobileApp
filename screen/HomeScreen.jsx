@@ -103,7 +103,7 @@ const HomeScreen = props => {
               flexDirection: 'row',
               flexWrap: 'wrap',
               justifyContent: 'space-around',
-              marginBottom: 100,
+              marginBottom: 50,
             }}>
             <TouchableOpacity style={styles.ex_categories}>
               <CbseSVG />

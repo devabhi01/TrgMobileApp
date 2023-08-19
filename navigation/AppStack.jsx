@@ -11,12 +11,12 @@ const Drawer = createDrawerNavigator();
 const AppStack = () => {
   return (
     <>
-      <NavigationContainer>
+      
         <Drawer.Navigator initialRouteName="Home">
           <Drawer.Screen name="Home" component={HomeScreen} />
           <Drawer.Screen name="Profile Setting" component={ProfileSettings} />
         </Drawer.Navigator>
-      </NavigationContainer>
+      
     </>
   );
 };
