@@ -16,7 +16,7 @@ import Feather from 'react-native-vector-icons/Feather';
 import ManSVG from '../assets/img/Man.svg';
 import CbseSVG from '../assets/img/cbse.svg';
 
-const HomeScreen = () => {
+const HomeScreen = props => {
   return (
     <SafeAreaView style={{flex: 1, backgroundColor: '#ffffff'}}>
       <ScrollView style={{padding: 10}}>
@@ -40,7 +40,9 @@ const HomeScreen = () => {
               TRG
             </Text> */}
 
-            <TouchableOpacity style={{marginRight: 20}}>
+            <TouchableOpacity
+              onPress={() => props.navigation.navigate('Login')}
+              style={{marginRight: 20}}>
               <View
                 style={{
                   width: 60,
@@ -93,17 +95,6 @@ const HomeScreen = () => {
               }}>
               Explore Categories
             </Text>
-            <TouchableOpacity>
-              <Text
-                style={{
-                  color: '#dc3545',
-                  fontSize: 14,
-                  fontWeight: 700,
-                  marginHorizontal: 20,
-                }}>
-                See all
-              </Text>
-            </TouchableOpacity>
           </View>
 
           <View

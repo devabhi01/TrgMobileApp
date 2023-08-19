@@ -1,20 +1,19 @@
-// import 'react-native-gesture-handler';
-import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
+
+
 
 import { View, Text, Button, StyleSheet } from 'react-native'
 
 
 import React, { useState } from 'react'
 
-import { createStackNavigator } from "@react-navigation/stack"
+
 
 
 import AuthStack from './navigation/AuthStack';
 
-const Tab = createMaterialBottomTabNavigator();
-const Stack = createStackNavigator();
 
-// const Drawer = createDrawerNavigator();
+
+
 
 const App = () => {
 
