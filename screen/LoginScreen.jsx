@@ -8,6 +8,7 @@ import {
 } from 'react-native';
 
 import React, {useState} from 'react';
+import {colors} from '../constants';
 
 import GoogleSVG from '../assets/img/google.svg';
 import AppleSVG from '../assets/img/apple.svg';
@@ -62,7 +63,7 @@ const LoginScreen = props => {
             style={styles.input}
             placeholder="Phone number / Email"
             placeholderTextColor={'#241D20'}
-            cursorColor={'#dc3545'}
+            cursorColor={colors.primary}
             allowFontScaling
           />
           <TextInput
