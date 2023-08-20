@@ -11,6 +11,7 @@ import {
 
 import React, {useState} from 'react';
 import DatePicker from 'react-native-date-picker';
+import {RadioButton} from 'react-native-paper';
 
 import GoogleSVG from '../assets/img/google.svg';
 import AppleSVG from '../assets/img/apple.svg';
@@ -24,6 +25,8 @@ const SignUpScreen = props => {
   const [date, setDate] = useState(new Date());
   const [open, setOpen] = useState(false);
   const [dobLabel, setDobLabel] = useState('Date of Birth');
+
+  const [value, setValue] = React.useState('first');
 
   return (
     <SafeAreaView style={styles.container}>
@@ -77,6 +80,45 @@ const SignUpScreen = props => {
               cursorColor={'#dc3545'}
               keyboardType="number-pad"
             />
+            <View
+              style={{
+                marginHorizontal: 30,
+                borderWidth: 1,
+                borderRadius: 10,
+                borderColor: '#dc3445',
+              }}>
+              <Text
+                style={{
+                  color: '#dc3545',
+                  fontSize: 15,
+                  fontWeight: 500,
+                  textAlign: 'center',
+                  paddingTop: 10,
+                }}>
+                Select Gender
+              </Text>
+              <RadioButton.Group
+                onValueChange={value => setValue(value)}
+                value={value}>
+                <RadioButton.Item
+                  label="Male"
+                  value="first"
+                  color={'#dc3545'}
+                  labelStyle={{color: '#241D20'}}
+                />
+                <RadioButton.Item
+                  label="Female"
+                  value="second"
+                  color="#FA78C2"
+                  labelStyle={{color: '#241D20'}}
+                />
+                <RadioButton.Item
+                  label="Other"
+                  value="third"
+                  labelStyle={{color: '#241D20'}}
+                />
+              </RadioButton.Group>
+            </View>
             <TextInput
               style={styles.input}
               secureTextEntry

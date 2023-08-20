@@ -7,9 +7,10 @@ import {
   StyleSheet,
   TouchableOpacity,
   Image,
+  useState,
   TextInput,
 } from 'react-native';
-
+import {Searchbar} from 'react-native-paper';
 import Feather from 'react-native-vector-icons/Feather';
 
 // Images here
@@ -17,6 +18,9 @@ import ManSVG from '../assets/img/Man.svg';
 import CbseSVG from '../assets/img/cbse.svg';
 
 const HomeScreen = props => {
+  const [searchQuery, setSearchQuery] = React.useState('');
+
+  const onChangeSearch = query => setSearchQuery(query);
   return (
     <SafeAreaView style={{flex: 1, backgroundColor: '#ffffff'}}>
       <ScrollView style={{padding: 10}}>
@@ -59,21 +63,20 @@ const HomeScreen = props => {
               </View>
             </TouchableOpacity>
           </View>
-
-          <View style={styles.input}>
-            <Feather name="search" size={20} color={'#dc3545'} />
-            <TextInput
+          <View>
+            <Searchbar
               placeholder="Search"
               placeholderTextColor={'#241D20'}
-              width={200}
-              selectionColor={'#dc3545'}
-              style={{color: '#241D20'}}
+              cursorColor={'#dc3545'}
+              onChangeText={onChangeSearch}
+              value={searchQuery}
+              iconColor="#dc3545"
+              style={{
+                marginHorizontal: 20,
+                borderRadius: 10,
+                backgroundColor: '#f5f5f5',
+              }}
             />
-            <TouchableOpacity>
-              <Text style={{justifyContent: 'flex-end'}}>
-                <Feather name="arrow-right" size={20} color={'#dc3545'} />
-              </Text>
-            </TouchableOpacity>
           </View>
 
           <Text

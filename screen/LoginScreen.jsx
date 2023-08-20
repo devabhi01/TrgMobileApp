@@ -9,10 +9,8 @@ import {
 
 import React, {useState} from 'react';
 
-
 import GoogleSVG from '../assets/img/google.svg';
 import AppleSVG from '../assets/img/apple.svg';
-
 
 const LoginScreen = props => {
   const [email, setEmail] = useState('');
@@ -90,7 +88,8 @@ const LoginScreen = props => {
             Forgot Password
           </Text>
         </TouchableOpacity>
-        <TouchableOpacity onPress={()=> props.navigation.navigate('Home')}
+        <TouchableOpacity
+          onPress={() => props.navigation.navigate('Home')}
           style={{
             backgroundColor: '#dc3545',
             margin: 12,
