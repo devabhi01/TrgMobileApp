@@ -109,7 +109,7 @@ const HomeScreen = props => {
               marginBottom: 50,
             }}>
             <TouchableOpacity style={styles.ex_categories}>
-              <CbseSVG />
+              <Image source={require('../assets/img/cbse.png')} />
             </TouchableOpacity>
             <TouchableOpacity style={styles.ex_categories}>
               <Image

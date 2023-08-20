@@ -90,7 +90,7 @@ const LoginScreen = props => {
           </Text>
         </TouchableOpacity>
         <TouchableOpacity
-          onPress={() => props.navigation.navigate('Home')}
+          onPress={() => props.navigation.navigate('Home_tab')}
           style={{
             backgroundColor: '#dc3545',
             margin: 12,
