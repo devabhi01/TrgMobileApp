@@ -14,7 +14,7 @@ import {colors} from '../constants';
 
 const SettingScreen = () => {
   return (
-    <SafeAreaView style={{flex: 1, backgroundColor: colors.dark}}>
+    <SafeAreaView style={{flex: 1, backgroundColor: colors.graylight}}>
       <ScrollView style={{marginHorizontal: 10}}>
         <View>
           <TouchableOpacity
@@ -36,33 +36,34 @@ const SettingScreen = () => {
                 paddingHorizontal: 20,
                 fontSize: 20,
                 fontWeight: 600,
+                color: colors.primary,
               }}>
               Abhishek
             </Text>
           </TouchableOpacity>
           <TouchableOpacity style={styles.btn}>
-            <IonIcon name="lock-closed" size={24} colors="#dc3545" />
+            <IonIcon name="lock-closed" size={24} color={colors.primary} />
             <Text style={styles.btnText}>Privacy</Text>
           </TouchableOpacity>
           <TouchableOpacity style={styles.btn}>
-            <IonIcon name="notifications" size={24} colors="#dc3545" />
+            <IonIcon name="notifications" size={24} color={colors.primary} />
             <Text style={styles.btnText}>Notifications</Text>
           </TouchableOpacity>
           <TouchableOpacity style={styles.btn}>
-            <IonIcon name="key" size={24} colors="#dc3545" />
+            <IonIcon name="key" size={24} color={colors.primary} />
             <Text style={styles.btnText}>Account</Text>
           </TouchableOpacity>
           <TouchableOpacity style={styles.btn}>
             <Image
               style={{width: 22, height: 22}}
-              color={'#eee'}
+              color={'#dc3545'}
               source={require('../assets/img/help.png')}
             />
             <Text style={styles.btnText}>Help & Support</Text>
           </TouchableOpacity>
 
           <TouchableOpacity style={styles.btn}>
-            <IonIcon name="cloud-download" size={24} colors="#dc3545" />
+            <IonIcon name="cloud-download" size={24} color={colors.primary} />
             <Text style={styles.btnText}>Storage & Data</Text>
           </TouchableOpacity>
           <TouchableOpacity style={styles.btn}>
@@ -74,7 +75,12 @@ const SettingScreen = () => {
             <Text style={styles.btnText}>Invite a friend</Text>
           </TouchableOpacity>
           <View style={{marginVertical: 10}}>
-            <Text style={{textAlign: 'center', fontSize: 18, color: '#eee'}}>
+            <Text
+              style={{
+                textAlign: 'center',
+                fontSize: 18,
+                color: colors.primary,
+              }}>
               Follow us
             </Text>
             <View
@@ -84,29 +90,41 @@ const SettingScreen = () => {
                 marginVertical: 20,
               }}>
               <TouchableOpacity style={{marginHorizontal: 10}}>
-                <IonIcon name="logo-instagram" size={30}  />
+                <IonIcon
+                  name="logo-instagram"
+                  size={30}
+                  color={colors.primary}
+                />
               </TouchableOpacity>
               <TouchableOpacity style={{marginHorizontal: 10}}>
-                <IonIcon name="logo-facebook" size={30}  />
+                <IonIcon
+                  name="logo-facebook"
+                  size={30}
+                  color={colors.primary}
+                />
               </TouchableOpacity>
               <TouchableOpacity style={{marginHorizontal: 10}}>
-                <IonIcon name="logo-linkedin" size={30}  />
+                <IonIcon
+                  name="logo-linkedin"
+                  size={30}
+                  color={colors.primary}
+                />
               </TouchableOpacity>
               <TouchableOpacity style={{marginHorizontal: 10}}>
-                <IonIcon name="logo-twitter" size={30}  />
+                <IonIcon name="logo-twitter" size={30} color={colors.primary} />
               </TouchableOpacity>
             </View>
           </View>
-          {/* <Text
+          <Text
             style={{
               textAlign: 'center',
-              paddingVertical: 50,
+              paddingVertical: 25,
               fontSize: 25,
               color: '#dc3545',
               fontWeight: 600,
             }}>
             TRG
-          </Text> */}
+          </Text>
         </View>
       </ScrollView>
     </SafeAreaView>
@@ -126,6 +144,6 @@ const styles = StyleSheet.create({
   btnText: {
     paddingHorizontal: 20,
     fontSize: 20,
-    color: '#eee',
+    color: colors.primary,
   },
 });

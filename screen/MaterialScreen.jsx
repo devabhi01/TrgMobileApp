@@ -78,10 +78,7 @@ const styles = StyleSheet.create({
   },
 
   btn: {
-    // borderRadius: 8,
-    // borderWidth: 1,
-    // borderColor: '#eee',
-    // backgroundColor: '#dc3545',
+    
     marginVertical: 10,
     flexDirection: 'row',
     paddingLeft: 20,
