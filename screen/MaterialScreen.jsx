@@ -23,10 +23,14 @@ const MaterialScreen = () => {
         />
 
         <View style={styles.container}>
-          <View style={{marginHorizontal: 30}}>
-            <View style={{marginVertical: 30}}>
+          <View style={{paddingHorizontal: 30}}>
+            <View style={{marginVertical: 10}}>
               <TouchableOpacity style={styles.btn}>
-                <MaterialIcon name="bookshelf" size={30} color="#eee" />
+                <MaterialIcon
+                  name="bookshelf"
+                  size={30}
+                  color={colors.primary}
+                />
                 <Text style={styles.textBtn}>Your Materials</Text>
               </TouchableOpacity>
               <TouchableOpacity style={styles.btn}>
@@ -41,7 +45,11 @@ const MaterialScreen = () => {
                 <Text style={styles.textBtn}>ICSE</Text>
               </TouchableOpacity>
               <TouchableOpacity style={styles.btn}>
-                <Foundation name="book-bookmark" size={30} color="#eee" />
+                <Foundation
+                  name="book-bookmark"
+                  size={30}
+                  color={colors.primary}
+                />
                 <Text style={styles.textBtn}>TRG Special</Text>
               </TouchableOpacity>
             </View>
@@ -70,11 +78,11 @@ const styles = StyleSheet.create({
   },
 
   btn: {
-    borderRadius: 8,
-    borderWidth: 1,
-    borderColor: '#eee',
-    backgroundColor: '#dc3545',
-    marginVertical: 20,
+    // borderRadius: 8,
+    // borderWidth: 1,
+    // borderColor: '#eee',
+    // backgroundColor: '#dc3545',
+    marginVertical: 10,
     flexDirection: 'row',
     paddingLeft: 20,
     alignItems: 'center',
@@ -85,5 +93,6 @@ const styles = StyleSheet.create({
     paddingVertical: 15,
     color: colors.white,
     paddingLeft: 10,
+    color: '#dc3545',
   },
 });

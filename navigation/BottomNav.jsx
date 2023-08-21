@@ -19,9 +19,17 @@ function BottomNav() {
     <Tab.Navigator
       screenOptions={({route}) => ({
         headerShown: false,
-        
-        tabBarLabelStyle: {fontSize: 12, fontWeight: 500},
-        tabBarActiveBackgroundColor: colors.white,
+        headerStyle: {backgroundColor: '#dc3545'},
+        headerTitleAlign: 'center',
+        headerTintColor: '#eee',
+
+        tabBarLabelStyle: {
+          fontSize: 12,
+          fontWeight: 800,
+          color: '#dc3545',
+          paddingBottom: 3,
+        },
+        tabBarActiveBackgroundColor: colors.graylight,
         tabBarIcon: ({focused}) => {
           let iconName;
 
@@ -39,9 +47,23 @@ function BottomNav() {
       })}
       initialRouteName="Home">
       <Tab.Screen name="Home" component={HomeScreen} />
-      <Tab.Screen name="Course" component={CourseScreen} />
-      <Tab.Screen name="Material" component={MaterialScreen} />
-      <Tab.Screen name="Settings" component={SettingScreen} />
+      <Tab.Screen
+        name="Course"
+        component={CourseScreen}
+        options={{headerShown: true}}
+      />
+      <Tab.Screen
+        name="Material"
+        component={MaterialScreen}
+        options={{
+          headerShown: true,
+        }}
+      />
+      <Tab.Screen
+        name="Settings"
+        component={SettingScreen}
+        options={{headerShown: true}}
+      />
     </Tab.Navigator>
   );
 }

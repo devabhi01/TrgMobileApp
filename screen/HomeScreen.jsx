@@ -11,7 +11,7 @@ import {
   TextInput,
 } from 'react-native';
 import {Searchbar} from 'react-native-paper';
-import Feather from 'react-native-vector-icons/Feather';
+
 
 // Images here
 import ManSVG from '../assets/img/Man.svg';
