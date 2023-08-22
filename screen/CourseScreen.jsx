@@ -82,6 +82,25 @@ const CourseScreen = props => {
                 />
                 <Text style={styles.textBtn}>DSSSB</Text>
               </TouchableOpacity>
+              <TouchableOpacity
+                onPress={() => props.navigation.navigate('dsssb')}
+                style={styles.btn}>
+                <Image
+                  style={{width: 30, height: 30}}
+                  source={require('../assets/img/police1.png')}
+                />
+                <Text style={styles.textBtn}>POLICE SERVICES</Text>
+              </TouchableOpacity>
+              <TouchableOpacity
+                onPress={() => props.navigation.navigate('dsssb')}
+                style={styles.btn}>
+                <Image
+                
+                  style={{width: 30, height: 30}}
+                  source={require('../assets/img/other1.png')}
+                />
+                <Text style={styles.textBtn}>OTHER SERVICES</Text>
+              </TouchableOpacity>
             </View>
           </View>
         </View>
