@@ -12,17 +12,18 @@ import {
 } from 'react-native';
 import {Searchbar} from 'react-native-paper';
 
-
 // Images here
 import ManSVG from '../assets/img/Man.svg';
 import CbseSVG from '../assets/img/cbse.svg';
+import {colors} from '../constants';
 
 const HomeScreen = props => {
   const [searchQuery, setSearchQuery] = React.useState('');
 
   const onChangeSearch = query => setSearchQuery(query);
+
   return (
-    <SafeAreaView style={{flex: 1, backgroundColor: '#ffffff'}}>
+    <SafeAreaView style={{flex: 1, backgroundColor: colors.graylight}}>
       <ScrollView style={{padding: 10}}>
         <View style={styles.container}>
           <View style={styles.topbar}>
@@ -45,7 +46,7 @@ const HomeScreen = props => {
             </Text> */}
 
             <TouchableOpacity
-              onPress={() => props.navigation.navigate('Login')}
+              onPress={() => props.navigation.toggleDrawer()}
               style={{marginRight: 20}}>
               <View
                 style={{
@@ -108,31 +109,47 @@ const HomeScreen = props => {
               justifyContent: 'space-around',
               marginBottom: 50,
             }}>
-            <TouchableOpacity style={styles.ex_categories}>
+            <TouchableOpacity
+              onPress={() => props.navigation.navigate('cbse')}
+              style={styles.ex_categories}>
               <Image source={require('../assets/img/cbse.png')} />
             </TouchableOpacity>
-            <TouchableOpacity style={styles.ex_categories}>
+            <TouchableOpacity
+              onPress={() => props.navigation.navigate('icse')}
+              style={styles.ex_categories}>
               <Image
                 resizeMethod="auto"
                 source={require('../assets/img/icse.png')}
               />
             </TouchableOpacity>
-            <TouchableOpacity style={styles.ex_categories}>
+            <TouchableOpacity
+              onPress={() => props.navigation.navigate('ssc')}
+              style={styles.ex_categories}>
               <Image source={require('../assets/img/ssc.png')} />
             </TouchableOpacity>
-            <TouchableOpacity style={styles.ex_categories}>
+            <TouchableOpacity
+              onPress={() => props.navigation.navigate('cuet')}
+              style={styles.ex_categories}>
               <Image source={require('../assets/img/cuet.png')} />
             </TouchableOpacity>
-            <TouchableOpacity style={styles.ex_categories}>
+            <TouchableOpacity
+              onPress={() => props.navigation.navigate('clat')}
+              style={styles.ex_categories}>
               <Image source={require('../assets/img/clat.png')} />
             </TouchableOpacity>
-            <TouchableOpacity style={styles.ex_categories}>
+            <TouchableOpacity
+              onPress={() => props.navigation.navigate('dsssb')}
+              style={styles.ex_categories}>
               <Image source={require('../assets/img/dsssb.png')} />
             </TouchableOpacity>
-            <TouchableOpacity style={styles.ex_categories}>
+            <TouchableOpacity
+              onPress={() => props.navigation.navigate('quiz')}
+              style={styles.ex_categories}>
               <Image source={require('../assets/img/Quiz.png')} />
             </TouchableOpacity>
-            <TouchableOpacity style={styles.ex_categories}>
+            <TouchableOpacity
+              onPress={() => props.navigation.navigate('test')}
+              style={styles.ex_categories}>
               <Image source={require('../assets/img/test.png')} />
             </TouchableOpacity>
           </View>
@@ -177,5 +194,6 @@ const styles = StyleSheet.create({
     marginBottom: 20,
     borderRadius: 8,
     padding: 10,
+    backgroundColor: '#fff',
   },
 });

@@ -1,7 +1,7 @@
 import {View, Text} from 'react-native';
 import React from 'react';
 
-const ProfileSettings = () => {
+const UserSettings = () => {
   return (
     <View>
       <Text>ProfileSettings</Text>
@@ -9,4 +9,4 @@ const ProfileSettings = () => {
   );
 };
 
-export default ProfileSettings;
+export default UserSettings;

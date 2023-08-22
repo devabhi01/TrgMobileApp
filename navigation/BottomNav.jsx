@@ -33,7 +33,7 @@ function BottomNav() {
         tabBarIcon: ({focused}) => {
           let iconName;
 
-          if (route.name === 'Home') {
+          if (route.name === 'BottomHome') {
             iconName = focused ? 'home' : 'home-outline';
           } else if (route.name === 'Settings') {
             iconName = focused ? 'settings' : 'settings-outline';
@@ -45,8 +45,12 @@ function BottomNav() {
           return <Icon name={iconName} size={22} color={'#dc3545'} />;
         },
       })}
-      initialRouteName="Home">
-      <Tab.Screen name="Home" component={HomeScreen} />
+      initialRouteName="BottomHome">
+      <Tab.Screen
+        name="BottomHome"
+        component={HomeScreen}
+        options={{title: 'Home'}}
+      />
       <Tab.Screen
         name="Course"
         component={CourseScreen}
