@@ -1,7 +1,7 @@
-import {View, Text} from 'react-native';
+import { View, Text } from 'react-native';
 import React from 'react';
-import {createStackNavigator} from '@react-navigation/stack';
-import {NavigationContainer} from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
+import { NavigationContainer } from '@react-navigation/native';
 
 // impoterted Component
 import LoginSignup from '../screen/LoginSignup';
@@ -20,12 +20,14 @@ import Quiz from '../components/courses/main_course/Quiz';
 import Test from '../components/courses/main_course/Test';
 import Clat from '../components/courses/main_course/Clat';
 import YourCourse from '../components/courses/main_course/YourCourse';
+import AccountPrivacy from '../components/setting/AccountPrivacy';
+import Notification from '../components/setting/Notification';
 
 const Stack = createStackNavigator();
 
 const AuthStack = () => {
   return (
-    <Stack.Navigator screenOptions={{headerShown: false}}>
+    <Stack.Navigator screenOptions={{ headerShown: false }}>
       <Stack.Screen name="LoginSignup" component={LoginSignup} />
       <Stack.Screen name="Login" component={LoginScreen} />
       <Stack.Screen name="Signup" component={SignUpScreen} />
@@ -42,6 +44,10 @@ const AuthStack = () => {
       <Stack.Screen name="quiz" component={Quiz} />
       <Stack.Screen name="test" component={Test} />
       <Stack.Screen name="your_course" component={YourCourse} />
+
+      {/* Setting Screen refers */}
+      <Stack.Screen name="account_privacy" component={AccountPrivacy} />
+      <Stack.Screen name="notification" component={Notification} />
     </Stack.Navigator>
   );
 };

@@ -6,17 +6,42 @@ import {
   TouchableOpacity,
   StyleSheet,
   Image,
+  Alert, Share,
 } from 'react-native';
-import {Avatar} from 'react-native-paper';
+import { Avatar } from 'react-native-paper';
 import React from 'react';
 
 import IonIcon from 'react-native-vector-icons/Ionicons';
-import {colors} from '../constants';
+import { colors } from '../constants';
 
 const SettingScreen = props => {
+
+
+  // Share Button Functionality
+  
+    const onShare = async () => {
+      try {
+        const result = await Share.share({
+          message:
+            'React Native | A framework for building native apps using React',
+        });
+        if (result.action === Share.sharedAction) {
+          if (result.activityType) {
+            // shared with activity type of result.activityType
+          } else {
+            // shared
+          }
+        } else if (result.action === Share.dismissedAction) {
+          // dismissed
+        }
+      } catch (error) {
+        Alert.alert(error.message);
+      }
+    };
+  
   return (
-    <SafeAreaView style={{flex: 1, backgroundColor: colors.graylight}}>
-      <ScrollView style={{marginHorizontal: 10}}>
+    <SafeAreaView style={{ flex: 1, backgroundColor: colors.graylight }}>
+      <ScrollView style={{ marginHorizontal: 10 }}>
         <View>
           <TouchableOpacity
             onPress={() => props.navigation.navigate('Profile_Setting')}
@@ -25,7 +50,7 @@ const SettingScreen = props => {
               flexDirection: 'row',
               alignItems: 'center',
             }}>
-            <View style={{borderWidth: 1, borderColor: colors.primary,borderRadius:50}}>
+            <View style={{ borderWidth: 1, borderColor: colors.primary, borderRadius: 50 }}>
               <Avatar.Image
                 size={60}
                 source={require('../assets/img/user.png')}
@@ -42,21 +67,21 @@ const SettingScreen = props => {
               Abhishek
             </Text>
           </TouchableOpacity>
-          <TouchableOpacity style={styles.btn}>
+          <TouchableOpacity
+            onPress={() => props.navigation.navigate('account_privacy')} style={styles.btn}>
             <IonIcon name="lock-closed" size={24} color={colors.primary} />
-            <Text style={styles.btnText}>Privacy</Text>
+            <Text style={styles.btnText}>Account & Privacy</Text>
           </TouchableOpacity>
-          <TouchableOpacity style={styles.btn}>
+          <TouchableOpacity
+            onPress={() => props.navigation.navigate('notification')}
+            style={styles.btn}>
             <IonIcon name="notifications" size={24} color={colors.primary} />
             <Text style={styles.btnText}>Notifications</Text>
           </TouchableOpacity>
-          <TouchableOpacity style={styles.btn}>
-            <IonIcon name="key" size={24} color={colors.primary} />
-            <Text style={styles.btnText}>Account</Text>
-          </TouchableOpacity>
+
           <TouchableOpacity style={styles.btn}>
             <Image
-              style={{width: 22, height: 22}}
+              style={{ width: 22, height: 22 }}
               color={'#dc3545'}
               source={require('../assets/img/help.png')}
             />
@@ -67,15 +92,17 @@ const SettingScreen = props => {
             <IonIcon name="cloud-download" size={24} color={colors.primary} />
             <Text style={styles.btnText}>Storage & Data</Text>
           </TouchableOpacity>
-          <TouchableOpacity style={styles.btn}>
+          <TouchableOpacity
+            onPress={onShare}
+            style={styles.btn}>
             <Image
-              style={{width: 22, height: 22}}
+              style={{ width: 22, height: 22 }}
               color={'#eee'}
               source={require('../assets/img/friends.png')}
             />
             <Text style={styles.btnText}>Invite a friend</Text>
           </TouchableOpacity>
-          <View style={{marginVertical: 10}}>
+          <View style={{ marginVertical: 10 }}>
             <Text
               style={{
                 textAlign: 'center',
@@ -90,33 +117,33 @@ const SettingScreen = props => {
                 flexDirection: 'row',
                 marginVertical: 20,
               }}>
-              <TouchableOpacity style={{marginHorizontal: 10}}>
+              <TouchableOpacity style={{ marginHorizontal: 10 }}>
                 <IonIcon
                   name="logo-instagram"
                   size={30}
                   color={colors.primary}
                 />
               </TouchableOpacity>
-              <TouchableOpacity style={{marginHorizontal: 10}}>
+              <TouchableOpacity style={{ marginHorizontal: 10 }}>
                 <IonIcon
                   name="logo-facebook"
                   size={30}
                   color={colors.primary}
                 />
               </TouchableOpacity>
-              <TouchableOpacity style={{marginHorizontal: 10}}>
+              <TouchableOpacity style={{ marginHorizontal: 10 }}>
                 <IonIcon
                   name="logo-linkedin"
                   size={30}
                   color={colors.primary}
                 />
               </TouchableOpacity>
-              <TouchableOpacity style={{marginHorizontal: 10}}>
+              <TouchableOpacity style={{ marginHorizontal: 10 }}>
                 <IonIcon name="logo-twitter" size={30} color={colors.primary} />
               </TouchableOpacity>
             </View>
           </View>
-          <Text
+          {/* <Text
             style={{
               textAlign: 'center',
               paddingVertical: 25,
@@ -125,7 +152,7 @@ const SettingScreen = props => {
               fontWeight: 600,
             }}>
             TRG
-          </Text>
+          </Text> */}
         </View>
       </ScrollView>
     </SafeAreaView>
