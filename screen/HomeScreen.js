@@ -13,11 +13,13 @@ import {
 import {Searchbar} from 'react-native-paper';
 import Carousel from 'react-native-snap-carousel';
 import {windowWidth} from '../utils/Dimensions';
+import {Avatar} from 'react-native-paper';
+import {colors} from '../constants';
 
 // Images here
 import ManSVG from '../assets/img/Man.svg';
 import CbseSVG from '../assets/img/cbse.svg';
-import {colors} from '../constants';
+
 import {sliderData} from '../model/Data';
 import BannerSlider from '../components/BannerSlider';
 
@@ -32,7 +34,7 @@ const HomeScreen = props => {
 
   return (
     <SafeAreaView style={{flex: 1, backgroundColor: colors.graylight}}>
-      <ScrollView style={{paddingVertical:10}}>
+      <ScrollView style={{paddingVertical: 10}}>
         <View style={styles.container}>
           <View style={styles.topbar}>
             <View style={{marginLeft: 20}}>
@@ -58,17 +60,14 @@ const HomeScreen = props => {
               style={{marginRight: 20}}>
               <View
                 style={{
-                  width: 60,
-                  height: 60,
-                  borderWidth: 2,
+                  borderWidth: 1,
+                  borderColor: colors.primary,
                   borderRadius: 50,
-                  borderColor: '#dc3545',
-                  backgroundColor: '#dc3545',
-                  justifyContent: 'center',
-                  alignItems: 'center',
-                  overflow: 'hidden',
                 }}>
-                <ManSVG height={55} width={55} />
+                <Avatar.Image
+                  size={60}
+                  source={require('../assets/img/user.png')}
+                />
               </View>
             </TouchableOpacity>
           </View>
@@ -98,8 +97,9 @@ const HomeScreen = props => {
             }}>
             Carousal Here
           </Text>
-          <View style={{marginHorizontal:20}}>
+          <View style={{marginHorizontal: 20}}>
             <Carousel
+              style={{marginHorizontal: 20}}
               ref={c => {
                 this._carousel = c;
               }}

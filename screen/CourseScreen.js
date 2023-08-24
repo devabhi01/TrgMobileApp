@@ -23,7 +23,9 @@ const CourseScreen = props => {
         <View style={styles.container}>
           <View style={{paddingHorizontal: 30}}>
             <View style={{marginVertical: 10}}>
-              <TouchableOpacity onPress={() => props.navigation.navigate('your_course')} style={styles.btn}>
+              <TouchableOpacity
+                onPress={() => props.navigation.navigate('your_course')}
+                style={styles.btn}>
                 <MaterialIcon
                   name="bookshelf"
                   size={30}
@@ -95,7 +97,6 @@ const CourseScreen = props => {
                 onPress={() => props.navigation.navigate('dsssb')}
                 style={styles.btn}>
                 <Image
-                
                   style={{width: 30, height: 30}}
                   source={require('../assets/img/other1.png')}
                 />

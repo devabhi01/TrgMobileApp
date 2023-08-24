@@ -1,9 +1,9 @@
-import {View, Text} from 'react-native';
+import { View, Text } from 'react-native';
 import React from 'react';
-import {createDrawerNavigator} from '@react-navigation/drawer';
-import {NavigationContainer} from '@react-navigation/native';
+import { createDrawerNavigator } from '@react-navigation/drawer';
+import { NavigationContainer } from '@react-navigation/native';
 
-import ProfileSettings from '../components/UserSettings';
+import ProfileSettings from '../components/ProfileSettings';
 import HomeScreen from '../screen/HomeScreen';
 import BottomNav from './BottomNav';
 import AppDrawer from '../components/AppDrawer';
@@ -18,10 +18,10 @@ const AppStack = () => {
     <>
       <Drawer.Navigator
         initialRouteName=""
-        screenOptions={{headerShown: false}}
+        screenOptions={{ headerShown: false }}
         drawerContent={props => <AppDrawer {...props} />}>
         <Drawer.Screen name="Home" component={BottomNav} />
-        <Drawer.Screen name="User Setting" component={ProfileSettings} />
+        <Drawer.Screen name="Profile_Setting" component={ProfileSettings} options={{ title: 'Profile Setting' }} />
         <Drawer.Screen name="Dashboard" component={DashBoard} />
         <Drawer.Screen name="Feedback" component={FeedBack} />
         <Drawer.Screen name="Setting" component={SettingScreen} />

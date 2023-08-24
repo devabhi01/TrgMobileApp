@@ -7,29 +7,30 @@ import {
   StyleSheet,
   Image,
 } from 'react-native';
+import {Avatar} from 'react-native-paper';
 import React from 'react';
-import Fa5 from 'react-native-vector-icons/FontAwesome5';
+
 import IonIcon from 'react-native-vector-icons/Ionicons';
 import {colors} from '../constants';
 
-const SettingScreen = () => {
+const SettingScreen = props => {
   return (
     <SafeAreaView style={{flex: 1, backgroundColor: colors.graylight}}>
       <ScrollView style={{marginHorizontal: 10}}>
         <View>
           <TouchableOpacity
+            onPress={() => props.navigation.navigate('Profile_Setting')}
             style={{
               marginVertical: 10,
               flexDirection: 'row',
               alignItems: 'center',
             }}>
-            <View
-              style={{
-                backgroundColor: colors.bg,
-                width: 60,
-                height: 60,
-                borderRadius: 50,
-              }}></View>
+            <View style={{borderWidth: 1, borderColor: colors.primary,borderRadius:50}}>
+              <Avatar.Image
+                size={60}
+                source={require('../assets/img/user.png')}
+              />
+            </View>
             <Text
               style={{
                 textAlign: 'center',
