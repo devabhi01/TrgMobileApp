@@ -5,7 +5,8 @@ import {
   TouchableOpacity,
   SafeAreaView,
   StyleSheet,
-  Image
+  Image,
+  Linking
 } from 'react-native';
 import React from 'react';
 import { colors } from '../constants';
@@ -87,28 +88,36 @@ const ProfileSettings = () => {
                   flexDirection: 'row',
                   marginVertical: 20,
                 }}>
-                <TouchableOpacity style={{ marginHorizontal: 10 }}>
+                <TouchableOpacity
+                  onPress={() => Linking.openURL('https://www.instagram.com/therightguru/')}
+                  style={{ marginHorizontal: 10 }}>
                   <Ionicon
                     name="logo-instagram"
                     size={30}
                     color={colors.primary}
                   />
                 </TouchableOpacity>
-                <TouchableOpacity style={{ marginHorizontal: 10 }}>
+                <TouchableOpacity
+                  onPress={() => Linking.openURL('https://www.facebook.com/people/The-Right-Guru/100063461899383/')}
+                  style={{ marginHorizontal: 10 }}>
                   <Ionicon
                     name="logo-facebook"
                     size={30}
                     color={colors.primary}
                   />
                 </TouchableOpacity>
-                <TouchableOpacity style={{ marginHorizontal: 10 }}>
+                <TouchableOpacity
+                  onPress={() => Linking.openURL('https://www.linkedin.com/company/the-right-guru/')}
+                  style={{ marginHorizontal: 10 }}>
                   <Ionicon
                     name="logo-linkedin"
                     size={30}
                     color={colors.primary}
                   />
                 </TouchableOpacity>
-                <TouchableOpacity style={{ marginHorizontal: 10 }}>
+                <TouchableOpacity
+                  onPress={() => Linking.openURL('https://twitter.com/The_Right_Guru')}
+                  style={{ marginHorizontal: 10 }}>
                   <Ionicon name="logo-twitter" size={30} color={colors.primary} />
                 </TouchableOpacity>
               </View>
