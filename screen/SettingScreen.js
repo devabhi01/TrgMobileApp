@@ -82,7 +82,9 @@ const SettingScreen = props => {
             <Text style={styles.btnText}>Notifications</Text>
           </TouchableOpacity>
 
-          <TouchableOpacity style={styles.btn}>
+          <TouchableOpacity
+            onPress={() => props.navigation.navigate('helpsupport')}
+            style={styles.btn}>
             <Image
               style={{ width: 22, height: 22 }}
               color={'#dc3545'}
@@ -91,10 +93,10 @@ const SettingScreen = props => {
             <Text style={styles.btnText}>Help & Support</Text>
           </TouchableOpacity>
 
-          <TouchableOpacity style={styles.btn}>
+          {/* <TouchableOpacity style={styles.btn}>
             <IonIcon name="cloud-download" size={24} color={colors.primary} />
             <Text style={styles.btnText}>Storage & Data</Text>
-          </TouchableOpacity>
+          </TouchableOpacity> */}
           <TouchableOpacity
             onPress={onShare}
             style={styles.btn}>
