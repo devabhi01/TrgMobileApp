@@ -11,19 +11,30 @@ import {
   TextInput,
 } from 'react-native';
 import {Searchbar} from 'react-native-paper';
-
+import Carousel from 'react-native-snap-carousel';
+import {windowWidth} from '../utils/Dimensions';
+import {Avatar} from 'react-native-paper';
+import {colors} from '../constants';
 
 // Images here
 import ManSVG from '../assets/img/Man.svg';
 import CbseSVG from '../assets/img/cbse.svg';
 
+import {sliderData} from '../model/Data';
+import BannerSlider from '../components/BannerSlider';
+
 const HomeScreen = props => {
   const [searchQuery, setSearchQuery] = React.useState('');
 
   const onChangeSearch = query => setSearchQuery(query);
+
+  const renderBanner = ({item, index}) => {
+    return <BannerSlider data={item} />;
+  };
+
   return (
-    <SafeAreaView style={{flex: 1, backgroundColor: '#ffffff'}}>
-      <ScrollView style={{padding: 10}}>
+    <SafeAreaView style={{flex: 1, backgroundColor: colors.graylight}}>
+      <ScrollView style={{paddingVertical: 10}}>
         <View style={styles.container}>
           <View style={styles.topbar}>
             <View style={{marginLeft: 20}}>
@@ -45,21 +56,18 @@ const HomeScreen = props => {
             </Text> */}
 
             <TouchableOpacity
-              onPress={() => props.navigation.navigate('Login')}
+              onPress={() => props.navigation.toggleDrawer()}
               style={{marginRight: 20}}>
               <View
                 style={{
-                  width: 60,
-                  height: 60,
-                  borderWidth: 2,
+                  borderWidth: 1,
+                  borderColor: colors.primary,
                   borderRadius: 50,
-                  borderColor: '#dc3545',
-                  backgroundColor: '#dc3545',
-                  justifyContent: 'center',
-                  alignItems: 'center',
-                  overflow: 'hidden',
                 }}>
-                <ManSVG height={55} width={55} />
+                <Avatar.Image
+                  size={60}
+                  source={require('../assets/img/user.png')}
+                />
               </View>
             </TouchableOpacity>
           </View>
@@ -85,10 +93,29 @@ const HomeScreen = props => {
               fontSize: 16,
               fontWeight: 700,
               marginHorizontal: 20,
+              marginVertical: 20,
             }}>
             Carousal Here
           </Text>
-          <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
+          <View style={{marginHorizontal: 20}}>
+            <Carousel
+              style={{marginHorizontal: 20}}
+              ref={c => {
+                this._carousel = c;
+              }}
+              data={sliderData}
+              renderItem={renderBanner}
+              sliderWidth={windowWidth - 40}
+              itemWidth={300}
+              loop={true}
+            />
+          </View>
+          <View
+            style={{
+              flexDirection: 'row',
+              justifyContent: 'space-between',
+              marginTop: 30,
+            }}>
             <Text
               style={{
                 color: '#dc3545',
@@ -108,31 +135,57 @@ const HomeScreen = props => {
               justifyContent: 'space-around',
               marginBottom: 50,
             }}>
-            <TouchableOpacity style={styles.ex_categories}>
+            <TouchableOpacity
+              onPress={() => props.navigation.navigate('cbse')}
+              style={styles.ex_categories}>
               <Image source={require('../assets/img/cbse.png')} />
             </TouchableOpacity>
-            <TouchableOpacity style={styles.ex_categories}>
+            <TouchableOpacity
+              onPress={() => props.navigation.navigate('icse')}
+              style={styles.ex_categories}>
               <Image
                 resizeMethod="auto"
                 source={require('../assets/img/icse.png')}
               />
             </TouchableOpacity>
-            <TouchableOpacity style={styles.ex_categories}>
+            <TouchableOpacity
+              onPress={() => props.navigation.navigate('ssc')}
+              style={styles.ex_categories}>
               <Image source={require('../assets/img/ssc.png')} />
             </TouchableOpacity>
-            <TouchableOpacity style={styles.ex_categories}>
+            <TouchableOpacity
+              onPress={() => props.navigation.navigate('cuet')}
+              style={styles.ex_categories}>
               <Image source={require('../assets/img/cuet.png')} />
             </TouchableOpacity>
-            <TouchableOpacity style={styles.ex_categories}>
+            <TouchableOpacity
+              onPress={() => props.navigation.navigate('clat')}
+              style={styles.ex_categories}>
               <Image source={require('../assets/img/clat.png')} />
             </TouchableOpacity>
-            <TouchableOpacity style={styles.ex_categories}>
+            <TouchableOpacity
+              onPress={() => props.navigation.navigate('dsssb')}
+              style={styles.ex_categories}>
               <Image source={require('../assets/img/dsssb.png')} />
             </TouchableOpacity>
-            <TouchableOpacity style={styles.ex_categories}>
+            <TouchableOpacity
+              onPress={() => props.navigation.navigate('dsssb')}
+              style={styles.ex_categories}>
+              <Image source={require('../assets/img/police.png')} />
+            </TouchableOpacity>
+            <TouchableOpacity
+              onPress={() => props.navigation.navigate('dsssb')}
+              style={styles.ex_categories}>
+              <Image source={require('../assets/img/other.png')} />
+            </TouchableOpacity>
+            <TouchableOpacity
+              onPress={() => props.navigation.navigate('quiz')}
+              style={styles.ex_categories}>
               <Image source={require('../assets/img/Quiz.png')} />
             </TouchableOpacity>
-            <TouchableOpacity style={styles.ex_categories}>
+            <TouchableOpacity
+              onPress={() => props.navigation.navigate('test')}
+              style={styles.ex_categories}>
               <Image source={require('../assets/img/test.png')} />
             </TouchableOpacity>
           </View>
@@ -164,7 +217,7 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     paddingHorizontal: 10,
     justifyContent: 'space-between',
-    marginHorizontal: 20,
+    marginHorizontal: 10,
     flexDirection: 'row',
     alignItems: 'center',
     marginBottom: 20,
@@ -177,5 +230,6 @@ const styles = StyleSheet.create({
     marginBottom: 20,
     borderRadius: 8,
     padding: 10,
+    backgroundColor: '#fff',
   },
 });

@@ -19,7 +19,7 @@ const MaterialScreen = () => {
       <ScrollView>
         <Image
           style={styles.img}
-          source={require('../assets/img/materials.png')}
+          source={require('../assets/img/materials_pos.png')}
         />
 
         <View style={styles.container}>
@@ -43,6 +43,20 @@ const MaterialScreen = () => {
                   source={require('../assets/img/icse1.png')}
                 />
                 <Text style={styles.textBtn}>ICSE</Text>
+              </TouchableOpacity>
+              <TouchableOpacity style={styles.btn}>
+                <Image
+                  style={{width: 30, height: 45}}
+                  source={require('../assets/img/Quiz1.png')}
+                />
+                <Text style={styles.textBtn}>QUIZ</Text>
+              </TouchableOpacity>
+              <TouchableOpacity style={styles.btn}>
+                <Image
+                  style={{width: 30, height: 45}}
+                  source={require('../assets/img/test1.png')}
+                />
+                <Text style={styles.textBtn}>TEST SERIES</Text>
               </TouchableOpacity>
               <TouchableOpacity style={styles.btn}>
                 <Foundation
