@@ -28,6 +28,27 @@ const SignUpScreen = props => {
 
   const [value, setValue] = React.useState('first');
 
+  const handleSubmit = async () =>{
+    console.log("submit pressed...")
+    try {
+        const response = await fetch('http://localhost:8000/signup', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({"name":name, "email":email, "number":phoneNo, "gender":"default", "password":password, "dob":date, "language":"English" }),
+      });
+
+      if (response.ok) {
+        console.log('Form data submitted successfully');
+      } else {
+        console.error('Form data submission failed');
+      }
+    } catch (error) {
+      console.error('Error submitting form data:', error);
+    }
+  }
+
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView>
@@ -180,7 +201,9 @@ const SignUpScreen = props => {
               borderRadius: 10,
               padding: 10,
               marginHorizontal: 30,
-            }}>
+            }} 
+              onPress={handleSubmit}
+            >
             <Text
               style={{
                 color: '#eee',
