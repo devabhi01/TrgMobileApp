@@ -7,8 +7,8 @@ import {
   Image,
   ScrollView,
   TextInput,
+  Alert
 } from 'react-native';
-
 import React, {useState} from 'react';
 import DatePicker from 'react-native-date-picker';
 import {RadioButton} from 'react-native-paper';
@@ -17,35 +17,50 @@ import GoogleSVG from '../assets/img/google.svg';
 import AppleSVG from '../assets/img/apple.svg';
 
 const SignUpScreen = props => {
-  const [name, setName] = React.useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [phoneNo, setPhoneNo] = useState('');
 
-  const [date, setDate] = useState(new Date());
+  const [userInfo, setUserInfo] = useState({
+    name:"",
+    email:"",
+    phoneNo:"",
+    gender:"male",
+    password:"",
+    cpassword:"",
+    dob:new Date(),
+    language:"English"
+  })
+
   const [open, setOpen] = useState(false);
   const [dobLabel, setDobLabel] = useState('Date of Birth');
 
-  const [value, setValue] = React.useState('first');
+  const handleChange = (fieldName, value) => {
+    setUserInfo({ ...userInfo, [fieldName]: value });
+  };
+  
 
   const handleSubmit = async () =>{
-    console.log("submit pressed...")
     try {
-        const response = await fetch('http://localhost:8000/signup', {
+      if (!userInfo.name || !userInfo.email || !userInfo.phoneNo || !userInfo.password || !userInfo.gender || !userInfo.dob) {
+        throw new Error('One or more fields required')
+      }
+
+        const res = await fetch('http://172.20.10.2:1222/api/register', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({"name":name, "email":email, "number":phoneNo, "gender":"default", "password":password, "dob":date, "language":"English" }),
+        credentials: 'include',
+        body: JSON.stringify(userInfo),
       });
 
-      if (response.ok) {
+
+      if (res.ok) {
         console.log('Form data submitted successfully');
+        props.navigation.navigate('Login')
       } else {
-        console.error('Form data submission failed');
+        throw new Error(res?.msg || 'something went wrong')
       }
     } catch (error) {
-      console.error('Error submitting form data:', error);
+      Alert.alert("Error :", error.message)
     }
   }
 
@@ -79,6 +94,7 @@ const SignUpScreen = props => {
             }}>
             Create an account
           </Text>
+
           <View>
             <TextInput
               style={styles.input}
@@ -86,6 +102,8 @@ const SignUpScreen = props => {
               placeholderTextColor={'#241D20'}
               cursorColor={'#dc3545'}
               keyboardType="default"
+              value={userInfo.name}
+              onChangeText={(text)=>{handleChange('name', text)}}
             />
             <TextInput
               style={styles.input}
@@ -93,6 +111,8 @@ const SignUpScreen = props => {
               placeholderTextColor={'#241D20'}
               cursorColor={'#dc3545'}
               keyboardType="email-address"
+              value={userInfo.email}
+              onChangeText={(text)=>{handleChange('email', text)}}
             />
             <TextInput
               style={styles.input}
@@ -100,13 +120,16 @@ const SignUpScreen = props => {
               placeholderTextColor={'#241D20'}
               cursorColor={'#dc3545'}
               keyboardType="number-pad"
+              value={String(userInfo.phoneNo)}
+              onChangeText={(text)=>{handleChange('phoneNo', text)}}
             />
+
             <View
               style={{
                 marginHorizontal: 30,
                 borderWidth: 1,
                 borderRadius: 10,
-                borderColor: '#dc3445',
+                borderColor: '#dc3445'
               }}>
               <Text
                 style={{
@@ -119,24 +142,26 @@ const SignUpScreen = props => {
                 Select Gender
               </Text>
               <RadioButton.Group
-                onValueChange={value => setValue(value)}
-                value={value}>
+                value={userInfo.gender}>
                 <RadioButton.Item
                   label="Male"
-                  value="first"
+                  value="male"
                   color={'#dc3545'}
                   labelStyle={{color: '#241D20'}}
+                  // onPress={setUserInfo({...userInfo, gender:"male"})}
                 />
                 <RadioButton.Item
                   label="Female"
-                  value="second"
+                  value="female"
                   color="#FA78C2"
                   labelStyle={{color: '#241D20'}}
+                  // onPress={setUserInfo({...userInfo, gender:"female"})}
                 />
                 <RadioButton.Item
                   label="Other"
-                  value="third"
+                  value="other"
                   labelStyle={{color: '#241D20'}}
+                  // onPress={setUserInfo({...userInfo, gender:"femail"})}
                 />
               </RadioButton.Group>
             </View>
@@ -147,7 +172,10 @@ const SignUpScreen = props => {
               placeholderTextColor={'#241D20'}
               cursorColor={'#dc3545'}
               maxLength={16}
+              value={userInfo.password}
+              onChangeText={(text)=>{handleChange('password', text)}}
             />
+
             <TextInput
               style={styles.input}
               secureTextEntry
@@ -155,7 +183,10 @@ const SignUpScreen = props => {
               placeholderTextColor={'#241D20'}
               cursorColor={'#dc3545'}
               maxLength={16}
+              value={userInfo.cpassword}
+              onChangeText={(text)=>{handleChange('cpassword', text)}}
             />
+
             <View
               style={{
                 flexDirection: 'row',
@@ -180,12 +211,12 @@ const SignUpScreen = props => {
             <DatePicker
               modal
               open={open}
-              date={date}
+              date={userInfo.dob}
               mode={'date'}
               onConfirm={date => {
                 setOpen(false);
-                setDate(date);
                 setDobLabel(date.toDateString());
+                // setUserInfo({...userInfo, dob:date})
               }}
               onCancel={() => {
                 setOpen(false);

@@ -1,16 +1,12 @@
-import {View, Text} from 'react-native';
 import React from 'react';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import Icon from 'react-native-vector-icons/Ionicons';
-import Fa from 'react-native-vector-icons/FontAwesome6';
-
 import HomeScreen from '../screen/HomeScreen';
-
 import MaterialScreen from '../screen/MaterialScreen';
 import SettingScreen from '../screen/SettingScreen';
-
 import CourseScreen from '../screen/CourseScreen';
 import {colors} from '../constants';
+import DrawerNav from './DrawerNav';
 
 const Tab = createBottomTabNavigator();
 
@@ -44,18 +40,27 @@ function BottomNav() {
           }
           return <Icon name={iconName} size={22} color={'#dc3545'} />;
         },
-      })}
-      initialRouteName="BottomHome">
+      })}>
+
+      {/* nesting drawer  not visible*/}
+      {/* <Tab.Screen
+        name="DrawerNav"
+        component={DrawerNav}
+        options={{title: '', tabBarItemStyle:{maxWidth:0}}}
+      /> */}
+
       <Tab.Screen
         name="BottomHome"
         component={HomeScreen}
         options={{title: 'Home'}}
       />
+
       <Tab.Screen
         name="Course"
         component={CourseScreen}
         options={{headerShown: true}}
       />
+
       <Tab.Screen
         name="Material"
         component={MaterialScreen}
@@ -63,6 +68,7 @@ function BottomNav() {
           headerShown: true,
         }}
       />
+      
       <Tab.Screen
         name="Settings"
         component={SettingScreen}

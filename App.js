@@ -1,52 +1,19 @@
-import { View, Text, Button, StyleSheet } from 'react-native'
+import { View, Text, Button, StyleSheet, StatusBar } from 'react-native'
 import React, { useState } from 'react'
 import { NavigationContainer } from '@react-navigation/native';
-import AuthStack from './navigation/AuthStack';
+import DecideStack from './navigation/DecideStack';
+import { UserProvider } from './utils/userContext';
 
 const App = () => {
 
   return (
-
-    <NavigationContainer>
-      <AuthStack />
-
-      {/* <Drawer.Navigator>
-          <Drawer.Screen name="signup" component={SignUpScreen} />
-        </Drawer.Navigator>
-        <Tab.Navigator>
-          <Tab.Screen name="Home" component={HomeScreen} options={{
-            tabBarLabel: 'Home',
-            tabBarIcon: ({ color }) => (
-              <FontAwesome5 name={'home'} size={24} />
-            ),
-          }} />
-          <Tab.Screen name="Test" component={TestScreen} options={{
-            tabBarLabel: 'Test',
-            tabBarIcon: ({ color }) => (
-              <FontAwesome5 name={'file'} size={24} />
-            ),
-          }} />
-          <Tab.Screen name="Material" component={MaterialScreen} options={{
-            tabBarLabel: 'Material',
-            tabBarIcon: ({ color }) => (
-              <FontAwesome5 name={'folder'} size={24} />
-            ),
-          }} />
-          <Tab.Screen name="Setting" component={SettingScreen} options={{
-            tabBarLabel: 'More',
-            tabBarIcon: ({ color }) => (
-              <FontAwesome5 name={'info'} size={24} />
-            ),
-          }} />
-          <Tab.Screen name="Login" component={LoginSignup} options={{
-            tabBarLabel: 'Login/Register',
-            tabBarIcon: ({ color }) => (
-              <FontAwesome5 name={'info'} size={24} />
-            ),
-          }} />
-        </Tab.Navigator> */}
-    </NavigationContainer>
-
+    // wrapping with context provide 
+    <UserProvider>
+      {/* wrapping with navigation */}
+      <NavigationContainer>
+        <DecideStack />
+      </NavigationContainer>
+    </UserProvider>
   )
 }
 

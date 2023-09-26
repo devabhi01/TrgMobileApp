@@ -11,7 +11,7 @@ import {
   TextInput,
 } from 'react-native';
 import {Searchbar} from 'react-native-paper';
-import Carousel from 'react-native-snap-carousel';
+// import Carousel from 'react-native-snap-carousel';
 import {windowWidth} from '../utils/Dimensions';
 import {Avatar} from 'react-native-paper';
 import {colors} from '../constants';
@@ -20,7 +20,7 @@ import {colors} from '../constants';
 import ManSVG from '../assets/img/Man.svg';
 import CbseSVG from '../assets/img/cbse.svg';
 
-import {sliderData} from '../model/Data';
+// import {sliderData} from '../model/Data';
 import BannerSlider from '../components/BannerSlider';
 
 const HomeScreen = props => {
@@ -98,7 +98,7 @@ const HomeScreen = props => {
             Carousal Here
           </Text>
           <View style={{marginHorizontal: 20}}>
-            <Carousel
+            {/* <Carousel
               style={{marginHorizontal: 20}}
               ref={c => {
                 this._carousel = c;
@@ -108,7 +108,7 @@ const HomeScreen = props => {
               sliderWidth={windowWidth - 40}
               itemWidth={300}
               loop={true}
-            />
+            /> */}
           </View>
           <View
             style={{
