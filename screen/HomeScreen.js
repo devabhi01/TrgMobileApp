@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import {
   View,
   Text,
@@ -6,9 +6,7 @@ import {
   ScrollView,
   StyleSheet,
   TouchableOpacity,
-  Image,
-  useState,
-  TextInput,
+  Image
 } from 'react-native';
 import {Searchbar} from 'react-native-paper';
 // import Carousel from 'react-native-snap-carousel';
@@ -22,9 +20,12 @@ import CbseSVG from '../assets/img/cbse.svg';
 
 // import {sliderData} from '../model/Data';
 import BannerSlider from '../components/BannerSlider';
+import { useUserContext } from '../utils/userContext';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const HomeScreen = props => {
-  const [searchQuery, setSearchQuery] = React.useState('');
+
+  const [searchQuery, setSearchQuery] = useState('');
 
   const onChangeSearch = query => setSearchQuery(query);
 

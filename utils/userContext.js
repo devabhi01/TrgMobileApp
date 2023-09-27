@@ -6,14 +6,11 @@ const UserContext = createContext();
 
 // creating its provider
 export const UserProvider = ({ children }) => {
-  const [user, setUser] = useState(true); // Initialize user state as null
-
-  const updateUser = (userData) => {
-    setUser(userData);
-  };
+  const [user, setUser] = useState(null); // Initialize user state as null
+  const [jwtoken, setJwtoken] = useState("")
 
   return (
-    <UserContext.Provider value={{ user, updateUser }}>
+    <UserContext.Provider value={{ user, setUser, jwtoken, setJwtoken }}>
       {children}
     </UserContext.Provider>
   );

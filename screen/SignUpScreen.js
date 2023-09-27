@@ -9,24 +9,28 @@ import {
   TextInput,
   Alert
 } from 'react-native';
-import React, {useState} from 'react';
+import React, { useState, useEffect } from 'react';
 import DatePicker from 'react-native-date-picker';
-import {RadioButton} from 'react-native-paper';
-
+import { RadioButton } from 'react-native-paper';
 import GoogleSVG from '../assets/img/google.svg';
 import AppleSVG from '../assets/img/apple.svg';
+import { useUserContext } from '../utils/userContext';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const SignUpScreen = props => {
 
+  // using user context to set set data
+  const { setUser, setJwtoken } = useUserContext()
+
   const [userInfo, setUserInfo] = useState({
-    name:"",
-    email:"",
-    phoneNo:"",
-    gender:"male",
-    password:"",
-    cpassword:"",
-    dob:new Date(),
-    language:"English"
+    name: "",
+    email: "",
+    phoneNo: "",
+    gender: "male",
+    password: "",
+    cpassword: "",
+    dob: new Date(),
+    language: "English"
   })
 
   const [open, setOpen] = useState(false);
@@ -35,15 +39,12 @@ const SignUpScreen = props => {
   const handleChange = (fieldName, value) => {
     setUserInfo({ ...userInfo, [fieldName]: value });
   };
-  
 
-  const handleSubmit = async () =>{
+  // submiting data and setting global states (context)
+  const handleSubmit = async () => {
     try {
-      if (!userInfo.name || !userInfo.email || !userInfo.phoneNo || !userInfo.password || !userInfo.gender || !userInfo.dob) {
-        throw new Error('One or more fields required')
-      }
 
-        const res = await fetch('http://172.20.10.2:1222/api/register', {
+      const res = await fetch('http://172.20.10.2:1222/api/register', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -52,12 +53,21 @@ const SignUpScreen = props => {
         body: JSON.stringify(userInfo),
       });
 
-
-      if (res.ok) {
+      if (res.ok && res.status == 201) {
         console.log('Form data submitted successfully');
-        props.navigation.navigate('Login')
-      } else {
-        throw new Error(res?.msg || 'something went wrong')
+        // setting global variables
+        setUser(userInfo)
+        setJwtoken(res.headers.map["set-cookie"])
+
+        // async storing
+        await AsyncStorage.setItem('user', JSON.stringify(userInfo));
+        await AsyncStorage.setItem('jwtoken', res.headers.map["set-cookie"])
+      }
+
+      else {
+        if (res?.status == 409) throw new Error(res?.statusText || 'User already Exist')
+        if (res?.status == 422) throw new Error(res?.statusText || 'One or more field missing')
+        if (res?.status == 400) throw new Error(res?.statusText || 'Invalid input!')
       }
     } catch (error) {
       Alert.alert("Error :", error.message)
@@ -103,7 +113,7 @@ const SignUpScreen = props => {
               cursorColor={'#dc3545'}
               keyboardType="default"
               value={userInfo.name}
-              onChangeText={(text)=>{handleChange('name', text)}}
+              onChangeText={(text) => { handleChange('name', text) }}
             />
             <TextInput
               style={styles.input}
@@ -112,7 +122,7 @@ const SignUpScreen = props => {
               cursorColor={'#dc3545'}
               keyboardType="email-address"
               value={userInfo.email}
-              onChangeText={(text)=>{handleChange('email', text)}}
+              onChangeText={(text) => { handleChange('email', text) }}
             />
             <TextInput
               style={styles.input}
@@ -121,7 +131,7 @@ const SignUpScreen = props => {
               cursorColor={'#dc3545'}
               keyboardType="number-pad"
               value={String(userInfo.phoneNo)}
-              onChangeText={(text)=>{handleChange('phoneNo', text)}}
+              onChangeText={(text) => { handleChange('phoneNo', text) }}
             />
 
             <View
@@ -147,21 +157,21 @@ const SignUpScreen = props => {
                   label="Male"
                   value="male"
                   color={'#dc3545'}
-                  labelStyle={{color: '#241D20'}}
-                  // onPress={setUserInfo({...userInfo, gender:"male"})}
+                  labelStyle={{ color: '#241D20' }}
+                // onPress={setUserInfo({...userInfo, gender:"male"})}
                 />
                 <RadioButton.Item
                   label="Female"
                   value="female"
                   color="#FA78C2"
-                  labelStyle={{color: '#241D20'}}
-                  // onPress={setUserInfo({...userInfo, gender:"female"})}
+                  labelStyle={{ color: '#241D20' }}
+                // onPress={setUserInfo({...userInfo, gender:"female"})}
                 />
                 <RadioButton.Item
                   label="Other"
                   value="other"
-                  labelStyle={{color: '#241D20'}}
-                  // onPress={setUserInfo({...userInfo, gender:"femail"})}
+                  labelStyle={{ color: '#241D20' }}
+                // onPress={setUserInfo({...userInfo, gender:"femail"})}
                 />
               </RadioButton.Group>
             </View>
@@ -173,7 +183,7 @@ const SignUpScreen = props => {
               cursorColor={'#dc3545'}
               maxLength={16}
               value={userInfo.password}
-              onChangeText={(text)=>{handleChange('password', text)}}
+              onChangeText={(text) => { handleChange('password', text) }}
             />
 
             <TextInput
@@ -184,7 +194,7 @@ const SignUpScreen = props => {
               cursorColor={'#dc3545'}
               maxLength={16}
               value={userInfo.cpassword}
-              onChangeText={(text)=>{handleChange('cpassword', text)}}
+              onChangeText={(text) => { handleChange('cpassword', text) }}
             />
 
             <View
@@ -205,7 +215,7 @@ const SignUpScreen = props => {
                   justifyContent: 'center',
                   paddingRight: 200,
                 }}>
-                <Text style={{color: '#241D20'}}>{dobLabel}</Text>
+                <Text style={{ color: '#241D20' }}>{dobLabel}</Text>
               </TouchableOpacity>
             </View>
             <DatePicker
@@ -232,9 +242,9 @@ const SignUpScreen = props => {
               borderRadius: 10,
               padding: 10,
               marginHorizontal: 30,
-            }} 
-              onPress={handleSubmit}
-            >
+            }}
+            onPress={handleSubmit}
+          >
             <Text
               style={{
                 color: '#eee',
@@ -288,10 +298,10 @@ const SignUpScreen = props => {
               justifyContent: 'center',
               marginBottom: 50,
             }}>
-            <Text style={{color: '#462530'}}>Already have an account </Text>
+            <Text style={{ color: '#462530' }}>Already have an account </Text>
             <TouchableOpacity
               onPress={() => props.navigation.navigate('Login')}>
-              <Text style={{color: '#A32734', fontWeight: 500}}>Login</Text>
+              <Text style={{ color: '#A32734', fontWeight: 500 }}>Login</Text>
             </TouchableOpacity>
           </View>
         </View>

@@ -6,14 +6,16 @@ import {
   TextInput,
   TouchableOpacity,
 } from 'react-native';
-
 import React, {useState} from 'react';
 import {colors} from '../constants';
-
 import GoogleSVG from '../assets/img/google.svg';
 import AppleSVG from '../assets/img/apple.svg';
+import { useUserContext } from '../utils/userContext';
+useUserContext
 
 const LoginScreen = props => {
+  const {user, jwtoken} = useUserContext()
+  console.log(user,jwtoken)
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   return (
