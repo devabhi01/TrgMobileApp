@@ -5,19 +5,62 @@ import {
   View,
   TextInput,
   TouchableOpacity,
+  Alert
 } from 'react-native';
-import React, {useState} from 'react';
-import {colors} from '../constants';
+import React, { useState } from 'react';
+import { colors } from '../constants';
 import GoogleSVG from '../assets/img/google.svg';
 import AppleSVG from '../assets/img/apple.svg';
 import { useUserContext } from '../utils/userContext';
-useUserContext
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const LoginScreen = props => {
-  const {user, jwtoken} = useUserContext()
-  console.log(user,jwtoken)
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  //taking function to set global variables
+  const { setUser, setJwtoken } = useUserContext()
+
+  // login info
+  const [loginInfo, setLoginInfo] = useState({ phoneNoOrEmail: "", password: "" })
+
+  // handling input change
+  const handleChange = (fieldName, value) => {
+    setLoginInfo({ ...loginInfo, [fieldName]: value });
+  };
+
+  // loggin in...
+  const handleSubmit = async () =>{
+    try{
+      const res = await fetch('http://172.20.10.2:1222/api/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        credentials: 'include',
+        body: JSON.stringify(loginInfo),
+      });
+
+      console.log(res)
+
+      if (res.ok && res.status == 201) {
+        // async storing
+        await AsyncStorage.setItem('user', JSON.stringify(loginInfo));
+        await AsyncStorage.setItem('jwtoken', res.headers.map["set-cookie"])
+        
+        // setting global variables
+        setUser(loginInfo)
+        setJwtoken(res.headers.map["set-cookie"])
+        
+        console.log('Login Successfull!');
+      }
+      else {
+        if (res?.status == 422) throw new Error(res?.statusText || 'One or more field missing')
+        if (res?.status == 401) throw new Error(res?.statusText || 'Incorrect phone no/email or password')
+      }
+    }
+    catch(e){
+      Alert.alert("Error :", e.message)
+    }
+  }
+
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.wraper}>
@@ -57,7 +100,7 @@ const LoginScreen = props => {
               fontWeight: 500,
             }}>
             been missed{' '}
-            <Text style={{color: '#dc3545', fontWeight: 500}}> TRG</Text>
+            <Text style={{ color: '#dc3545', fontWeight: 500 }}> TRG</Text>
           </Text>
         </View>
         <View>
@@ -67,6 +110,8 @@ const LoginScreen = props => {
             placeholderTextColor={'#241D20'}
             cursorColor={colors.primary}
             allowFontScaling
+            value={loginInfo.phoneNoOrEmail}
+            onChangeText={(text)=>{handleChange('phoneNoOrEmail', text)}}
           />
           <TextInput
             secureTextEntry
@@ -75,6 +120,8 @@ const LoginScreen = props => {
             placeholderTextColor={'#241D20'}
             cursorColor={'#dc3545'}
             maxLength={16}
+            value={loginInfo.password}
+            onChangeText={(text)=>{handleChange('password', text)}}
           />
         </View>
         <TouchableOpacity>
@@ -92,7 +139,7 @@ const LoginScreen = props => {
           </Text>
         </TouchableOpacity>
         <TouchableOpacity
-          onPress={() => props.navigation.navigate('Home_tab')}
+          onPress={handleSubmit}
           style={{
             backgroundColor: '#dc3545',
             margin: 12,
@@ -148,10 +195,10 @@ const LoginScreen = props => {
             <AppleSVG height={35} width={35} />
           </TouchableOpacity>
         </View>
-        <View style={{flexDirection: 'row', justifyContent: 'center'}}>
-          <Text style={{color: '#462530'}}>Not a member? </Text>
+        <View style={{ flexDirection: 'row', justifyContent: 'center' }}>
+          <Text style={{ color: '#462530' }}>Not a member? </Text>
           <TouchableOpacity onPress={() => props.navigation.navigate('Signup')}>
-            <Text style={{color: '#A32734', fontWeight: 500}}>Signup now</Text>
+            <Text style={{ color: '#A32734', fontWeight: 500 }}>Signup now</Text>
           </TouchableOpacity>
         </View>
       </View>

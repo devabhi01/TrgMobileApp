@@ -14,9 +14,15 @@ import React from 'react';
 
 import IonIcon from 'react-native-vector-icons/Ionicons';
 import { colors } from '../constants';
+import { useUserContext } from '../utils/userContext';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import RNRestart from 'react-native-restart';
 
 const SettingScreen = props => {
-
+  
+  // taking context to clear on logout
+  const { setUser, setJwtoken } = useUserContext()
+  
   //Linking to social Handle
 
 
@@ -41,6 +47,21 @@ const SettingScreen = props => {
       Alert.alert(error.message);
     }
   };
+
+  // logging out
+  const handleLogout = async () => {
+    try {
+      //clearing storage
+      await AsyncStorage.clear()
+      //clearing global data
+      setUser(null); setJwtoken("");
+      RNRestart.Restart();
+    }
+    catch (e) {
+      console.log("Error : ", e)
+    }
+
+  }
 
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: colors.graylight }}>
@@ -114,7 +135,7 @@ const SettingScreen = props => {
               mode='outlined'
               textColor='#dc3545'
               rippleColor={'#dc3545'}
-              onPress={() => { }}
+              onPress={handleLogout}
               style={{ width: 200, borderWidth: 2, borderColor: '#dc3545', borderRadius: 10, }}
 
             >Logout</Button>
