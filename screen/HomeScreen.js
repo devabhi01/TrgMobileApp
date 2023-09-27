@@ -25,6 +25,18 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const HomeScreen = props => {
 
+  // //testing api
+  // useEffect(() => {
+  //   fetctData = async () => {
+  //     const res = await fetch('http://172.20.10.2:1222/',{
+  //       method:'GET'
+  //     })
+  //     console.log(await res.json())
+  //   }
+  //   fetctData()
+  // }, [])
+  
+
   const [searchQuery, setSearchQuery] = useState('');
 
   const onChangeSearch = query => setSearchQuery(query);

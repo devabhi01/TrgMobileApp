@@ -37,23 +37,22 @@ const LoginScreen = props => {
         credentials: 'include',
         body: JSON.stringify(loginInfo),
       });
-
-      console.log(res)
+      // taking out json response
+      const data = await res.json()
 
       if (res.ok && res.status == 201) {
         // async storing
-        await AsyncStorage.setItem('user', JSON.stringify(loginInfo));
-        await AsyncStorage.setItem('jwtoken', res.headers.map["set-cookie"])
+        await AsyncStorage.setItem('user', JSON.stringify(data.response.user));
+        await AsyncStorage.setItem('jwtoken', data.response.token)
         
         // setting global variables
-        setUser(loginInfo)
-        setJwtoken(res.headers.map["set-cookie"])
+        setUser(data.response.user)
+        setJwtoken(data.response.token)
         
-        console.log('Login Successfull!');
+        console.log(data?.msg,'Login Successfull!');
       }
       else {
-        if (res?.status == 422) throw new Error(res?.statusText || 'One or more field missing')
-        if (res?.status == 401) throw new Error(res?.statusText || 'Incorrect phone no/email or password')
+        throw new Error(data?.msg || 'Something went wrong!')
       }
     }
     catch(e){

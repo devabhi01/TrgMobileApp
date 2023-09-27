@@ -24,7 +24,7 @@ const StudentStack = () => {
     return (
         <>
         {/* all other stack screens  */}
-        <Stack.Navigator screenOptions={{ headerShown: false }}>
+        <Stack.Navigator screenOptions={{ headerShown: true }}>
 
             {/* nesting bottom nav */}
             <Stack.Screen name="BottomNav" component={BottomNav} options={{ headerShown: false }} />
