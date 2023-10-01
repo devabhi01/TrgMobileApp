@@ -45,7 +45,7 @@ const SignUpScreen = props => {
   const handleSubmit = async () => {
     try {
 
-      const res = await fetch('http://172.20.10.2:1222/api/register', {
+      const res = await fetch('http://192.168.1.6:1222/api/register', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

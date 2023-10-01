@@ -1,7 +1,17 @@
 import {View, Text, SafeAreaView, TouchableOpacity, Image} from 'react-native';
 import React from 'react';
+import {useAuth0} from 'react-native-auth0';
 
 const LoginSignup = props => {
+  const {authorize} = useAuth0();
+
+  const onPress = async () => {
+      try {
+          await authorize();
+      } catch (e) {
+          console.log(e);
+      }
+  };
   return (
     <SafeAreaView style={{flex: 1}}>
       <View>
@@ -80,7 +90,7 @@ const LoginSignup = props => {
             marginRight: 30,
           }}>
           <TouchableOpacity
-            onPress={() => props.navigation.navigate('Home_tab')}
+            onPress={onPress}
             style={{
               width: 100,
               backgroundColor: '#dc3545',
@@ -93,7 +103,7 @@ const LoginSignup = props => {
                 color: '#eee',
                 fontWeight: 500,
               }}>
-              Later
+              0oth Login
             </Text>
           </TouchableOpacity>
         </View>
