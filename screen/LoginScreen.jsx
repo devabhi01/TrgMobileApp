@@ -5,17 +5,77 @@ import {
   View,
   TextInput,
   TouchableOpacity,
+  Alert
 } from 'react-native';
-
-import React, {useState} from 'react';
-import {colors} from '../constants';
-
+import React, { useState } from 'react';
+import { colors } from '../constants';
 import GoogleSVG from '../assets/img/google.svg';
 import AppleSVG from '../assets/img/apple.svg';
+import { useUserContext } from '../utils/userContext';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import auth from '@react-native-firebase/auth';
+import { GoogleSignin } from '@react-native-google-signin/google-signin';
 
 const LoginScreen = props => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  //taking function to set global variables
+  const { setUser, setJwtoken } = useUserContext()
+
+  // login info
+  const [loginInfo, setLoginInfo] = useState({ phoneNoOrEmail: "", password: "" })
+
+  // handling input change
+  const handleChange = (fieldName, value) => {
+    setLoginInfo({ ...loginInfo, [fieldName]: value });
+  };
+
+  // loggin in...
+  const handleSubmit = async () =>{
+    try{
+      const res = await fetch('http://192.168.1.6:1222/api/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        credentials: 'include',
+        body: JSON.stringify(loginInfo),
+      });
+      // taking out json response
+      const data = await res.json()
+
+      if (res.ok && res.status == 201) {
+        // async storing
+        await AsyncStorage.setItem('user', JSON.stringify(data.response.user));
+        await AsyncStorage.setItem('jwtoken', data.response.token)
+        
+        // setting global variables
+        setUser(data.response.user)
+        setJwtoken(data.response.token)
+        
+        console.log(data?.msg,'Login Successfull!');
+      }
+      else {
+        throw new Error(data?.msg || 'Something went wrong!')
+      }
+    }
+    catch(e){
+      Alert.alert("Error :", e.message)
+    }
+  }
+
+  //google sign-in
+  async function onGoogleButtonPress() {
+    // Check if your device supports Google Play
+    await GoogleSignin.hasPlayServices({ showPlayServicesUpdateDialog: true });
+    // Get the users ID token
+    const { idToken } = await GoogleSignin.signIn();
+  
+    // Create a Google credential with the token
+    const googleCredential = auth.GoogleAuthProvider.credential(idToken);
+  
+    // Sign-in the user with the credential
+    return auth().signInWithCredential(googleCredential);
+  }
+
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.wraper}>
@@ -55,7 +115,7 @@ const LoginScreen = props => {
               fontWeight: 500,
             }}>
             been missed{' '}
-            <Text style={{color: '#dc3545', fontWeight: 500}}> TRG</Text>
+            <Text style={{ color: '#dc3545', fontWeight: 500 }}> TRG</Text>
           </Text>
         </View>
         <View>
@@ -65,6 +125,8 @@ const LoginScreen = props => {
             placeholderTextColor={'#241D20'}
             cursorColor={colors.primary}
             allowFontScaling
+            value={loginInfo.phoneNoOrEmail}
+            onChangeText={(text)=>{handleChange('phoneNoOrEmail', text)}}
           />
           <TextInput
             secureTextEntry
@@ -73,6 +135,8 @@ const LoginScreen = props => {
             placeholderTextColor={'#241D20'}
             cursorColor={'#dc3545'}
             maxLength={16}
+            value={loginInfo.password}
+            onChangeText={(text)=>{handleChange('password', text)}}
           />
         </View>
         <TouchableOpacity>
@@ -90,7 +154,7 @@ const LoginScreen = props => {
           </Text>
         </TouchableOpacity>
         <TouchableOpacity
-          onPress={() => props.navigation.navigate('Home_tab')}
+          onPress={handleSubmit}
           style={{
             backgroundColor: '#dc3545',
             margin: 12,
@@ -132,7 +196,7 @@ const LoginScreen = props => {
               borderRadius: 10,
               padding: 8,
               justifyContent: 'center',
-            }}>
+            }}  onPress={() => onGoogleButtonPress().then(() => console.log('Signed in with Google!'))}>
             <GoogleSVG height={30} width={30} />
           </TouchableOpacity>
           <TouchableOpacity
@@ -146,36 +210,14 @@ const LoginScreen = props => {
             <AppleSVG height={35} width={35} />
           </TouchableOpacity>
         </View>
-        <View style={{flexDirection: 'row', justifyContent: 'center'}}>
-          <Text style={{color: '#462530'}}>Not a member? </Text>
+        <View style={{ flexDirection: 'row', justifyContent: 'center' }}>
+          <Text style={{ color: '#462530' }}>Not a member? </Text>
           <TouchableOpacity onPress={() => props.navigation.navigate('Signup')}>
-            <Text style={{color: '#A32734', fontWeight: 500}}>Signup now</Text>
+            <Text style={{ color: '#A32734', fontWeight: 500 }}>Signup now</Text>
           </TouchableOpacity>
         </View>
       </View>
     </SafeAreaView>
-
-    // <View style={{marginTop:200, marginHorizontal:20}}>
-    //   <Text style={{fontSize:25, fontWeight:500, marginBottom:5}} >Welcome back!</Text>
-
-    //   <TextInput
-    //   label="Email"
-    //   value={email}
-    //   onChangeText={email => setEmail(email)}
-    //   />
-    //   <View style={{marginBottom:20}} />
-
-    //   <TextInput
-    //   label="Password"
-    //   value={password}
-    //   onChangeText={password => setPassword(password)}
-    //   secureTextEntry
-    //   />
-    //   <View style={{marginBottom:20}} />
-
-    //   <Button style={{backgroundColor:'white'}} >Login</Button>
-
-    // </View>
   );
 };
 

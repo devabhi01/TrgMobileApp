@@ -89,6 +89,7 @@ android {
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
         versionName "1.0"
+        manifestPlaceholders = [auth0Domain: "dev-h4achp4dc0pqx6ih.us.auth0.com", auth0Scheme: "${applicationId}.auth0"]
     }
     signingConfigs {
         debug {
@@ -116,6 +117,7 @@ dependencies {
     // The version of react-native is set by the React Native Gradle Plugin
     implementation("com.facebook.react:react-android")
     implementation project(':react-native-vector-icons')
+<<<<<<< HEAD
     // For animated GIF support
   implementation 'com.facebook.fresco:animated-gif:2.5.0'
 
@@ -126,6 +128,9 @@ dependencies {
   // For WebP support, without animations
   implementation 'com.facebook.fresco:webpsupport:2.5.0'
     
+=======
+    implementation 'androidx.swiperefreshlayout:swiperefreshlayout:1.0.0'
+>>>>>>> dcbdbcf34e65e968481ff2ce2f35efa1f5208644
 
     debugImplementation("com.facebook.flipper:flipper:${FLIPPER_VERSION}")
     debugImplementation("com.facebook.flipper:flipper-network-plugin:${FLIPPER_VERSION}") {
@@ -141,3 +146,5 @@ dependencies {
 }
 
 apply from: file("../../node_modules/@react-native-community/cli-platform-android/native_modules.gradle"); applyNativeModulesAppBuildGradle(project)
+
+apply plugin: 'com.google.gms.google-services'

@@ -1,12 +1,11 @@
-import { View, Text } from 'react-native';
 import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
-import { NavigationContainer } from '@react-navigation/native';
 
 // impoterted Component
 import LoginSignup from '../screen/LoginSignup';
 import LoginScreen from '../screen/LoginScreen';
 import SignUpScreen from '../screen/SignUpScreen';
+<<<<<<< HEAD
 import HomeScreen from '../screen/HomeScreen';
 import AppDrawer from '../components/AppDrawer';
 import BottomNav from './BottomNav';
@@ -25,12 +24,15 @@ import Notification from '../components/setting/Notification';
 import Helpsupport from '../components/setting/Helpsupport';
 import OneC from '../components/courses/classes/OneC';
 import OtpVerification from '../components/courses/misc/OtpVerification';
+=======
+>>>>>>> dcbdbcf34e65e968481ff2ce2f35efa1f5208644
 
 const Stack = createStackNavigator();
 
 const AuthStack = () => {
   return (
     <Stack.Navigator screenOptions={{ headerShown: false }}>
+<<<<<<< HEAD
       <Stack.Screen name="LoginSignup" component={LoginSignup} />
       <Stack.Screen name="Login" component={LoginScreen} />
       <Stack.Screen name="Signup" component={SignUpScreen} />
@@ -56,6 +58,11 @@ const AuthStack = () => {
 
       {/* cbse screen refers */}
       <Stack.Screen name="OneC" component={OneC} />
+=======
+        <Stack.Screen name="LoginSignup" component={LoginSignup} />
+        <Stack.Screen name="Login" component={LoginScreen} />
+        <Stack.Screen name="Signup" component={SignUpScreen} />
+>>>>>>> dcbdbcf34e65e968481ff2ce2f35efa1f5208644
     </Stack.Navigator>
   );
 };

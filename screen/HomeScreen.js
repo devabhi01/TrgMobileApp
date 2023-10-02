@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import {
   View,
   Text,
@@ -6,25 +6,50 @@ import {
   ScrollView,
   StyleSheet,
   TouchableOpacity,
-  Image,
-  useState,
-  TextInput,
+  Image
 } from 'react-native';
+<<<<<<< HEAD
 import { Searchbar } from 'react-native-paper';
 // import Carousel from 'react-native-snap-carousel';
 import { windowWidth } from '../utils/Dimensions';
 import { Avatar } from 'react-native-paper';
 import { colors } from '../constants';
+=======
+import {Searchbar} from 'react-native-paper';
+// import Carousel from 'react-native-snap-carousel';
+import {windowWidth} from '../utils/Dimensions';
+import {Avatar} from 'react-native-paper';
+import {colors} from '../constants';
+>>>>>>> dcbdbcf34e65e968481ff2ce2f35efa1f5208644
 
 // Images here
 import ManSVG from '../assets/img/Man.svg';
 import CbseSVG from '../assets/img/cbse.svg';
 
+<<<<<<< HEAD
 import { sliderData } from '../model/Data';
+=======
+// import {sliderData} from '../model/Data';
+>>>>>>> dcbdbcf34e65e968481ff2ce2f35efa1f5208644
 import BannerSlider from '../components/BannerSlider';
+import { useUserContext } from '../utils/userContext';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const HomeScreen = props => {
-  const [searchQuery, setSearchQuery] = React.useState('');
+
+  // //testing api
+  // useEffect(() => {
+  //   fetctData = async () => {
+  //     const res = await fetch('http://172.20.10.2:1222/',{
+  //       method:'GET'
+  //     })
+  //     console.log(await res.json())
+  //   }
+  //   fetctData()
+  // }, [])
+  
+
+  const [searchQuery, setSearchQuery] = useState('');
 
   const onChangeSearch = query => setSearchQuery(query);
 
@@ -97,9 +122,15 @@ const HomeScreen = props => {
             }}>
             Carousal Here
           </Text>
+<<<<<<< HEAD
           <View style={{ marginHorizontal: 20 }}>
             {/* <Carousel
               style={{ marginHorizontal: 20 }}
+=======
+          <View style={{marginHorizontal: 20}}>
+            {/* <Carousel
+              style={{marginHorizontal: 20}}
+>>>>>>> dcbdbcf34e65e968481ff2ce2f35efa1f5208644
               ref={c => {
                 this._carousel = c;
               }}

@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "967642509622",
+    "project_id": "the-right-guru",
+    "storage_bucket": "the-right-guru.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:967642509622:android:638a4b13d60d403d930397",
+        "android_client_info": {
+          "package_name": "com.trgmobileapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "967642509622-56j4hi6i34uuvhr3icllcnu2uqu79i5k.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.trgmobileapp",
+            "certificate_hash": "ea5c0fc5159bd36e6ed45be6458c4415d86cdd3d"
+          }
+        },
+        {
+          "client_id": "967642509622-irbv40matt7l920g5ds6r73bjqc77k1h.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBFKMcenMPzbWqIBbKKB5bg1Xk1aPZnuyA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "967642509622-irbv40matt7l920g5ds6r73bjqc77k1h.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
