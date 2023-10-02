@@ -8,9 +8,12 @@ import {
   Image,
   Linking
 } from 'react-native';
-import React from 'react';
+import React, { useState } from 'react';
+import ImagePicker, { openPicker } from 'react-native-image-crop-picker';
+
+
 import { colors } from '../constants';
-import { Avatar } from 'react-native-paper';
+import Avatar from '../assets/img/user.png'
 import Ionicon from 'react-native-vector-icons/Ionicons';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import MaterialIcon from 'react-native-vector-icons/MaterialIcons';
@@ -18,20 +21,36 @@ import MaterialIcon from 'react-native-vector-icons/MaterialIcons';
 
 
 const ProfileSettings = () => {
+  const [profile, setProfile] = useState(null)
+
+  const ImgPick = () => {
+    ImagePicker.openPicker({
+      width: 400,
+      height: 400,
+      cropping: true
+    }).then(image => {
+      console.log(image);
+      setProfile(image.path)
+    });
+  }
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: colors.primary }}>
       <ScrollView style={{ paddingVertical: 10 }}>
         <View style={styles.container}>
           <View style={styles.wraper}>
             <View style={{ alignItems: 'center' }}>
-              <Avatar.Image
+              <Image
                 style={styles.Avatar_img}
                 size={80}
-                source={require('../assets/img/user.png')}
+                source={profile ? { uri: profile } : Avatar}
+
               />
+              <TouchableOpacity onPress={ImgPick} style={styles.CamPick}>
+                <Ionicon name="camera" size={20} color={colors.primary} />
+              </TouchableOpacity>
               <Text
                 style={{
-                  marginTop: 10,
+                  marginTop: 20,
                   color: colors.primary,
                   fontSize: 25,
                   fontWeight: 500,
@@ -69,11 +88,11 @@ const ProfileSettings = () => {
               <MaterialIcon name="payment" size={25} color={colors.primary} />
               <Text style={styles.btnText}>Payment Details</Text>
             </TouchableOpacity>
-            <TouchableOpacity style={styles.btn}>
+            {/* <TouchableOpacity style={styles.btn}>
               <MaterialIcon name="contact-support" size={25} color={colors.primary} />
               <Text style={styles.btnText}>Support</Text>
-            </TouchableOpacity>
-            <View style={{ marginVertical: 10 }}>
+            </TouchableOpacity> */}
+            <View style={{ marginVertical: 30 }}>
               <Text
                 style={{
                   textAlign: 'center',
@@ -174,5 +193,9 @@ const styles = StyleSheet.create({
     fontSize: 20,
     color: colors.primary,
   },
+  CamPick: {
+    alignSelf: 'flex-end',
+    marginTop: -35
+  }
 
 });

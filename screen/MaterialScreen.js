@@ -11,11 +11,11 @@ import React from 'react';
 import MaterialIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 import Foundation from 'react-native-vector-icons/Foundation';
 import CbseSVG from '../assets/img/cbse.svg';
-import {colors} from '../constants';
+import { colors } from '../constants';
 
-const MaterialScreen = () => {
+const TestSeriesScreen = () => {
   return (
-    <SafeAreaView style={{flex: 1, backgroundColor: colors.graylight}}>
+    <SafeAreaView style={{ flex: 1, backgroundColor: colors.graylight }}>
       <ScrollView>
         <Image
           style={styles.img}
@@ -23,8 +23,8 @@ const MaterialScreen = () => {
         />
 
         <View style={styles.container}>
-          <View style={{paddingHorizontal: 30}}>
-            <View style={{marginVertical: 10}}>
+          <View style={{ paddingHorizontal: 30 }}>
+            <View style={{ marginVertical: 10 }}>
               <TouchableOpacity style={styles.btn}>
                 <MaterialIcon
                   name="bookshelf"
@@ -34,26 +34,26 @@ const MaterialScreen = () => {
                 <Text style={styles.textBtn}>Your Materials</Text>
               </TouchableOpacity>
               <TouchableOpacity style={styles.btn}>
-                <CbseSVG style={{width: 30, height: 30}} />
+                <CbseSVG style={{ width: 30, height: 30 }} />
                 <Text style={styles.textBtn}>CBSE</Text>
               </TouchableOpacity>
               <TouchableOpacity style={styles.btn}>
                 <Image
-                  style={{width: 30, height: 45}}
+                  style={{ width: 30, height: 45 }}
                   source={require('../assets/img/icse1.png')}
                 />
                 <Text style={styles.textBtn}>ICSE</Text>
               </TouchableOpacity>
               <TouchableOpacity style={styles.btn}>
                 <Image
-                  style={{width: 30, height: 45}}
+                  style={{ width: 30, height: 45 }}
                   source={require('../assets/img/Quiz1.png')}
                 />
                 <Text style={styles.textBtn}>QUIZ</Text>
               </TouchableOpacity>
               <TouchableOpacity style={styles.btn}>
                 <Image
-                  style={{width: 30, height: 45}}
+                  style={{ width: 30, height: 45 }}
                   source={require('../assets/img/test1.png')}
                 />
                 <Text style={styles.textBtn}>TEST SERIES</Text>
@@ -74,7 +74,7 @@ const MaterialScreen = () => {
   );
 };
 
-export default MaterialScreen;
+export default TestSeriesScreen;
 
 const styles = StyleSheet.create({
   img: {
@@ -92,7 +92,7 @@ const styles = StyleSheet.create({
   },
 
   btn: {
-    
+
     marginVertical: 10,
     flexDirection: 'row',
     paddingLeft: 20,

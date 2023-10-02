@@ -23,6 +23,8 @@ import YourCourse from '../components/courses/main_course/YourCourse';
 import AccountPrivacy from '../components/setting/AccountPrivacy';
 import Notification from '../components/setting/Notification';
 import Helpsupport from '../components/setting/Helpsupport';
+import OneC from '../components/courses/classes/OneC';
+import OtpVerification from '../components/courses/misc/OtpVerification';
 
 const Stack = createStackNavigator();
 
@@ -32,6 +34,7 @@ const AuthStack = () => {
       <Stack.Screen name="LoginSignup" component={LoginSignup} />
       <Stack.Screen name="Login" component={LoginScreen} />
       <Stack.Screen name="Signup" component={SignUpScreen} />
+      <Stack.Screen name="Otp-verify" component={OtpVerification} />
       {/* <Stack.Screen name="home" component={HomeScreen} /> */}
       <Stack.Screen name="Home_tab" component={AppStack} />
 
@@ -50,6 +53,9 @@ const AuthStack = () => {
       <Stack.Screen name="account_privacy" component={AccountPrivacy} />
       <Stack.Screen name="notification" component={Notification} />
       <Stack.Screen name="helpsupport" component={Helpsupport} />
+
+      {/* cbse screen refers */}
+      <Stack.Screen name="OneC" component={OneC} />
     </Stack.Navigator>
   );
 };

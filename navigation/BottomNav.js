@@ -1,25 +1,25 @@
-import {View, Text} from 'react-native';
+import { View, Text } from 'react-native';
 import React from 'react';
-import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Icon from 'react-native-vector-icons/Ionicons';
 import Fa from 'react-native-vector-icons/FontAwesome6';
 
 import HomeScreen from '../screen/HomeScreen';
 
-import MaterialScreen from '../screen/MaterialScreen';
+import TestSeriesScreen from '../screen/MaterialScreen';
 import SettingScreen from '../screen/SettingScreen';
 
 import CourseScreen from '../screen/CourseScreen';
-import {colors} from '../constants';
+import { colors } from '../constants';
 
 const Tab = createBottomTabNavigator();
 
 function BottomNav() {
   return (
     <Tab.Navigator
-      screenOptions={({route}) => ({
+      screenOptions={({ route }) => ({
         headerShown: false,
-        headerStyle: {backgroundColor: '#dc3545'},
+        headerStyle: { backgroundColor: '#dc3545' },
         headerTitleAlign: 'center',
         headerTintColor: '#eee',
 
@@ -30,7 +30,7 @@ function BottomNav() {
           paddingBottom: 3,
         },
         tabBarActiveBackgroundColor: colors.graylight,
-        tabBarIcon: ({focused}) => {
+        tabBarIcon: ({ focused }) => {
           let iconName;
 
           if (route.name === 'BottomHome') {
@@ -49,24 +49,25 @@ function BottomNav() {
       <Tab.Screen
         name="BottomHome"
         component={HomeScreen}
-        options={{title: 'Home'}}
+        options={{ title: 'Home' }}
       />
       <Tab.Screen
         name="Course"
         component={CourseScreen}
-        options={{headerShown: true}}
+        options={{ headerShown: true }}
       />
       <Tab.Screen
         name="Material"
-        component={MaterialScreen}
+        component={TestSeriesScreen}
         options={{
           headerShown: true,
+          title: 'Test Series'
         }}
       />
       <Tab.Screen
         name="Settings"
         component={SettingScreen}
-        options={{headerShown: true}}
+        options={{ headerShown: true }}
       />
     </Tab.Navigator>
   );

@@ -10,17 +10,17 @@ import {
   useState,
   TextInput,
 } from 'react-native';
-import {Searchbar} from 'react-native-paper';
-import Carousel from 'react-native-snap-carousel';
-import {windowWidth} from '../utils/Dimensions';
-import {Avatar} from 'react-native-paper';
-import {colors} from '../constants';
+import { Searchbar } from 'react-native-paper';
+// import Carousel from 'react-native-snap-carousel';
+import { windowWidth } from '../utils/Dimensions';
+import { Avatar } from 'react-native-paper';
+import { colors } from '../constants';
 
 // Images here
 import ManSVG from '../assets/img/Man.svg';
 import CbseSVG from '../assets/img/cbse.svg';
 
-import {sliderData} from '../model/Data';
+import { sliderData } from '../model/Data';
 import BannerSlider from '../components/BannerSlider';
 
 const HomeScreen = props => {
@@ -28,17 +28,17 @@ const HomeScreen = props => {
 
   const onChangeSearch = query => setSearchQuery(query);
 
-  const renderBanner = ({item, index}) => {
+  const renderBanner = ({ item, index }) => {
     return <BannerSlider data={item} />;
   };
 
   return (
-    <SafeAreaView style={{flex: 1, backgroundColor: colors.graylight}}>
-      <ScrollView style={{paddingVertical: 10}}>
+    <SafeAreaView style={{ flex: 1, backgroundColor: colors.graylight }}>
+      <ScrollView style={{ paddingVertical: 10 }}>
         <View style={styles.container}>
           <View style={styles.topbar}>
-            <View style={{marginLeft: 20}}>
-              <Text style={{color: '#eee', fontSize: 20, color: '#dc3545'}}>
+            <View style={{ marginLeft: 20 }}>
+              <Text style={{ color: '#eee', fontSize: 20, color: '#dc3545' }}>
                 Hello,
               </Text>
               <Text
@@ -57,7 +57,7 @@ const HomeScreen = props => {
 
             <TouchableOpacity
               onPress={() => props.navigation.toggleDrawer()}
-              style={{marginRight: 20}}>
+              style={{ marginRight: 20 }}>
               <View
                 style={{
                   borderWidth: 1,
@@ -97,9 +97,9 @@ const HomeScreen = props => {
             }}>
             Carousal Here
           </Text>
-          <View style={{marginHorizontal: 20}}>
-            <Carousel
-              style={{marginHorizontal: 20}}
+          <View style={{ marginHorizontal: 20 }}>
+            {/* <Carousel
+              style={{ marginHorizontal: 20 }}
               ref={c => {
                 this._carousel = c;
               }}
@@ -108,7 +108,7 @@ const HomeScreen = props => {
               sliderWidth={windowWidth - 40}
               itemWidth={300}
               loop={true}
-            />
+            /> */}
           </View>
           <View
             style={{

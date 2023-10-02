@@ -9,9 +9,9 @@ import {
   TextInput,
 } from 'react-native';
 
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import DatePicker from 'react-native-date-picker';
-import {RadioButton} from 'react-native-paper';
+import { RadioButton } from 'react-native-paper';
 
 import GoogleSVG from '../assets/img/google.svg';
 import AppleSVG from '../assets/img/apple.svg';
@@ -28,15 +28,15 @@ const SignUpScreen = props => {
 
   const [value, setValue] = React.useState('first');
 
-  const handleSubmit = async () =>{
+  const handleSubmit = async () => {
     console.log("submit pressed...")
     try {
-        const response = await fetch('http://localhost:8000/signup', {
+      const response = await fetch('http://localhost:8000/signup', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({"name":name, "email":email, "number":phoneNo, "gender":"default", "password":password, "dob":date, "language":"English" }),
+        body: JSON.stringify({ "name": name, "email": email, "number": phoneNo, "gender": "default", "password": password, "dob": date, "language": "English" }),
       });
 
       if (response.ok) {
@@ -125,18 +125,18 @@ const SignUpScreen = props => {
                   label="Male"
                   value="first"
                   color={'#dc3545'}
-                  labelStyle={{color: '#241D20'}}
+                  labelStyle={{ color: '#241D20' }}
                 />
                 <RadioButton.Item
                   label="Female"
                   value="second"
                   color="#FA78C2"
-                  labelStyle={{color: '#241D20'}}
+                  labelStyle={{ color: '#241D20' }}
                 />
                 <RadioButton.Item
                   label="Other"
                   value="third"
-                  labelStyle={{color: '#241D20'}}
+                  labelStyle={{ color: '#241D20' }}
                 />
               </RadioButton.Group>
             </View>
@@ -174,7 +174,7 @@ const SignUpScreen = props => {
                   justifyContent: 'center',
                   paddingRight: 200,
                 }}>
-                <Text style={{color: '#241D20'}}>{dobLabel}</Text>
+                <Text style={{ color: '#241D20' }}>{dobLabel}</Text>
               </TouchableOpacity>
             </View>
             <DatePicker
@@ -201,9 +201,9 @@ const SignUpScreen = props => {
               borderRadius: 10,
               padding: 10,
               marginHorizontal: 30,
-            }} 
-              onPress={handleSubmit}
-            >
+            }}
+            onPress={() => props.navigation.navigate('Otp-verify')}
+          >
             <Text
               style={{
                 color: '#eee',
@@ -212,7 +212,7 @@ const SignUpScreen = props => {
                 fontSize: 18,
                 fontWeight: 500,
               }}>
-              Signup
+              Next
             </Text>
           </TouchableOpacity>
           <Text
@@ -257,10 +257,10 @@ const SignUpScreen = props => {
               justifyContent: 'center',
               marginBottom: 50,
             }}>
-            <Text style={{color: '#462530'}}>Already have an account </Text>
+            <Text style={{ color: '#462530' }}>Already have an account </Text>
             <TouchableOpacity
               onPress={() => props.navigation.navigate('Login')}>
-              <Text style={{color: '#A32734', fontWeight: 500}}>Login</Text>
+              <Text style={{ color: '#A32734', fontWeight: 500 }}>Login</Text>
             </TouchableOpacity>
           </View>
         </View>
