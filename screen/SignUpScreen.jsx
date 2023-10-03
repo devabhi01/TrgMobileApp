@@ -16,6 +16,7 @@ import GoogleSVG from '../assets/img/google.svg';
 import AppleSVG from '../assets/img/apple.svg';
 import { useUserContext } from '../utils/userContext';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { registerUser, sentCodeToMail } from '../utils/APIs';
 
 const SignUpScreen = props => {
 
@@ -42,40 +43,47 @@ const SignUpScreen = props => {
   };
 
   // submiting data and setting global states (context)
-  const handleSubmit = async () => {
+  const handleNext = async (props) => {
     try {
+      // submiting info through api
+      const res = await registerUser(userInfo)
 
-      const res = await fetch('http://192.168.1.6:1222/api/register', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        credentials: 'include',
-        body: JSON.stringify(userInfo),
-      });
+      const data = await res.json()
 
       if (res.ok && res.status == 201) {
-        
+
         // async storing
-        await AsyncStorage.setItem('user', JSON.stringify(userInfo));
-        await AsyncStorage.setItem('jwtoken', res.headers.map["set-cookie"])
+        await AsyncStorage.setItem('user', JSON.stringify(data.response.user));
+        await AsyncStorage.setItem('jwtoken', data.response.token)
         
         // setting global variables
-        setUser(userInfo)
-        setJwtoken(res.headers.map["set-cookie"])
-        
-        console.log('Form data submitted successfully');
+        setUser(data.response.user)
+        setJwtoken(data.response.token)
+
+        console.log('Verification code sent! and user registered!');
+        props.navigation.navigate('Otp-verify')
       }
 
       else {
-        if (res?.status == 409) throw new Error(res?.statusText || 'User already Exist')
-        if (res?.status == 422) throw new Error(res?.statusText || 'One or more field missing')
-        if (res?.status == 400) throw new Error(res?.statusText || 'Invalid input!')
+        throw new Error(data?.msg || 'Something went wrong!')
       }
     } catch (error) {
       Alert.alert("Error :", error.message)
     }
   }
+
+  // // sending OTP
+  // const handleNext = async (props) => {
+  //   try {
+  //     const res = await sentCodeToMail(userInfo.email)
+  //     const data = res.json()
+  //     console.log(data)
+  //     props.navigation.navigate('Otp-verify')
+  //   }
+  //   catch (error) {
+  //     Alert.alert("Error :", error.message)
+  //   }
+  // }
 
   return (
     <SafeAreaView style={styles.container}>
@@ -246,7 +254,7 @@ const SignUpScreen = props => {
               padding: 10,
               marginHorizontal: 30,
             }}
-            onPress={handleSubmit}
+            onPress={() => { handleNext(props) }}
           >
             <Text
               style={{
@@ -256,7 +264,7 @@ const SignUpScreen = props => {
                 fontSize: 18,
                 fontWeight: 500,
               }}>
-              Signup
+              Next
             </Text>
           </TouchableOpacity>
           <Text

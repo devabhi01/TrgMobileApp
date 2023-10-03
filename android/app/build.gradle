@@ -117,20 +117,18 @@ dependencies {
     // The version of react-native is set by the React Native Gradle Plugin
     implementation("com.facebook.react:react-android")
     implementation project(':react-native-vector-icons')
-<<<<<<< HEAD
-    // For animated GIF support
-  implementation 'com.facebook.fresco:animated-gif:2.5.0'
-
-  // For WebP support, including animated WebP
-  implementation 'com.facebook.fresco:animated-webp:2.5.0'
-  implementation 'com.facebook.fresco:webpsupport:2.5.0'
-
-  // For WebP support, without animations
-  implementation 'com.facebook.fresco:webpsupport:2.5.0'
     
-=======
+    // For animated GIF support
+    implementation 'com.facebook.fresco:animated-gif:2.5.0'
+
+    // For WebP support, including animated WebP
+    implementation 'com.facebook.fresco:animated-webp:2.5.0'
+    implementation 'com.facebook.fresco:webpsupport:2.5.0'
+
+    // For WebP support, without animations
+    implementation 'com.facebook.fresco:webpsupport:2.5.0'
+
     implementation 'androidx.swiperefreshlayout:swiperefreshlayout:1.0.0'
->>>>>>> dcbdbcf34e65e968481ff2ce2f35efa1f5208644
 
     debugImplementation("com.facebook.flipper:flipper:${FLIPPER_VERSION}")
     debugImplementation("com.facebook.flipper:flipper-network-plugin:${FLIPPER_VERSION}") {

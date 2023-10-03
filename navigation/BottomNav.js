@@ -1,25 +1,12 @@
-<<<<<<< HEAD
-import { View, Text } from 'react-native';
-=======
->>>>>>> dcbdbcf34e65e968481ff2ce2f35efa1f5208644
 import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Icon from 'react-native-vector-icons/Ionicons';
 import HomeScreen from '../screen/HomeScreen';
-<<<<<<< HEAD
-
 import TestSeriesScreen from '../screen/MaterialScreen';
-=======
-import MaterialScreen from '../screen/MaterialScreen';
->>>>>>> dcbdbcf34e65e968481ff2ce2f35efa1f5208644
 import SettingScreen from '../screen/SettingScreen';
 import CourseScreen from '../screen/CourseScreen';
-<<<<<<< HEAD
-import { colors } from '../constants';
-=======
 import {colors} from '../constants';
 import DrawerNav from './DrawerNav';
->>>>>>> dcbdbcf34e65e968481ff2ce2f35efa1f5208644
 
 const Tab = createBottomTabNavigator();
 

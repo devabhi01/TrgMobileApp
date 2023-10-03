@@ -1,9 +1,13 @@
 import { StyleSheet, Text, View, Image, SafeAreaView, TextInput, TouchableOpacity, Alert } from 'react-native'
 import React, { useRef, useState, useEffect } from 'react';
-
-
+import { useUserContext } from '../utils/userContext';
+import { verifyOTP } from '../utils/APIs';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const OtpVerification = () => {
+    // taking user data
+    const { user, setUser } = useUserContext()
+
     const et1 = useRef();
     const et2 = useRef();
     const et3 = useRef();
@@ -27,12 +31,32 @@ const OtpVerification = () => {
         }
     }, [count]);
 
-    const ValidateOTP = () => {
-        let otp = '1234'
+    const ValidateOTP = async () => {
+        const email = user.email
         let enteredOTP = f1 + f2 + f3 + f4
-        if (enteredOTP == otp) {
-            Alert.alert('Otp Matched')
-        } else { Alert.alert('Wrong OTP') }
+        // if (enteredOTP == otp) {
+        //     Alert.alert('Otp Matched')
+        // } else { Alert.alert('Wrong OTP') }
+        try {
+            const res = await verifyOTP({ email, verifyCode: enteredOTP })
+            const data = await res.json()
+
+            if (res.ok) {
+                // async storing
+                await AsyncStorage.setItem('user', JSON.stringify(data.response));
+
+                // setting global variables
+                setUser(data.response)
+                
+                Alert.alert('Congrats!','Email Verified...')
+            }
+
+            else {
+                throw new Error(data?.msg || 'Something went wrong!')
+            }
+        } catch (error) {
+            Alert.alert("Error : ", error.message)
+        }
     };
 
 
@@ -46,11 +70,11 @@ const OtpVerification = () => {
                             width: 350,
                             alignSelf: 'center'
                         }}
-                        source={require('../img/Otp-verify.png')}
+                        source={require('../assets/img/Otp-verify.png')}
                     />
                 </View>
                 <Text style={styles.title}>OTP Verification</Text>
-                <Text style={{ color: '#444444', textAlign: 'center', marginTop: 20 }}>OTP sent to +91 72****1622</Text>
+                <Text style={{ color: '#444444', textAlign: 'center', marginTop: 20 }}>OTP sent to {user.email}</Text>
                 <View style={styles.otpview}>
                     <TextInput
                         ref={et1}

@@ -16,7 +16,6 @@ import IonIcon from 'react-native-vector-icons/Ionicons';
 import { colors } from '../constants';
 import { useUserContext } from '../utils/userContext';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import RNRestart from 'react-native-restart';
 
 const SettingScreen = props => {
   
@@ -55,7 +54,6 @@ const SettingScreen = props => {
       await AsyncStorage.clear()
       //clearing global data
       setUser(null); setJwtoken("");
-      RNRestart.Restart();
     }
     catch (e) {
       console.log("Error : ", e)

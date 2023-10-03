@@ -15,6 +15,7 @@ import { useUserContext } from '../utils/userContext';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import auth from '@react-native-firebase/auth';
 import { GoogleSignin } from '@react-native-google-signin/google-signin';
+import { loginUser } from '../utils/APIs';
 
 const LoginScreen = props => {
   //taking function to set global variables
@@ -31,14 +32,9 @@ const LoginScreen = props => {
   // loggin in...
   const handleSubmit = async () =>{
     try{
-      const res = await fetch('http://192.168.1.6:1222/api/login', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        credentials: 'include',
-        body: JSON.stringify(loginInfo),
-      });
+      // login through api
+      const res = await loginUser(loginInfo)
+      
       // taking out json response
       const data = await res.json()
 

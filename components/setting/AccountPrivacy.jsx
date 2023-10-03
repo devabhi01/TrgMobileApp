@@ -4,6 +4,7 @@ import { colors } from '../../constants';
 import { TextInput, Button } from 'react-native-paper';
 import { useUserContext } from '../../utils/userContext';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { updateUser } from '../../utils/APIs';
 
 const AccountPrivacy = (props) => {
 
@@ -29,15 +30,8 @@ const AccountPrivacy = (props) => {
             if (!updateInfo.password || !updateInfo.cpassword) throw new Error("Password field can't be empty")
             if (updateInfo.password !== updateInfo.cpassword) throw new Error("Confirm password doesn't match!")
 
-            const res = await fetch('http://172.20.10.2:1222/api/update-profile', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    Authorization: 'token ' + jwtoken
-                },
-                credentials: 'include',
-                body: JSON.stringify({ ...user, ...updateInfo })
-            })
+            // updating user through api
+            const res = await updateUser({ ...user, ...updateInfo }, jwtoken);
 
             // taking updated user data
             const data = await res.json()

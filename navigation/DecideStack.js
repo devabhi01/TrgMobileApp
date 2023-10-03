@@ -11,7 +11,7 @@ const DecideStack = () => {
   const { user } = useUserContext();
   return (
     <>
-      {user ? <StudentStack /> : <AuthStack />}
+      {user && user?.isVerified ? <StudentStack /> : <AuthStack />}
     </>
   );
 };
