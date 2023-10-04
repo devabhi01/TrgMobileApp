@@ -20,7 +20,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 const SettingScreen = props => {
   
   // taking context to clear on logout
-  const { setUser, setJwtoken } = useUserContext()
+  const { setUser, setJwtoken, user } = useUserContext()
   
   //Linking to social Handle
 
@@ -86,7 +86,7 @@ const SettingScreen = props => {
                 fontWeight: 600,
                 color: colors.primary,
               }}>
-              Abhishek
+              {user.name}
             </Text>
           </TouchableOpacity>
           <TouchableOpacity

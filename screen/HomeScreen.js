@@ -20,8 +20,16 @@ import CbseSVG from '../assets/img/cbse.svg';
 
 import { sliderData } from '../model/Data';
 import BannerSlider from '../components/BannerSlider';
+import { useUserContext } from '../utils/userContext';
+import Geolocation from '@react-native-community/geolocation';
+
+
 
 const HomeScreen = props => {
+  // getting current geolocation
+  Geolocation.getCurrentPosition(info => console.log(info));
+
+  const {user} = useUserContext()
   
   const [searchQuery, setSearchQuery] = useState('');
 
@@ -47,7 +55,7 @@ const HomeScreen = props => {
                   fontWeight: 600,
                   color: '#dc3545',
                 }}>
-                Abhishek
+                {user.name}
               </Text>
             </View>
             {/* <Text style={{color: '#eee', fontSize: 28, fontWeight: 600}}>
