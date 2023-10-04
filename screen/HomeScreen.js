@@ -22,10 +22,12 @@ import { sliderData } from '../model/Data';
 import BannerSlider from '../components/BannerSlider';
 import { useUserContext } from '../utils/userContext';
 import Geolocation from '@react-native-community/geolocation';
-
+import {PermissionsAndroid} from 'react-native';
 
 
 const HomeScreen = props => {
+  // asking notifications permission
+  PermissionsAndroid.request(PermissionsAndroid.PERMISSIONS.POST_NOTIFICATIONS);
   // getting current geolocation
   Geolocation.getCurrentPosition(info => console.log(info));
 

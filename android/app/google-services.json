@@ -1,6 +1,7 @@
 {
   "project_info": {
     "project_number": "967642509622",
+    "firebase_url": "https://the-right-guru-default-rtdb.firebaseio.com",
     "project_id": "the-right-guru",
     "storage_bucket": "the-right-guru.appspot.com"
   },
@@ -22,7 +23,7 @@
           }
         },
         {
-          "client_id": "967642509622-irbv40matt7l920g5ds6r73bjqc77k1h.apps.googleusercontent.com",
+          "client_id": "967642509622-2e08cvu6gppd4j5k8cgslstbduoit4nv.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
@@ -35,8 +36,15 @@
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "967642509622-irbv40matt7l920g5ds6r73bjqc77k1h.apps.googleusercontent.com",
+              "client_id": "967642509622-2e08cvu6gppd4j5k8cgslstbduoit4nv.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "967642509622-v5frbk9sniakquh1dnhrmlge6pqirifn.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.trgmobileapp"
+              }
             }
           ]
         }
