@@ -66,7 +66,7 @@ const SettingScreen = props => {
       <ScrollView style={{ marginHorizontal: 10 }}>
         <View>
           <TouchableOpacity
-            onPress={() => props.navigation.navigate('Profile_Setting')}
+            onPress={() => props.navigation.navigate('profile_setting')}
             style={{
               marginVertical: 10,
               flexDirection: 'row',

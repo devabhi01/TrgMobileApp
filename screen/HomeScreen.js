@@ -79,7 +79,7 @@ const HomeScreen = props => {
           <View style={styles.topbar}>
             <View style={{ marginLeft: 20 }}>
               <Text style={{ color: '#eee', fontSize: 20, color: '#dc3545' }}>
-                Hello, {user.name}
+                Hello,
               </Text>
               <Text
                 style={{
