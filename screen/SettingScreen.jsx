@@ -75,7 +75,7 @@ const SettingScreen = props => {
             <View style={{ borderWidth: 1, borderColor: colors.primary, borderRadius: 50 }}>
               <Avatar.Image
                 size={60}
-                source={require('../assets/img/user.png')}
+                source={user?.profilePic ? {uri: user?.profilePic}: require('../assets/img/user.png')}
               />
             </View>
             <Text

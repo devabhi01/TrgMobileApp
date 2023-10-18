@@ -31,7 +31,7 @@ const AccountPrivacy = (props) => {
             if (updateInfo.password !== updateInfo.cpassword) throw new Error("Confirm password doesn't match!")
 
             // updating user through api
-            const res = await updateUser({ ...user, ...updateInfo }, jwtoken);
+            const res = await updateUser({ _id:user._id, ...updateInfo }, jwtoken);
 
             // taking updated user data
             const data = await res.json()

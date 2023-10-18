@@ -267,7 +267,7 @@ const SignUpScreen = props => {
               Next
             </Text>
           </TouchableOpacity>
-          <Text
+          {/* <Text
             style={{
               color: '#462530',
               textAlign: 'center',
@@ -275,14 +275,14 @@ const SignUpScreen = props => {
               fontSize: 12,
             }}>
             or continue with
-          </Text>
-          <View
+          </Text> */}
+          {/* <View
             style={{
               flexDirection: 'row',
               justifyContent: 'space-evenly',
               marginVertical: 30,
-            }}>
-            <TouchableOpacity
+            }}> */}
+            {/* <TouchableOpacity
               style={{
                 borderColor: '#dc3545',
                 borderWidth: 2,
@@ -291,8 +291,8 @@ const SignUpScreen = props => {
                 justifyContent: 'center',
               }}>
               <GoogleSVG height={30} width={30} />
-            </TouchableOpacity>
-            <TouchableOpacity
+            </TouchableOpacity> */}
+            {/* <TouchableOpacity
               style={{
                 borderColor: '#dc3545',
                 borderWidth: 2,
@@ -301,8 +301,8 @@ const SignUpScreen = props => {
                 justifyContent: 'center',
               }}>
               <AppleSVG height={35} width={35} />
-            </TouchableOpacity>
-          </View>
+            </TouchableOpacity> */}
+          {/* </View> */}
           <View
             style={{
               flexDirection: 'row',

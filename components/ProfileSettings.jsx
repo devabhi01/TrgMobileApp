@@ -6,46 +6,93 @@ import {
   SafeAreaView,
   StyleSheet,
   Image,
-  Linking
+  Linking,
+  Alert,
+  ToastAndroid
 } from 'react-native';
 import React, { useState } from 'react';
 import ImagePicker, { openPicker } from 'react-native-image-crop-picker';
-
+import storage from '@react-native-firebase/storage';
 
 import { colors } from '../constants';
 import Avatar from '../assets/img/user.png'
 import Ionicon from 'react-native-vector-icons/Ionicons';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import MaterialIcon from 'react-native-vector-icons/MaterialIcons';
-
+import { useUserContext } from '../utils/userContext';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { updateUser } from '../utils/APIs';
 
 
 const ProfileSettings = () => {
-  const [profile, setProfile] = useState(null)
 
-  const ImgPick = () => {
-    ImagePicker.openPicker({
-      width: 400,
-      height: 400,
-      cropping: true
-    }).then(image => {
-      console.log(image);
-      setProfile(image.path)
-    });
+  // user context
+  const { user, setUser, jwtoken } = useUserContext()
+  // progress
+  const [uploadProgress, setUploadProgress] = useState(0);
+  const [showProgress, setShowProgress] = useState(false);
+
+  const ImgPickAndUpload = async () => {
+    try {
+      const image = await ImagePicker.openPicker({
+        width: 400,
+        height: 400,
+        cropping: true
+      })
+      const imgUrl = image.path;
+
+      // path to existing file on filesystem
+      // fileName = imgUrl.substring(imgUrl.lastIndexOf('/') + 1);
+      const fileName = `${user.name}-${Date.now()}`
+      // uploading the file
+      setShowProgress(true)
+      let uploadTask = storage().ref(fileName).putFile(imgUrl);
+      
+      uploadTask.on('state_changed', taskSnapshot => {
+        setUploadProgress(Math.floor((taskSnapshot.bytesTransferred / taskSnapshot.totalBytes) * 100))
+      });
+      
+      await uploadTask;
+      // generating https url
+      const imgUri = await storage().ref(fileName).getDownloadURL();
+      setShowProgress(false)
+      
+      // setting global context and local storage and database
+      const res = await updateUser({ _id: user._id, profilePic: imgUri }, jwtoken);
+      const data = await res.json()
+      if (res.ok) {
+
+        // async storing
+        await AsyncStorage.setItem('user', JSON.stringify(data.response));
+
+        // setting global variables
+        setUser(data.response)
+
+        Alert.alert('Congrats', 'Profile Image updated successfully!')
+      }
+      else {
+        throw new Error(data?.msg || "Something went wrong!")
+      }
+
+    } catch (e) {
+      console.log("Error : ", e)
+    }
   }
+
+
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: colors.primary }}>
       <ScrollView style={{ paddingVertical: 10 }}>
         <View style={styles.container}>
           <View style={styles.wraper}>
+            {showProgress? ToastAndroid.show(`${uploadProgress} uploaded`,ToastAndroid.SHORT) : null}
             <View style={{ alignItems: 'center' }}>
               <Image
                 style={styles.Avatar_img}
                 size={80}
-                source={profile ? { uri: profile } : Avatar}
-
+                source={user?.profilePic ? { uri: user?.profilePic } : Avatar}
               />
-              <TouchableOpacity onPress={ImgPick} style={styles.CamPick}>
+              <TouchableOpacity onPress={ImgPickAndUpload} style={styles.CamPick}>
                 <Ionicon name="camera" size={20} color={colors.primary} />
               </TouchableOpacity>
               <Text
@@ -55,25 +102,25 @@ const ProfileSettings = () => {
                   fontSize: 25,
                   fontWeight: 500,
                 }}>
-                Abhishek
+                {user?.name}
               </Text>
             </View>
             <View style={{ marginVertical: 20 }}>
               <View style={styles.InfoDetail}>
                 <Ionicon name="location" size={24} color={colors.primary} />
-                <Text style={styles.TextInfo}>Delhi, India</Text>
+                <Text style={styles.TextInfo}>{user?.address}</Text>
               </View>
               <View style={styles.InfoDetail}>
                 <Icon name='phone' size={24} color={colors.primary} />
-                <Text style={styles.TextInfo}>+91 7290901622</Text>
+                <Text style={styles.TextInfo}>{user?.phoneNo}</Text>
               </View>
               <View style={styles.InfoDetail}>
                 <Icon name='email' size={24} color={colors.primary} />
-                <Text style={styles.TextInfo}>a1abhishek2016@gmail.com</Text>
+                <Text style={styles.TextInfo}>{user?.email}</Text>
               </View>
               <View style={styles.InfoDetail}>
                 <Image source={require('../assets/img/dob.png')} color={'#dc3545'} style={{ width: 24, height: 24, }} />
-                <Text style={styles.TextInfo}>12 January 2003</Text>
+                <Text style={styles.TextInfo}>{user?.dob} </Text>
               </View>
 
             </View>

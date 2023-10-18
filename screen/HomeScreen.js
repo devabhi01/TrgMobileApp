@@ -96,7 +96,6 @@ const HomeScreen = props => {
             </Text> */}
 
             <TouchableOpacity
-              onPress={() => props.navigation.toggleDrawer()}
               style={{ marginRight: 20 }}>
               <View
                 style={{
@@ -106,7 +105,7 @@ const HomeScreen = props => {
                 }}>
                 <Avatar.Image
                   size={60}
-                  source={require('../assets/img/user.png')}
+                  source={user?.profilePic ? { uri: user?.profilePic } : require('../assets/img/user.png')}
                 />
               </View>
             </TouchableOpacity>
@@ -124,7 +123,7 @@ const HomeScreen = props => {
                 borderRadius: 10,
                 backgroundColor: '#f5f5f5',
               }}
-              onTouchCancel={()=>{setSearchQuery('')}}
+              onTouchCancel={() => { setSearchQuery('') }}
             />
           </View>
 

@@ -6,7 +6,6 @@ import TestSeriesScreen from '../screen/MaterialScreen';
 import SettingScreen from '../screen/SettingScreen';
 import CourseScreen from '../screen/CourseScreen';
 import {colors} from '../constants';
-import DrawerNav from './DrawerNav';
 
 const Tab = createBottomTabNavigator();
 
@@ -41,13 +40,6 @@ function BottomNav() {
           return <Icon name={iconName} size={22} color={'#dc3545'} />;
         },
       })}>
-
-      {/* nesting drawer  not visible*/}
-      {/* <Tab.Screen
-        name="DrawerNav"
-        component={DrawerNav}
-        options={{title: '', tabBarItemStyle:{maxWidth:0}}}
-      /> */}
 
       <Tab.Screen
         name="BottomHome"

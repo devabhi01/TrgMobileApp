@@ -170,7 +170,7 @@ const LoginScreen = props => {
             Login
           </Text>
         </TouchableOpacity>
-        <Text
+        {/* <Text
           style={{
             color: '#462530',
             textAlign: 'center',
@@ -178,8 +178,8 @@ const LoginScreen = props => {
             fontSize: 12,
           }}>
           or continue with
-        </Text>
-        <View
+        </Text> */}
+        {/* <View
           style={{
             flexDirection: 'row',
             justifyContent: 'space-evenly',
@@ -205,7 +205,7 @@ const LoginScreen = props => {
             }}>
             <AppleSVG height={35} width={35} />
           </TouchableOpacity>
-        </View>
+        </View> */}
         <View style={{ flexDirection: 'row', justifyContent: 'center' }}>
           <Text style={{ color: '#462530' }}>Not a member? </Text>
           <TouchableOpacity onPress={() => props.navigation.navigate('Signup')}>
