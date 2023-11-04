@@ -2,7 +2,7 @@ import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Icon from 'react-native-vector-icons/Ionicons';
 import HomeScreen from '../screen/HomeScreen';
-import TestSeriesScreen from '../screen/MaterialScreen';
+import TestSeriesScreen from '../screen/TestSeriesScreen';
 import SettingScreen from '../screen/SettingScreen';
 import CourseScreen from '../screen/CourseScreen';
 import {colors} from '../constants';

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, {useState, useEffect} from 'react';
 import {
   View,
   Text,
@@ -9,33 +9,34 @@ import {
   Image,
   // PermissionsAndroid
 } from 'react-native';
-import { Searchbar, Avatar } from 'react-native-paper';
+import {Searchbar, Avatar} from 'react-native-paper';
 // import Carousel from 'react-native-snap-carousel';
-import { windowWidth } from '../utils/Dimensions';
-import { colors } from '../constants';
+import {windowWidth} from '../utils/Dimensions';
+import {colors} from '../constants';
 
 // Images here
 import ManSVG from '../assets/img/Man.svg';
 import CbseSVG from '../assets/img/cbse.svg';
 
-import { sliderData } from '../model/Data';
+import {sliderData} from '../model/Data';
 import BannerSlider from '../components/BannerSlider';
-import { useUserContext } from '../utils/userContext';
+import {useUserContext} from '../utils/userContext';
 import Geolocation from '@react-native-community/geolocation';
+import Qotd from '../components/courses/template/Qotd';
 
 // Course details
 const courses = [
-  { name: "cbse", screen: "cbse", img: require("../assets/img/cbse.png") },
-  { name: "icse", screen: "icse", img: require("../assets/img/icse.png") },
-  { name: "ssc", screen: "ssc", img: require("../assets/img/ssc.png") },
-  { name: "cuet", screen: "cuet", img: require("../assets/img/cuet.png") },
-  { name: "clat", screen: "clat", img: require("../assets/img/clat.png") },
-  { name: "dsssb", screen: "dsssb", img: require("../assets/img/dsssb.png") },
-  { name: "police", screen: "dsssb", img: require("../assets/img/police.png") },
-  { name: "others", screen: "dsssb", img: require("../assets/img/other.png") },
-  { name: "quiz", screen: "quiz", img: require("../assets/img/Quiz.png") },
-  { name: "test", screen: "test", img: require("../assets/img/test.png") },
-]
+  {name: 'cbse', screen: 'cbse', img: require('../assets/img/cbse.png')},
+  {name: 'icse', screen: 'icse', img: require('../assets/img/icse.png')},
+  {name: 'ssc', screen: 'ssc', img: require('../assets/img/ssc.png')},
+  {name: 'cuet', screen: 'cuet', img: require('../assets/img/cuet.png')},
+  {name: 'clat', screen: 'clat', img: require('../assets/img/clat.png')},
+  {name: 'dsssb', screen: 'dsssb', img: require('../assets/img/dsssb.png')},
+  {name: 'police', screen: 'dsssb', img: require('../assets/img/police.png')},
+  {name: 'others', screen: 'dsssb', img: require('../assets/img/other.png')},
+  {name: 'quiz', screen: 'quiz', img: require('../assets/img/Quiz.png')},
+  {name: 'test', screen: 'test', img: require('../assets/img/test.png')},
+];
 
 const HomeScreen = props => {
   // asking notifications permission
@@ -44,42 +45,43 @@ const HomeScreen = props => {
   Geolocation.getCurrentPosition(info => console.log(info));
 
   // user context for fetching details
-  const { user } = useUserContext()
+  const {user} = useUserContext();
 
   const [searchQuery, setSearchQuery] = useState('');
 
   // filtered course state
-  const [filteredCourses, setFilteredCourses] = useState(courses)
+  const [filteredCourses, setFilteredCourses] = useState(courses);
 
   const onChangeSearch = query => {
-    setSearchQuery(query)
+    setSearchQuery(query);
     // Convert the query to lowercase for case-insensitive search
     const lowercaseQuery = query.toLowerCase();
 
     // Use Array.prototype.filter() to filter objects based on the query
     const filteredCourses = courses.filter(item => {
       // Check if any property of the item contains the query string (case-insensitive)
-      return Object.values(item).some(value =>
-        typeof value === 'string' && value.toLowerCase().includes(lowercaseQuery)
+      return Object.values(item).some(
+        value =>
+          typeof value === 'string' &&
+          value.toLowerCase().includes(lowercaseQuery),
       );
     });
 
     setFilteredCourses(filteredCourses);
-
   };
 
-  const renderBanner = ({ item, index }) => {
+  const renderBanner = ({item, index}) => {
     return <BannerSlider data={item} />;
   };
 
   return (
-    <SafeAreaView style={{ flex: 1, backgroundColor: colors.graylight }}>
-      <ScrollView style={{ paddingVertical: 10 }}>
+    <SafeAreaView style={{flex: 1, backgroundColor: colors.graylight}}>
+      <ScrollView style={{paddingVertical: 10}}>
         <View style={styles.container}>
           <View style={styles.topbar}>
-            <View style={{ marginLeft: 20 }}>
-              <Text style={{ color: '#eee', fontSize: 20, color: '#dc3545' }}>
-                Hello,
+            <View style={{marginLeft: 20}}>
+              <Text style={{color: '#eee', fontSize: 20, color: '#dc3545'}}>
+                Hello
               </Text>
               <Text
                 style={{
@@ -95,8 +97,7 @@ const HomeScreen = props => {
               TRG
             </Text> */}
 
-            <TouchableOpacity
-              style={{ marginRight: 20 }}>
+            <TouchableOpacity style={{marginRight: 20}}>
               <View
                 style={{
                   borderWidth: 1,
@@ -105,7 +106,11 @@ const HomeScreen = props => {
                 }}>
                 <Avatar.Image
                   size={60}
-                  source={user?.profilePic ? { uri: user?.profilePic } : require('../assets/img/user.png')}
+                  source={
+                    user?.profilePic
+                      ? {uri: user?.profilePic}
+                      : require('../assets/img/user.png')
+                  }
                 />
               </View>
             </TouchableOpacity>
@@ -123,7 +128,9 @@ const HomeScreen = props => {
                 borderRadius: 10,
                 backgroundColor: '#f5f5f5',
               }}
-              onTouchCancel={() => { setSearchQuery('') }}
+              onTouchCancel={() => {
+                setSearchQuery('');
+              }}
             />
           </View>
 
@@ -137,7 +144,7 @@ const HomeScreen = props => {
             }}>
             Carousal Here
           </Text>
-          <View style={{ marginHorizontal: 20 }}>
+          <View style={{marginHorizontal: 20}}>
             {/* <Carousel
               style={{ marginHorizontal: 20 }}
               ref={c => {
@@ -149,6 +156,27 @@ const HomeScreen = props => {
               itemWidth={300}
               loop={true}
             /> */}
+          </View>
+          <View
+            style={{
+              flexDirection: 'row',
+              justifyContent: 'space-between',
+              marginTop: 30,
+              display: 'flex',
+              flexDirection: 'column',
+            }}>
+            <Text
+              style={{
+                color: '#dc3545',
+                fontSize: 16,
+                fontWeight: 700,
+                marginHorizontal: 20,
+              }}>
+              Question of the Day
+            </Text>
+            <View style={{marginHorizontal: 20, marginTop: 10}}>
+              <Qotd />
+            </View>
           </View>
           <View
             style={{
@@ -175,7 +203,6 @@ const HomeScreen = props => {
               justifyContent: 'space-around',
               marginBottom: 50,
             }}>
-
             {filteredCourses.map((course, index) => {
               return (
                 <TouchableOpacity
@@ -183,9 +210,9 @@ const HomeScreen = props => {
                   style={styles.ex_categories}
                   key={index}>
                   <Image source={course.img} />
-                </TouchableOpacity>)
+                </TouchableOpacity>
+              );
             })}
-
           </View>
         </View>
       </ScrollView>

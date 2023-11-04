@@ -17,6 +17,8 @@ import Notification from '../components/setting/Notification';
 import Helpsupport from '../components/setting/Helpsupport';
 import BottomNav from './BottomNav';
 import ProfileSettings from '../components/ProfileSettings';
+import TestDetail from '../components/testseries/TestDetail';
+
 
 
 const Stack = createStackNavigator();
@@ -46,6 +48,10 @@ const StudentStack = () => {
             <Stack.Screen name="notification" component={Notification} />
             <Stack.Screen name="helpsupport" component={Helpsupport} />
             <Stack.Screen name="profile_setting" component={ProfileSettings} />
+
+            {/* Quiz App Refers */}
+            <Stack.Screen name="test_detail" component={TestDetail} options={{headerShown:false}} />
+            
         </Stack.Navigator>
         </>
     );
