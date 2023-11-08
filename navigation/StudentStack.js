@@ -18,6 +18,8 @@ import Helpsupport from '../components/setting/Helpsupport';
 import BottomNav from './BottomNav';
 import ProfileSettings from '../components/ProfileSettings';
 import TestDetail from '../components/testseries/TestDetail';
+import BoardScreen from '../components/testseries/BoardScreen';
+import ResultScreen from '../components/testseries/ResultScreen';
 
 
 
@@ -51,6 +53,8 @@ const StudentStack = () => {
 
             {/* Quiz App Refers */}
             <Stack.Screen name="test_detail" component={TestDetail} options={{headerShown:false}} />
+            <Stack.Screen name="test_board" component={BoardScreen} options={{headerShown:false}} />
+            <Stack.Screen name="result_screen" component={ResultScreen} options={{headerShown:false}} />
             
         </Stack.Navigator>
         </>
