@@ -34,7 +34,7 @@ function BottomNav() {
             iconName = focused ? 'settings' : 'settings-outline';
           } else if (route.name === 'Course') {
             iconName = focused ? 'tv' : 'tv-outline';
-          } else if (route.name === 'Material') {
+          } else if (route.name === 'TestSeries') {
             iconName = focused ? 'book-sharp' : 'book-outline';
           }
           return <Icon name={iconName} size={22} color={'#dc3545'} />;
@@ -54,7 +54,7 @@ function BottomNav() {
       />
 
       <Tab.Screen
-        name="Material"
+        name="TestSeries"
         component={TestSeriesScreen}
         options={{
           headerShown: true,

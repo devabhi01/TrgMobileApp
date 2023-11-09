@@ -18,6 +18,7 @@ import Carousel from 'react-native-reanimated-carousel';
 // Images here
 import ManSVG from '../assets/img/Man.svg';
 import CbseSVG from '../assets/img/cbse.svg';
+import trgIcon from '../assets/img/trgIcon.png';
 
 import {sliderData} from '../model/Data';
 import BannerSlider from '../components/BannerSlider';
@@ -33,10 +34,8 @@ const courses = [
   {name: 'cuet', screen: 'cuet', img: require('../assets/img/cuet.png')},
   {name: 'clat', screen: 'clat', img: require('../assets/img/clat.png')},
   {name: 'dsssb', screen: 'dsssb', img: require('../assets/img/dsssb.png')},
-  {name: 'police', screen: 'dsssb', img: require('../assets/img/police.png')},
+  {name: 'police', screen: 'police', img: require('../assets/img/police.png')},
   {name: 'others', screen: 'dsssb', img: require('../assets/img/other.png')},
-  {name: 'quiz', screen: 'quiz', img: require('../assets/img/Quiz.png')},
-  {name: 'test', screen: 'test', img: require('../assets/img/test.png')},
 ];
 
 const HomeScreen = props => {
@@ -80,8 +79,11 @@ const HomeScreen = props => {
       <ScrollView style={{paddingVertical: 10}}>
         <View style={styles.container}>
           <View style={styles.topbar}>
-            <View style={{marginLeft: 20}}>
-              <Text style={{color: '#eee', fontSize: 20, color: '#dc3545'}}>
+            <View >
+              <Image source={trgIcon} style={{width:60,height:50,}} resizeMode='contain' />
+            </View>
+            <View style={{marginLeft:20}}>
+              <Text style={{color: '#eee', fontSize: 20, color: '#dc3545',}}>
                 Hello
               </Text>
               <Text
@@ -97,24 +99,6 @@ const HomeScreen = props => {
             {/* <Text style={{color: '#eee', fontSize: 28, fontWeight: 600}}>
               TRG
             </Text> */}
-
-            <TouchableOpacity style={{marginRight: 20}}>
-              <View
-                style={{
-                  borderWidth: 1,
-                  borderColor: colors.primary,
-                  borderRadius: 50,
-                }}>
-                <Avatar.Image
-                  size={60}
-                  source={
-                    user?.profilePic
-                      ? {uri: user?.profilePic}
-                      : require('../assets/img/user.png')
-                  }
-                />
-              </View>
-            </TouchableOpacity>
           </View>
           <View>
             <Searchbar
@@ -146,8 +130,9 @@ const HomeScreen = props => {
             }}>
             Carousal
           </Text>
-          <View >
-            <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+          <View>
+            <View
+              style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
               <Carousel
                 loop
                 width={windowWidth - 40}
@@ -155,7 +140,6 @@ const HomeScreen = props => {
                 autoPlay={true}
                 autoPlayInterval={5000}
                 data={sliderData}
-                
                 renderItem={({item, index}) => (
                   <View
                     style={{
@@ -249,10 +233,11 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     paddingBottom: 20,
     paddingTop: 10,
-    justifyContent: 'space-between',
+
     alignItems: 'center',
     borderBottomLeftRadius: 20,
     borderBottomRightRadius: 20,
+    marginHorizontal: 20,
   },
   input: {
     borderWidth: 2,

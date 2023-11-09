@@ -9,7 +9,7 @@ import Ssc from '../components/courses/main_course/Ssc';
 import Cuet from '../components/courses/main_course/Cuet';
 import Dsssb from '../components/courses/main_course/Dsssb';
 import Quiz from '../components/courses/main_course/Quiz';
-import Test from '../components/courses/main_course/Test';
+
 import Clat from '../components/courses/main_course/Clat';
 import YourCourse from '../components/courses/main_course/YourCourse';
 import AccountPrivacy from '../components/setting/AccountPrivacy';
@@ -20,6 +20,8 @@ import ProfileSettings from '../components/ProfileSettings';
 import TestDetail from '../components/testseries/TestDetail';
 import BoardScreen from '../components/testseries/BoardScreen';
 import ResultScreen from '../components/testseries/ResultScreen';
+import OthersComp from '../components/courses/main_course/OthersComp';
+import Police from '../components/courses/main_course/Police';
 
 const Stack = createStackNavigator();
 
@@ -42,8 +44,9 @@ const StudentStack = () => {
         <Stack.Screen name="clat" component={Clat} />
         <Stack.Screen name="cuet" component={Cuet} />
         <Stack.Screen name="dsssb" component={Dsssb} />
-        <Stack.Screen name="quiz" component={Quiz} />
-        <Stack.Screen name="test" component={Test} />
+        <Stack.Screen name="police" component={Police} />
+        <Stack.Screen name="other_comp" component={OthersComp} />
+        
         <Stack.Screen name="your_course" component={YourCourse} />
 
         {/* Setting Screen refers */}

@@ -85,7 +85,7 @@ const CourseScreen = props => {
                 <Text style={styles.textBtn}>DSSSB</Text>
               </TouchableOpacity>
               <TouchableOpacity
-                onPress={() => props.navigation.navigate('dsssb')}
+                onPress={() => props.navigation.navigate('police')}
                 style={styles.btn}>
                 <Image
                   style={{width: 30, height: 30}}
@@ -94,7 +94,7 @@ const CourseScreen = props => {
                 <Text style={styles.textBtn}>POLICE SERVICES</Text>
               </TouchableOpacity>
               <TouchableOpacity
-                onPress={() => props.navigation.navigate('dsssb')}
+                onPress={() => props.navigation.navigate('other_comp')}
                 style={styles.btn}>
                 <Image
                   style={{width: 30, height: 30}}
