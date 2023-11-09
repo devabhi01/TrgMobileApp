@@ -103,6 +103,8 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     marginTop: 20,
     marginBottom: 20,
+    height: 50,
+    justifyContent: 'center', 
   },
   buttonText: {
     color: colors.white,
