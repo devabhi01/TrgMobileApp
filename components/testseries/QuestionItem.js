@@ -6,17 +6,18 @@ import {
   FlatList,
   TouchableOpacity,
 } from 'react-native';
-import React from 'react';
+import React, {memo} from 'react';
 import {colors} from '../../constants';
 
 const {height, width} = Dimensions.get('window');
 
-const QuestionItem = ({data}) => {
+const QuestionItem = memo(({data, selectedOption}) => {
   return (
     <View style={{width: width}}>
       <Text style={styles.ques}>{data.question}</Text>
       <View style={{marginTop: 20}}>
         <FlatList
+          keyExtractor={(item, index) => index.toString()}
           data={data.options}
           renderItem={({item, index}) => {
             return (
@@ -25,24 +26,33 @@ const QuestionItem = ({data}) => {
                   width: '90%',
                   height: 60,
                   elevation: 3,
-                  backgroundColor: '#fff',
+                  backgroundColor: data.marked == index + 1 ? 'purple' : '#fff',
                   marginTop: 20,
                   marginBottom: 10,
                   alignSelf: 'center',
                   alignItems: 'center',
                   paddingLeft: 15,
                   flexDirection: 'row',
+                }}
+                onPress={() => {
+                  selectedOption(index + 1);
                 }}>
                 <View
                   style={{
                     width: 30,
                     height: 30,
                     borderRadius: 15,
-                    backgroundColor: colors.secondary,
+                    backgroundColor:
+                      data.marked == index + 1 ? '#fff' : colors.secondary,
                     justifyContent: 'center',
                     alignItems: 'center',
                   }}>
-                  <Text style={{color:'#fff', fontWeight:"600"}}>
+                  <Text
+                    style={{
+                      color:
+                        data.marked == index + 1 ? colors.textColor : '#fff',
+                      fontWeight: '600',
+                    }}>
                     {index == 0
                       ? 'A'
                       : index == 1
@@ -52,7 +62,14 @@ const QuestionItem = ({data}) => {
                       : 'D'}
                   </Text>
                 </View>
-                <Text style={{color: colors.textColor,fontSize:18,marginLeft:15}}>{item}</Text>
+                <Text
+                  style={{
+                    color: data.marked == index + 1 ? '#fff' : colors.textColor,
+                    fontSize: 18,
+                    marginLeft: 15,
+                  }}>
+                  {item}
+                </Text>
               </TouchableOpacity>
             );
           }}
@@ -60,7 +77,7 @@ const QuestionItem = ({data}) => {
       </View>
     </View>
   );
-};
+});
 
 export default QuestionItem;
 

@@ -2,6 +2,7 @@ import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import React from 'react';
 import {DataTable} from 'react-native-paper';
 import {colors} from '../../constants';
+import {testData} from './testData';
 
 const TestDetail = (props) => {
   return (
@@ -42,8 +43,8 @@ const TestDetail = (props) => {
             </DataTable.Header>
 
             <DataTable.Row >
-              <DataTable.Cell>30</DataTable.Cell>
-              <DataTable.Cell>30</DataTable.Cell>
+              <DataTable.Cell>{testData.length}</DataTable.Cell>
+              <DataTable.Cell>{testData.length}</DataTable.Cell>
               
             </DataTable.Row>
           </DataTable>
