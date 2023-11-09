@@ -141,9 +141,10 @@ const HomeScreen = props => {
               fontSize: 16,
               fontWeight: 700,
               marginHorizontal: 20,
-              marginVertical: 20,
+              marginTop: 20,
+              marginBottom: 10,
             }}>
-            Carousal Here
+            Carousal
           </Text>
           <View >
             <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
@@ -152,15 +153,13 @@ const HomeScreen = props => {
                 width={windowWidth - 40}
                 height={windowWidth / 2}
                 autoPlay={true}
+                autoPlayInterval={5000}
                 data={sliderData}
-                scrollAnimationDuration={3000}
-                onSnapToItem={index => console.log('current index:', index)}
+                
                 renderItem={({item, index}) => (
                   <View
                     style={{
                       flex: 1,
-                      borderWidth: 1,
-                      borderColor: '#dc3545',
                       justifyContent: 'center',
                     }}>
                     <Image
@@ -168,7 +167,7 @@ const HomeScreen = props => {
                       style={{
                         width: '100%',
                         height: '100%',
-                        resizeMode: 'cover',
+                        resizeMode: 'contain',
                       }}
                     />
                   </View>
@@ -180,7 +179,7 @@ const HomeScreen = props => {
             style={{
               flexDirection: 'row',
               justifyContent: 'space-between',
-              marginTop: 30,
+              marginTop: 20,
               display: 'flex',
               flexDirection: 'column',
             }}>

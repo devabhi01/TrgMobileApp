@@ -106,10 +106,10 @@ const ProfileSettings = () => {
               </Text>
             </View>
             <View style={{ marginVertical: 20 }}>
-              <View style={styles.InfoDetail}>
+              {/* <View style={styles.InfoDetail}>
                 <Ionicon name="location" size={24} color={colors.primary} />
                 <Text style={styles.TextInfo}>{user?.address}</Text>
-              </View>
+              </View> */}
               <View style={styles.InfoDetail}>
                 <Icon name='phone' size={24} color={colors.primary} />
                 <Text style={styles.TextInfo}>{user?.phoneNo}</Text>
@@ -133,7 +133,7 @@ const ProfileSettings = () => {
             </TouchableOpacity>
             <TouchableOpacity style={styles.btn}>
               <MaterialIcon name="payment" size={25} color={colors.primary} />
-              <Text style={styles.btnText}>Payment Details</Text>
+              <Text style={styles.btnText}>Payment History</Text>
             </TouchableOpacity>
             {/* <TouchableOpacity style={styles.btn}>
               <MaterialIcon name="contact-support" size={25} color={colors.primary} />
