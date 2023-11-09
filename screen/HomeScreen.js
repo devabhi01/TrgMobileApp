@@ -10,9 +10,10 @@ import {
   // PermissionsAndroid
 } from 'react-native';
 import {Searchbar, Avatar} from 'react-native-paper';
-// import Carousel from 'react-native-snap-carousel';
+
 import {windowWidth} from '../utils/Dimensions';
 import {colors} from '../constants';
+import Carousel from 'react-native-reanimated-carousel';
 
 // Images here
 import ManSVG from '../assets/img/Man.svg';
@@ -144,18 +145,36 @@ const HomeScreen = props => {
             }}>
             Carousal Here
           </Text>
-          <View style={{marginHorizontal: 20}}>
-            {/* <Carousel
-              style={{ marginHorizontal: 20 }}
-              ref={c => {
-                this._carousel = c;
-              }}
-              data={sliderData}
-              renderItem={renderBanner}
-              sliderWidth={windowWidth - 40}
-              itemWidth={300}
-              loop={true}
-            /> */}
+          <View >
+            <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+              <Carousel
+                loop
+                width={windowWidth - 40}
+                height={windowWidth / 2}
+                autoPlay={true}
+                data={sliderData}
+                scrollAnimationDuration={3000}
+                onSnapToItem={index => console.log('current index:', index)}
+                renderItem={({item, index}) => (
+                  <View
+                    style={{
+                      flex: 1,
+                      borderWidth: 1,
+                      borderColor: '#dc3545',
+                      justifyContent: 'center',
+                    }}>
+                    <Image
+                      source={item.image}
+                      style={{
+                        width: '100%',
+                        height: '100%',
+                        resizeMode: 'cover',
+                      }}
+                    />
+                  </View>
+                )}
+              />
+            </View>
           </View>
           <View
             style={{
