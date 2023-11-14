@@ -24,10 +24,18 @@ import OthersComp from '../components/courses/main_course/OthersComp';
 import Police from '../components/courses/main_course/Police';
 import SettingScreen from '../screen/SettingScreen';
 
-import SupportMaterial from '../components/SupportMaterial';
-import RivisionNotes from '../components/RivisionNotes';
 import Videos from '../components/Videos';
 import MyCourse from '../components/courses/main_course/MyCourse';
+import Material from '../components/Material';
+
+import PdfViewer from '../components/courses/template/PdfViewer';
+import PdfScreen from '../components/courses/template/PdfScreen';
+import Assignments from '../components/material/Assignments';
+import NcertBooks from '../components/material/NcertBooks';
+import PreviousYearQP from '../components/material/PreviousYearQP';
+import SupportMaterial from '../components/material/SupportMaterial';
+import Sylabus from '../components/material/Sylabus';
+import RivisionNotes from '../components/material/RivisionNotes';
 
 const Stack = createStackNavigator();
 
@@ -82,23 +90,16 @@ const StudentStack = () => {
 
         {/* more Button stack screen */}
         <Stack.Screen
-          name="support_material"
-          component={SupportMaterial}
+          name="material"
+          component={Material}
           options={{
             headerTintColor: '#fff',
-            title: 'Support Material',
+            title: 'Materials',
             headerTitleAlign: 'center',
           }}
         />
-        <Stack.Screen
-          name="rivision_notes"
-          component={RivisionNotes}
-          options={{
-            headerTintColor: '#fff',
-            title: 'Rivision Notes',
-            headerTitleAlign: 'center',
-          }}
-        />
+        
+        
         <Stack.Screen
           name="videos"
           component={Videos}
@@ -132,6 +133,75 @@ const StudentStack = () => {
           name="result_screen"
           component={ResultScreen}
           options={{headerShown: false}}
+        />
+
+        {/* Pdf viewer refers */}
+        <Stack.Screen
+          name="pdf_viewer"
+          component={PdfViewer}
+          options={{headerShown: false}}
+        />
+        <Stack.Screen
+          name="pdf_screen"
+          component={PdfScreen}
+          options={{headerShown: false}}
+        />
+        
+
+        {/* Material Section Refers */}
+        <Stack.Screen
+          name="rivision_notes"
+          component={RivisionNotes}
+          options={{
+            headerTintColor: '#fff',
+            title: 'RivisionNotes',
+            headerTitleAlign: 'center',
+          }}
+        />
+        <Stack.Screen
+          name="assignments"
+          component={Assignments}
+          options={{
+            headerTintColor: '#fff',
+            title: 'Assignments',
+            headerTitleAlign: 'center',
+          }}
+        />
+        <Stack.Screen
+          name="ncertbooks"
+          component={NcertBooks}
+          options={{
+            headerTintColor: '#fff',
+            title: 'NcertBooks',
+            headerTitleAlign: 'center',
+          }}
+        />
+        <Stack.Screen
+          name="previous_year_qp"
+          component={PreviousYearQP}
+          options={{
+            headerTintColor: '#fff',
+            title: 'PreviousYearQP',
+            headerTitleAlign: 'center',
+          }}
+        />
+        <Stack.Screen
+          name="support_material"
+          component={SupportMaterial}
+          options={{
+            headerTintColor: '#fff',
+            title: 'SupportMaterial',
+            headerTitleAlign: 'center',
+          }}
+        />
+        <Stack.Screen
+          name="sylabus"
+          component={Sylabus}
+          options={{
+            headerTintColor: '#fff',
+            title: 'Sylabus',
+            headerTitleAlign: 'center',
+          }}
         />
       </Stack.Navigator>
     </>

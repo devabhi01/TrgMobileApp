@@ -8,11 +8,15 @@ import {
   TouchableOpacity,
   Dimensions,
 } from 'react-native';
-import React from 'react';
+import React, {useState} from 'react';
 import {colors} from '../../../constants';
+import PdfViewer from '../template/PdfViewer';
+import {useNavigation} from '@react-navigation/native';
 
 const {height, width} = Dimensions.get('window');
-const Ssc = () => {
+const Ssc = props => {
+  const navigation = useNavigation();
+  const [showPdfViewer, setShowPdfViewer] = useState(false);
   return (
     <SafeAreaView>
       <ScrollView>
@@ -239,7 +243,12 @@ const Ssc = () => {
                 justifyContent: 'center',
                 alignItems: 'flex-end',
               }}>
-              <TouchableOpacity>
+              <TouchableOpacity
+                onPress={() =>
+                  navigation.navigate('pdf_screen', {
+                    uri: 'https://therightguru-website.s3.ap-south-1.amazonaws.com/TnC.pdf',
+                  })
+                }>
                 <Text
                   style={{
                     color: colors.textColor,

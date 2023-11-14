@@ -106,7 +106,7 @@ const TestSeriesScreen = props => {
                     'Science',
                   ]}
                   defaultIndex={1}
-                  defaultValue={'Select Sublect'}
+                  defaultValue={'Select Subject'}
                   isFullWidth
                   style={styles.btnStyle}
                   textStyle={styles.textStyle}

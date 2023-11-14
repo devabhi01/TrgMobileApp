@@ -1,14 +1,14 @@
 import { StyleSheet, Text, View } from 'react-native'
 import React from 'react'
 
-const SupportMaterial = () => {
+const PreviousYearQP = () => {
   return (
     <View>
-      <Text>SupportMaterial</Text>
+      <Text>PreviousYearQP</Text>
     </View>
   )
 }
 
-export default SupportMaterial
+export default PreviousYearQP
 
 const styles = StyleSheet.create({})

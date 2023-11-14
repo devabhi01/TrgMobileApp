@@ -1,14 +1,14 @@
 import { StyleSheet, Text, View } from 'react-native'
 import React from 'react'
 
-const RivisionNotes = () => {
+const Assignments = () => {
   return (
     <View>
-      <Text>RivisionNotes</Text>
+      <Text>Assignments</Text>
     </View>
   )
 }
 
-export default RivisionNotes
+export default Assignments
 
 const styles = StyleSheet.create({})

@@ -8,20 +8,20 @@ const MoreScreen = props => {
     <SafeAreaView style={styles.container}>
       <View style={styles.btnCont}>
         <MoreOptBtn
-          name={'Support Material'}
+          name={'Materials'}
           IocnName={'book'}
-          onPress={() => props.navigation.navigate('support_material')}
+          onPress={() => props.navigation.navigate('material')}
           backgroundColor={'#D3D936'}
         />
       </View>
-      <View style={styles.btnCont}>
+      {/* <View style={styles.btnCont}>
         <MoreOptBtn
           name={'Revision Notes'}
           IocnName={'clipboard'}
           onPress={() => props.navigation.navigate('rivision_notes')}
           backgroundColor={'#17AADD'}
         />
-      </View>
+      </View> */}
 
       <View style={styles.btnCont}>
         <MoreOptBtn
