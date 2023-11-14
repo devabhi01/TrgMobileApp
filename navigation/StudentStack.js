@@ -11,7 +11,7 @@ import Dsssb from '../components/courses/main_course/Dsssb';
 import Quiz from '../components/courses/main_course/Quiz';
 
 import Clat from '../components/courses/main_course/Clat';
-import YourCourse from '../components/courses/main_course/YourCourse';
+
 import AccountPrivacy from '../components/setting/AccountPrivacy';
 import Notification from '../components/setting/Notification';
 import Helpsupport from '../components/setting/Helpsupport';
@@ -22,6 +22,12 @@ import BoardScreen from '../components/testseries/BoardScreen';
 import ResultScreen from '../components/testseries/ResultScreen';
 import OthersComp from '../components/courses/main_course/OthersComp';
 import Police from '../components/courses/main_course/Police';
+import SettingScreen from '../screen/SettingScreen';
+
+import SupportMaterial from '../components/SupportMaterial';
+import RivisionNotes from '../components/RivisionNotes';
+import Videos from '../components/Videos';
+import MyCourse from '../components/courses/main_course/MyCourse';
 
 const Stack = createStackNavigator();
 
@@ -29,7 +35,11 @@ const StudentStack = () => {
   return (
     <>
       {/* all other stack screens  */}
-      <Stack.Navigator screenOptions={{headerShown: true}}>
+      <Stack.Navigator
+        screenOptions={{
+          headerShown: true,
+          headerStyle: {backgroundColor: '#dc3545'},
+        }}>
         {/* nesting bottom nav */}
         <Stack.Screen
           name="BottomNav"
@@ -38,7 +48,11 @@ const StudentStack = () => {
         />
 
         {/* Home Screeen Refers */}
-        <Stack.Screen name="cbse" component={Cbse} />
+        <Stack.Screen
+          name="cbse"
+          component={Cbse}
+          options={{headerTintColor: '#fff'}}
+        />
         <Stack.Screen name="icse" component={Icse} />
         <Stack.Screen name="ssc" component={Ssc} />
         <Stack.Screen name="clat" component={Clat} />
@@ -46,10 +60,17 @@ const StudentStack = () => {
         <Stack.Screen name="dsssb" component={Dsssb} />
         <Stack.Screen name="police" component={Police} />
         <Stack.Screen name="other_comp" component={OthersComp} />
-        
-        <Stack.Screen name="your_course" component={YourCourse} />
 
         {/* Setting Screen refers */}
+        <Stack.Screen
+          name="setting_screen"
+          component={SettingScreen}
+          options={{
+            headerTintColor: '#fff',
+            title: 'Settings',
+            headerTitleAlign: 'center',
+          }}
+        />
         <Stack.Screen name="account_privacy" component={AccountPrivacy} />
         <Stack.Screen name="notification" component={Notification} />
         <Stack.Screen name="helpsupport" component={Helpsupport} />
@@ -59,6 +80,43 @@ const StudentStack = () => {
           options={{title: 'Profile'}}
         />
 
+        {/* more Button stack screen */}
+        <Stack.Screen
+          name="support_material"
+          component={SupportMaterial}
+          options={{
+            headerTintColor: '#fff',
+            title: 'Support Material',
+            headerTitleAlign: 'center',
+          }}
+        />
+        <Stack.Screen
+          name="rivision_notes"
+          component={RivisionNotes}
+          options={{
+            headerTintColor: '#fff',
+            title: 'Rivision Notes',
+            headerTitleAlign: 'center',
+          }}
+        />
+        <Stack.Screen
+          name="videos"
+          component={Videos}
+          options={{
+            headerTintColor: '#fff',
+            title: 'Videos',
+            headerTitleAlign: 'center',
+          }}
+        />
+        <Stack.Screen
+          name="my_course"
+          component={MyCourse}
+          options={{
+            headerTintColor: '#fff',
+            title: 'MyCourse',
+            headerTitleAlign: 'center',
+          }}
+        />
         {/* Quiz App Refers */}
         <Stack.Screen
           name="test_detail"

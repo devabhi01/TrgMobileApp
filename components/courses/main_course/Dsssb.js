@@ -16,7 +16,7 @@ const Dsssb = () => {
   return (
     <SafeAreaView>
       <ScrollView>
-        <Image style={styles.img} source={require('../img/ssc_pos.png')} />
+        <Image style={styles.img} source={require('../img/dssb_pos.png')} />
         <View style={styles.container}>
           <View style={{paddingHorizontal: 20}}>
             <View style={{marginVertical: 10}}>

@@ -2,6 +2,7 @@ import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Icon from 'react-native-vector-icons/Ionicons';
 import HomeScreen from '../screen/HomeScreen';
+import MoreScreen from '../screen/MoreScreen';
 import TestSeriesScreen from '../screen/TestSeriesScreen';
 import SettingScreen from '../screen/SettingScreen';
 import CourseScreen from '../screen/CourseScreen';
@@ -30,8 +31,8 @@ function BottomNav() {
 
           if (route.name === 'BottomHome') {
             iconName = focused ? 'home' : 'home-outline';
-          } else if (route.name === 'Settings') {
-            iconName = focused ? 'settings' : 'settings-outline';
+          } else if (route.name === 'More') {
+            iconName = focused ? 'apps' : 'apps-outline';
           } else if (route.name === 'Course') {
             iconName = focused ? 'tv' : 'tv-outline';
           } else if (route.name === 'TestSeries') {
@@ -63,8 +64,8 @@ function BottomNav() {
       />
       
       <Tab.Screen
-        name="Settings"
-        component={SettingScreen}
+        name="More"
+        component={MoreScreen}
         options={{ headerShown: true }}
       />
     </Tab.Navigator>
