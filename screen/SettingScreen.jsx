@@ -20,8 +20,10 @@ import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import {colors} from '../constants';
 import {useUserContext} from '../utils/userContext';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import HeaderThreeDots from '../components/header/HeaderThreeDots';
 
-const SettingScreen = props => {
+
+const SettingScreen = (props) => {
   // taking context to clear on logout
   const {setUser, setJwtoken, user} = useUserContext();
 
@@ -33,7 +35,7 @@ const SettingScreen = props => {
     try {
       const result = await Share.share({
         message:
-          'React Native | A framework for building native apps using React',
+          'Share the The Right Gure Learning App',
       });
       if (result.action === Share.sharedAction) {
         if (result.activityType) {
@@ -151,6 +153,7 @@ const SettingScreen = props => {
               Logout
             </Button>
           </View>
+          
 
           <View style={{marginVertical: 10}}>
             <Image
@@ -245,6 +248,7 @@ const SettingScreen = props => {
             }}>
             TRG
           </Text> */}
+          
         </View>
       </ScrollView>
     </SafeAreaView>

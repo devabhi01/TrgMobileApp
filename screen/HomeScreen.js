@@ -35,7 +35,11 @@ const courses = [
   {name: 'clat', screen: 'clat', img: require('../assets/img/clat.png')},
   {name: 'dsssb', screen: 'dsssb', img: require('../assets/img/dsssb.png')},
   {name: 'police', screen: 'police', img: require('../assets/img/police.png')},
-  {name: 'others', screen: 'dsssb', img: require('../assets/img/other.png')},
+  {
+    name: 'others',
+    screen: 'other_comp',
+    img: require('../assets/img/other.png'),
+  },
 ];
 
 const HomeScreen = props => {
@@ -100,7 +104,7 @@ const HomeScreen = props => {
               TRG
             </Text>
           </View> */}
-          <View style={{marginTop:10}}>
+          <View style={{marginTop: 10}}>
             <Searchbar
               placeholder="Search"
               placeholderTextColor={'#241D20'}
@@ -180,6 +184,23 @@ const HomeScreen = props => {
               <Qotd />
             </View>
           </View>
+
+          <TouchableOpacity
+            style={{
+              width: '90%',
+              height: 50,
+              backgroundColor: '#dc3545',
+              alignSelf: 'center',
+              justifyContent: 'center',
+              borderRadius: 10,
+              marginTop: 20,
+              elevation: 3,
+            }}
+            onPress={() => {}}>
+            <Text style={{color: '#fff', fontSize: 18, textAlign: 'center'}}>
+              Open Drawer
+            </Text>
+          </TouchableOpacity>
           <View
             style={{
               flexDirection: 'row',

@@ -20,9 +20,9 @@ const Ssc = props => {
   return (
     <SafeAreaView>
       <ScrollView>
-        <Image style={styles.img} source={require('../img/ssc_pos.png')} />
+        
         <View style={styles.container}>
-          <View style={{paddingHorizontal: 20}}>
+          <View style={{paddingHorizontal: 20,marginTop:20}}>
             <View style={{marginVertical: 10}}>
               <Text
                 style={{

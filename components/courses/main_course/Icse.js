@@ -15,7 +15,7 @@ const Icse = () => {
   return (
     <SafeAreaView style={{flex: 1, backgroundColor: colors.graylight}}>
       <ScrollView>
-        <Image style={styles.img} source={require('../img/Icse_pos.png')} />
+        
         <View style={styles.container}>
           <View style={{paddingHorizontal: 30}}>
             <View style={{marginVertical: 10}}>

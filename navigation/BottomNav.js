@@ -1,19 +1,23 @@
 import React from 'react';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import Icon from 'react-native-vector-icons/Ionicons';
+import IconFA from 'react-native-vector-icons/FontAwesome6';
 import HomeScreen from '../screen/HomeScreen';
 import MoreScreen from '../screen/MoreScreen';
 import TestSeriesScreen from '../screen/TestSeriesScreen';
-import SettingScreen from '../screen/SettingScreen';
+import {TouchableOpacity} from 'react-native';
+
 import CourseScreen from '../screen/CourseScreen';
 import {colors} from '../constants';
 import Header from '../components/header/Header';
 import HeaderThreeDots from '../components/header/HeaderThreeDots';
-import HeaderDash from '../components/header/HeaderDash';
+
+import { useNavigation } from '@react-navigation/native';
 
 const Tab = createBottomTabNavigator();
 
 function BottomNav() {
+  const navigation = useNavigation();
   return (
     <Tab.Navigator
       screenOptions={({route}) => ({
@@ -51,7 +55,13 @@ function BottomNav() {
           headerTitle: () => <Header />,
           headerTitleAlign: 'left',
           headerRight: () => <HeaderThreeDots />,
-          headerLeft: () => <HeaderDash />,
+          headerLeft: () => {
+            return (
+              <TouchableOpacity style={{marginLeft: 20}} onPress={() => navigation.openDrawer()}>
+                <IconFA name="bars" size={24} color="#fff" />
+              </TouchableOpacity>
+            );
+          },
         }}
       />
 
@@ -61,7 +71,13 @@ function BottomNav() {
         options={{
           headerShown: true,
           headerRight: () => <HeaderThreeDots />,
-          headerLeft: () => <HeaderDash />,
+          headerLeft: () => {
+            return (
+              <TouchableOpacity style={{marginLeft: 20}} onPress={() => navigation.openDrawer()}>
+                <IconFA name="bars" size={24} color="#fff" />
+              </TouchableOpacity>
+            );
+          },
         }}
       />
 
@@ -72,7 +88,13 @@ function BottomNav() {
           headerShown: true,
           title: 'Test Series',
           headerRight: () => <HeaderThreeDots />,
-          headerLeft: () => <HeaderDash />,
+          headerLeft: () => {
+            return (
+              <TouchableOpacity style={{marginLeft: 20}} onPress={() => navigation.openDrawer()}>
+                <IconFA name="bars" size={24} color="#fff" />
+              </TouchableOpacity>
+            );
+          },
         }}
       />
 
@@ -82,7 +104,13 @@ function BottomNav() {
         options={{
           headerShown: true,
           headerRight: () => <HeaderThreeDots />,
-          headerLeft: () => <HeaderDash />,
+          headerLeft: () => {
+            return (
+              <TouchableOpacity style={{marginLeft: 20}} onPress={() => navigation.openDrawer()}>
+                <IconFA name="bars" size={24} color="#fff" />
+              </TouchableOpacity>
+            );
+          },
         }}
       />
     </Tab.Navigator>

@@ -15,7 +15,7 @@ import {
     return (
       <SafeAreaView style={{ flex: 1, backgroundColor: colors.graylight }}>
         <ScrollView>
-          <Image style={styles.img} source={require('../img/cbse_pos.png')} />
+         
           <View style={styles.container}>
             
             <Text style={{color:colors.textColor,textAlign:'center'}}>This page will updated soon </Text>
@@ -36,7 +36,7 @@ import {
     },
     container: {
       backgroundColor: colors.graylight,
-      marginTop: -20,
+      marginTop: 20,
       borderColor: colors.primary,
       borderTopLeftRadius: 20,
       borderTopRightRadius: 20,

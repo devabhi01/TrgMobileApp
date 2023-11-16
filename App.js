@@ -9,6 +9,7 @@ import Splash from './components/Splash';
 import { useAuth0, Auth0Provider } from 'react-native-auth0';
 import { GoogleSignin } from '@react-native-google-signin/google-signin';
 
+
 const NavComponent = () => {
 
   const [loading, setLoading] = useState(true)
@@ -40,6 +41,7 @@ const NavComponent = () => {
     //wrapping with navigation
     <NavigationContainer>
       {loading ? <Splash /> : <DecideStack />}
+      
     </NavigationContainer>)
 }
 

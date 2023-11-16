@@ -6,7 +6,7 @@ import {
   DrawerItemList,
 } from '@react-navigation/drawer';
 
-const AppDrawer = props => {
+const CustomDrawer = props => {
   return (
     <View style={{flex: 1, backgroundColor: colors.graylight}}>
       <DrawerContentScrollView {...props}>
@@ -32,4 +32,4 @@ const AppDrawer = props => {
   );
 };
 
-export default AppDrawer;
+export default CustomDrawer;

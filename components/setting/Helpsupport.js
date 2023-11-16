@@ -5,8 +5,8 @@ import { ElevationLevels } from 'react-native-paper/lib/typescript/types';
 
 const Helpsupport = () => {
     return (
-        <SafeAreaView style={{ flex: 1, backgroundColor: colors.primary }}>
-            <Text style={{ textAlign: 'center', marginVertical: 50, fontSize: 24, color: colors.white, fontWeight: 600 }}>Help & Support</Text>
+        <SafeAreaView style={{ flex: 1,backgroundColor:colors.graylight  }}>
+            
             <ScrollView>
                 <View style={styles.wraper}>
                     <View style={{ marginVertical: 30 }}>

@@ -39,6 +39,12 @@ import RivisionNotes from '../components/material/RivisionNotes';
 import DoubtClearence from '../components/DoubtClearence';
 import Bookmarks from '../components/Bookmarks';
 
+
+import Announcement from '../components/header/Announcement';
+import DrawerNav from './DrawerNav';
+
+
+
 const Stack = createStackNavigator();
 
 const StudentStack = () => {
@@ -52,24 +58,96 @@ const StudentStack = () => {
         }}>
         {/* nesting bottom nav */}
         <Stack.Screen
-          name="BottomNav"
-          component={BottomNav}
+          name="home"
+          component={DrawerNav}
           options={{headerShown: false}}
         />
+        
+        
+        <Stack.Screen
+          name="announcement"
+          component={Announcement}
+          options={{
+            headerTintColor: '#fff',
+            title: 'Announcement',
+            headerTitleAlign: 'center',
+          }}
+        />
+
 
         {/* Home Screeen Refers */}
         <Stack.Screen
           name="cbse"
           component={Cbse}
-          options={{headerTintColor: '#fff'}}
+          options={{
+            headerTintColor: '#fff',
+            title: 'CBSE',
+            headerTitleAlign: 'center',
+          }}
         />
-        <Stack.Screen name="icse" component={Icse} />
-        <Stack.Screen name="ssc" component={Ssc} />
-        <Stack.Screen name="clat" component={Clat} />
-        <Stack.Screen name="cuet" component={Cuet} />
-        <Stack.Screen name="dsssb" component={Dsssb} />
-        <Stack.Screen name="police" component={Police} />
-        <Stack.Screen name="other_comp" component={OthersComp} />
+        <Stack.Screen
+          name="icse"
+          component={Icse}
+          options={{
+            headerTintColor: '#fff',
+            title: 'ICSE',
+            headerTitleAlign: 'center',
+          }}
+        />
+        <Stack.Screen
+          name="ssc"
+          component={Ssc}
+          options={{
+            headerTintColor: '#fff',
+            title: 'SSC',
+            headerTitleAlign: 'center',
+          }}
+        />
+        <Stack.Screen
+          name="clat"
+          component={Clat}
+          options={{
+            headerTintColor: '#fff',
+            title: 'CLAT',
+            headerTitleAlign: 'center',
+          }}
+        />
+        <Stack.Screen
+          name="cuet"
+          component={Cuet}
+          options={{
+            headerTintColor: '#fff',
+            title: 'CUET',
+            headerTitleAlign: 'center',
+          }}
+        />
+        <Stack.Screen
+          name="dsssb"
+          component={Dsssb}
+          options={{
+            headerTintColor: '#fff',
+            title: 'DSSSB',
+            headerTitleAlign: 'center',
+          }}
+        />
+        <Stack.Screen
+          name="police"
+          component={Police}
+          options={{
+            headerTintColor: '#fff',
+            title: 'Police Services',
+            headerTitleAlign: 'center',
+          }}
+        />
+        <Stack.Screen
+          name="other_comp"
+          component={OthersComp}
+          options={{
+            headerTintColor: '#fff',
+            title: 'Other Competitive Exams',
+            headerTitleAlign: 'center',
+          }}
+        />
 
         {/* Setting Screen refers */}
         <Stack.Screen
@@ -81,13 +159,42 @@ const StudentStack = () => {
             headerTitleAlign: 'center',
           }}
         />
-        <Stack.Screen name="account_privacy" component={AccountPrivacy} />
-        <Stack.Screen name="notification" component={Notification} />
-        <Stack.Screen name="helpsupport" component={Helpsupport} />
+        <Stack.Screen
+          name="account_privacy"
+          component={AccountPrivacy}
+          options={{
+            headerTintColor: '#fff',
+            title: 'Account Privacy',
+            headerTitleAlign: 'center',
+          }}
+        />
+        <Stack.Screen
+          name="notification"
+          component={Notification}
+          options={{
+            headerTintColor: '#fff',
+            title: 'Notification',
+            headerTitleAlign: 'center',
+          }}
+        />
+        <Stack.Screen
+          name="helpsupport"
+          component={Helpsupport}
+          options={{
+            headerTintColor: '#fff',
+            title: 'Help Support',
+            headerTitleAlign: 'center',
+          }}
+        />
         <Stack.Screen
           name="profile_setting"
           component={ProfileSettings}
-          options={{title: 'Profile'}}
+          options={{
+            headerTintColor: '#fff',
+            title: 'Profile Settings',
+            headerTitleAlign: 'center',
+            headerShadowVisible: false,
+          }}
         />
 
         {/* more Button stack screen */}
@@ -118,8 +225,7 @@ const StudentStack = () => {
             headerTitleAlign: 'center',
           }}
         />
-        
-        
+
         <Stack.Screen
           name="videos"
           component={Videos}
@@ -166,7 +272,6 @@ const StudentStack = () => {
           component={PdfScreen}
           options={{headerShown: false}}
         />
-        
 
         {/* Material Section Refers */}
         <Stack.Screen
