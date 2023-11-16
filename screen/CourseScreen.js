@@ -16,10 +16,10 @@ const CourseScreen = props => {
   return (
     <SafeAreaView style={{flex: 1, backgroundColor: colors.graylight}}>
       <ScrollView>
-        <Image
+        {/* <Image
           style={styles.img}
           source={require('../assets/img/trgCourse.png')}
-        />
+        /> */}
         <View style={styles.container}>
           <View style={{paddingHorizontal: 30}}>
             <View style={{marginVertical: 10}}>
@@ -121,7 +121,6 @@ const styles = StyleSheet.create({
   },
   container: {
     backgroundColor: colors.graylight,
-    marginTop: -20,
     borderColor: colors.primary,
     borderTopLeftRadius: 20,
     borderTopRightRadius: 20,

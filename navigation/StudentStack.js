@@ -36,6 +36,8 @@ import PreviousYearQP from '../components/material/PreviousYearQP';
 import SupportMaterial from '../components/material/SupportMaterial';
 import Sylabus from '../components/material/Sylabus';
 import RivisionNotes from '../components/material/RivisionNotes';
+import DoubtClearence from '../components/DoubtClearence';
+import Bookmarks from '../components/Bookmarks';
 
 const Stack = createStackNavigator();
 
@@ -95,6 +97,24 @@ const StudentStack = () => {
           options={{
             headerTintColor: '#fff',
             title: 'Materials',
+            headerTitleAlign: 'center',
+          }}
+        />
+        <Stack.Screen
+          name="doubt_clearence"
+          component={DoubtClearence}
+          options={{
+            headerTintColor: '#fff',
+            title: 'DoubtClearence',
+            headerTitleAlign: 'center',
+          }}
+        />
+        <Stack.Screen
+          name="bookmarks"
+          component={Bookmarks}
+          options={{
+            headerTintColor: '#fff',
+            title: 'DoubtClearence',
             headerTitleAlign: 'center',
           }}
         />

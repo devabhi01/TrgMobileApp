@@ -14,14 +14,14 @@ const MoreScreen = props => {
           backgroundColor={'#D3D936'}
         />
       </View>
-      {/* <View style={styles.btnCont}>
+      <View style={styles.btnCont}>
         <MoreOptBtn
-          name={'Revision Notes'}
+          name={'Doubt Clearence'}
           IocnName={'clipboard'}
-          onPress={() => props.navigation.navigate('rivision_notes')}
+          onPress={() => props.navigation.navigate('doubt_clearence')}
           backgroundColor={'#17AADD'}
         />
-      </View> */}
+      </View>
 
       <View style={styles.btnCont}>
         <MoreOptBtn
@@ -35,18 +35,27 @@ const MoreScreen = props => {
       <View style={styles.btnCont}>
         <MoreOptBtn
           name={'My Courses'}
-          IocnName={'bookmarks'}
+          IocnName={'download'}
           onPress={() => props.navigation.navigate('my_course')}
           backgroundColor={'#BA68CA'}
         />
       </View>
+      <View style={styles.btnCont}>
+        <MoreOptBtn
+          name={'Bookmarks'}
+          IocnName={'bookmarks'}
+          onPress={() => props.navigation.navigate('bookmarks')}
+          backgroundColor={'#F29A2E'}
+        />
+      </View>
+      
 
       <View style={styles.btnCont}>
         <MoreOptBtn
           name={'Setting'}
           IocnName={'settings'}
           onPress={() => props.navigation.navigate('setting_screen')}
-          backgroundColor={'#FFD53E'}
+          backgroundColor={'#F24E29'}
         />
       </View>
       {/* <View style={styles.btnCont}>
@@ -56,14 +65,7 @@ const MoreScreen = props => {
           backgroundColor={'#F24E29'}
         />
       </View> */}
-      {/* <View style={styles.btnCont}>
-        <MoreOptBtn
-          name={'Videos'}
-          onPress={() => props.navigation.navigate('material')}
-          backgroundColor={'#F29A2E'}
-        />
-      </View>
-       */}
+      
     </SafeAreaView>
   );
 };

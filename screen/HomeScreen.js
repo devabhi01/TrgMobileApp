@@ -78,11 +78,11 @@ const HomeScreen = props => {
     <SafeAreaView style={{flex: 1, backgroundColor: colors.graylight}}>
       <ScrollView style={{paddingVertical: 10}}>
         <View style={styles.container}>
-          <View style={styles.topbar}>
+          {/* <View style={styles.topbar}>
             <View >
               <Image source={trgIcon} style={{width:60,height:50,}} resizeMode='contain' />
             </View>
-            <View style={{marginLeft:20}}>
+            <View >
               <Text style={{color: '#eee', fontSize: 20, color: '#dc3545',}}>
                 Hello
               </Text>
@@ -96,11 +96,11 @@ const HomeScreen = props => {
                 {user.name}
               </Text>
             </View>
-            {/* <Text style={{color: '#eee', fontSize: 28, fontWeight: 600}}>
+            <Text style={{color: '#eee', fontSize: 28, fontWeight: 600}}>
               TRG
-            </Text> */}
-          </View>
-          <View>
+            </Text>
+          </View> */}
+          <View style={{marginTop:10}}>
             <Searchbar
               placeholder="Search"
               placeholderTextColor={'#241D20'}

@@ -6,11 +6,11 @@ const Qotd = () => {
   const [value, setValue] = useState('');
   return (
     <>
-      <View style={{backgroundColor:"#f5f5f5",borderRadius:8,paddingVertical:10}}>
-        <Text style={styles.quesstions}>Who is the prime minister of India?</Text>
-        <Text style={{marginHorizontal:40,color:'#0a0a0a'}}>Options</Text>
+      <View style={{backgroundColor:"#f5f5f5",borderRadius:8,paddingVertical:10,elevation:3}}>
+        <Text style={styles.quesstions}>Question : Who is the prime minister of India?</Text>
+        <Text style={styles.correctAns}>Ans : Narendra Modi</Text>
 
-        <RadioButton.Group
+        {/* <RadioButton.Group
         color={'#dc3545'}
           onValueChange={newValue => setValue(newValue)}
           value={value}>
@@ -30,10 +30,9 @@ const Qotd = () => {
             <RadioButton value="fourth" />
             <Text style={styles.ans}>Narendra Modi</Text>
           </View>
-        </RadioButton.Group>
+        </RadioButton.Group> */}
 
-      <Text style={styles.correctAns}>Correct Answer : Narendra Modi</Text>
-      <Text style={styles.wrongAns}>Wrong Answer</Text>
+      
       </View>
     </>
   );
@@ -63,7 +62,7 @@ const styles = StyleSheet.create({
     marginLeft: 20,
     fontSize: 16,
     paddingTop: 10,
-    display: 'none',
+  
   },
   
   wrongAns: {
