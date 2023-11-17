@@ -12,7 +12,7 @@ const DrawerNav = () => {
   const navigation = useNavigation();
   return (
     <Drawer.Navigator
-    drawerContent={props => <CustomDrawer {...props} />}
+      drawerContent={props => <CustomDrawer {...props} />}
       screenOptions={{
         headerShown: false,
         drawerActiveBackgroundColor: colors.primary,

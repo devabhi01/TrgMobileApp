@@ -6,6 +6,7 @@ import {
   ScrollView,
   StyleSheet,
   TouchableOpacity,
+  Linking,
   Image,
   // PermissionsAndroid
 } from 'react-native';
@@ -196,9 +197,13 @@ const HomeScreen = props => {
               marginTop: 20,
               elevation: 3,
             }}
-            onPress={() => {}}>
+            onPress={() =>
+              Linking.openURL(
+                'https://www.therightguru.com/',
+              )
+            }>
             <Text style={{color: '#fff', fontSize: 18, textAlign: 'center'}}>
-              Open Drawer
+              Book Free Trial Class
             </Text>
           </TouchableOpacity>
           <View

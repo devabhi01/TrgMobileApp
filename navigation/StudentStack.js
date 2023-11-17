@@ -221,7 +221,7 @@ const StudentStack = () => {
           component={Bookmarks}
           options={{
             headerTintColor: '#fff',
-            title: 'DoubtClearence',
+            title: 'My Bookmarks',
             headerTitleAlign: 'center',
           }}
         />
