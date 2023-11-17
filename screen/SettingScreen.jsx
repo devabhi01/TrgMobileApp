@@ -77,9 +77,9 @@ const SettingScreen = (props) => {
             }}>
             <View
               style={{
-                borderWidth: 1,
-                borderColor: colors.primary,
-                borderRadius: 50,
+                borderWidth: 3,
+                borderColor: colors.graylight,
+                borderRadius: 100,
               }}>
               <Avatar.Image
                 size={60}

@@ -1,14 +1,98 @@
-import { StyleSheet, Text, View } from 'react-native'
-import React from 'react'
+import {
+  SafeAreaView,
+  StyleSheet,
+  Text,
+  View,
+  Dimensions,
+  TextInput,
+  TouchableOpacity,
+} from 'react-native';
+import React from 'react';
+import Icon from 'react-native-vector-icons/FontAwesome';
+
+const {width, height} = Dimensions.get('screen');
 
 const DoubtClearence = () => {
   return (
-    <View>
-      <Text>DoubtClearence</Text>
-    </View>
-  )
-}
+    <SafeAreaView>
+      <View style={styles.container}>
 
-export default DoubtClearence
+      <Text style={styles.txt }> Topic : </Text>
+        <View
+          style={{
+            backgroundColor: '#D9D7D7',
+            borderRadius: 8,
+            marginTop: 10,
+          }}>
+          <TextInput
+            style={styles.textInput}
+            placeholder="Type topic name"
+            placeholderTextColor={'#8F8F8F'}
+            cursorColor={'#dc3545'}
+            multiline
+            keyboardType="default"
+          />
+        </View>
 
-const styles = StyleSheet.create({})
+        <Text style={[styles.txt,{marginTop:20}]}> Type Your Doubt : </Text>
+        <View
+          style={{
+            backgroundColor: '#D9D7D7',
+            borderRadius: 8,
+            marginTop: 10,
+          }}>
+          <TextInput
+            style={styles.textInput}
+            placeholder="Type question"
+            placeholderTextColor={'#8F8F8F'}
+            cursorColor={'#dc3545'}
+            multiline
+            keyboardType="default"
+          />
+        </View>
+        
+        <Text style={{color: '#8F8F8F', marginTop: 50}}> Note : Your solution will be send to your registered email.</Text>
+      </View>
+      <TouchableOpacity
+        style={{
+          width: '90%',
+          alignSelf: 'center',
+          backgroundColor: '#dc3545',
+          height: 50,
+          borderRadius: 8,
+          justifyContent: 'center',
+          alignItems: 'center',
+          flexDirection: 'row',
+          gap: 10,
+          position: 'absolute',
+          bottom: 110,
+          right: 20,
+        }}>
+        <Icon name="send" size={20} color="#fff" />
+        <Text style={{color: '#fff', fontSize: 18}}>Submit</Text>
+      </TouchableOpacity>
+    </SafeAreaView>
+  );
+};
+
+export default DoubtClearence;
+
+const styles = StyleSheet.create({
+  container: {
+    margin: 20,
+    width: width - 40,
+    height: height - 40,
+  },
+  txt: {
+    color: '#0a0a0a',
+    fontSize: 18,
+    fontWeight: '600',
+  },
+  textInput: {
+    color: '#0a0a0a',
+    fontSize: 16,
+    fontWeight: '600',
+    textAlignVertical: 'top',
+    margin: 5,
+  },
+});

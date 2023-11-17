@@ -9,6 +9,8 @@ import {
   Linking
 } from 'react-native';
 import React from 'react';
+import {useUserContext} from '../utils/userContext';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import {colors} from '../constants';
 import trgIcon from '../assets/img/trgIcon.png';
 import {
@@ -24,6 +26,20 @@ const {width, height} = Dimensions.get('screen');
 
 const CustomDrawer = props => {
   const navigation = useNavigation();
+
+  const {setUser, setJwtoken, user} = useUserContext();
+
+  const handleLogout = async () => {
+    try {
+      //clearing storage
+      await AsyncStorage.clear();
+      //clearing global data
+      setUser(null);
+      setJwtoken('');
+    } catch (e) {
+      console.log('Error : ', e);
+    }
+  };
   return (
     <View style={{flex: 1, backgroundColor: colors.graylight, marginTop: -10}}>
       <DrawerContentScrollView {...props} >
@@ -74,7 +90,7 @@ const CustomDrawer = props => {
             <Text style={styles.btnText}>Setting</Text>
           </TouchableOpacity>
 
-          <TouchableOpacity style={styles.btn}>
+          <TouchableOpacity style={styles.btn} onPress={handleLogout}>
             <Icon name="logout" size={25} color={colors.graylight} />
             <Text style={styles.btnText}>Logout</Text>
           </TouchableOpacity>
