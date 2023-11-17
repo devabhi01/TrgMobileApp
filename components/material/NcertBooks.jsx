@@ -51,6 +51,7 @@ const NcertBooks = ({ navigation }) => {
           innerList="class"
           menuHeight={300}
           onSelect={handleClassSelect}
+          displayName={'Class'}
         />
         {/* Access selectedClass state here if needed */}
       </View>
