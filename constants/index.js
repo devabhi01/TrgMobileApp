@@ -1,10 +1,10 @@
 import colors from "./colors";
 
-function getDate() {
-    const today = new Date();
-    const month = today.getMonth() + 1;
-    const year = today.getFullYear();
-    const date = today.getDate();
+function getDate(dstring=new Date().now) {
+    let d = new Date(dstring)
+    const month = d.getMonth() + 1;
+    const year = d.getFullYear();
+    const date = d.getDate();
     return `${date}/${month}/${year}`;
   }
 export { colors, getDate };

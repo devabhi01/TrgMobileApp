@@ -72,3 +72,15 @@ export const fetchCarousel = async ()=>{
     }
     return await fetch(route, options)
 }
+
+//------------- fetching announcements --------------
+export const fetchAnnouncements = async ()=>{
+    const route = `${root}/api/fetch-announcements`
+    const options = {
+        method: "GET",
+        headers: {
+            "Content-Type": "application/json"
+        }
+    }
+    return await fetch(route, options)
+}

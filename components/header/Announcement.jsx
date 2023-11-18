@@ -1,28 +1,55 @@
-import {SafeAreaView, ScrollView, StyleSheet, Text, View} from 'react-native';
-import React, {useState} from 'react';
-import {getDate} from '../../constants';
+import { SafeAreaView, ScrollView, StyleSheet, Text, View } from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { getDate } from '../../constants';
+import { fetchAnnouncements } from '../../utils/APIs';
+import { ActivityIndicator } from 'react-native-paper';
 
 const Announcement = () => {
-  const [currentdate, setDate] = useState(getDate());
+  const [isLoading, setIsLoading] = useState(false);
+
+  //fetching announcements
+  const [announcements, setAnnouncements] = useState([])
+  useEffect(() => {
+    const getAnnouncements = async () => {
+      try {
+        setIsLoading(true);
+        const res = await fetchAnnouncements()
+        const announceData = await res.json();
+        setAnnouncements(announceData);
+        // console.log(announcements)
+        setIsLoading(false)
+      } catch (error) {
+        console.log(error)
+      }
+    }
+    getAnnouncements();
+  }, [])
+
+
   return (
-    <SafeAreaView style={{flex: 1}}>
+    <SafeAreaView style={{ flex: 1 }}>
       <ScrollView>
-        <View style={{flex: 1, margin: 20}}>
-          <View
-            style={{
-              backgroundColor: '#d7d7d7',
-              padding: 8,
-              borderRadius: 8,
-              borderWidth: 0.5,
-              borderColor: '#dc3545',
-            }}>
-            <Text style={styles.title}>Doubt</Text>
-            <Text style={styles.desc}>
-              Your doubt has been solved and mailed to your registerd mail.
-            </Text>
-            <Text style={styles.date}>{currentdate}</Text>
-          </View>
-        </View>
+        {isLoading ? <ActivityIndicator style={{ paddingVertical: 100, justifyContent: "center", alignItems: 'center' }} /> :
+          announcements.map((announcement, index) => {
+            return (
+              <View key={index} style={{ flex: 1, margin: 20, marginBottom:0 }}>
+                <View
+                  style={{
+                    backgroundColor: '#d7d7d7',
+                    padding: 8,
+                    borderRadius: 8,
+                    borderWidth: 0.5,
+                    borderColor: '#dc3545',
+                  }}>
+                  <Text style={styles.title}>{announcement.title}</Text>
+                  <Text style={styles.desc}>
+                    {announcement.description}
+                  </Text>
+                  <Text style={styles.date}>{getDate(announcement.date)}</Text>
+                </View>
+              </View>
+            )
+          })}
       </ScrollView>
     </SafeAreaView>
   );

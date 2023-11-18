@@ -160,7 +160,7 @@ const HomeScreen = props => {
           <View>
             <View
               style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-              {isCarouselLoading?<ActivityIndicator style={{paddingVertical: 100,justifyContent: 'center', alignItems:'center'}} />:<Carousel
+              {isCarouselLoading?<ActivityIndicator style={{paddingVertical: 90,justifyContent: 'center', alignItems:'center'}} />:<Carousel
                 loop
                 width={windowWidth - 40}
                 height={windowWidth / 2}
