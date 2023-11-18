@@ -1,13 +1,14 @@
-import React, { useState } from 'react';
-import { View, Text, TouchableOpacity, StyleSheet, FlatList } from 'react-native';
+import React, {useState} from 'react';
+import {View, Text, TouchableOpacity, StyleSheet, FlatList} from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 
-const CustomDropdown = (props) => {
+const CustomDropdown = props => {
   const [isClicked, setIsClicked] = useState(false);
-  const [selected, setSelected] = useState('Select');
+  const [selected, setSelected] = useState(`Select ${props.displayName}`);
+
   const [data, setData] = useState(props.initialValue);
 
-  const handleSelect = (item) => {
+  const handleSelect = item => {
     setSelected(item[props.innerList]);
     setIsClicked(!isClicked);
     // Pass the selected item to the callback function
@@ -19,12 +20,18 @@ const CustomDropdown = (props) => {
   return (
     <View>
       <TouchableOpacity
-        style={styles.dropdownSelector}
+        style={[
+          styles.dropdownSelector,
+          {
+            borderColor: props.borderColor || '#8e8e8e',
+            width: props.width || '100%',
+            borderWidth: props.borderWidth || 0.5,
+          },
+        ]}
         onPress={() => {
           setIsClicked(!isClicked);
-        }}
-      >
-        <Text style={{ color: '#000' }}>{selected}</Text>
+        }}>
+        <Text style={{color: '#000'}}>{selected} </Text>
         {isClicked ? (
           <Icon name="chevron-up" size={24} color="#000" />
         ) : (
@@ -38,14 +45,13 @@ const CustomDropdown = (props) => {
             marginTop: 20,
             height: props.menuHeight || 'auto',
             alignSelf: 'center',
-            width: '100%',
+            width: props.contWidth || '100%',
             backgroundColor: '#fff',
             borderRadius: 10,
-          }}
-        >
+          }}>
           <FlatList
             data={data}
-            renderItem={({ item, index }) => (
+            renderItem={({item, index}) => (
               <TouchableOpacity
                 style={{
                   width: '85%',
@@ -55,9 +61,8 @@ const CustomDropdown = (props) => {
                   borderBottomWidth: 0.5,
                   borderColor: '#8e8e8e',
                 }}
-                onPress={() => handleSelect(item)}
-              >
-                <Text style={{ fontWeight: '600', color: '#0a0a0a' }}>
+                onPress={() => handleSelect(item)}>
+                <Text style={{fontWeight: '600', color: '#0a0a0a'}}>
                   {item[props.innerList]}
                 </Text>
               </TouchableOpacity>

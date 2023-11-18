@@ -13,7 +13,7 @@ const Material = (props) => {
               name={'Revision Notes '}
               
               onPress={() => props.navigation.navigate('rivision_notes')}
-              backgroundColor={'#17AADD'}
+              backgroundColor={'#dc3545'}
             />
           </View>
           <View style={styles.btnCont}>
@@ -21,7 +21,7 @@ const Material = (props) => {
               name={'Support Material '}
               
               onPress={() => props.navigation.navigate('support_material')}
-              backgroundColor={'#17AADD'}
+              backgroundColor={'#dc3545'}
             />
           </View>
           <View style={styles.btnCont}>
@@ -29,7 +29,7 @@ const Material = (props) => {
               name={'Syllabus'}
               
               onPress={() => props.navigation.navigate('sylabus')}
-              backgroundColor={'#17AADD'}
+              backgroundColor={'#dc3545'}
             />
           </View>
           <View style={styles.btnCont}>
@@ -37,7 +37,7 @@ const Material = (props) => {
               name={'Assignments'}
               
               onPress={() => props.navigation.navigate('assignments')}
-              backgroundColor={'#17AADD'}
+              backgroundColor={'#dc3545'}
             />
           </View>
 
@@ -46,7 +46,7 @@ const Material = (props) => {
               name={'NCERT Books'}
               
               onPress={() => props.navigation.navigate('ncertbooks')}
-              backgroundColor={'#17AADD'}
+              backgroundColor={'#dc3545'}
             />
           </View>
 
@@ -55,7 +55,7 @@ const Material = (props) => {
               name={'PreviousYearQuestionPaper'}
               
               onPress={() => props.navigation.navigate('previous_year_qp')}
-              backgroundColor={'#17AADD'}
+              backgroundColor={'#dc3545'}
             />
           </View>
           

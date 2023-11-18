@@ -5,72 +5,69 @@ import {
   SafeAreaView,
   TouchableOpacity,
   Image,
-  ScrollView,
   TextInput,
-  Alert
+  ScrollView,
+  Alert,
 } from 'react-native';
-import React, { useState, useEffect } from 'react';
+
+import React, {useState, useEffect} from 'react';
 import DatePicker from 'react-native-date-picker';
-import { RadioButton } from 'react-native-paper';
-import GoogleSVG from '../assets/img/google.svg';
-import AppleSVG from '../assets/img/apple.svg';
-import { useUserContext } from '../utils/userContext';
+
+import {useUserContext} from '../utils/userContext';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { registerUser, sentCodeToMail } from '../utils/APIs';
+import {registerUser, sentCodeToMail} from '../utils/APIs';
+import CustomDropdown from '../components/courses/template/CustomDropdown';
+import {windowWidth} from '../utils/Dimensions';
 
 const SignUpScreen = props => {
-
   // using user context to set set data
-  const { setUser, setJwtoken } = useUserContext()
+  const {setUser, setJwtoken} = useUserContext();
 
   const [userInfo, setUserInfo] = useState({
-    name: "",
-    email: "",
-    phoneNo: "",
-    gender: "male",
-    password: "",
-    cpassword: "",
+    name: '',
+    email: '',
+    phoneNo: '',
+    gender: 'male',
+    password: '',
+    cpassword: '',
     dob: new Date(),
-    language: "English"
-  })
+    language: 'English',
+  });
 
   const [open, setOpen] = useState(false);
   const [dobLabel, setDobLabel] = useState('Date of Birth');
 
   // handling input change
   const handleChange = (fieldName, value) => {
-    setUserInfo({ ...userInfo, [fieldName]: value });
+    setUserInfo({...userInfo, [fieldName]: value});
   };
 
   // submiting data and setting global states (context)
-  const handleNext = async (props) => {
+  const handleNext = async props => {
     try {
       // submiting info through api
-      const res = await registerUser(userInfo)
+      const res = await registerUser(userInfo);
 
-      const data = await res.json()
+      const data = await res.json();
 
       if (res.ok && res.status == 201) {
-
         // async storing
         await AsyncStorage.setItem('user', JSON.stringify(data.response.user));
-        await AsyncStorage.setItem('jwtoken', data.response.token)
-        
+        await AsyncStorage.setItem('jwtoken', data.response.token);
+
         // setting global variables
-        setUser(data.response.user)
-        setJwtoken(data.response.token)
+        setUser(data.response.user);
+        setJwtoken(data.response.token);
 
         console.log('Verification code sent! and user registered!');
-        props.navigation.navigate('Otp-verify')
-      }
-
-      else {
-        throw new Error(data?.msg || 'Something went wrong!')
+        props.navigation.navigate('Otp-verify');
+      } else {
+        throw new Error(data?.msg || 'Something went wrong!');
       }
     } catch (error) {
-      Alert.alert("Error :", error.message)
+      Alert.alert('Error :', error.message);
     }
-  }
+  };
 
   // // sending OTP
   // const handleNext = async (props) => {
@@ -85,9 +82,26 @@ const SignUpScreen = props => {
   //   }
   // }
 
+  const [selectGender, setSelectGender] = useState(null);
+  const handleGenderSelect = selectGender => {
+    setSelectGender(selectGender);
+  };
+
+  const genderData = [
+    {
+      gender: 'Male',
+    },
+    {
+      gender: 'Female',
+    },
+    {
+      gender: 'Other',
+    },
+  ];
+
   return (
-    <SafeAreaView style={styles.container}>
-      <ScrollView>
+    <SafeAreaView>
+      <ScrollView nestedScrollEnabled={true} style={{width: '100%'}}>
         <View style={styles.wraper}>
           <View
             style={{
@@ -124,7 +138,9 @@ const SignUpScreen = props => {
               cursorColor={'#dc3545'}
               keyboardType="default"
               value={userInfo.name}
-              onChangeText={(text) => { handleChange('name', text) }}
+              onChangeText={text => {
+                handleChange('name', text);
+              }}
             />
             <TextInput
               style={styles.input}
@@ -133,7 +149,9 @@ const SignUpScreen = props => {
               cursorColor={'#dc3545'}
               keyboardType="email-address"
               value={userInfo.email}
-              onChangeText={(text) => { handleChange('email', text) }}
+              onChangeText={text => {
+                handleChange('email', text);
+              }}
             />
             <TextInput
               style={styles.input}
@@ -142,50 +160,28 @@ const SignUpScreen = props => {
               cursorColor={'#dc3545'}
               keyboardType="number-pad"
               value={String(userInfo.phoneNo)}
-              onChangeText={(text) => { handleChange('phoneNo', text) }}
+              onChangeText={text => {
+                handleChange('phoneNo', text);
+              }}
             />
-
-            <View
-              style={{
-                marginHorizontal: 30,
-                borderWidth: 1,
-                borderRadius: 10,
-                borderColor: '#dc3445'
-              }}>
-              <Text
+            <ScrollView horizontal={true} style={{width: '100%'}}>
+              <View
                 style={{
-                  color: '#dc3545',
-                  fontSize: 15,
-                  fontWeight: 500,
-                  textAlign: 'center',
-                  paddingTop: 10,
+                  marginBottom: 10,
+                  width: windowWidth - 60,
+                  marginLeft: 30,
                 }}>
-                Select Gender
-              </Text>
-              <RadioButton.Group
-                value={userInfo.gender}>
-                <RadioButton.Item
-                  label="Male"
-                  value="male"
-                  color={'#dc3545'}
-                  labelStyle={{ color: '#241D20' }}
-                // onPress={setUserInfo({...userInfo, gender:"male"})}
+                <CustomDropdown
+                  initialValue={genderData}
+                  innerList="gender"
+                  onSelect={handleGenderSelect}
+                  borderColor={'#dc3545'}
+                  borderWidth={1}
+                  displayName={'Gender'}
                 />
-                <RadioButton.Item
-                  label="Female"
-                  value="female"
-                  color="#FA78C2"
-                  labelStyle={{ color: '#241D20' }}
-                // onPress={setUserInfo({...userInfo, gender:"female"})}
-                />
-                <RadioButton.Item
-                  label="Other"
-                  value="other"
-                  labelStyle={{ color: '#241D20' }}
-                // onPress={setUserInfo({...userInfo, gender:"femail"})}
-                />
-              </RadioButton.Group>
-            </View>
+              </View>
+            </ScrollView>
+
             <TextInput
               style={styles.input}
               secureTextEntry
@@ -194,7 +190,9 @@ const SignUpScreen = props => {
               cursorColor={'#dc3545'}
               maxLength={16}
               value={userInfo.password}
-              onChangeText={(text) => { handleChange('password', text) }}
+              onChangeText={text => {
+                handleChange('password', text);
+              }}
             />
 
             <TextInput
@@ -205,7 +203,9 @@ const SignUpScreen = props => {
               cursorColor={'#dc3545'}
               maxLength={16}
               value={userInfo.cpassword}
-              onChangeText={(text) => { handleChange('cpassword', text) }}
+              onChangeText={text => {
+                handleChange('cpassword', text);
+              }}
             />
 
             <View
@@ -226,7 +226,7 @@ const SignUpScreen = props => {
                   justifyContent: 'center',
                   paddingRight: 200,
                 }}>
-                <Text style={{ color: '#241D20' }}>{dobLabel}</Text>
+                <Text style={{color: '#241D20'}}>{dobLabel}</Text>
               </TouchableOpacity>
             </View>
             <DatePicker
@@ -254,8 +254,9 @@ const SignUpScreen = props => {
               padding: 10,
               marginHorizontal: 30,
             }}
-            onPress={() => { handleNext(props) }}
-          >
+            onPress={() => {
+              handleNext(props);
+            }}>
             <Text
               style={{
                 color: '#eee',
@@ -267,91 +268,22 @@ const SignUpScreen = props => {
               Next
             </Text>
           </TouchableOpacity>
-          {/* <Text
-            style={{
-              color: '#462530',
-              textAlign: 'center',
-              marginVertical: 20,
-              fontSize: 12,
-            }}>
-            or continue with
-          </Text> */}
-          {/* <View
-            style={{
-              flexDirection: 'row',
-              justifyContent: 'space-evenly',
-              marginVertical: 30,
-            }}> */}
-            {/* <TouchableOpacity
-              style={{
-                borderColor: '#dc3545',
-                borderWidth: 2,
-                borderRadius: 10,
-                padding: 8,
-                justifyContent: 'center',
-              }}>
-              <GoogleSVG height={30} width={30} />
-            </TouchableOpacity> */}
-            {/* <TouchableOpacity
-              style={{
-                borderColor: '#dc3545',
-                borderWidth: 2,
-                borderRadius: 10,
-                padding: 8,
-                justifyContent: 'center',
-              }}>
-              <AppleSVG height={35} width={35} />
-            </TouchableOpacity> */}
-          {/* </View> */}
+
           <View
             style={{
               flexDirection: 'row',
               justifyContent: 'center',
               marginBottom: 50,
             }}>
-            <Text style={{ color: '#462530' }}>Already have an account </Text>
+            <Text style={{color: '#462530'}}>Already have an account </Text>
             <TouchableOpacity
               onPress={() => props.navigation.navigate('Login')}>
-              <Text style={{ color: '#A32734', fontWeight: 500 }}>Login</Text>
+              <Text style={{color: '#A32734', fontWeight: 500}}>Login</Text>
             </TouchableOpacity>
           </View>
         </View>
       </ScrollView>
     </SafeAreaView>
-    // <View style={{marginTop:200, marginHorizontal:20}}>
-    //   <Text style={{fontSize:25, fontWeight:500, marginBottom:5}} >Create Your Account</Text>
-    //   <TextInput
-    //   label="Name"
-    //   value={name}
-    //   onChangeText={name => setName(name)}
-    //   />
-    //   <View style={{marginBottom:20}} />
-
-    //   <TextInput
-    //   label="Number"
-    //   value={phoneNo}
-    //   onChangeText={phoneNo => setPhoneNo(phoneNo)}
-    //   />
-    //   <View style={{marginBottom:20}} />
-
-    //   <TextInput
-    //   label="Email"
-    //   value={email}
-    //   onChangeText={email => setEmail(email)}
-    //   />
-    //   <View style={{marginBottom:20}} />
-
-    //   <TextInput
-    //   label="Password"
-    //   value={password}
-    //   onChangeText={password => setPassword(password)}
-    //   secureTextEntry
-    //   />
-    //   <View style={{marginBottom:20}} />
-
-    //   <Button style={{backgroundColor:'white'}} >Submit</Button>
-
-    // </View>
   );
 };
 

@@ -46,6 +46,7 @@ const Sylabus = ({navigation}) => {
           initialValue={courseList}
           innerList="courseName"
           onSelect={handleCourseSelect}
+          displayName={'Course'}
         />
       </View>
       <View style={{marginHorizontal: 20}}>
@@ -55,6 +56,7 @@ const Sylabus = ({navigation}) => {
           innerList="class"
           menuHeight={300}
           onSelect={handleClassSelect}
+          displayName={'Class'}
         />
       </View>
       <TouchableOpacity
