@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   View,
   Text,
@@ -8,12 +8,12 @@ import {
   TouchableOpacity,
   Linking,
   Image,
-  // PermissionsAndroid
+  ActivityIndicator
 } from 'react-native';
-import {Searchbar, Avatar} from 'react-native-paper';
+import { Searchbar, Avatar } from 'react-native-paper';
 
-import {windowWidth} from '../utils/Dimensions';
-import {colors} from '../constants';
+import { windowWidth } from '../utils/Dimensions';
+import { colors } from '../constants';
 import Carousel from 'react-native-reanimated-carousel';
 
 // Images here
@@ -21,21 +21,22 @@ import ManSVG from '../assets/img/Man.svg';
 import CbseSVG from '../assets/img/cbse.svg';
 import trgIcon from '../assets/img/trgIcon.png';
 
-import {sliderData} from '../model/Data';
+// import {sliderData} from '../model/Data';
 import BannerSlider from '../components/BannerSlider';
-import {useUserContext} from '../utils/userContext';
+import { useUserContext } from '../utils/userContext';
 import Geolocation from '@react-native-community/geolocation';
 import Qotd from '../components/courses/template/Qotd';
+import { fetchCarousel } from '../utils/APIs';
 
 // Course details
 const courses = [
-  {name: 'cbse', screen: 'cbse', img: require('../assets/img/cbse.png')},
-  {name: 'icse', screen: 'icse', img: require('../assets/img/icse.png')},
-  {name: 'ssc', screen: 'ssc', img: require('../assets/img/ssc.png')},
-  {name: 'cuet', screen: 'cuet', img: require('../assets/img/cuet.png')},
-  {name: 'clat', screen: 'clat', img: require('../assets/img/clat.png')},
-  {name: 'dsssb', screen: 'dsssb', img: require('../assets/img/dsssb.png')},
-  {name: 'police', screen: 'police', img: require('../assets/img/police.png')},
+  { name: 'cbse', screen: 'cbse', img: require('../assets/img/cbse.png') },
+  { name: 'icse', screen: 'icse', img: require('../assets/img/icse.png') },
+  { name: 'ssc', screen: 'ssc', img: require('../assets/img/ssc.png') },
+  { name: 'cuet', screen: 'cuet', img: require('../assets/img/cuet.png') },
+  { name: 'clat', screen: 'clat', img: require('../assets/img/clat.png') },
+  { name: 'dsssb', screen: 'dsssb', img: require('../assets/img/dsssb.png') },
+  { name: 'police', screen: 'police', img: require('../assets/img/police.png') },
   {
     name: 'others',
     screen: 'other_comp',
@@ -44,14 +45,15 @@ const courses = [
 ];
 
 const HomeScreen = props => {
-  // asking notifications permission
-  // PermissionsAndroid.request(PermissionsAndroid.PERMISSIONS.POST_NOTIFICATIONS);
-  // getting current geolocation
-  Geolocation.getCurrentPosition(info => console.log(info));
 
   // user context for fetching details
-  const {user} = useUserContext();
+  const { setLocation } = useUserContext();
+  //setting location
+  Geolocation.getCurrentPosition(info => setLocation([info.coords.latitude, info.coords.longitude]));
 
+  // loading status
+  const [isCarouselLoading, setIsCarouselLoading] = useState(false);
+  // search query
   const [searchQuery, setSearchQuery] = useState('');
 
   // filtered course state
@@ -75,13 +77,33 @@ const HomeScreen = props => {
     setFilteredCourses(filteredCourses);
   };
 
-  const renderBanner = ({item, index}) => {
+  const renderBanner = ({ item, index }) => {
     return <BannerSlider data={item} />;
   };
 
+  // getting slider/carousel data
+  const [sliderData, setSliderData] = useState([])
+  useEffect(() => {
+    const getSliderData = async () => {
+      try {
+        setIsCarouselLoading(true)
+        const res = await fetchCarousel();
+        const carousel = await res.json();
+        setSliderData(carousel)
+        setIsCarouselLoading(false)
+      } catch (error) {
+        console.log(error);
+      }
+    }
+
+    getSliderData();
+
+  }, [])
+
+
   return (
-    <SafeAreaView style={{flex: 1, backgroundColor: colors.graylight}}>
-      <ScrollView style={{paddingVertical: 10}}>
+    <SafeAreaView style={{ flex: 1, backgroundColor: colors.graylight }}>
+      <ScrollView style={{ paddingVertical: 10 }}>
         <View style={styles.container}>
           {/* <View style={styles.topbar}>
             <View >
@@ -105,7 +127,7 @@ const HomeScreen = props => {
               TRG
             </Text>
           </View> */}
-          <View style={{marginTop: 10}}>
+          <View style={{ marginTop: 10 }}>
             <Searchbar
               placeholder="Search"
               placeholderTextColor={'#241D20'}
@@ -124,7 +146,7 @@ const HomeScreen = props => {
             />
           </View>
 
-          <Text
+          {/* <Text
             style={{
               color: '#dc3545',
               fontSize: 16,
@@ -134,25 +156,26 @@ const HomeScreen = props => {
               marginBottom: 10,
             }}>
             Carousal
-          </Text>
+          </Text> */}
           <View>
             <View
-              style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-              <Carousel
+              style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+              {isCarouselLoading?<ActivityIndicator style={{paddingVertical: 100,justifyContent: 'center', alignItems:'center'}} />:<Carousel
                 loop
                 width={windowWidth - 40}
                 height={windowWidth / 2}
                 autoPlay={true}
                 autoPlayInterval={5000}
                 data={sliderData}
-                renderItem={({item, index}) => (
+                renderItem={({ item, index }) => (
                   <View
+                    key={index}
                     style={{
                       flex: 1,
                       justifyContent: 'center',
                     }}>
                     <Image
-                      source={item.image}
+                      source={{uri:item.imgUrl}}
                       style={{
                         width: '100%',
                         height: '100%',
@@ -161,7 +184,7 @@ const HomeScreen = props => {
                     />
                   </View>
                 )}
-              />
+              />}
             </View>
           </View>
           <View
@@ -181,7 +204,7 @@ const HomeScreen = props => {
               }}>
               Question of the Day
             </Text>
-            <View style={{marginHorizontal: 20, marginTop: 10}}>
+            <View style={{ marginHorizontal: 20, marginTop: 10 }}>
               <Qotd />
             </View>
           </View>
@@ -202,7 +225,7 @@ const HomeScreen = props => {
                 'https://www.therightguru.com/',
               )
             }>
-            <Text style={{color: '#fff', fontSize: 18, textAlign: 'center'}}>
+            <Text style={{ color: '#fff', fontSize: 18, textAlign: 'center' }}>
               Book Free Trial Class
             </Text>
           </TouchableOpacity>
