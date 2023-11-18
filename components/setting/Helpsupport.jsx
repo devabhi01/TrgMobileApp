@@ -33,19 +33,23 @@ const Helpsupport = () => {
                                 <Text style={styles.btnText}>Support</Text>
                             </TouchableOpacity>
                             <View>
-                                <TouchableOpacity onPress={() => Linking.openURL('tel:+917290901622')}
-                                    style={{ borderBottomWidth: 2, borderColor: colors.primary, marginLeft: 60 }}>
-                                    <Text style={styles.btnText1}><Text style={{fontWeight:500}}>Phone Number : </Text> 7290901622</Text>
+                                <TouchableOpacity onPress={() => Linking.openURL('tel:+917419197878')}
+                                    style={{ marginLeft: 60 }}>
+                                    <Text style={styles.btnText1}><Text style={{fontWeight:500}}>Phone Number : </Text> 7419197878</Text>
+                                </TouchableOpacity>
+                                <TouchableOpacity onPress={() => Linking.openURL('tel:+919570424242')}
+                                    style={{borderBottomWidth: 2, borderColor: colors.primary,  marginLeft: 60 }}>
+                                    <Text style={styles.btnText1}><Text style={{fontWeight:500}}>Alternative Number : </Text> 9570424242</Text>
                                 </TouchableOpacity>
                                 <TouchableOpacity
                                     style={{ borderBottomWidth: 2, borderColor: colors.primary, marginLeft: 60, marginVertical: 20 }}
-                                    onPress={() => Linking.openURL('mailto: a1abhishek2016@gmail.com')}>
-                                    <Text style={styles.btnText1}><Text style={{fontWeight:500}}>Email : </Text> a1abhishek2016@gmail.com </Text>
+                                    onPress={() => Linking.openURL('mailto: contact@therightguru.com')}>
+                                    <Text style={styles.btnText1}><Text style={{fontWeight:500}}>Email : </Text> contact@therightguru.com </Text>
                                 </TouchableOpacity>
                                 <TouchableOpacity
                                     style={{ borderBottomWidth: 2, borderColor: colors.primary, marginLeft: 60, marginBottom: 20 }}
                                     onPress={() => {}}>
-                                    <Text style={styles.btnText1}><Text style={{fontWeight:500}}>Address : </Text></Text>
+                                    <Text style={styles.btnText1}><Text style={{fontWeight:500}}>Address: 311 Vardhman Sunder Plaza, Plot No. 12 MLU Sec - 12 Dwarka, New Delhi 110078</Text></Text>
                                 </TouchableOpacity>
                             </View>
                         </View>

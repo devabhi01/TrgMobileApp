@@ -9,6 +9,7 @@ import {
   Share,
   Modal,
   TouchableWithoutFeedback,
+  Linking
 } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import AnnouncmentIcon from './announcement.png';
@@ -23,7 +24,7 @@ const HeaderThreeDots = props => {
   const onShare = async () => {
     try {
       const result = await Share.share({
-        message: 'Share the The Right Gure Learning App',
+        message: 'Download the App on Playstore : https://play.google.com/store/apps/details?id=com.trgmobileapp',
       });
       if (result.action === Share.sharedAction) {
         if (result.activityType) {
@@ -38,6 +39,13 @@ const HeaderThreeDots = props => {
       Alert.alert(error.message);
     }
   };
+
+  // opening on playstore
+  const openPlayStore = () => {
+    Linking.openURL('market://details?id=com.trgmobileapp')
+      .catch((err) => console.error('An error occurred', err));
+  };
+
   return (
     <View style={{marginRight: 20, flexDirection: 'row'}}>
       <TouchableOpacity style={{marginRight: 10}} onPress={() => {navigation.navigate('announcement')}}>
@@ -60,7 +68,7 @@ const HeaderThreeDots = props => {
           <View style={styles.modalOverlay}>
             <View style={styles.modalContainer}>
               <View style={{flexDirection: 'column'}}>
-                <TouchableOpacity style={{marginBottom: 15}}>
+                <TouchableOpacity style={{marginBottom: 15}} onPress={openPlayStore} >
                   <Text style={{color: '#0a0a0a', fontSize: 16}}>Rate App</Text>
                 </TouchableOpacity>
                 <TouchableOpacity
