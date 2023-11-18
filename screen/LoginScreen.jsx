@@ -9,12 +9,8 @@ import {
 } from 'react-native';
 import React, { useState } from 'react';
 import { colors } from '../constants';
-import GoogleSVG from '../assets/img/google.svg';
-import AppleSVG from '../assets/img/apple.svg';
 import { useUserContext } from '../utils/userContext';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import auth from '@react-native-firebase/auth';
-import { GoogleSignin } from '@react-native-google-signin/google-signin';
 import { loginUser } from '../utils/APIs';
 
 const LoginScreen = props => {
@@ -58,19 +54,6 @@ const LoginScreen = props => {
     }
   }
 
-  //google sign-in
-  async function onGoogleButtonPress() {
-    // Check if your device supports Google Play
-    await GoogleSignin.hasPlayServices({ showPlayServicesUpdateDialog: true });
-    // Get the users ID token
-    const { idToken } = await GoogleSignin.signIn();
-  
-    // Create a Google credential with the token
-    const googleCredential = auth.GoogleAuthProvider.credential(idToken);
-  
-    // Sign-in the user with the credential
-    return auth().signInWithCredential(googleCredential);
-  }
 
   return (
     <SafeAreaView style={styles.container}>

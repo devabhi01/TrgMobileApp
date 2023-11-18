@@ -1,21 +1,11 @@
-import {View, Text, SafeAreaView, TouchableOpacity, Image} from 'react-native';
+import { View, Text, SafeAreaView, TouchableOpacity, Image } from 'react-native';
 import React from 'react';
-import {useAuth0} from 'react-native-auth0';
 
 const LoginSignup = props => {
-  const {authorize} = useAuth0();
-
-  const onPress = async () => {
-      try {
-          await authorize();
-      } catch (e) {
-          console.log(e);
-      }
-  };
   return (
-    <SafeAreaView style={{flex: 1}}>
+    <SafeAreaView style={{ flex: 1 }}>
       <View>
-        <View style={{alignItems: 'center'}}>
+        <View style={{ alignItems: 'center' }}>
           <Image
             style={{
               height: 400,
@@ -31,7 +21,7 @@ const LoginSignup = props => {
             alignItems: 'center',
             margin: 50,
           }}>
-          <Text style={{fontSize: 25, fontWeight: 800, color: '#dc3545'}}>
+          <Text style={{ fontSize: 25, fontWeight: 800, color: '#dc3545' }}>
             Your Betterment
           </Text>
           <Text
@@ -42,7 +32,7 @@ const LoginSignup = props => {
             }}>
             Our Commitment
           </Text>
-          <Text style={{fontSize: 20, paddingVertical: 20, color: '#dc3500'}}>
+          <Text style={{ fontSize: 20, paddingVertical: 20, color: '#dc3500' }}>
             Join us to pace your Career
           </Text>
         </View>
@@ -64,7 +54,7 @@ const LoginSignup = props => {
               justifyContent: 'center',
               alignItems: 'center',
             }}>
-            <Text style={{fontSize: 24, color: '#eee', fontWeight: 600}}>
+            <Text style={{ fontSize: 24, color: '#eee', fontWeight: 600 }}>
               Login
             </Text>
           </TouchableOpacity>
@@ -78,7 +68,7 @@ const LoginSignup = props => {
               justifyContent: 'center',
               alignItems: 'center',
             }}>
-            <Text style={{fontSize: 24, color: '#eee', fontWeight: 600}}>
+            <Text style={{ fontSize: 24, color: '#eee', fontWeight: 600 }}>
               Signup
             </Text>
           </TouchableOpacity>
@@ -89,23 +79,6 @@ const LoginSignup = props => {
             justifyContent: 'flex-end',
             marginRight: 30,
           }}>
-          <TouchableOpacity
-            onPress={onPress}
-            style={{
-              width: 100,
-              backgroundColor: '#dc3545',
-              borderRadius: 10,
-              alignItems: 'center',
-              paddingVertical: 10,
-            }}>
-            <Text
-              style={{
-                color: '#eee',
-                fontWeight: 500,
-              }}>
-              0oth Login
-            </Text>
-          </TouchableOpacity>
         </View>
       </View>
     </SafeAreaView>
