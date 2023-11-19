@@ -9,7 +9,7 @@ const HeaderDash = (props) => {
   const navigation = useNavigation();
   return (
     
-      <TouchableOpacity style={{marginLeft:20}} onPress={() => {}}>
+      <TouchableOpacity style={{marginLeft:20}}>
         <Icon name="bars" size={24} color="#fff" />
       </TouchableOpacity>
     

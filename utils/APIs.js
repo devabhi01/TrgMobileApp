@@ -84,3 +84,17 @@ export const fetchAnnouncements = async ()=>{
     }
     return await fetch(route, options)
 }
+
+// ----------- submitting doubt -------------------
+export const submitDoubt = async (body)=>{
+    const route = `${root}/api/submit-doubt`
+    const options = {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        credentials: 'include',
+        body: JSON.stringify(body)
+    }
+    return await fetch(route, options)
+}

@@ -49,7 +49,7 @@ const Helpsupport = () => {
                                 <TouchableOpacity
                                     style={{ borderBottomWidth: 2, borderColor: colors.primary, marginLeft: 60, marginBottom: 20 }}
                                     onPress={() => {}}>
-                                    <Text style={styles.btnText1}><Text style={{fontWeight:500}}>Address: 311 Vardhman Sunder Plaza, Plot No. 12 MLU Sec - 12 Dwarka, New Delhi 110078</Text></Text>
+                                    <Text style={styles.btnText1}><Text style={{fontWeight:500}}>Address: 311 T/F Vardhman Sunder Plaza, MLU Plot No 12 Sector 12, Dwarka New Delhi 110078</Text></Text>
                                 </TouchableOpacity>
                             </View>
                         </View>

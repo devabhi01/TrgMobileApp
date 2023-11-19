@@ -120,7 +120,7 @@ const ProfileSettings = () => {
               </View>
               <View style={styles.InfoDetail}>
                 <Image source={require('../assets/img/dob.png')} color={'#dc3545'} style={{ width: 24, height: 24, }} />
-                <Text style={styles.TextInfo}>{user?.dob} </Text>
+                <Text style={styles.TextInfo}>{user?.dob.substring(0,10)} </Text>
               </View>
 
             </View>

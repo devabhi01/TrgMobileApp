@@ -6,12 +6,13 @@ import {
   Dimensions,
   StyleSheet,
   TouchableOpacity,
-  Linking
+  Linking,
+  Alert
 } from 'react-native';
-import React from 'react';
-import {useUserContext} from '../utils/userContext';
+import React, { useState } from 'react';
+import { useUserContext } from '../utils/userContext';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import {colors} from '../constants';
+import { colors } from '../constants';
 import trgIcon from '../assets/img/trgIcon.png';
 import {
   DrawerContentScrollView,
@@ -20,14 +21,20 @@ import {
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import IconFA from 'react-native-vector-icons/FontAwesome5';
 import IconIo from 'react-native-vector-icons/Ionicons';
-import {useNavigation} from '@react-navigation/native';
+import { useNavigation } from '@react-navigation/native';
+import ImagePicker, { openPicker } from 'react-native-image-crop-picker';
+import storage from '@react-native-firebase/storage';
+import { updateUser } from '../utils/APIs';
 
-const {width, height} = Dimensions.get('screen');
+const { width, height } = Dimensions.get('screen');
 
 const CustomDrawer = props => {
   const navigation = useNavigation();
 
-  const {setUser, setJwtoken, user} = useUserContext();
+  const { setUser, setJwtoken, user, jwtoken } = useUserContext();
+  // progress
+  const [uploadProgress, setUploadProgress] = useState(0);
+  const [showProgress, setShowProgress] = useState(false);
 
   const handleLogout = async () => {
     try {
@@ -40,28 +47,69 @@ const CustomDrawer = props => {
       console.log('Error : ', e);
     }
   };
+
+  const ImgPickAndUpload = async () => {
+    try {
+      const image = await ImagePicker.openPicker({
+        width: 400,
+        height: 400,
+        cropping: true
+      })
+      const imgUrl = image.path;
+
+      // path to existing file on filesystem
+      // fileName = imgUrl.substring(imgUrl.lastIndexOf('/') + 1);
+      const fileName = `${user.name}-${Date.now()}`
+      // uploading the file
+      setShowProgress(true)
+      let uploadTask = storage().ref(fileName).putFile(imgUrl);
+
+      uploadTask.on('state_changed', taskSnapshot => {
+        setUploadProgress(Math.floor((taskSnapshot.bytesTransferred / taskSnapshot.totalBytes) * 100))
+      });
+
+      await uploadTask;
+      // generating https url
+      const imgUri = await storage().ref(fileName).getDownloadURL();
+      setShowProgress(false)
+
+      // setting global context and local storage and database
+      const res = await updateUser({ _id: user._id, profilePic: imgUri }, jwtoken);
+      const data = await res.json()
+      if (res.ok) {
+
+        // async storing
+        await AsyncStorage.setItem('user', JSON.stringify(data.response));
+
+        // setting global variables
+        setUser(data.response)
+
+        Alert.alert('Congrats', 'Profile Image updated successfully!')
+      }
+      else {
+        throw new Error(data?.msg || "Something went wrong!")
+      }
+    } catch (e) {
+      console.log("Error : ", e)
+    }
+  }
   return (
-    <View style={{flex: 1, backgroundColor: colors.graylight, marginTop: -10}}>
+    <View style={{ flex: 1, backgroundColor: colors.graylight, marginTop: -10 }}>
       <DrawerContentScrollView {...props} >
         <ImageBackground
-          style={{height: 150}}
+          style={{ height: 140 }}
           source={require('../assets/img/wall.jpg')}>
-          <Image
-            style={styles.userImg}
-            source={require('../assets/img/person.jpg')}
-          />
+          <TouchableOpacity onPress={ImgPickAndUpload} >
+            <Image
+              style={styles.userImg}
+              // source={require('../assets/img/person.jpg')}
+              source={user?.profilePic ? { uri: user?.profilePic } : Avatar}
+            /></TouchableOpacity>
         </ImageBackground>
         {/* <View style={styles.drawerList}>
           <DrawerItemList {...props} />
         </View> */}
         <View style={styles.drawerList}>
-          <TouchableOpacity
-            style={styles.btn}
-            onPress={() => navigation.navigate('home_drawer')}>
-            <Icon name="home" size={25} color={colors.graylight} />
-            <Text style={styles.btnText}>Home</Text>
-          </TouchableOpacity>
-
           <TouchableOpacity
             style={styles.btn}
             onPress={() => navigation.navigate('profile_setting')}>
@@ -104,17 +152,17 @@ const CustomDrawer = props => {
               marginVertical: 20,
             }}
           />
-          
-          <View style={{marginVertical: 10}}>
+
+          <View style={{ marginVertical: 10 }}>
             <Image
               source={trgIcon}
-              style={{width: 130, height: 130, alignSelf: 'center'}}
+              style={{ width: 130, height: 130, alignSelf: 'center' }}
               resizeMode="contain"
             />
           </View>
 
 
-          <View style={{marginVertical: 10}}>
+          <View style={{ marginVertical: 10 }}>
             <Text
               style={{
                 textAlign: 'center',
@@ -133,7 +181,7 @@ const CustomDrawer = props => {
                 onPress={() =>
                   Linking.openURL('https://www.instagram.com/therightguru/')
                 }
-                style={{marginHorizontal: 10}}>
+                style={{ marginHorizontal: 10 }}>
                 <IconIo
                   name="logo-instagram"
                   size={30}
@@ -146,7 +194,7 @@ const CustomDrawer = props => {
                     'https://www.facebook.com/people/The-Right-Guru/100063461899383/',
                   )
                 }
-                style={{marginHorizontal: 10}}>
+                style={{ marginHorizontal: 10 }}>
                 <IconIo
                   name="logo-facebook"
                   size={30}
@@ -159,7 +207,7 @@ const CustomDrawer = props => {
                     'https://www.linkedin.com/company/the-right-guru/',
                   )
                 }
-                style={{marginHorizontal: 10}}>
+                style={{ marginHorizontal: 10 }}>
                 <IconIo
                   name="logo-linkedin"
                   size={30}
@@ -170,7 +218,7 @@ const CustomDrawer = props => {
                 onPress={() =>
                   Linking.openURL('https://twitter.com/The_Right_Guru')
                 }
-                style={{marginHorizontal: 10}}>
+                style={{ marginHorizontal: 10 }}>
                 <IconIo name="logo-twitter" size={30} color={colors.primary} />
               </TouchableOpacity>
               <TouchableOpacity
@@ -179,7 +227,7 @@ const CustomDrawer = props => {
                     'https://www.linkedin.com/company/the-right-guru/',
                   )
                 }
-                style={{marginHorizontal: 10}}>
+                style={{ marginHorizontal: 10 }}>
                 <IconFA
                   name="telegram"
                   size={30}
