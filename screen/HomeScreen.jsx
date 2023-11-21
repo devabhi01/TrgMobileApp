@@ -26,7 +26,7 @@ import BannerSlider from '../components/BannerSlider';
 import { useUserContext } from '../utils/userContext';
 import Geolocation from '@react-native-community/geolocation';
 import Qotd from '../components/courses/template/Qotd';
-import { fetchCarousel } from '../utils/APIs';
+import { fetchCarousel, fetchQod } from '../utils/APIs';
 
 // Course details
 const courses = [
@@ -53,44 +53,52 @@ const HomeScreen = props => {
 
   // loading status
   const [isCarouselLoading, setIsCarouselLoading] = useState(false);
+
   // search query
-  const [searchQuery, setSearchQuery] = useState('');
+  // const [searchQuery, setSearchQuery] = useState('');
 
   // filtered course state
-  const [filteredCourses, setFilteredCourses] = useState(courses);
+  // const [filteredCourses, setFilteredCourses] = useState(courses);
 
-  const onChangeSearch = query => {
-    setSearchQuery(query);
-    // Convert the query to lowercase for case-insensitive search
-    const lowercaseQuery = query.toLowerCase();
+  // const onChangeSearch = query => {
+  //   setSearchQuery(query);
+  //   // Convert the query to lowercase for case-insensitive search
+  //   const lowercaseQuery = query.toLowerCase();
 
-    // Use Array.prototype.filter() to filter objects based on the query
-    const filteredCourses = courses.filter(item => {
-      // Check if any property of the item contains the query string (case-insensitive)
-      return Object.values(item).some(
-        value =>
-          typeof value === 'string' &&
-          value.toLowerCase().includes(lowercaseQuery),
-      );
-    });
+  //   // Use Array.prototype.filter() to filter objects based on the query
+  //   const filteredCourses = courses.filter(item => {
+  //     // Check if any property of the item contains the query string (case-insensitive)
+  //     return Object.values(item).some(
+  //       value =>
+  //         typeof value === 'string' &&
+  //         value.toLowerCase().includes(lowercaseQuery),
+  //     );
+  //   });
 
-    setFilteredCourses(filteredCourses);
-  };
+  //   setFilteredCourses(filteredCourses);
+  // };
 
-  const renderBanner = ({ item, index }) => {
-    return <BannerSlider data={item} />;
-  };
+  // const renderBanner = ({ item, index }) => {
+  //   return <BannerSlider data={item} />;
+  // };
 
-  // getting slider/carousel data
+  // getting slider/carousel
   const [sliderData, setSliderData] = useState([])
   useEffect(() => {
     const getSliderData = async () => {
       try {
         setIsCarouselLoading(true)
+        setIsQodLoading(true)
         const res = await fetchCarousel();
         const carousel = await res.json();
         setSliderData(carousel)
         setIsCarouselLoading(false)
+
+        const res2 = await fetchQod();
+        const qodData = await res2.json();
+        console.log(qodData)
+        setIsQodLoading(qodData)
+        setIsQodLoading(false)
       } catch (error) {
         console.log(error);
       }
@@ -127,7 +135,7 @@ const HomeScreen = props => {
               TRG
             </Text>
           </View> */}
-          <View style={{ marginTop: 10 }}>
+          {/* <View style={{ marginTop: 10 }}>
             <Searchbar
               placeholder="Search"
               placeholderTextColor={'#241D20'}
@@ -144,7 +152,7 @@ const HomeScreen = props => {
                 setSearchQuery('');
               }}
             />
-          </View>
+          </View> */}
 
           {/* <Text
             style={{
@@ -254,7 +262,7 @@ const HomeScreen = props => {
               justifyContent: 'space-around',
               marginBottom: 50,
             }}>
-            {filteredCourses.map((course, index) => {
+            {courses.map((course, index) => {
               return (
                 <TouchableOpacity
                   onPress={() => props.navigation.navigate(course.screen)}

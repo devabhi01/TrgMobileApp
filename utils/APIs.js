@@ -98,3 +98,15 @@ export const submitDoubt = async (body)=>{
     }
     return await fetch(route, options)
 }
+
+//------------ fetch qod --------------------
+export const fetchQod = async ()=>{
+    const route = `${root}/api/fetch-qod`
+    const options = {
+        method: "GET",
+        headers: {
+            "Content-Type": "application/json"
+        }
+    }
+    return await fetch(route, options)
+}

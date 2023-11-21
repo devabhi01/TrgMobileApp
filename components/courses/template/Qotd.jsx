@@ -1,14 +1,37 @@
 import {StyleSheet, Text, View} from 'react-native';
-import React, {useState} from 'react';
-import {RadioButton} from 'react-native-paper';
+import React, {useState, useEffect} from 'react';
+import {ActivityIndicator, RadioButton} from 'react-native-paper';
+import { fetchQod } from '../../../utils/APIs';
 
 const Qotd = () => {
-  const [value, setValue] = useState('');
+  // loading status
+  const [isQodLoading, setIsQodLoading] = useState(false)
+
+  //qod data
+  const [qod, setQod] = useState({})
+
+  useEffect(() => {
+    const getQodData = async () => {
+      try {
+        setIsQodLoading(true)
+        const res = await fetchQod();
+        const qodData = await res.json();
+        setQod(qodData)
+        setIsQodLoading(false)
+      } catch (error) {
+        console.log(error);
+      }
+    }
+    getQodData();
+  }, [])
+  
+
+  // const [value, setValue] = useState('');
   return (
     <>
       <View style={{backgroundColor:"#f5f5f5",borderRadius:8,paddingVertical:10,elevation:3}}>
-        <Text style={styles.quesstions}>Question : Who is the prime minister of India?</Text>
-        <Text style={styles.correctAns}>Ans : Narendra Modi</Text>
+        {isQodLoading?<ActivityIndicator style={{paddingVertical: 30,justifyContent: 'center', alignItems:'center'}} />:<><Text style={styles.quesstions}>Question : {qod?.question} </Text>
+        <Text style={styles.correctAns}>Ans : {qod?.answer} </Text></>}
 
         {/* <RadioButton.Group
         color={'#dc3545'}

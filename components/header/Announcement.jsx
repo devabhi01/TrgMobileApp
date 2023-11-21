@@ -1,4 +1,4 @@
-import { SafeAreaView, ScrollView, StyleSheet, Text, View } from 'react-native';
+import { SafeAreaView, ScrollView, StyleSheet, Text, View, FlatList } from 'react-native';
 import React, { useState, useEffect } from 'react';
 import { getDate } from '../../constants';
 import { fetchAnnouncements } from '../../utils/APIs';
@@ -25,32 +25,33 @@ const Announcement = () => {
     getAnnouncements();
   }, [])
 
+  // announcement Item component
+  const renderItem = ({ item }) => (
+    <View style={{ flex: 1, margin: 20, marginBottom: 0 }}>
+      <View
+        style={{
+          backgroundColor: '#d7d7d7',
+          padding: 8,
+          borderRadius: 8,
+          borderWidth: 0.5,
+          borderColor: '#dc3545',
+        }}>
+        <Text style={styles.title}>{item.title}</Text>
+        <Text style={styles.desc}>{item.description}</Text>
+        <Text style={styles.date}>{getDate(item.date)}</Text>
+      </View>
+    </View>
+  );
 
   return (
     <SafeAreaView style={{ flex: 1 }}>
-      <ScrollView>
         {isLoading ? <ActivityIndicator style={{ paddingVertical: 100, justifyContent: "center", alignItems: 'center' }} /> :
-          announcements.map((announcement, index) => {
-            return (
-              <View key={index} style={{ flex: 1, margin: 20, marginBottom:0 }}>
-                <View
-                  style={{
-                    backgroundColor: '#d7d7d7',
-                    padding: 8,
-                    borderRadius: 8,
-                    borderWidth: 0.5,
-                    borderColor: '#dc3545',
-                  }}>
-                  <Text style={styles.title}>{announcement.title}</Text>
-                  <Text style={styles.desc}>
-                    {announcement.description}
-                  </Text>
-                  <Text style={styles.date}>{getDate(announcement.date)}</Text>
-                </View>
-              </View>
-            )
-          })}
-      </ScrollView>
+          <FlatList
+            data={announcements}
+            keyExtractor={(item, index) => index.toString()}
+            renderItem={renderItem}
+          />
+        }
     </SafeAreaView>
   );
 };
