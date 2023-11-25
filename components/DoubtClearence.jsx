@@ -65,7 +65,7 @@ const DoubtClearence = () => {
             />
           </View>
 
-          <Text style={[styles.txt, { marginTop: 20 }]}> Type Your Doubt : </Text>
+          <Text style={[styles.txt, { marginTop: 20 }]}> Your Doubt : </Text>
           <View
             style={{
               backgroundColor: '#D9D7D7',

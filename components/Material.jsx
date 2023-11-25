@@ -49,6 +49,14 @@ const Material = (props) => {
               backgroundColor={'#dc3545'}
             />
           </View>
+          <View style={styles.btnCont}>
+            <MoreOptBtn
+              name={'NCERT Solutions'}
+              
+              onPress={() => props.navigation.navigate('ncertSoln')}
+              backgroundColor={'#dc3545'}
+            />
+          </View>
 
           <View style={styles.btnCont}>
             <MoreOptBtn

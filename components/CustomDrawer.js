@@ -96,16 +96,17 @@ const CustomDrawer = props => {
   return (
     <View style={{ flex: 1, backgroundColor: colors.graylight, marginTop: -10 }}>
       <DrawerContentScrollView {...props} >
-        <ImageBackground
+        {/* <ImageBackground
           style={{ height: 140 }}
           source={require('../assets/img/wall.jpg')}>
-          <TouchableOpacity onPress={ImgPickAndUpload} >
+          
+        </ImageBackground> */}
+        <TouchableOpacity onPress={ImgPickAndUpload} >
             <Image
               style={styles.userImg}
               // source={require('../assets/img/person.jpg')}
               source={user?.profilePic ? { uri: user?.profilePic } : Avatar}
             /></TouchableOpacity>
-        </ImageBackground>
         {/* <View style={styles.drawerList}>
           <DrawerItemList {...props} />
         </View> */}
@@ -123,6 +124,12 @@ const CustomDrawer = props => {
             <IconFA name="clipboard" size={25} color={colors.graylight} />
             <Text style={styles.btnText}>Doubt CLearence</Text>
           </TouchableOpacity>
+          <TouchableOpacity
+            style={styles.btn}
+            onPress={() => navigation.navigate('ncertSoln')}>
+            <IconFA name="clipboard" size={25} color={colors.graylight} />
+            <Text style={styles.btnText}>NCERT Solutions</Text>
+          </TouchableOpacity>
 
           <TouchableOpacity
             style={styles.btn}
@@ -138,9 +145,9 @@ const CustomDrawer = props => {
             <Text style={styles.btnText}>Setting</Text>
           </TouchableOpacity>
 
-          <TouchableOpacity style={styles.btn} onPress={handleLogout}>
-            <Icon name="logout" size={25} color={colors.graylight} />
-            <Text style={styles.btnText}>Logout</Text>
+          <TouchableOpacity style={styles.logoutBtn} onPress={handleLogout}>
+            <Icon name="logout" size={25} color={colors.primary} />
+            <Text style={[styles.btnText,{color:colors.primary}]}>Logout</Text>
           </TouchableOpacity>
 
           <View
@@ -252,7 +259,7 @@ const styles = StyleSheet.create({
     borderRadius: 100 / 2,
     borderColor: colors.graylight,
     left: width / 2 - 100,
-    bottom: -100,
+    bottom: -35,
     borderWidth: 3,
   },
   drawerList: {
@@ -264,6 +271,19 @@ const styles = StyleSheet.create({
     height: 45,
     alignSelf: 'center',
     backgroundColor: colors.primary,
+    alignItems: 'center',
+    paddingLeft: 10,
+    flexDirection: 'row',
+    marginBottom: 10,
+  },
+  logoutBtn: {
+    width: '90%',
+    borderRadius: 5,
+    height: 45,
+    borderWidth: 2,
+    alignSelf: 'center',
+    borderColor: colors.primary,
+    borderStyle: 'solid',
     alignItems: 'center',
     paddingLeft: 10,
     flexDirection: 'row',

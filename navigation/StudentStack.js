@@ -42,6 +42,8 @@ import Bookmarks from '../components/Bookmarks';
 
 import Announcement from '../components/header/Announcement';
 import DrawerNav from './DrawerNav';
+import Downloads from '../components/Downloads';
+import NcertSoln from '../components/material/NcertSoln';
 
 
 
@@ -236,6 +238,15 @@ const StudentStack = () => {
           }}
         />
         <Stack.Screen
+          name="downloads"
+          component={Downloads}
+          options={{
+            headerTintColor: '#fff',
+            title: 'Downloads',
+            headerTitleAlign: 'center',
+          }}
+        />
+        <Stack.Screen
           name="my_course"
           component={MyCourse}
           options={{
@@ -289,6 +300,15 @@ const StudentStack = () => {
           options={{
             headerTintColor: '#fff',
             title: 'Assignments',
+            headerTitleAlign: 'center',
+          }}
+        />
+        <Stack.Screen
+          name="ncertSoln"
+          component={NcertSoln}
+          options={{
+            headerTintColor: '#fff',
+            title: 'NCERT Solutions',
             headerTitleAlign: 'center',
           }}
         />
