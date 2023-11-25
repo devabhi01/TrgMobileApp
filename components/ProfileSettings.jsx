@@ -17,6 +17,7 @@ import storage from '@react-native-firebase/storage';
 import { colors } from '../constants';
 import Avatar from '../assets/img/user.png'
 import Ionicon from 'react-native-vector-icons/Ionicons';
+import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import MaterialIcon from 'react-native-vector-icons/MaterialIcons';
 import { useUserContext } from '../utils/userContext';
@@ -185,6 +186,15 @@ const ProfileSettings = () => {
                   onPress={() => Linking.openURL('https://twitter.com/The_Right_Guru')}
                   style={{ marginHorizontal: 10 }}>
                   <Ionicon name="logo-twitter" size={30} color={colors.primary} />
+                </TouchableOpacity>
+                <TouchableOpacity
+                  onPress={() => Linking.openURL('https://t.me/therightguru')}
+                  style={{ marginHorizontal: 10 }}>
+                  <FontAwesome
+                  name="telegram"
+                  size={30}
+                  color={colors.primary}
+                />
                 </TouchableOpacity>
               </View>
             </View>

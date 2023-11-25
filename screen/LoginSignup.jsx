@@ -1,86 +1,98 @@
-import { View, Text, SafeAreaView, TouchableOpacity, Image } from 'react-native';
+import {
+  View,
+  Text,
+  SafeAreaView,
+  TouchableOpacity,
+  Image,
+  ScrollView,
+  Dimensions
+} from 'react-native';
 import React from 'react';
+
+
+const {width, height} = Dimensions.get('screen');
 
 const LoginSignup = props => {
   return (
-    <SafeAreaView style={{ flex: 1 }}>
-      <View>
-        <View style={{ alignItems: 'center' }}>
-          <Image
+    <SafeAreaView style={{flex: 1}}>
+      <ScrollView>
+        <View>
+          <View style={{alignItems: 'center'}}>
+            <Image
+              style={{
+                height: 350,
+                width: width,
+                borderBottomLeftRadius: 30,
+                borderBottomRightRadius: 30,
+              }}
+              source={require('../assets/img/OnboardLogin.jpg')}
+            />
+          </View>
+          <View
             style={{
-              height: 400,
-              width: 400,
-              borderBottomLeftRadius: 30,
-              borderBottomRightRadius: 30,
-            }}
-            source={require('../assets/img/OnboardLogin.jpg')}
-          />
-        </View>
-        <View
-          style={{
-            alignItems: 'center',
-            margin: 50,
-          }}>
-          <Text style={{ fontSize: 25, fontWeight: 800, color: '#dc3545' }}>
-            Your Betterment
-          </Text>
-          <Text
-            style={{
-              fontSize: 25,
-              fontWeight: 800,
-              color: '#dc3545',
-            }}>
-            Our Commitment
-          </Text>
-          <Text style={{ fontSize: 20, paddingVertical: 20, color: '#dc3500' }}>
-            Join us to pace your Career
-          </Text>
-        </View>
-        <View
-          style={{
-            flexDirection: 'row',
-            justifyContent: 'space-evenly',
-            marginBottom: 50,
-          }}>
-          <TouchableOpacity
-            onPress={() => {
-              props.navigation.navigate('Login');
-            }}
-            style={{
-              backgroundColor: '#dc3545',
-              paddingHorizontal: 50,
-              paddingVertical: 10,
-              borderRadius: 10,
-              justifyContent: 'center',
               alignItems: 'center',
+              margin: 50,
             }}>
-            <Text style={{ fontSize: 24, color: '#eee', fontWeight: 600 }}>
-              Login
+            <Text style={{fontSize: 25, fontWeight: 800, color: '#dc3545'}}>
+              Your Betterment
             </Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            onPress={() => props.navigation.navigate('Signup')}
+            <Text
+              style={{
+                fontSize: 25,
+                fontWeight: 800,
+                color: '#dc3545',
+              }}>
+              Our Commitment
+            </Text>
+            <Text style={{fontSize: 20, paddingVertical: 20, color: '#dc3500'}}>
+              Join us to pace your Career
+            </Text>
+          </View>
+          <View
             style={{
-              backgroundColor: '#dc3545',
-              paddingHorizontal: 50,
-              paddingVertical: 10,
-              borderRadius: 10,
-              justifyContent: 'center',
-              alignItems: 'center',
+              flexDirection: 'row',
+              justifyContent: 'space-evenly',
+              marginBottom: 50,
             }}>
-            <Text style={{ fontSize: 24, color: '#eee', fontWeight: 600 }}>
-              Signup
-            </Text>
-          </TouchableOpacity>
+            <TouchableOpacity
+              onPress={() => {
+                props.navigation.navigate('Login');
+              }}
+              style={{
+                backgroundColor: '#dc3545',
+                paddingHorizontal: 50,
+                paddingVertical: 10,
+                borderRadius: 10,
+                justifyContent: 'center',
+                alignItems: 'center',
+              }}>
+              <Text style={{fontSize: 24, color: '#eee', fontWeight: 600}}>
+                Login
+              </Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+              onPress={() => props.navigation.navigate('Signup')}
+              style={{
+                backgroundColor: '#dc3545',
+                paddingHorizontal: 50,
+                paddingVertical: 10,
+                borderRadius: 10,
+                justifyContent: 'center',
+                alignItems: 'center',
+              }}>
+              <Text style={{fontSize: 24, color: '#eee', fontWeight: 600}}>
+                Signup
+              </Text>
+            </TouchableOpacity>
+          </View>
+          <View
+            style={{
+              flexDirection: 'row',
+              justifyContent: 'flex-end',
+              marginRight: 30,
+            }}></View>
         </View>
-        <View
-          style={{
-            flexDirection: 'row',
-            justifyContent: 'flex-end',
-            marginRight: 30,
-          }}>
-        </View>
-      </View>
+      </ScrollView>
     </SafeAreaView>
   );
 };

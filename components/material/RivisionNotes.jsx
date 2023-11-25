@@ -9,7 +9,7 @@ import React, {useState} from 'react';
 import CustomDropdown from '../courses/template/CustomDropdown';
 import {courseList, classData} from '../../model';
 
-const RivisionNotes = ({ navigation }) => {
+const RivisionNotes = ({navigation}) => {
   const [selectedCourse, setSelectedCourse] = useState(null);
   const [selectedClass, setSelectedClass] = useState(null);
 
@@ -44,8 +44,8 @@ const RivisionNotes = ({ navigation }) => {
         />
         
       </View> */}
-      
-      <View style={{marginHorizontal: 20,marginTop:20}}>
+
+      <View style={{marginHorizontal: 20, marginTop: 20}}>
         <Text style={{color: '#000', fontSize: 18}}>Select Class</Text>
         <CustomDropdown
           initialValue={classData}
@@ -63,7 +63,7 @@ const RivisionNotes = ({ navigation }) => {
             uri: selectedClass ? selectedClass.rivisionNotesUri : '',
           })
         }>
-        <Text style={{color: '#fff', fontSize: 18}}>Submit</Text>
+        <Text style={{color: '#fff', fontSize: 18}}>Next</Text>
       </TouchableOpacity>
     </SafeAreaView>
   );

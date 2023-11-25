@@ -225,7 +225,7 @@ const SettingScreen = (props) => {
               <TouchableOpacity
                 onPress={() =>
                   Linking.openURL(
-                    'https://www.linkedin.com/company/the-right-guru/',
+                    'https://t.me/therightguru',
                   )
                 }
                 style={{marginHorizontal: 10}}>
