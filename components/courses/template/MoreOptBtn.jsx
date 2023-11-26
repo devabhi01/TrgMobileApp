@@ -10,7 +10,7 @@ const MoreOptBtn = props => {
       <View style={styles.innerCont}>
         <View style={{flexDirection: 'row',alignItems:'center'}}>
           <Icon name={props.IocnName} size={25} color="#fff" />
-          <Text style={{color: 'white', fontSize: 20, marginLeft:10}}>{props.name}</Text>
+          <Text style={{color: 'white', fontSize: 18, marginLeft:10}}>{props.name}</Text>
         </View>
       </View>
     </TouchableOpacity>

@@ -24,7 +24,7 @@ export const courseList = [
 
 export const classData = [
     {
-        class: 'Class 1',
+        class: 1,
         rivisionNotesUri: 'https://therightguru-website.s3.ap-south-1.amazonaws.com/TnC.pdf',
         SyllabusUriCbse: 'https://therightguru-website.s3.ap-south-1.amazonaws.com/TnC.pdf',
         SyllabusUriIcse: 'https://www.africau.edu/images/default/sample.pdf',
@@ -32,77 +32,77 @@ export const classData = [
         supportMaterialUri: 'https://therightguru-website.s3.ap-south-1.amazonaws.com/TnC.pdf',
     },
     {
-        class: 'Class 2',
+        class: 2,
         rivisionNotesUri: 'https://www.africau.edu/images/default/sample.pdf',
         SyllabusUri: 'https://www.africau.edu/images/default/sample.pdf',
         ncertBooksUri: 'https://www.africau.edu/images/default/sample.pdf',
         supportMaterialUri: 'https://www.africau.edu/images/default/sample.pdf',
     },
     {
-        class: 'Class 3',
+        class: 3,
         rivisionNotesUri: 'https://www.africau.edu/images/default/sample.pdf',
         SyllabusUri: 'https://www.africau.edu/images/default/sample.pdf',
         ncertBooksUri: 'https://www.africau.edu/images/default/sample.pdf',
         supportMaterialUri: 'https://www.africau.edu/images/default/sample.pdf',
     },
     {
-        class: 'Class 4',
+        class: 4,
         rivisionNotesUri: 'https://www.africau.edu/images/default/sample.pdf',
         SyllabusUri: 'https://www.africau.edu/images/default/sample.pdf',
         ncertBooksUri: 'https://www.africau.edu/images/default/sample.pdf',
         supportMaterialUri: 'https://www.africau.edu/images/default/sample.pdf',
     },
     {
-        class: 'Class 5',
+        class: 5,
         rivisionNotesUri: 'https://www.africau.edu/images/default/sample.pdf',
         SyllabusUri: 'https://www.africau.edu/images/default/sample.pdf',
         ncertBooksUri: 'https://www.africau.edu/images/default/sample.pdf',
         supportMaterialUri: 'https://www.africau.edu/images/default/sample.pdf',
     },
     {
-        class: 'Class 6',
+        class: 6,
         rivisionNotesUri: 'https://www.africau.edu/images/default/sample.pdf',
         SyllabusUri: 'https://www.africau.edu/images/default/sample.pdf',
         ncertBooksUri: 'https://www.africau.edu/images/default/sample.pdf',
         supportMaterialUri: 'https://www.africau.edu/images/default/sample.pdf',
     },
     {
-        class: 'Class 7',
+        class: 7,
         rivisionNotesUri: 'https://www.africau.edu/images/default/sample.pdf',
         SyllabusUri: 'https://www.africau.edu/images/default/sample.pdf',
         ncertBooksUri: 'https://www.africau.edu/images/default/sample.pdf',
         supportMaterialUri: 'https://www.africau.edu/images/default/sample.pdf',
     },
     {
-        class: 'Class 8',
+        class: 8,
         rivisionNotesUri: 'https://www.africau.edu/images/default/sample.pdf',
         SyllabusUri: 'https://www.africau.edu/images/default/sample.pdf',
         ncertBooksUri: 'https://www.africau.edu/images/default/sample.pdf',
         supportMaterialUri: 'https://www.africau.edu/images/default/sample.pdf',
     },
     {
-        class: 'Class 9',
+        class: 9,
         rivisionNotesUri: 'https://www.africau.edu/images/default/sample.pdf',
         SyllabusUri: 'https://www.africau.edu/images/default/sample.pdf',
         ncertBooksUri: 'https://www.africau.edu/images/default/sample.pdf',
         supportMaterialUri: 'https://www.africau.edu/images/default/sample.pdf',
     },
     {
-        class: 'Class 10',
+        class: 10,
         rivisionNotesUri: 'https://www.africau.edu/images/default/sample.pdf',
         SyllabusUri: 'https://www.africau.edu/images/default/sample.pdf',
         ncertBooksUri: 'https://www.africau.edu/images/default/sample.pdf',
         supportMaterialUri: 'https://www.africau.edu/images/default/sample.pdf',
     },
     {
-        class: 'Class 11',
+        class: 11,
         rivisionNotesUri: 'https://www.africau.edu/images/default/sample.pdf',
         SyllabusUri: 'https://www.africau.edu/images/default/sample.pdf',
         ncertBooksUri: 'https://www.africau.edu/images/default/sample.pdf',
         supportMaterialUri: 'https://www.africau.edu/images/default/sample.pdf',
     },
     {
-        class: 'Class 12',
+        class: 12,
         rivisionNotesUri: 'https://www.africau.edu/images/default/sample.pdf',
         SyllabusUri: 'https://www.africau.edu/images/default/sample.pdf',
         ncertBooksUri: 'https://www.africau.edu/images/default/sample.pdf',
@@ -111,4 +111,71 @@ export const classData = [
 
 ]
 
+
+const subjectListForbelow11 = [
+    {
+        subject: 'Maths',
+    },
+    {
+        subject: 'Science',
+    },
+    {
+        subject: 'English',
+    },
+    {
+        subject: 'Hindi',
+    },
+    {
+        subject: 'Social Science',
+    },
+    {
+        subject: 'Sanskrit',
+    },
+    {
+        subject: 'Computer Science',
+    },
+]
+
+
+const subjectListForafter10 = [
+    {
+        subject: 'Maths',
+    },
+    {
+        subject: 'Phisics',
+    },
+    {
+        subject: 'Chemitry',
+    },
+    {
+        subject: 'English',
+    },
+    {
+        subject: 'Hindi',
+    },
+    {
+        subject: 'Economics',
+    },
+    {
+        subject: 'Biology',
+    },
+    {
+        subject: 'Computer Science',
+    },
+    {
+        subject: 'Geography',
+    },
+    {
+        subject: 'Business Studies',
+    },
+    {
+        subject: 'Accountancy',
+    },
+    {
+        subject: 'Political Science',
+    },
+    {
+        subject: 'History',
+    },
+]
 

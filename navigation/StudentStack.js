@@ -44,6 +44,7 @@ import Announcement from '../components/header/Announcement';
 import DrawerNav from './DrawerNav';
 import Downloads from '../components/Downloads';
 import NcertSoln from '../components/material/NcertSoln';
+import ListScreen from '../components/courses/template/ListScreen';
 
 
 
@@ -345,6 +346,18 @@ const StudentStack = () => {
           options={{
             headerTintColor: '#fff',
             title: 'Sylabus',
+            headerTitleAlign: 'center',
+          }}
+        />
+
+
+        {/* material screen refers */}
+        <Stack.Screen
+          name="ListScreen"
+          component={ListScreen}
+          options={{
+            headerTintColor: '#fff',
+            title: 'Choose Subject',
             headerTitleAlign: 'center',
           }}
         />
