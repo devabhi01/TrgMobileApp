@@ -8,7 +8,7 @@ const Material = (props) => {
       <ScrollView>
         <View style={styles.conatiner}>
 
-          <View style={styles.btnCont}>
+          {/* <View style={styles.btnCont}>
             <MoreOptBtn
               name={'Revision Notes '}
               
@@ -65,7 +65,7 @@ const Material = (props) => {
               onPress={() => props.navigation.navigate('previous_year_qp')}
               backgroundColor={'#dc3545'}
             />
-          </View>
+          </View> */}
           
         </View>
       </ScrollView>

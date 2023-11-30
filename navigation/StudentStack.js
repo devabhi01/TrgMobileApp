@@ -45,6 +45,7 @@ import DrawerNav from './DrawerNav';
 import Downloads from '../components/Downloads';
 import NcertSoln from '../components/material/NcertSoln';
 import ListScreen from '../components/courses/template/ListScreen';
+import TestList from '../components/testseries/TestList';
 
 
 
@@ -260,17 +261,38 @@ const StudentStack = () => {
         <Stack.Screen
           name="test_detail"
           component={TestDetail}
-          options={{headerShown: false}}
+          options={{
+            headerTintColor: '#fff',
+            title: '',
+            headerTitleAlign: 'center',
+          }}
         />
         <Stack.Screen
           name="test_board"
           component={BoardScreen}
-          options={{headerShown: false}}
+          options={{
+            headerTintColor: '#fff',
+            title: '',
+            headerTitleAlign: 'center',
+          }}
         />
         <Stack.Screen
           name="result_screen"
           component={ResultScreen}
-          options={{headerShown: false}}
+          options={{
+            headerTintColor: '#fff',
+            title: 'Result',
+            headerTitleAlign: 'center',
+          }}
+        />
+        <Stack.Screen
+          name="testlist"
+          component={TestList}
+          options={{
+            headerTintColor: '#fff',
+            title: 'Choose Test Date',
+            headerTitleAlign: 'center',
+          }}
         />
 
         {/* Pdf viewer refers */}

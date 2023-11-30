@@ -12,9 +12,10 @@ import MaterialIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 import Foundation from 'react-native-vector-icons/Foundation';
 import CbseSVG from '../assets/img/cbse.svg';
 import {colors} from '../constants';
-
+import {classData} from '../model';
 
 import ModalDropdown from 'react-native-modal-dropdown';
+import CustomDropdown from '../components/courses/template/CustomDropdown';
 
 const TestSeriesScreen = props => {
   const [showDropDown, setShowDropDown] = useState(false);
@@ -22,33 +23,47 @@ const TestSeriesScreen = props => {
 
   const courseList = [
     {
-      label: 'CBSE',
-      value: 'cbse',
+      courseName: 'Cbse',
     },
     {
-      label: 'Icse',
-      value: 'icse',
+      courseName: 'Icse',
     },
     {
-      label: 'Ssc',
-      value: 'ssc',
+      courseName: 'Ssc',
     },
     {
-      label: 'Cuet',
-      value: 'cuet',
+      courseName: 'Cuet',
     },
     {
-      label: 'Clat',
-      value: 'clat',
+      courseName: 'Clat',
     },
     {
-      label: 'Dsssb',
-      value: 'dsssb',
+      courseName: 'Dsssb',
     },
     {
-      label: 'PoliceService',
-      value: 'policeService',
+      courseName: 'PoliceService',
     },
+  ];
+
+  const subjectList = [
+    {
+      subject: 'English',
+    },
+    {
+      subject: 'Mathematics',
+    },
+    {
+      subject: 'Sst',
+    },
+    {
+      subject: 'Hindi',
+    },
+    {
+      subject: 'Sanskrit',
+    },
+    {
+      subject: 'Science',
+    }
   ];
 
   return (
@@ -64,66 +79,42 @@ const TestSeriesScreen = props => {
             <View style={{marginVertical: 10}}>
               <View style={{marginTop: 20}}>
                 
-                <ModalDropdown
-                  options={[
-                    'Cbse',
-                    'Icse',
-                    'Ssc',
-                    'Cuet',
-                    'Clat',
-                    'Dsssb',
-                    'PoliceService',
-                  ]}
-                  defaultIndex={1}
-                  defaultValue={'Select Course'}
-                  isFullWidth
-                  style={styles.btnStyle}
-                  textStyle={styles.textStyle}
-                  dropdownStyle={styles.dropDownStyle}
-                  dropdownTextStyle={styles.dropdownTextStyle}
+                <CustomDropdown
+                  initialValue={courseList}
+                  innerList={'courseName'}
+                  displayName={'Course'}
+                  menuHeight={200}
                 />
+                
                 <View style={{marginVertical: 20}}>
-                  <ModalDropdown
-                    options={['N/A', '6', '7', '8', '9', '10', '11', '12']}
-                    defaultIndex={1}
-                    defaultValue={'Select Class'}
-                    isFullWidth
-                    style={styles.btnStyle}
-                    textStyle={styles.textStyle}
-                    dropdownStyle={styles.dropDownStyle}
-                    dropdownTextStyle={styles.dropdownTextStyle}
+                  <CustomDropdown
+                    initialValue={classData}
+                    innerList={'class'}
+                    displayName={'Class'}
+                    menuHeight={200}
                   />
+                  
                 </View>
-
-                <ModalDropdown
-                  options={[
-                    'N/A',
-                    'English',
-                    'Mathematics',
-                    'Sst',
-                    'Hindi',
-                    'Sanskrit',
-                    'Science',
-                  ]}
-                  defaultIndex={1}
-                  defaultValue={'Select Subject'}
-                  isFullWidth
-                  style={styles.btnStyle}
-                  textStyle={styles.textStyle}
-                  dropdownStyle={styles.dropDownStyle}
-                  dropdownTextStyle={styles.dropdownTextStyle}
+                <CustomDropdown
+                  initialValue={subjectList}
+                  innerList={'subject'}
+                  displayName={'Subject'}
+                  menuHeight={200}
                 />
+                
               </View>
+              
               <TouchableOpacity
                 style={styles.btn}
-                onPress={() => props.navigation.navigate('test_detail')}>
+                onPress={() => props.navigation.navigate('testlist')}>
                 {/* <MaterialIcon name="bookshelf" size={30} color={colors.white} /> */}
                 <Text style={styles.textBtn}>Lets Go</Text>
               </TouchableOpacity>
+              
             </View>
           </View>
         </View>
-      </ScrollView>
+        </ScrollView>
     </SafeAreaView>
   );
 };
@@ -157,7 +148,6 @@ const styles = StyleSheet.create({
     fontSize: 20,
     paddingVertical: 15,
     color: colors.white,
-    
   },
   btnStyle: {
     backgroundColor: '#ffffff',

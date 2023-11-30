@@ -114,68 +114,68 @@ export const classData = [
 
 const subjectListForbelow11 = [
     {
-        subject: 'Maths',
+        subjectName: 'Maths',
     },
     {
-        subject: 'Science',
+        subjectName: 'Science',
     },
     {
-        subject: 'English',
+        subjectName: 'English',
     },
     {
-        subject: 'Hindi',
+        subjectName: 'Hindi',
     },
     {
-        subject: 'Social Science',
+        subjectName: 'Social Science',
     },
     {
-        subject: 'Sanskrit',
+        subjectName: 'Sanskrit',
     },
     {
-        subject: 'Computer Science',
+        subjectName: 'Computer Science',
     },
 ]
 
 
 const subjectListForafter10 = [
     {
-        subject: 'Maths',
+        subjectName: 'Maths',
     },
     {
         subject: 'Phisics',
     },
     {
-        subject: 'Chemitry',
+        subjectName: 'Chemitry',
     },
     {
-        subject: 'English',
+        subjectName: 'English',
     },
     {
-        subject: 'Hindi',
+        subjectName: 'Hindi',
     },
     {
-        subject: 'Economics',
+        subjectName: 'Economics',
     },
     {
-        subject: 'Biology',
+        subjectName: 'Biology',
     },
     {
-        subject: 'Computer Science',
+        subjectName: 'Computer Science',
     },
     {
-        subject: 'Geography',
+        subjectName: 'Geography',
     },
     {
-        subject: 'Business Studies',
+        subjectName: 'Business Studies',
     },
     {
-        subject: 'Accountancy',
+        subjectName: 'Accountancy',
     },
     {
-        subject: 'Political Science',
+        subjectName: 'Political Science',
     },
     {
-        subject: 'History',
+        subjectName: 'History',
     },
 ]
 

@@ -24,45 +24,16 @@ const RivisionNotes = props => {
   const navigation = useNavigation();
   const [selectedCourse, setSelectedCourse] = useState(null);
   const [selectedClass, setSelectedClass] = useState(null);
-  const [selectedSubjects, setSelectedSubjects] = useState([]);
-
-  const handleCourseSelect = course => {
-    setSelectedCourse(course);
-    // Do something with the selected course if needed
-  };
+  const [selectedSubjects, setSelectedSubjects] = useState();
 
   const handleClassSelect = selectedClass => {
     setSelectedClass(selectedClass);
-    // Do something with the selected class if needed
 
-    // Access revision notes URI and pass it to the navigation params
     const revisionNotesUri = selectedClass.rivisionNotesUri;
-    // You can perform additional actions with the revision notes URI if needed
-
-    // Navigate to 'pdf_screen' with the revision notes URI
-    // navigation.navigate('pdf_screen', {
-    //   uri: revisionNotesUri,
-    // });
-    // if (selectedClass.class < 11) {
-    //   setSelectedSubjects(subjectListForbelow11);
-    // } else {
-    //   setSelectedSubjects(subjectListForafter10);
-    // }
   };
 
   return (
     <SafeAreaView style={{flex: 1}}>
-      {/* Access selectedCourse state here if needed */}
-      {/* <View style={{margin: 20}}>
-        <Text style={{color: '#000', fontSize: 18}}>Select Course</Text>
-        <CustomDropdown
-          initialValue={courseList}
-          innerList="courseName"
-          onSelect={handleCourseSelect}
-        />
-        
-      </View> */}
-
       <View style={{marginHorizontal: 20, marginTop: 20}}>
         <Text style={{color: '#000', fontSize: 18}}>Select Class</Text>
         <CustomDropdown
@@ -73,6 +44,22 @@ const RivisionNotes = props => {
           displayName={'Class'}
         />
         {/* Access selectedClass state here if needed */}
+        {selectedClass < 11
+          ? <View>
+          {subjectListForbelow11.map ((subjectName) => (
+            <TouchableOpacity key={subjectName}>
+              <Text>{subjectName.subjectName}</Text>
+            </TouchableOpacity>
+          ))}
+        </View>
+          : <View>
+          {subjectListForafter10.map ((subjectName) => (
+            <TouchableOpacity key={subjectName}>
+              <Text>{subjectName.subjectName}</Text>
+            </TouchableOpacity>
+          ))}
+        </View>}
+        
       </View>
 
       <TouchableOpacity
