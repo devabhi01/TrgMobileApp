@@ -18,9 +18,9 @@ const {height, width} = Dimensions.get('window');
 const Cbse = props => {
   const navigation = useNavigation();
   return (
-    <SafeAreaView style={{flex: 1, backgroundColor: colors.graylight}}>
+    <SafeAreaView style={{flex: 1,padding:20}}>
       <ScrollView>
-        <View style={{margin: 20}}>
+        <View >
           <Text style={{color: colors.primary, fontSize: 18}}>
             "TRG's 1-Year CBSE Board Comprehensive Tuition
             Classes, opt for Online, Offline, or Home Learning!"
@@ -330,6 +330,7 @@ const Cbse = props => {
             </View>
         </View>
       </ScrollView>
+      
       <TouchableOpacity style={styles.buyBtn}>
         <Text style={{fontSize: 18, color: '#fff'}}>Buy Now</Text>
       </TouchableOpacity>
@@ -363,13 +364,11 @@ const styles = StyleSheet.create({
     paddingLeft: 10,
     color: '#dc3545',
   },
-  buyBtn: {
-    width: width - 40,
+ buyBtn: {
+    width: '100%',
     height: 50,
     backgroundColor: colors.primary,
-    position: 'absolute',
-    bottom: 20,
-    right: 20,
+    marginTop: 20,
     justifyContent: 'center',
     alignItems: 'center',
     borderRadius: 10,

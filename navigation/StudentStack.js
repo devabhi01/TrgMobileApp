@@ -46,6 +46,7 @@ import Downloads from '../components/Downloads';
 import NcertSoln from '../components/material/NcertSoln';
 import ListScreen from '../components/courses/template/ListScreen';
 import TestList from '../components/testseries/TestList';
+import MaterialList from '../components/material/MaterialList';
 
 
 
@@ -308,6 +309,15 @@ const StudentStack = () => {
         />
 
         {/* Material Section Refers */}
+        <Stack.Screen
+          name="materialList"
+          component={MaterialList}
+          options={{
+            headerTintColor: '#fff',
+            title: '',
+            headerTitleAlign: 'center',
+          }}
+        />
         <Stack.Screen
           name="rivision_notes"
           component={RivisionNotes}

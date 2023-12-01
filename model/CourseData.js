@@ -142,7 +142,7 @@ const subjectListForafter10 = [
         subjectName: 'Maths',
     },
     {
-        subject: 'Phisics',
+        subjectName: 'Phisics',
     },
     {
         subjectName: 'Chemitry',

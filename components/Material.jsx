@@ -1,10 +1,25 @@
-import {SafeAreaView, ScrollView, StyleSheet, Text, View,TouchableOpacity} from 'react-native';
-import { colors } from '../constants';
+import {
+  SafeAreaView,
+  ScrollView,
+  StyleSheet,
+  Text,
+  Dimensions,
+  View,
+  TouchableOpacity,
+} from 'react-native';
+import {colors} from '../constants';
 import React from 'react';
 import MoreOptBtn from './courses/template/MoreOptBtn';
 import {useNavigation} from '@react-navigation/native';
-import {courseList, classData,subjectListForbelow11,subjectListForafter10} from '../model';
+import {
+  courseList,
+  classData,
+  subjectListForbelow11,
+  subjectListForafter10,
+} from '../model';
 import CustomDropdown from './courses/template/CustomDropdown';
+
+const {width, height} = Dimensions.get('screen');
 
 const Material = props => {
   const navigation = useNavigation();
@@ -33,35 +48,56 @@ const Material = props => {
     },
   ];
 
+  const subjects = [
+    {
+      subjectName: 'Maths',
+    },
+    {
+      subjectName: 'Science',
+    },
+    {
+      subjectName: 'English',
+    },
+    {
+      subjectName: 'Hindi',
+    },
+    {
+      subjectName: 'Social Science',
+    },
+    {
+      subjectName: 'Sanskrit',
+    },
+    {
+      subjectName: 'Computer Science',
+    },
+  ];
   return (
-    <SafeAreaView style={{flex: 1}}>
+    <SafeAreaView style={{flex: 1, margin: 20}}>
       <ScrollView>
         <View style={styles.conatiner}>
-          <CustomDropdown 
-          initialValue={material}
-          innerList={'materialName'}
-          displayName={'Material'}
-          menuHeight={200}
+          <CustomDropdown
+            initialValue={material}
+            innerList={'materialName'}
+            displayName={'Material'}
+            menuHeight={200}
           />
-          <CustomDropdown 
-          initialValue={courseList}
-          innerList={'courseName'}
-          displayName={'Course'}
-          
+          <CustomDropdown
+            initialValue={courseList}
+            innerList={'courseName'}
+            displayName={'Course'}
           />
-          <CustomDropdown 
-          initialValue={classData}
-          innerList={'class'}
-          displayName={'Course'}
-          menuHeight={200}
+          <CustomDropdown
+            initialValue={classData}
+            innerList={'class'}
+            displayName={'Course'}
+            menuHeight={200}
           />
-          <CustomDropdown 
-          initialValue={subjectListForbelow11}
-          innerList={'subjectName'}
-          displayName={'Subject'}
-          menuHeight={200}
+          <CustomDropdown
+            initialValue={subjects}
+            innerList={'subjectName'}
+            displayName={'Subject'}
+            menuHeight={200}
           />
-
 
           {/* <View style={styles.btnCont}>
             <MoreOptBtn
@@ -123,7 +159,8 @@ const Material = props => {
           </View> */}
         </View>
       </ScrollView>
-      <TouchableOpacity style={styles.buyBtn}>
+
+      <TouchableOpacity style={styles.buyBtn} onPress={() => navigation.navigate('materialList')}>
         <Text style={{fontSize: 18, color: '#fff'}}>Submit</Text>
       </TouchableOpacity>
     </SafeAreaView>
@@ -135,7 +172,6 @@ export default Material;
 const styles = StyleSheet.create({
   conatiner: {
     flex: 1,
-    margin: 20,
   },
   btnCont: {
     margin: 20,
@@ -144,9 +180,7 @@ const styles = StyleSheet.create({
     width: '100%',
     height: 50,
     backgroundColor: colors.primary,
-    position: 'absolute',
-    bottom: 20,
-    right: 20,
+    marginTop: 20,
     justifyContent: 'center',
     alignItems: 'center',
     borderRadius: 10,

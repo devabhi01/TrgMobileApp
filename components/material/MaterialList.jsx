@@ -5,13 +5,13 @@ import {
   SafeAreaView,
   TouchableOpacity,
 } from 'react-native';
-import { colors } from '../constants';
+import {colors} from '../../constants';
 import React, {useState} from 'react';
 import Icon from 'react-native-vector-icons/Ionicons';
 import FAIcon from 'react-native-vector-icons/FontAwesome6';
 import {useNavigation} from '@react-navigation/native';
 
-const Downloads = () => {
+const MaterialList = () => {
   const navigation = useNavigation();
   const [isBookmarked, setIsBookmarked] = useState(false);
 
@@ -22,10 +22,9 @@ const Downloads = () => {
     <SafeAreaView style={{flex: 1}}>
       <View style={{margin: 20}}>
         <TouchableOpacity style={styles.button}>
-          <View style={{flexDirection: 'column',}}>
-            
-            <Text style={styles.subjectText}> Maths</Text>
-            <Text style={styles.descText}> Support Material - Class:10</Text>
+          <View style={{flexDirection: 'row', alignItems: 'center'}}>
+            <Icon name="calendar" size={30} color="#fff" />
+            <Text style={styles.dateText}> 30.11.2023</Text>
           </View>
           <View style={{flexDirection: 'row', alignItems: 'center', gap: 20}}>
             <TouchableOpacity onPress={toggleBookmark}>
@@ -41,14 +40,11 @@ const Downloads = () => {
           </View>
         </TouchableOpacity>
       </View>
-      {/* <View style={{justifyContent:'center',alignItems:'center',flex:1}}>
-        <Text style={{color:'#0a0a0a'}}>No Downloads</Text>
-      </View> */}
     </SafeAreaView>
   );
 };
 
-export default Downloads;
+export default MaterialList;
 
 const styles = StyleSheet.create({
   button: {
@@ -62,15 +58,9 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     elevation: 5,
   },
-  subjectText: {
+  dateText: {
     color: '#fff',
     fontSize: 18,
     marginLeft: 5,
   },
-  descText: {
-    color: '#fff',
-    opacity: 0.8,
-    fontSize: 12,
-    marginLeft: 5,
-  }
 });
