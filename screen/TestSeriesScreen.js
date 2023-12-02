@@ -63,7 +63,7 @@ const TestSeriesScreen = props => {
     },
     {
       subject: 'Science',
-    }
+    },
   ];
 
   return (
@@ -78,14 +78,13 @@ const TestSeriesScreen = props => {
           <View style={{paddingHorizontal: 30}}>
             <View style={{marginVertical: 10}}>
               <View style={{marginTop: 20}}>
-                
                 <CustomDropdown
                   initialValue={courseList}
                   innerList={'courseName'}
                   displayName={'Course'}
                   menuHeight={200}
                 />
-                
+
                 <View style={{marginVertical: 20}}>
                   <CustomDropdown
                     initialValue={classData}
@@ -93,7 +92,6 @@ const TestSeriesScreen = props => {
                     displayName={'Class'}
                     menuHeight={200}
                   />
-                  
                 </View>
                 <CustomDropdown
                   initialValue={subjectList}
@@ -101,20 +99,18 @@ const TestSeriesScreen = props => {
                   displayName={'Subject'}
                   menuHeight={200}
                 />
-                
               </View>
-              
+
               <TouchableOpacity
                 style={styles.btn}
                 onPress={() => props.navigation.navigate('testlist')}>
                 {/* <MaterialIcon name="bookshelf" size={30} color={colors.white} /> */}
-                <Text style={styles.textBtn}>Lets Go</Text>
+                <Text style={styles.textBtn}>Next</Text>
               </TouchableOpacity>
-              
             </View>
           </View>
         </View>
-        </ScrollView>
+      </ScrollView>
     </SafeAreaView>
   );
 };
@@ -136,17 +132,20 @@ const styles = StyleSheet.create({
   },
 
   btn: {
-    backgroundColor: '#dc3545',
-    borderRadius: 8,
-    marginVertical: 10,
-    flexDirection: 'row',
-    marginTop: 20,
-    paddingLeft: 20,
+    backgroundColor: colors.primary,
+    height: 50,
+    justifyContent: 'center',
     alignItems: 'center',
+    borderRadius: 8,
+    elevation: 3,
+    width: '100%',
+    marginTop: 20,
+    flexDirection: 'row',
+    
   },
   textBtn: {
-    fontSize: 20,
-    paddingVertical: 15,
+    fontSize: 18,
+
     color: colors.white,
   },
   btnStyle: {

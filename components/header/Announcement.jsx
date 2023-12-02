@@ -44,7 +44,7 @@ const Announcement = () => {
   );
 
   return (
-    <SafeAreaView style={{ flex: 1 }}>
+    <SafeAreaView style={{ flex: 1,marginBottom:20 }}>
         {isLoading ? <ActivityIndicator style={{ paddingVertical: 100, justifyContent: "center", alignItems: 'center' }} /> :
           <FlatList
             data={announcements}
