@@ -5,23 +5,26 @@ import {colors} from '../../constants';
 import {testData} from './testData';
 
 const TestDetail = (props) => {
+  const quiz = props.route.params?.data || {};
+  // console.log(quiz)
+
   return (
     <View style={styles.container}>
       <View style={styles.wraper}>
-        <Text style={styles.heading}>Test Series</Text>
+        <Text style={styles.heading}>{quiz?.title}</Text>
         <Text style={styles.subHeading}>General Instructions:-</Text>
         <Text style={styles.paraText}>
-          1. This test is of 30 minutes duration.
+          1. This test is of {quiz?.duration} minutes duration.
         </Text>
         <Text style={styles.paraText}>
           2. The examination will comprise of Objective type Multiple Choice
           Questions (MCQs).
         </Text>
         <Text style={styles.paraText}>
-          3. All questions are compulsory and each carries One mark
+          3. All questions are compulsory and each carries {quiz?.markForEach} mark(s)
         </Text>
         <Text style={styles.paraText}>
-          4. There will be NO NEGATIVE MARKING for the wrong answers.
+          4. There will be NEGATIVE MARKING {quiz?.negativeMark} mark(s) for the wrong answers.
         </Text>
         <Text style={styles.paraText}>
           5. The students just need to click on the Right Choice / Correct
@@ -43,13 +46,13 @@ const TestDetail = (props) => {
             </DataTable.Header>
 
             <DataTable.Row >
-              <DataTable.Cell>{testData.length}</DataTable.Cell>
-              <DataTable.Cell>{testData.length}</DataTable.Cell>
+              <DataTable.Cell>{quiz?.length}</DataTable.Cell>
+              <DataTable.Cell>{quiz?.totalMarks}</DataTable.Cell>
               
             </DataTable.Row>
           </DataTable>
         </View>
-        <TouchableOpacity style={styles.button} onPress={() => props.navigation.navigate('test_board')}>
+        <TouchableOpacity style={styles.button} onPress={() => props.navigation.navigate('test_board',{data:quiz?.questions})}>
           <Text style={styles.buttonText}>Start Test</Text>
         </TouchableOpacity>
       </View>

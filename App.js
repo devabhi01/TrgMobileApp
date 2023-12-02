@@ -5,6 +5,7 @@ import DecideStack from './navigation/DecideStack';
 import { UserProvider, useUserContext } from './utils/userContext';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import Splash from './components/Splash';
+import { StripeProvider } from '@stripe/stripe-react-native';
 
 
 const NavComponent = () => {
@@ -23,30 +24,34 @@ const NavComponent = () => {
       catch (e) {
         console.log("Error ", e)
       }
-      
+
     }
     setGlobalData();
-    
+
   }, [])
 
   return (
     //wrapping with navigation
     <NavigationContainer>
       {loading ? <Splash /> : <DecideStack />}
-      
+
     </NavigationContainer>)
 }
 
 // app component
 const App = () => {
   return (
-   
-      <>
-    {/* // wrapping with context provide */}
+
+    <>
+      <StripeProvider
+        publishableKey='pk_test_51OIpBHSBoBUkzh0Q83JSOVvCiumj2kgG8EAQdRx0hIcp3mTPxYLAuneKiVk3uZO3LhQeT6ENc98f7HqXXAefA7Sf00aCzFZE09'
+      >
+        {/* // wrapping with context provide */}
         <UserProvider>
           <NavComponent />
         </UserProvider>
-      </>
+      </StripeProvider>
+    </>
   )
 }
 

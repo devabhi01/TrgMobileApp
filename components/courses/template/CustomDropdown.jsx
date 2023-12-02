@@ -9,6 +9,7 @@ const CustomDropdown = props => {
   const [data, setData] = useState(props.initialValue);
 
   const handleSelect = item => {
+    props.setData(item[props.innerList])
     setSelected(item[props.innerList]);
     setIsClicked(!isClicked);
     // Pass the selected item to the callback function
