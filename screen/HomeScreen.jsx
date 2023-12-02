@@ -22,9 +22,9 @@ import CbseSVG from '../assets/img/cbse.svg';
 import trgIcon from '../assets/img/trgIcon.png';
 
 // import {sliderData} from '../model/Data';
-import BannerSlider from '../components/BannerSlider';
-import { useUserContext } from '../utils/userContext';
-import Geolocation from '@react-native-community/geolocation';
+// import BannerSlider from '../components/BannerSlider';
+// import { useUserContext } from '../utils/userContext';
+// import Geolocation from '@react-native-community/geolocation';
 import Qotd from '../components/courses/template/Qotd';
 import { fetchCarousel, fetchQod } from '../utils/APIs';
 
@@ -46,10 +46,10 @@ const courses = [
 
 const HomeScreen = props => {
 
-  // user context for fetching details
-  const { setLocation } = useUserContext();
-  //setting location
-  Geolocation.getCurrentPosition(info => setLocation([info.coords.latitude, info.coords.longitude]));
+  // // user context for fetching details
+  // const { setLocation } = useUserContext();
+  // //setting location
+  // Geolocation.getCurrentPosition(info => setLocation([info.coords.latitude, info.coords.longitude]));
 
   // loading status
   const [isCarouselLoading, setIsCarouselLoading] = useState(false);

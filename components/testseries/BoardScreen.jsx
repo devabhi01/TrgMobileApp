@@ -13,11 +13,14 @@ import {testData} from './testData';
 import QuestionItem from './QuestionItem';
 import Animated from 'react-native-reanimated';
 
-const BoardScreen = () => {
+const BoardScreen = ({route}) => {
+  // getting questions for quiz 
+  const questionsData = route.params?.data || {};
+
   const {height, width} = Dimensions.get('window');
 
   const [currentIndex, setCurrentIndex] = useState(1);
-  const [questions, setQuestions] = useState(testData);
+  const [questions, setQuestions] = useState(questionsData);
 
   const listRef = useRef();
 
@@ -69,7 +72,7 @@ const BoardScreen = () => {
             justifyContent: 'space-between',
             marginTop: 20,
           }}>
-          <Text style={styles.subject}>General Knowledge</Text>
+          <Text style={styles.subject}>Time : 9:00PM</Text>
           <Text
             style={{
               color: colors.gray,
@@ -86,11 +89,11 @@ const BoardScreen = () => {
         </View>
 
         <Text style={{color: colors.textColor, fontSize: 16, marginLeft: 20}}>
-          Questions : {' ' + currentIndex + '/' + testData.length}
+          Question : {' ' + currentIndex + '/' + questionsData.length}
         </Text>
-        <View style={{marginTop: 10}}>
+        <View style={{marginTop: -10}}>
           <FlatList
-            keyExtractor={(item, index) => index.toString()}
+            keyExtractor={(item) => item?._id}
             showsHorizontalScrollIndicator={false}
             pagingEnabled
             ref={listRef}
@@ -216,7 +219,7 @@ const BoardScreen = () => {
                 <Text style={{color: colors.textColor, fontSize: 16}}>
                   Maximum Marks :{' '}
                   <Text style={{fontSize: 18, fontWeight: '700'}}>
-                    {testData.length}
+                    {questionsData.length}
                   </Text>
                 </Text>
                 <Text style={{color: colors.textColor, fontSize: 16}}>

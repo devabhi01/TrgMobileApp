@@ -110,3 +110,29 @@ export const fetchQod = async ()=>{
     }
     return await fetch(route, options)
 }
+
+// ----------- fetching test series -------------------
+export const fetchQuizes = async (body)=>{
+    const route = `${root}/api/fetch-quizes`
+    const options = {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        credentials: 'include',
+        body: JSON.stringify(body)
+    }
+    return await fetch(route, options)
+}
+
+//------------ fetch quiz --------------------
+export const fetchQuiz = async (quizId)=>{
+    const route = `${root}/api/fetch-quiz/${quizId}`
+    const options = {
+        method: "GET",
+        headers: {
+            "Content-Type": "application/json"
+        }
+    }
+    return await fetch(route, options)
+}

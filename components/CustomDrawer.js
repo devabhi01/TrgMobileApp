@@ -25,6 +25,7 @@ import { useNavigation } from '@react-navigation/native';
 import ImagePicker, { openPicker } from 'react-native-image-crop-picker';
 import storage from '@react-native-firebase/storage';
 import { updateUser } from '../utils/APIs';
+// import Avatar from 'react-native-paper/lib/typescript/components/Avatar/AvatarIcon';
 
 const { width, height } = Dimensions.get('screen');
 
@@ -105,7 +106,7 @@ const CustomDrawer = props => {
             <Image
               style={styles.userImg}
               // source={require('../assets/img/person.jpg')}
-              source={user?.profilePic ? { uri: user?.profilePic } : Avatar}
+              source={user?.profilePic ? { uri: user?.profilePic } : require('../assets/img/person.jpg')}
             /></TouchableOpacity>
         {/* <View style={styles.drawerList}>
           <DrawerItemList {...props} />
