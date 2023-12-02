@@ -6,9 +6,10 @@ import {
   Dimensions,
   View,
   TouchableOpacity,
+  Alert,
 } from 'react-native';
 import {colors} from '../constants';
-import React from 'react';
+import React,{useState} from 'react';
 import MoreOptBtn from './courses/template/MoreOptBtn';
 import {useNavigation} from '@react-navigation/native';
 import {
@@ -18,11 +19,17 @@ import {
   subjectListForafter10,
 } from '../model';
 import CustomDropdown from './courses/template/CustomDropdown';
+import { fetchMaterials } from '../utils/APIs';
 
 const {width, height} = Dimensions.get('screen');
 
 const Material = props => {
   const navigation = useNavigation();
+
+  const [course, setCourse] = useState('');
+  const [classNo, setClassNo] = useState('');
+  const [subject, setSubject] = useState('');
+  const [type, setType] = useState('');
 
   const material = [
     {
@@ -35,13 +42,13 @@ const Material = props => {
       materialName: 'Syllabus',
     },
     {
-      materialName: 'Assignments',
+      materialName: 'Assignment',
     },
     {
-      materialName: 'NCERT Books',
+      materialName: 'NCERT Book',
     },
     {
-      materialName: 'NCERT Solutions',
+      materialName: 'NCERT Solution',
     },
     {
       materialName: 'Previous Year Question Paper',
@@ -71,96 +78,52 @@ const Material = props => {
       subjectName: 'Computer Science',
     },
   ];
+
+  const handleFilter = async () => {
+    try {
+      const res = await fetchMaterials({course, subject, "class":classNo, type})
+      const materials = await res.json()
+      // console.log(materials)
+      props.navigation.navigate('materialList', {data: materials})
+    } catch (error) {
+      console.log(error)
+      Alert.alert("Something went wrong...")
+    }
+  }
+
   return (
     <SafeAreaView style={{flex: 1, margin: 20}}>
-      <ScrollView>
         <View style={styles.conatiner}>
           <CustomDropdown
             initialValue={material}
             innerList={'materialName'}
             displayName={'Material'}
             menuHeight={200}
+            setData={setType}
           />
           <CustomDropdown
             initialValue={courseList}
             innerList={'courseName'}
             displayName={'Course'}
+            setData={setCourse}
           />
           <CustomDropdown
             initialValue={classData}
             innerList={'class'}
-            displayName={'Course'}
+            displayName={'Class'}
             menuHeight={200}
+            setData={setClassNo}
           />
           <CustomDropdown
             initialValue={subjects}
             innerList={'subjectName'}
             displayName={'Subject'}
             menuHeight={200}
+            setData={setSubject}
           />
-
-          {/* <View style={styles.btnCont}>
-            <MoreOptBtn
-              name={'Revision Notes '}
-              
-              onPress={() => props.navigation.navigate('rivision_notes')}
-              backgroundColor={'#dc3545'}
-            />
-          </View>
-          <View style={styles.btnCont}>
-            <MoreOptBtn
-              name={'Support Material '}
-              
-              onPress={() => props.navigation.navigate('support_material')}
-              backgroundColor={'#dc3545'}
-            />
-          </View>
-          <View style={styles.btnCont}>
-            <MoreOptBtn
-              name={'Syllabus'}
-              
-              onPress={() => props.navigation.navigate('sylabus')}
-              backgroundColor={'#dc3545'}
-            />
-          </View>
-          <View style={styles.btnCont}>
-            <MoreOptBtn
-              name={'Assignments'}
-              
-              onPress={() => props.navigation.navigate('assignments')}
-              backgroundColor={'#dc3545'}
-            />
-          </View>
-
-          <View style={styles.btnCont}>
-            <MoreOptBtn
-              name={'NCERT Books'}
-              
-              onPress={() => props.navigation.navigate('ncertbooks')}
-              backgroundColor={'#dc3545'}
-            />
-          </View>
-          <View style={styles.btnCont}>
-            <MoreOptBtn
-              name={'NCERT Solutions'}
-              
-              onPress={() => props.navigation.navigate('ncertSoln')}
-              backgroundColor={'#dc3545'}
-            />
-          </View>
-
-          <View style={styles.btnCont}>
-            <MoreOptBtn
-              name={'PreviousYearQuestionPaper'}
-              
-              onPress={() => props.navigation.navigate('previous_year_qp')}
-              backgroundColor={'#dc3545'}
-            />
-          </View> */}
         </View>
-      </ScrollView>
 
-      <TouchableOpacity style={styles.buyBtn} onPress={() => navigation.navigate('materialList')}>
+      <TouchableOpacity style={styles.buyBtn} onPress={handleFilter}>
         <Text style={{fontSize: 18, color: '#fff'}}>Submit</Text>
       </TouchableOpacity>
     </SafeAreaView>

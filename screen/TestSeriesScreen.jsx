@@ -20,7 +20,7 @@ import CustomDropdown from '../components/courses/template/CustomDropdown';
 import { fetchQuizes } from '../utils/APIs';
 
 const TestSeriesScreen = props => {
-  const [showDropDown, setShowDropDown] = useState(false);
+  // const [showDropDown, setShowDropDown] = useState(false);
   const [course, setCourse] = useState('');
   const [classNo, setClassNo] = useState('');
   const [subject, setSubject] = useState('');

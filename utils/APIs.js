@@ -18,7 +18,7 @@ export const registerUser = async (body) => {
 
 
 // ----------- user login ---------------------
-export const loginUser = async (body)=>{
+export const loginUser = async (body) => {
     const route = `${root}/api/login`
     const options = {
         method: "POST",
@@ -32,7 +32,7 @@ export const loginUser = async (body)=>{
 }
 
 // ----------- update user -------------------
-export const updateUser = async (body, jwtoken)=>{
+export const updateUser = async (body, jwtoken) => {
     const route = `${root}/api/update-profile`
     const options = {
         method: "POST",
@@ -48,7 +48,7 @@ export const updateUser = async (body, jwtoken)=>{
 
 
 // ----------- verifying code -------------------
-export const verifyOTP = async (body)=>{
+export const verifyOTP = async (body) => {
     const route = `${root}/api/verify-code`
     const options = {
         method: "POST",
@@ -62,7 +62,7 @@ export const verifyOTP = async (body)=>{
 }
 
 //------------- fetching carousel --------------
-export const fetchCarousel = async ()=>{
+export const fetchCarousel = async () => {
     const route = `${root}/api/fetch-carousel`
     const options = {
         method: "GET",
@@ -74,7 +74,7 @@ export const fetchCarousel = async ()=>{
 }
 
 //------------- fetching announcements --------------
-export const fetchAnnouncements = async ()=>{
+export const fetchAnnouncements = async () => {
     const route = `${root}/api/fetch-announcements`
     const options = {
         method: "GET",
@@ -86,7 +86,7 @@ export const fetchAnnouncements = async ()=>{
 }
 
 // ----------- submitting doubt -------------------
-export const submitDoubt = async (body)=>{
+export const submitDoubt = async (body) => {
     const route = `${root}/api/submit-doubt`
     const options = {
         method: "POST",
@@ -100,7 +100,7 @@ export const submitDoubt = async (body)=>{
 }
 
 //------------ fetch qod --------------------
-export const fetchQod = async ()=>{
+export const fetchQod = async () => {
     const route = `${root}/api/fetch-qod`
     const options = {
         method: "GET",
@@ -112,7 +112,7 @@ export const fetchQod = async ()=>{
 }
 
 // ----------- fetching test series -------------------
-export const fetchQuizes = async (body)=>{
+export const fetchQuizes = async (body) => {
     const route = `${root}/api/fetch-quizes`
     const options = {
         method: "POST",
@@ -126,13 +126,26 @@ export const fetchQuizes = async (body)=>{
 }
 
 //------------ fetch quiz --------------------
-export const fetchQuiz = async (quizId)=>{
+export const fetchQuiz = async (quizId) => {
     const route = `${root}/api/fetch-quiz/${quizId}`
     const options = {
         method: "GET",
         headers: {
             "Content-Type": "application/json"
         }
+    }
+    return await fetch(route, options)
+}
+
+//------------ fetch materials --------------------
+export const fetchMaterials = async (body) => {
+    const route = `${root}/api/fetch-materials`
+    const options = {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(body)
     }
     return await fetch(route, options)
 }
