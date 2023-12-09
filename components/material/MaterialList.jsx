@@ -4,16 +4,18 @@ import {
   View,
   SafeAreaView,
   TouchableOpacity,
+  Modal,
 } from 'react-native';
 import {colors} from '../../constants';
 import React, {useState} from 'react';
 import Icon from 'react-native-vector-icons/Ionicons';
 import FAIcon from 'react-native-vector-icons/FontAwesome6';
 import {useNavigation} from '@react-navigation/native';
-import { FlatList } from 'react-native-gesture-handler';
+import {FlatList} from 'react-native-gesture-handler';
 
 const MaterialList = ({route}) => {
   const navigation = useNavigation();
+  const [modalVisible, setModalVisible] = useState(false);
   const [isBookmarked, setIsBookmarked] = useState(false);
 
   const materials = route.params?.data || [];
@@ -28,9 +30,7 @@ const MaterialList = ({route}) => {
       <TouchableOpacity
         style={styles.button}
         onPress={() => {
-          navigation.navigate('pdf_screen',{
-            uri: item?.pdfUrl,
-          });
+          setModalVisible(true);
         }}>
         <View style={{flexDirection: 'row', alignItems: 'center'}}>
           <Icon name="calendar" size={30} color="#fff" />
@@ -42,8 +42,13 @@ const MaterialList = ({route}) => {
                   {item?.course}
                 </Text>
               </View>
-              <Text style={[styles.levelText,{opacity: 0.8}]}>{item?.type}</Text>
-              <Text style={[styles.levelText,{opacity: 0.9}]}> {item?.difficultyLevel}</Text>
+              <Text style={[styles.levelText, {opacity: 0.8}]}>
+                {item?.type}
+              </Text>
+              <Text style={[styles.levelText, {opacity: 0.9}]}>
+                {' '}
+                {item?.difficultyLevel}
+              </Text>
             </View>
           </View>
         </View>
@@ -71,6 +76,62 @@ const MaterialList = ({route}) => {
         keyExtractor={item => item?._id}
         renderItem={renderMaterialItem}
       />
+
+      {/* Modal */}
+      <Modal
+        animationType="slide"
+        transparent={true}
+        visible={modalVisible}
+        onRequestClose={() => {
+          setModalVisible(!modalVisible);
+        }}>
+        <View
+          style={{
+            flex: 1,
+            backgroundColor: 'rgba(0,0,0,0.3)',
+            justifyContent: 'center',
+            alignItems: 'center',
+          }}>
+          <View
+            style={{
+              backgroundColor: '#fff',
+              width: '90%',
+              height: '50%',
+              borderRadius: 8,
+              position: 'relative',
+            }}>
+            <Text
+              style={{
+                color: colors.textColor,
+                fontSize: 20,
+                textAlign: 'center',
+                marginTop: 20,
+              }}>
+              Materials Detals
+            </Text>
+
+            <View
+              style={{
+                position: 'absolute',
+                right: 15,
+                top: 10,
+                backgroundColor: '#dc3545',
+                padding: 2,
+                borderRadius: 50,
+              }}>
+              <TouchableOpacity
+                onPress={() => {
+                  setModalVisible(false);
+                }}>
+                <Icon name="close" size={20} color="#fff" />
+              </TouchableOpacity>
+            </View>
+            <TouchableOpacity onPress={() => {}}>
+              <Text style={styles.openBtn}>Open</Text>
+            </TouchableOpacity>
+          </View>
+        </View>
+      </Modal>
     </SafeAreaView>
   );
 };
@@ -99,7 +160,6 @@ const styles = StyleSheet.create({
     color: '#fff',
     fontSize: 18,
     marginLeft: 5,
-    
   },
   levelText: {
     color: '#fff',
@@ -107,5 +167,15 @@ const styles = StyleSheet.create({
     marginLeft: 5,
     fontWeight: 'bold',
   },
+  openBtn: {
+    textAlign: 'center',
+    color: '#fff',
+    padding: 10,
+    backgroundColor: colors.primary,
+    borderRadius: 10,
+    marginTop: 10,
+    width: '90%',
+    fontSize: 20,
+    alignSelf: 'center',
+  },
 });
-

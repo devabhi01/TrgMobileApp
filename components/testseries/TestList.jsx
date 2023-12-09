@@ -56,8 +56,11 @@ const TestList = ({route}) => {
                   {item?.createdAt.substring(0, 10)}
                 </Text>
               </View>
-              <Text style={[styles.levelText,{opacity: 0.8}]}>Level:</Text>
-              <Text style={[styles.levelText,{opacity: 0.9}]}> {item?.difficultyLevel}</Text>
+              <Text style={[styles.levelText, {opacity: 0.8}]}>Level:</Text>
+              <Text style={[styles.levelText, {opacity: 0.9}]}>
+                {' '}
+                {item?.difficultyLevel}
+              </Text>
             </View>
           </View>
         </View>
@@ -113,7 +116,6 @@ const styles = StyleSheet.create({
     color: '#fff',
     fontSize: 18,
     marginLeft: 5,
-    
   },
   levelText: {
     color: '#fff',
