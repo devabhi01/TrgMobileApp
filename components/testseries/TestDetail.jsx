@@ -1,17 +1,54 @@
-import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
-import React from 'react';
-import {DataTable} from 'react-native-paper';
-import {colors} from '../../constants';
-import {testData} from './testData';
+import { Alert, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { DataTable } from 'react-native-paper';
+import { colors } from '../../constants';
+import { testData } from './testData';
+import Icon from 'react-native-vector-icons/Ionicons';
+import FAIcon from 'react-native-vector-icons/FontAwesome6';
+import { addRemoveBookmark, checkIfBookmarked } from '../../utils/APIs';
+import { useUserContext } from '../../utils/userContext';
 
 const TestDetail = (props) => {
+
+  // user context
+  const {user} = useUserContext();
+  // quiz details
   const quiz = props.route.params?.data || {};
-  // console.log(quiz)
+  const bookmarked = props.route.params?.bookmarked;
+  const [isBookmarked, setIsBookmarked] = useState(bookmarked);
+  const [isDisabled, setIsDisabled] = useState(false);
+
+  const toggleBookmark = async () => {
+    try {
+      setIsDisabled(!isDisabled);
+      // updating bookmark in db
+      await addRemoveBookmark({userId:user._id, materialId:quiz._id})
+      setIsDisabled(false);
+    } catch (error) {
+      console.log(error)
+      Alert.alert(error)
+    }
+    setIsBookmarked(!isBookmarked);
+  };
+
 
   return (
     <View style={styles.container}>
       <View style={styles.wraper}>
-        <Text style={styles.heading}>{quiz?.title}</Text>
+        <View style={{ flexDirection: 'row', justifyContent: 'space-between', gap: 20 }}>
+          <TouchableOpacity onPress={toggleBookmark} disabled={isDisabled} >
+            {isBookmarked ? (
+              <Icon name="bookmarks" size={25} color="red" />
+            ) : (
+              <Icon name="bookmarks-outline" size={25} color="red" />
+            )}
+          </TouchableOpacity>
+          <TouchableOpacity>
+            <FAIcon name="download" size={25} color="red" />
+          </TouchableOpacity>
+        </View>
+
+        <Text style={[styles.heading,]}>{quiz?.title}</Text>
         <Text style={styles.subHeading}>General Instructions:-</Text>
         <Text style={styles.paraText}>
           1. This test is of {quiz?.duration} minutes duration.
@@ -42,17 +79,17 @@ const TestDetail = (props) => {
             <DataTable.Header>
               <DataTable.Title>Total questions</DataTable.Title>
               <DataTable.Title>Total Marks</DataTable.Title>
-              
+
             </DataTable.Header>
 
             <DataTable.Row >
               <DataTable.Cell>{quiz?.length}</DataTable.Cell>
               <DataTable.Cell>{quiz?.totalMarks}</DataTable.Cell>
-              
+
             </DataTable.Row>
           </DataTable>
         </View>
-        <TouchableOpacity style={styles.button} onPress={() => props.navigation.navigate('test_board',{data:quiz?.questions})}>
+        <TouchableOpacity style={styles.button} onPress={() => props.navigation.navigate('test_board', { data: quiz?.questions })}>
           <Text style={styles.buttonText}>Start Test</Text>
         </TouchableOpacity>
       </View>
@@ -78,7 +115,7 @@ const styles = StyleSheet.create({
     color: '#0a0a0a',
     fontWeight: 'bold',
     textAlign: 'center',
-    marginTop: 20,
+    // marginTop: 20,
     marginBottom: 20,
   },
   subHeading: {
@@ -108,7 +145,7 @@ const styles = StyleSheet.create({
     marginTop: 20,
     marginBottom: 20,
     height: 50,
-    justifyContent: 'center', 
+    justifyContent: 'center',
   },
   buttonText: {
     color: colors.white,

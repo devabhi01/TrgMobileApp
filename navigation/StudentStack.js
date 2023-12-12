@@ -47,6 +47,7 @@ import NcertSoln from '../components/material/NcertSoln';
 import ListScreen from '../components/courses/template/ListScreen';
 import TestList from '../components/testseries/TestList';
 import MaterialList from '../components/material/MaterialList';
+import MaterialModal from '../components/material/MaterialModal';
 
 
 
@@ -263,6 +264,7 @@ const StudentStack = () => {
           name="test_detail"
           component={TestDetail}
           options={{
+            headerShown:false,
             headerTintColor: '#fff',
             title: '',
             headerTitleAlign: 'center',
@@ -314,6 +316,16 @@ const StudentStack = () => {
           component={MaterialList}
           options={{
             headerTintColor: '#fff',
+            title: '',
+            headerTitleAlign: 'center',
+          }}
+        />
+        <Stack.Screen
+          name="material_modal"
+          component={MaterialModal}
+          options={{
+            headerShown:false,
+            // headerTintColor: '#fff',
             title: '',
             headerTitleAlign: 'center',
           }}

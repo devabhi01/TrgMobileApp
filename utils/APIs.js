@@ -149,3 +149,41 @@ export const fetchMaterials = async (body) => {
     }
     return await fetch(route, options)
 }
+
+//------------ check if bookmarked --------------------
+export const checkIfBookmarked = async (body) => {
+    const route = `${root}/api/check-if-bookmarked`
+    const options = {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(body)
+    }
+    return await fetch(route, options)
+}
+
+//------------ check if bookmarked --------------------
+export const addRemoveBookmark = async (body) => {
+    const route = `${root}/api/add-bookmark`
+    const options = {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(body)
+    }
+    return await fetch(route, options)
+}
+
+//------------ fetch quiz --------------------
+export const fetchBookmarks = async (userId) => {
+    const route = `${root}/api/fetch-bookmarks/${userId}`
+    const options = {
+        method: "GET",
+        headers: {
+            "Content-Type": "application/json"
+        }
+    }
+    return await fetch(route, options)
+}
