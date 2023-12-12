@@ -134,6 +134,10 @@ dependencies {
     implementation 'com.facebook.fresco:animated-webp:2.5.0'
     implementation 'com.facebook.fresco:webpsupport:2.5.0'
 
+
+    // download Rn fetch 
+    implementation project(':rn-fetch-blob')
+    
     // For WebP support, without animations
     implementation 'com.facebook.fresco:webpsupport:2.5.0'
 

@@ -143,9 +143,11 @@ const styles = StyleSheet.create({
     marginLeft: 5,
   },
   title: {
-    fontSize: 24,
+    fontSize: 20,
     margin: 20,
-    fontWeight: 'bold'
+    fontWeight: 'bold',
+    textAlign: 'center',
+    color: colors.textColor,
   },
   button: {
     backgroundColor: colors.primary,

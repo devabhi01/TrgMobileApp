@@ -8,7 +8,7 @@ import {
 import { colors } from '../constants';
 import React, {useState} from 'react';
 import Icon from 'react-native-vector-icons/Ionicons';
-import FAIcon from 'react-native-vector-icons/FontAwesome6';
+import FAIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 import {useNavigation} from '@react-navigation/native';
 
 const Downloads = () => {
@@ -27,20 +27,21 @@ const Downloads = () => {
             <Text style={styles.subjectText}> Maths</Text>
             <Text style={styles.descText}> Support Material - Class:10</Text>
           </View>
-          <View style={{flexDirection: 'row', alignItems: 'center', gap: 20}}>
-            <TouchableOpacity onPress={toggleBookmark}>
+          <View style={{flexDirection: 'row', alignItems: 'center', paddingHorizontal:10}}>
+            {/* <TouchableOpacity onPress={toggleBookmark}>
               {isBookmarked ? (
                 <Icon name="bookmarks" size={20} color="#fff" />
               ) : (
                 <Icon name="bookmarks-outline" size={20} color="#fff" />
               )}
-            </TouchableOpacity>
+            </TouchableOpacity> */}
             <TouchableOpacity>
-              <FAIcon name="download" size={20} color="#fff" />
+              <FAIcon name="delete" size={24} color="#fff" />
             </TouchableOpacity>
           </View>
         </TouchableOpacity>
       </View>
+ {/* In case of no downloads */}
       {/* <View style={{justifyContent:'center',alignItems:'center',flex:1}}>
         <Text style={{color:'#0a0a0a'}}>No Downloads</Text>
       </View> */}

@@ -12,7 +12,7 @@ const MoreScreen = props => {
             name={'Materials'}
             IocnName={'book'}
             onPress={() => props.navigation.navigate('material')}
-            backgroundColor={'#D3D936'}
+            backgroundColor={'#17AADD'}
           />
         </View>
         <View style={styles.btnCont}>
@@ -29,7 +29,7 @@ const MoreScreen = props => {
             name={'Videos'}
             IocnName={'play'}
             onPress={() => props.navigation.navigate('videos')}
-            backgroundColor={'#F26DAB'}
+            backgroundColor={'#17AADD'}
           />
         </View>
 
@@ -38,7 +38,7 @@ const MoreScreen = props => {
             name={'My Courses'}
             IocnName={'cloud-download'}
             onPress={() => props.navigation.navigate('my_course')}
-            backgroundColor={'#BA68CA'}
+            backgroundColor={'#17AADD'}
           />
         </View>
         <View style={styles.btnCont}>
@@ -46,7 +46,7 @@ const MoreScreen = props => {
             name={'Downloads'}
             IocnName={'download'}
             onPress={() => props.navigation.navigate('downloads')}
-            backgroundColor={'#BA68CA'}
+            backgroundColor={'#17AADD'}
           />
         </View>
         <View style={styles.btnCont}>
@@ -54,7 +54,7 @@ const MoreScreen = props => {
             name={'Bookmarks'}
             IocnName={'bookmarks'}
             onPress={() => props.navigation.navigate('bookmarks')}
-            backgroundColor={'#F29A2E'}
+            backgroundColor={'#17AADD'}
           />
         </View>
 
@@ -63,7 +63,7 @@ const MoreScreen = props => {
             name={'Setting'}
             IocnName={'settings'}
             onPress={() => props.navigation.navigate('setting_screen')}
-            backgroundColor={'#F24E29'}
+            backgroundColor={'#dc3545'}
           />
         </View>
         {/* <View style={styles.btnCont}>

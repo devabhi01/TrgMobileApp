@@ -8,9 +8,11 @@ const MoreOptBtn = props => {
       style={[styles.Contbg, {backgroundColor: props.backgroundColor}]}
       onPress={props.onPress}>
       <View style={styles.innerCont}>
-        <View style={{flexDirection: 'row',alignItems:'center'}}>
+        <View style={{flexDirection: 'row', alignItems: 'center'}}>
           <Icon name={props.IocnName} size={25} color="#fff" />
-          <Text style={{color: 'white', fontSize: 18, marginLeft:10}}>{props.name}</Text>
+          <Text style={{color: 'white', fontSize: 18, marginLeft: 10}}>
+            {props.name}
+          </Text>
         </View>
       </View>
     </TouchableOpacity>
@@ -24,14 +26,12 @@ const styles = StyleSheet.create({
     width: '100%',
     height: 60,
     borderRadius: 5,
-    elevation: 10,
+    elevation: 5,
     paddingHorizontal: 15,
     justifyContent: 'center',
   },
   innerCont: {
-    
-    borderColor: 'white',
-    height: 45,
+    // borderColor: 'white',
     paddingHorizontal: 15,
     justifyContent: 'center',
   },
