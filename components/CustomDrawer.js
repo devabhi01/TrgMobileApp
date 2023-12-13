@@ -121,8 +121,14 @@ const CustomDrawer = props => {
 
           <TouchableOpacity
             style={styles.btn}
+            onPress={() => navigation.navigate('downloads')}>
+            <IconFA name="download" size={20} color={colors.graylight} />
+            <Text style={styles.btnText}>Downloads</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={styles.btn}
             onPress={() => navigation.navigate('doubt_clearence')}>
-            <IconFA name="clipboard" size={25} color={colors.graylight} />
+            <IconFA name="question" size={22} color={colors.graylight} />
             <Text style={styles.btnText}>Doubt CLearence</Text>
           </TouchableOpacity>
           <TouchableOpacity

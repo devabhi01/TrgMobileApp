@@ -34,18 +34,30 @@ const MaterialModal = ({navigation, route}) => {
 
   const handleDownload = async () => {
     try {
-      const { config, fs } = RNFetchBlob;
-      const response = await config({
+      const { fs } = RNFetchBlob;
+      const rootDir = fs.dirs.DownloadDir;
+      const folderName = 'TheRightGuru';
+      const folderPath = `${rootDir}/${folderName}`;
+      const filePath = `${folderPath}/${material?.pdfFilename}`; // Path to the file to be downloaded
+      
+      // Check if the folder exists, create it if it doesn't
+      const folderExists = await fs.isDir(folderPath);
+      if (!folderExists) {
+        await fs.mkdir(folderPath);
+      }
+      
+      // Perform the file download
+      const response = await RNFetchBlob.config({
         fileCache: true,
         addAndroidDownloads: {
           useDownloadManager: true,
           notification: true,
-          path: `${fs.dirs.DownloadDir}/${material?.pdfFilename}`, // Specify the path and filename for the downloaded file
+          path: filePath,
         },
       }).fetch('GET', material?.pdfUrl);
 
       console.log('File downloaded:', response);
-      Alert.alert('File Downloaded', 'Your file has been downloaded in the Download folder.');
+      Alert.alert('File Downloaded', 'Your file has been downloaded in TheRightGuru folder in your Downloads.');
     } catch (error) {
       console.error('Download error:', error);
     }

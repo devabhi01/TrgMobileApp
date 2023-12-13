@@ -48,6 +48,7 @@ import ListScreen from '../components/courses/template/ListScreen';
 import TestList from '../components/testseries/TestList';
 import MaterialList from '../components/material/MaterialList';
 import MaterialModal from '../components/material/MaterialModal';
+import OnBoardingScreen from '../screen/OnBoardingScreen';
 
 
 
@@ -403,6 +404,13 @@ const StudentStack = () => {
             headerTintColor: '#fff',
             title: 'Choose Subject',
             headerTitleAlign: 'center',
+          }}
+        />
+        <Stack.Screen
+          name="onBoarding"
+          component={OnBoardingScreen}
+          options={{
+            headerShown:false,
           }}
         />
       </Stack.Navigator>
