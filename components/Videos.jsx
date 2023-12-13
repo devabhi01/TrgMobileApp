@@ -1,5 +1,7 @@
 import {SafeAreaView, ScrollView, StyleSheet, Text, View} from 'react-native';
 import React from 'react';
+import YoutubePlayer from "react-native-youtube-iframe";
+
 
 const Videos = () => {
   return (
@@ -9,6 +11,9 @@ const Videos = () => {
           <Text style={{fontSize: 18, fontWeight: 'bold', color: '#0a0a0a'}}>
             Featured Video
           </Text>
+        </View>
+        <View style={{marginTop: 20}}>
+          
         </View>
       </ScrollView>
     </SafeAreaView>

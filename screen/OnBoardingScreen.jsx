@@ -37,7 +37,7 @@ export default function OnBoardingScreen() {
         <Text
           style={{
             color: '#dc3545',
-            paddingHorizontal: 10
+            paddingHorizontal: 10,
           }}>
           {label}
         </Text>

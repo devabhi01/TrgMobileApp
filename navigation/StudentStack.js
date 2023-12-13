@@ -189,7 +189,7 @@ const StudentStack = () => {
           component={Helpsupport}
           options={{
             headerTintColor: '#fff',
-            title: 'Help Support',
+            title: 'Support',
             headerTitleAlign: 'center',
           }}
         />

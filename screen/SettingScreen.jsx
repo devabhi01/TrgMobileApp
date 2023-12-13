@@ -122,7 +122,7 @@ const SettingScreen = (props) => {
               color={'#dc3545'}
               source={require('../assets/img/help.png')}
             />
-            <Text style={styles.btnText}>Help & Support</Text>
+            <Text style={styles.btnText}>Support</Text>
           </TouchableOpacity>
 
           {/* <TouchableOpacity style={styles.btn}>
