@@ -16,7 +16,6 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 const Downloads = () => {
   const navigation = useNavigation();
   const {downloads, setDownloads} = useUserContext();
-  // console.log(downloads)
 
   const handleDelete = async (material) =>{
     try {
