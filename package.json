@@ -49,6 +49,7 @@
     "react-native-svg-transformer": "^1.1.0",
     "react-native-vector-icons": "^10.0.0",
     "react-native-virtualized-view": "^1.0.0",
+    "react-native-webview": "^11.23.1",
     "react-native-youtube-iframe": "^2.3.0",
     "rn-fetch-blob": "^0.12.0"
   },
