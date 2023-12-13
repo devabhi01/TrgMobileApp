@@ -10,13 +10,16 @@ import {StripeProvider} from '@stripe/stripe-react-native';
 const NavComponent = () => {
   const [loading, setLoading] = useState(true);
   // setting global data from async storage
-  const {setUser, setJwtoken} = useUserContext();
+  const {setUser, setJwtoken, setDownloads} = useUserContext();
 
   useEffect(() => {
     const setGlobalData = async () => {
       try {
         await setUser(JSON.parse(await AsyncStorage.getItem('user')));
         await setJwtoken(await AsyncStorage.getItem('jwtoken'));
+        const downldData = JSON.parse(await AsyncStorage.getItem('downloads'));
+        if(downldData) await setDownloads(downldData);
+        else await setDownloads([]);
         setLoading(false);
       } catch (e) {
         console.log('Error ', e);

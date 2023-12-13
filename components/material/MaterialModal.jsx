@@ -7,14 +7,15 @@ import {addRemoveBookmark} from '../../utils/APIs';
 import {useUserContext} from '../../utils/userContext';
 import RNFetchBlob from 'rn-fetch-blob';
 import { Alert } from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const MaterialModal = ({navigation, route}) => {
-  const {user} = useUserContext();
+  const {user, downloads, setDownloads} = useUserContext();
   // material details
   const material = route.params?.data || {};
   const bookmarked = route.params?.bookmarked;
 
-  console.log(bookmarked, material);
+  // console.log(bookmarked, material);
   const [isBookmarked, setIsBookmarked] = useState(bookmarked);
   const [isDisabled, setIsDisabled] = useState(false);
 
@@ -38,7 +39,8 @@ const MaterialModal = ({navigation, route}) => {
       const rootDir = fs.dirs.DownloadDir;
       const folderName = 'TheRightGuru';
       const folderPath = `${rootDir}/${folderName}`;
-      const filePath = `${folderPath}/${material?.pdfFilename}`; // Path to the file to be downloaded
+      const filePath = `${folderPath}/${material?.title}`; // Path to the file to be downloaded
+      // console.log(filePath)
       
       // Check if the folder exists, create it if it doesn't
       const folderExists = await fs.isDir(folderPath);
@@ -56,10 +58,16 @@ const MaterialModal = ({navigation, route}) => {
         },
       }).fetch('GET', material?.pdfUrl);
 
-      console.log('File downloaded:', response);
-      Alert.alert('File Downloaded', 'Your file has been downloaded in TheRightGuru folder in your Downloads.');
+      //saving downloaded material in user context and async store
+      const materialWithPath = {...material, pdfUrl:filePath}
+      await AsyncStorage.setItem('downloads', JSON.stringify([...downloads, materialWithPath]));
+      setDownloads([...downloads, materialWithPath])
+
+      // console.log('File downloaded:', response);
+      Alert.alert('File Downloaded!', 'Your download are available now in My Downloads');
     } catch (error) {
       console.error('Download error:', error);
+      Alert.alert("Error while downloading...")
     }
   };
 

@@ -8,12 +8,10 @@ const UserContext = createContext();
 export const UserProvider = ({ children }) => {
   const [user, setUser] = useState(null); // Initialize user state as null
   const [jwtoken, setJwtoken] = useState("")
-  // const [location, setLocation] = useState([]);
+  const [downloads, setDownloads] = useState([]);
 
   return (
-    <UserContext.Provider value={{ user, setUser, jwtoken, setJwtoken,
-    //  location, setLocation
-      }}>
+    <UserContext.Provider value={{ user, setUser, jwtoken, setJwtoken, downloads, setDownloads }}>
       {children}
     </UserContext.Provider>
   );
@@ -21,5 +19,5 @@ export const UserProvider = ({ children }) => {
 
 // custom hook 
 export const useUserContext = () => {
-    return useContext(UserContext);
-  };
+  return useContext(UserContext);
+};
