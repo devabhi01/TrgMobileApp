@@ -187,3 +187,30 @@ export const fetchBookmarks = async (userId) => {
     }
     return await fetch(route, options)
 }
+
+//------------ creating payment intent --------------------
+export const createPaymentIntent = async (body) => {
+    const route = `${root}/payment/intent`
+    const options = {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+            'Accept': 'application/json'
+        },
+        body: JSON.stringify(body)
+    }
+    return await fetch(route, options)
+}
+
+//------------ check if bookmarked --------------------
+export const buyMaterial = async (body) => {
+    const route = `${root}/payment/buyMaterial`
+    const options = {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(body)
+    }
+    return await fetch(route, options)
+}

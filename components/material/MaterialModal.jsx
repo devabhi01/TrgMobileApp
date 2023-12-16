@@ -3,11 +3,12 @@ import { StyleSheet, Text, View, TouchableOpacity, Modal } from 'react-native';
 import { colors } from '../../constants';
 import Icon from 'react-native-vector-icons/Ionicons';
 import FAIcon from 'react-native-vector-icons/FontAwesome6';
-import { addRemoveBookmark } from '../../utils/APIs';
+import { addRemoveBookmark, buyMaterial, createPaymentIntent } from '../../utils/APIs';
 import { useUserContext } from '../../utils/userContext';
 import RNFetchBlob from 'rn-fetch-blob';
 import { Alert } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { useStripe } from '@stripe/stripe-react-native';
 
 const MaterialModal = ({ navigation, route }) => {
   const { user, downloads, setDownloads } = useUserContext();
@@ -18,6 +19,10 @@ const MaterialModal = ({ navigation, route }) => {
   // console.log(bookmarked, material);
   const [isBookmarked, setIsBookmarked] = useState(bookmarked);
   const [isDisabled, setIsDisabled] = useState(false);
+
+  //payment inits
+  const { initPaymentSheet, presentPaymentSheet } = useStripe();
+  // const [loading, setLoading] = useState(false);
 
   const toggleBookmark = async () => {
     try {
@@ -71,6 +76,53 @@ const MaterialModal = ({ navigation, route }) => {
     }
   };
 
+
+  // checkout function
+  const handleCheckout = async (material) => {
+    try {
+      console.log("payment initialted...")
+      // creating payment intend
+      const price = material?.price
+      const res = await createPaymentIntent({ amount: Math.floor(price * 100) })
+      const data = await res.json()
+      // console.log(material?.price, data)
+
+      //initializing payment sheet
+      const { error } = await initPaymentSheet({
+        merchantDisplayName: "The Right Guru",
+        // customerId: customer,
+        // customerEphemeralKeySecret: ephemeralKey,
+        paymentIntentClientSecret: data.paymentIntent,
+        // Set `allowsDelayedPaymentMethods` to true if your business can handle payment
+        //methods that complete payment after a delay, like SEPA Debit and Sofort.
+        // allowsDelayedPaymentMethods: true,
+        // defaultBillingDetails: {
+        //   name: 'Jane Doe',
+        // }
+      });
+      console.log(error)
+
+      if (!error) {
+        // presenting payment sheet
+        // setLoading(true);
+        const errRes = await presentPaymentSheet();
+        if (errRes) {
+          Alert.alert("Payment flow was intrupted ;(");
+          return;
+        }
+      }
+
+      // adding paid material to user account
+      const res2 = await buyMaterial({ userId: user._id, materialId: material?._id })
+      //go back
+      Alert.alert("Payment Success!", "Your material is added to my material screen :)")
+      navigation.goBack()
+
+    } catch (error) {
+      console.log(error)
+      Alert.alert("Something went wrong...")
+    }
+  }
 
   return (
     <Modal
@@ -145,13 +197,13 @@ const MaterialModal = ({ navigation, route }) => {
           <View style={{ width: "100%", marginHorizontal: 30, marginVertical: 10 }}>
             <Text>Name : {material?.title}</Text>
             <Text>Description : {material?.description}</Text>
-            <Text>Price : {material?.price}</Text>
+            <Text>Price : {material?.price}Rs</Text>
           </View>
 
 
           {material?.isPaid ? <TouchableOpacity
             onPress={() => {
-              navigation.navigate('pay_screen', { data: material });
+              handleCheckout(material)
             }}>
             <Text style={styles.openBtn}>Buy</Text>
           </TouchableOpacity> : <TouchableOpacity
