@@ -1,16 +1,16 @@
-import React, {useState, useEffect} from 'react';
-import {StyleSheet, Text, View, TouchableOpacity, Modal} from 'react-native';
-import {colors} from '../../constants';
+import React, { useState, useEffect } from 'react';
+import { StyleSheet, Text, View, TouchableOpacity, Modal } from 'react-native';
+import { colors } from '../../constants';
 import Icon from 'react-native-vector-icons/Ionicons';
 import FAIcon from 'react-native-vector-icons/FontAwesome6';
-import {addRemoveBookmark} from '../../utils/APIs';
-import {useUserContext} from '../../utils/userContext';
+import { addRemoveBookmark } from '../../utils/APIs';
+import { useUserContext } from '../../utils/userContext';
 import RNFetchBlob from 'rn-fetch-blob';
 import { Alert } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-const MaterialModal = ({navigation, route}) => {
-  const {user, downloads, setDownloads} = useUserContext();
+const MaterialModal = ({ navigation, route }) => {
+  const { user, downloads, setDownloads } = useUserContext();
   // material details
   const material = route.params?.data || {};
   const bookmarked = route.params?.bookmarked;
@@ -24,7 +24,7 @@ const MaterialModal = ({navigation, route}) => {
       // console.log(isBookmarked)
       setIsDisabled(!isDisabled);
       // updating bookmark in db
-      await addRemoveBookmark({userId: user._id, materialId: material?._id});
+      await addRemoveBookmark({ userId: user._id, materialId: material?._id });
       setIsBookmarked(!isBookmarked);
       setIsDisabled(false);
     } catch (error) {
@@ -41,13 +41,13 @@ const MaterialModal = ({navigation, route}) => {
       const folderPath = `${rootDir}/${folderName}`;
       const filePath = `${folderPath}/${material?.title}`; // Path to the file to be downloaded
       // console.log(filePath)
-      
+
       // Check if the folder exists, create it if it doesn't
       const folderExists = await fs.isDir(folderPath);
       if (!folderExists) {
         await fs.mkdir(folderPath);
       }
-      
+
       // Perform the file download
       const response = await RNFetchBlob.config({
         fileCache: true,
@@ -59,7 +59,7 @@ const MaterialModal = ({navigation, route}) => {
       }).fetch('GET', material?.pdfUrl);
 
       //saving downloaded material in user context and async store
-      const materialWithPath = {...material, pdfUrl:filePath}
+      const materialWithPath = { ...material, pdfUrl: filePath }
       await AsyncStorage.setItem('downloads', JSON.stringify([...downloads, materialWithPath]));
       setDownloads([...downloads, materialWithPath])
 
@@ -91,7 +91,7 @@ const MaterialModal = ({navigation, route}) => {
           style={{
             backgroundColor: '#fff',
             width: '90%',
-            height: '50%',
+            height: '40%',
             borderRadius: 8,
             position: 'relative',
           }}>
@@ -142,12 +142,24 @@ const MaterialModal = ({navigation, route}) => {
             </TouchableOpacity>
           </View>
 
-          <TouchableOpacity
+          <View style={{ width: "100%", marginHorizontal: 30, marginVertical: 10 }}>
+            <Text>Name : {material?.title}</Text>
+            <Text>Description : {material?.description}</Text>
+            <Text>Price : {material?.price}</Text>
+          </View>
+
+
+          {material?.isPaid ? <TouchableOpacity
             onPress={() => {
-              navigation.navigate('pdf_screen', {uri: material?.pdfUrl});
+              navigation.navigate('pay_screen', { data: material });
+            }}>
+            <Text style={styles.openBtn}>Buy</Text>
+          </TouchableOpacity> : <TouchableOpacity
+            onPress={() => {
+              navigation.navigate('pdf_screen', { uri: material?.pdfUrl });
             }}>
             <Text style={styles.openBtn}>Open</Text>
-          </TouchableOpacity>
+          </TouchableOpacity>}
         </View>
       </View>
     </Modal>
