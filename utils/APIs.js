@@ -1,5 +1,6 @@
-const root = "https://trgbackend-production.up.railway.app"
+// const root = "https://trgbackend-production.up.railway.app"
 // const root = "http://172.20.10.2:1222"
+const root = "https://ea38-2409-4050-e9f-2638-9038-37ea-e7da-5c14.ngrok-free.app"
 
 // ---------- register user ------------------
 export const registerUser = async (body) => {
@@ -112,8 +113,8 @@ export const fetchQod = async () => {
 }
 
 // ----------- fetching test series -------------------
-export const fetchQuizes = async (body) => {
-    const route = `${root}/api/fetch-quizes`
+export const fetchQuizes = async (body, userId) => {
+    const route = `${root}/api/fetch-quizes/${userId}`
     const options = {
         method: "POST",
         headers: {
@@ -138,8 +139,8 @@ export const fetchQuiz = async (quizId) => {
 }
 
 //------------ fetch materials --------------------
-export const fetchMaterials = async (body) => {
-    const route = `${root}/api/fetch-materials`
+export const fetchMaterials = async (body, userId) => {
+    const route = `${root}/api/fetch-materials/${userId}`
     const options = {
         method: "POST",
         headers: {

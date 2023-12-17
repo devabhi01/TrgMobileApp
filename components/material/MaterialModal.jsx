@@ -83,7 +83,7 @@ const MaterialModal = ({ navigation, route }) => {
       console.log("payment initialted...")
       // creating payment intend
       const price = material?.price
-      const res = await createPaymentIntent({ amount: Math.floor(price * 100) })
+      const res = await createPaymentIntent({ amount: Math.floor(price * 100), userId:user?._id, materialId:material?._id })
       const data = await res.json()
       // console.log(material?.price, data)
 
@@ -95,27 +95,32 @@ const MaterialModal = ({ navigation, route }) => {
         paymentIntentClientSecret: data.paymentIntent,
         // Set `allowsDelayedPaymentMethods` to true if your business can handle payment
         //methods that complete payment after a delay, like SEPA Debit and Sofort.
-        // allowsDelayedPaymentMethods: true,
+        allowsDelayedPaymentMethods: true,
         // defaultBillingDetails: {
-        //   name: 'Jane Doe',
+        //   name: user?.name,
+        // },
+        // googlePay:{
+        //   merchantCountryCode:'IND',
+        //   testEnv:true,
+        //   currencyCode:'INR'
         // }
       });
-      console.log(error)
+      // console.log(error)
 
       if (!error) {
         // presenting payment sheet
         // setLoading(true);
         const errRes = await presentPaymentSheet();
         if (errRes) {
-          Alert.alert("Payment flow was intrupted ;(");
-          return;
+          // Alert.alert("Payment flow was intrupted ;(");
+          // return;
         }
       }
 
       // adding paid material to user account
-      const res2 = await buyMaterial({ userId: user._id, materialId: material?._id })
+      // const res2 = await buyMaterial({ userId: user._id, materialId: material?._id })
       //go back
-      Alert.alert("Payment Success!", "Your material is added to my material screen :)")
+      // Alert.alert("Payment Success!", "Your material is added to my material screen :)")
       navigation.goBack()
 
     } catch (error) {
@@ -198,6 +203,8 @@ const MaterialModal = ({ navigation, route }) => {
             <Text>Name : {material?.title}</Text>
             <Text>Description : {material?.description}</Text>
             <Text>Price : {material?.price}Rs</Text>
+            <Text></Text>
+            <Text>Note: Material is added to my material screen after successful payment :)</Text>
           </View>
 
 

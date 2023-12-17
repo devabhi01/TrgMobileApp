@@ -5,13 +5,14 @@ import { colors } from '../../constants';
 import { testData } from './testData';
 import Icon from 'react-native-vector-icons/Ionicons';
 import FAIcon from 'react-native-vector-icons/FontAwesome6';
-import { addRemoveBookmark, checkIfBookmarked } from '../../utils/APIs';
+import { addRemoveBookmark, checkIfBookmarked, createPaymentIntent } from '../../utils/APIs';
 import { useUserContext } from '../../utils/userContext';
+import { initPaymentSheet, presentPaymentSheet } from '@stripe/stripe-react-native';
 
 const TestDetail = (props) => {
 
   // user context
-  const {user} = useUserContext();
+  const { user } = useUserContext();
   // quiz details
   const quiz = props.route.params?.data || {};
   const bookmarked = props.route.params?.bookmarked;
@@ -22,7 +23,7 @@ const TestDetail = (props) => {
     try {
       setIsDisabled(!isDisabled);
       // updating bookmark in db
-      await addRemoveBookmark({userId:user._id, materialId:quiz._id})
+      await addRemoveBookmark({ userId: user._id, materialId: quiz._id })
       setIsDisabled(false);
     } catch (error) {
       console.log(error)
@@ -30,6 +31,59 @@ const TestDetail = (props) => {
     }
     setIsBookmarked(!isBookmarked);
   };
+
+
+  // checkout function
+  const handleCheckout = async (quiz) => {
+    try {
+      console.log("payment initialted...")
+      // creating payment intend
+      const price = quiz?.price
+      const res = await createPaymentIntent({ amount: Math.floor(price * 100), userId: user?._id, materialId: quiz?._id })
+      const data = await res.json()
+      // console.log(quiz?.price, data)
+
+      //initializing payment sheet
+      const { error } = await initPaymentSheet({
+        merchantDisplayName: "The Right Guru",
+        // customerId: customer,
+        // customerEphemeralKeySecret: ephemeralKey,
+        paymentIntentClientSecret: data.paymentIntent,
+        // Set `allowsDelayedPaymentMethods` to true if your business can handle payment
+        //methods that complete payment after a delay, like SEPA Debit and Sofort.
+        allowsDelayedPaymentMethods: true,
+        // defaultBillingDetails: {
+        //   name: user?.name,
+        // },
+        // googlePay:{
+        //   merchantCountryCode:'IND',
+        //   testEnv:true,
+        //   currencyCode:'INR'
+        // }
+      });
+      // console.log(error)
+
+      if (!error) {
+        // presenting payment sheet
+        // setLoading(true);
+        const errRes = await presentPaymentSheet();
+        if (errRes) {
+          // Alert.alert("Payment flow was intrupted ;(");
+          // return;
+        }
+      }
+
+      // adding paid material to user account
+      // const res2 = await buyMaterial({ userId: user._id, materialId: material?._id })
+      //go back
+      // Alert.alert("Payment Success!", "Your material is added to my material screen :)")
+      props.navigation.goBack()
+
+    } catch (error) {
+      console.log(error)
+      Alert.alert("Something went wrong...")
+    }
+  }
 
 
   return (
@@ -89,9 +143,16 @@ const TestDetail = (props) => {
             </DataTable.Row>
           </DataTable>
         </View>
-        <TouchableOpacity style={styles.button} onPress={() => props.navigation.navigate('test_board', { data: quiz?.questions })}>
+        <View style={{ width: "100%", marginHorizontal: 10 }}>
+          <Text>Price : {quiz?.price}Rs</Text>
+          <Text></Text>
+          <Text>Note: This test series will be added to my test series screen after successful payment :)</Text>
+        </View>
+        {quiz?.isPaid ? <TouchableOpacity style={styles.button} onPress={() => handleCheckout(quiz)}>
+          <Text style={styles.buttonText}>Buy Test</Text>
+        </TouchableOpacity> : <TouchableOpacity style={styles.button} onPress={() => props.props.navigation.navigate('test_board', { data: quiz?.questions })}>
           <Text style={styles.buttonText}>Start Test</Text>
-        </TouchableOpacity>
+        </TouchableOpacity>}
       </View>
     </View>
   );

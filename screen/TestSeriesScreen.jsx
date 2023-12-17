@@ -2,28 +2,24 @@ import {
   View,
   Text,
   SafeAreaView,
-  ScrollView,
-  Image,
   StyleSheet,
   TouchableOpacity,
   Alert,
 } from 'react-native';
 import React, { useState } from 'react';
-import MaterialIcon from 'react-native-vector-icons/MaterialCommunityIcons';
-import Foundation from 'react-native-vector-icons/Foundation';
-import CbseSVG from '../assets/img/cbse.svg';
 import { colors } from '../constants';
 import { classData } from '../model';
 
-import ModalDropdown from 'react-native-modal-dropdown';
 import CustomDropdown from '../components/courses/template/CustomDropdown';
 import { fetchQuizes } from '../utils/APIs';
+import { useUserContext } from '../utils/userContext';
 
 const TestSeriesScreen = props => {
-  // const [showDropDown, setShowDropDown] = useState(false);
   const [course, setCourse] = useState('');
   const [classNo, setClassNo] = useState('');
   const [subject, setSubject] = useState('');
+
+  const {user} = useUserContext()
 
   const courseList = [
     {
@@ -72,7 +68,7 @@ const TestSeriesScreen = props => {
 
   const handleFilter = async () => {
     try {
-      const res = await fetchQuizes({course, subject, "class":classNo})
+      const res = await fetchQuizes({course, subject, "class":classNo}, user?._id)
       const quizData = await res.json()
       props.navigation.navigate('testlist', {data: quizData})
     } catch (error) {

@@ -20,11 +20,13 @@ import {
 } from '../model';
 import CustomDropdown from './courses/template/CustomDropdown';
 import { fetchMaterials } from '../utils/APIs';
+import { useUserContext } from '../utils/userContext';
 
 const {width, height} = Dimensions.get('screen');
 
 const Material = props => {
   const navigation = useNavigation();
+  const {user} = useUserContext()
 
   const [course, setCourse] = useState('');
   const [classNo, setClassNo] = useState('');
@@ -81,9 +83,8 @@ const Material = props => {
 
   const handleFilter = async () => {
     try {
-      const res = await fetchMaterials({course, subject, "class":classNo, type})
+      const res = await fetchMaterials({course, subject, "class":classNo, type},user?._id)
       const materials = await res.json()
-      // console.log(materials)
       props.navigation.navigate('materialList', {data: materials})
     } catch (error) {
       console.log(error)

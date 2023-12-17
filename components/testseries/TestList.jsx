@@ -67,6 +67,7 @@ const TestList = ({ route }) => {
               </Text>
             </View>
           </View>
+          {item?.isPaid?<Text style={{fontSize:20, color:'white', textAlign:'right', marginHorizontal:100}}>This is Paid!!! at {item?.price}Rs</Text>:null}
         </View>
       </TouchableOpacity>
     </View>
