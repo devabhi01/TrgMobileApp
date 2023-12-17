@@ -1,6 +1,6 @@
-// const root = "https://trgbackend-production.up.railway.app"
+const root = "https://trgbackend-production.up.railway.app"
 // const root = "http://172.20.10.2:1222"
-const root = "https://ea38-2409-4050-e9f-2638-9038-37ea-e7da-5c14.ngrok-free.app"
+// const root = "https://ea38-2409-4050-e9f-2638-9038-37ea-e7da-5c14.ngrok-free.app"
 
 // ---------- register user ------------------
 export const registerUser = async (body) => {
