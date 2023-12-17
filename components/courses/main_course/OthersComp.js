@@ -28,12 +28,7 @@ import {
   export default OthersComp;
   
   const styles = StyleSheet.create({
-    img: {
-      width: 400,
-      height: 200,
-      resizeMode: 'cover',
-      zIndex: -10,
-    },
+    
     container: {
       backgroundColor: colors.graylight,
       marginTop: 20,

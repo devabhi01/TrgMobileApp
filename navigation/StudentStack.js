@@ -39,7 +39,6 @@ import RivisionNotes from '../components/material/RivisionNotes';
 import DoubtClearence from '../components/DoubtClearence';
 import Bookmarks from '../components/Bookmarks';
 
-
 import Announcement from '../components/header/Announcement';
 import DrawerNav from './DrawerNav';
 import Downloads from '../components/Downloads';
@@ -49,7 +48,6 @@ import TestList from '../components/testseries/TestList';
 import MaterialList from '../components/material/MaterialList';
 import MaterialModal from '../components/material/MaterialModal';
 import OnBoardingScreen from '../screen/OnBoardingScreen';
-
 
 
 const Stack = createStackNavigator();
@@ -69,8 +67,7 @@ const StudentStack = () => {
           component={DrawerNav}
           options={{headerShown: false}}
         />
-        
-        
+
         <Stack.Screen
           name="announcement"
           component={Announcement}
@@ -80,7 +77,6 @@ const StudentStack = () => {
             headerTitleAlign: 'center',
           }}
         />
-
 
         {/* Home Screeen Refers */}
         <Stack.Screen
@@ -265,7 +261,7 @@ const StudentStack = () => {
           name="test_detail"
           component={TestDetail}
           options={{
-            headerShown:false,
+            headerShown: false,
             headerTintColor: '#fff',
             title: '',
             headerTitleAlign: 'center',
@@ -325,7 +321,7 @@ const StudentStack = () => {
           name="material_modal"
           component={MaterialModal}
           options={{
-            headerShown:false,
+            headerShown: false,
             // headerTintColor: '#fff',
             title: '',
             headerTitleAlign: 'center',
@@ -395,7 +391,6 @@ const StudentStack = () => {
           }}
         />
 
-
         {/* material screen refers */}
         <Stack.Screen
           name="ListScreen"
@@ -410,9 +405,12 @@ const StudentStack = () => {
           name="onBoarding"
           component={OnBoardingScreen}
           options={{
-            headerShown:false,
+            headerShown: false,
           }}
         />
+
+        {/* Misc Screen refers */}
+        
       </Stack.Navigator>
     </>
   );
