@@ -133,9 +133,9 @@ const CustomDrawer = props => {
           </TouchableOpacity>
           <TouchableOpacity
             style={styles.btn}
-            onPress={() => navigation.navigate('ncertSoln')}>
-            <IconFA name="clipboard" size={25} color={colors.graylight} />
-            <Text style={styles.btnText}>NCERT Solutions</Text>
+            onPress={() => navigation.navigate('my_material')}>
+            <IconIo name="cloud-download" size={25} color={colors.graylight} />
+            <Text style={styles.btnText}>My Materials(Paid)</Text>
           </TouchableOpacity>
 
           <TouchableOpacity

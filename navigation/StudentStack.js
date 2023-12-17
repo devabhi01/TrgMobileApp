@@ -48,6 +48,7 @@ import TestList from '../components/testseries/TestList';
 import MaterialList from '../components/material/MaterialList';
 import MaterialModal from '../components/material/MaterialModal';
 import OnBoardingScreen from '../screen/OnBoardingScreen';
+import MyMaterial from '../components/MyMaterial';
 
 
 const Stack = createStackNavigator();
@@ -253,6 +254,15 @@ const StudentStack = () => {
           options={{
             headerTintColor: '#fff',
             title: 'MyCourse',
+            headerTitleAlign: 'center',
+          }}
+        />
+        <Stack.Screen
+          name="my_material"
+          component={MyMaterial}
+          options={{
+            headerTintColor: '#fff',
+            title: 'My material(Paid)',
             headerTitleAlign: 'center',
           }}
         />
