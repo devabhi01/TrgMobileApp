@@ -215,3 +215,16 @@ export const createPaymentIntent = async (body) => {
 //     }
 //     return await fetch(route, options)
 // }
+
+//------------ creating payment intent --------------------
+export const sentOtp = async (body) => {
+    const route = `${root}/api/send-otp`
+    const options = {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify(body)
+    }
+    return await fetch(route, options)
+}
