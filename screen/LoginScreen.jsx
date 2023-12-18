@@ -152,7 +152,8 @@ const LoginScreen = props => {
               </TouchableOpacity>
             </View>
           </View>
-          <TouchableOpacity>
+          <TouchableOpacity
+            onPress={() => props.navigation.navigate('forgot_password')}>
             <Text
               style={{
                 color: '#A32734',

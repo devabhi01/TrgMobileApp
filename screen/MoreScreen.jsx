@@ -35,9 +35,9 @@ const MoreScreen = props => {
 
         <View style={styles.btnCont}>
           <MoreOptBtn
-            name={'My Courses'}
+            name={'My Matrials(Paid)'}
             IocnName={'cloud-download'}
-            onPress={() => props.navigation.navigate('my_course')}
+            onPress={() => props.navigation.navigate('my_material')}
             backgroundColor={'#17AADD'}
           />
         </View>
