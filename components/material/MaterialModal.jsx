@@ -1,17 +1,23 @@
-import React, { useState, useEffect } from 'react';
-import { StyleSheet, Text, View, TouchableOpacity, Modal } from 'react-native';
-import { colors } from '../../constants';
+import React, {useState, useEffect} from 'react';
+import {StyleSheet, Text, View, TouchableOpacity, Modal} from 'react-native';
+import {colors} from '../../constants';
 import Icon from 'react-native-vector-icons/Ionicons';
-import FAIcon from 'react-native-vector-icons/FontAwesome6';
-import { addRemoveBookmark, buyMaterial, createPaymentIntent } from '../../utils/APIs';
-import { useUserContext } from '../../utils/userContext';
-import RNFetchBlob from 'rn-fetch-blob';
-import { Alert } from 'react-native';
-import AsyncStorage from '@react-native-async-storage/async-storage';
-import { useStripe } from '@stripe/stripe-react-native';
+import IconFA from 'react-native-vector-icons/FontAwesome';
 
-const MaterialModal = ({ navigation, route }) => {
-  const { user, downloads, setDownloads } = useUserContext();
+import FAIcon from 'react-native-vector-icons/FontAwesome6';
+import {
+  addRemoveBookmark,
+  buyMaterial,
+  createPaymentIntent,
+} from '../../utils/APIs';
+import {useUserContext} from '../../utils/userContext';
+import RNFetchBlob from 'rn-fetch-blob';
+import {Alert} from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import {useStripe} from '@stripe/stripe-react-native';
+
+const MaterialModal = ({navigation, route}) => {
+  const {user, downloads, setDownloads} = useUserContext();
   // material details
   const material = route.params?.data || {};
   const bookmarked = route.params?.bookmarked;
@@ -21,7 +27,7 @@ const MaterialModal = ({ navigation, route }) => {
   const [isDisabled, setIsDisabled] = useState(false);
 
   //payment inits
-  const { initPaymentSheet, presentPaymentSheet } = useStripe();
+  const {initPaymentSheet, presentPaymentSheet} = useStripe();
   // const [loading, setLoading] = useState(false);
 
   const toggleBookmark = async () => {
@@ -29,7 +35,7 @@ const MaterialModal = ({ navigation, route }) => {
       // console.log(isBookmarked)
       setIsDisabled(!isDisabled);
       // updating bookmark in db
-      await addRemoveBookmark({ userId: user._id, materialId: material?._id });
+      await addRemoveBookmark({userId: user._id, materialId: material?._id});
       setIsBookmarked(!isBookmarked);
       setIsDisabled(false);
     } catch (error) {
@@ -40,7 +46,7 @@ const MaterialModal = ({ navigation, route }) => {
 
   const handleDownload = async () => {
     try {
-      const { fs } = RNFetchBlob;
+      const {fs} = RNFetchBlob;
       const rootDir = fs.dirs.DownloadDir;
       const folderName = 'TheRightGuru';
       const folderPath = `${rootDir}/${folderName}`;
@@ -64,32 +70,41 @@ const MaterialModal = ({ navigation, route }) => {
       }).fetch('GET', material?.pdfUrl);
 
       //saving downloaded material in user context and async store
-      const materialWithPath = { ...material, pdfUrl: filePath }
-      await AsyncStorage.setItem('downloads', JSON.stringify([...downloads, materialWithPath]));
-      setDownloads([...downloads, materialWithPath])
+      const materialWithPath = {...material, pdfUrl: filePath};
+      await AsyncStorage.setItem(
+        'downloads',
+        JSON.stringify([...downloads, materialWithPath]),
+      );
+      setDownloads([...downloads, materialWithPath]);
 
       // console.log('File downloaded:', response);
-      Alert.alert('File Downloaded!', 'Your download are available now in My Downloads');
+      Alert.alert(
+        'File Downloaded!',
+        'Your download are available now in My Downloads',
+      );
     } catch (error) {
       console.error('Download error:', error);
-      Alert.alert("Error while downloading...")
+      Alert.alert('Error while downloading...');
     }
   };
 
-
   // checkout function
-  const handleCheckout = async (material) => {
+  const handleCheckout = async material => {
     try {
-      console.log("payment initialted...")
+      console.log('payment initialted...');
       // creating payment intend
-      const price = material?.price
-      const res = await createPaymentIntent({ amount: Math.floor(price * 100), userId:user?._id, materialId:material?._id })
-      const data = await res.json()
+      const price = material?.price;
+      const res = await createPaymentIntent({
+        amount: Math.floor(price * 100),
+        userId: user?._id,
+        materialId: material?._id,
+      });
+      const data = await res.json();
       // console.log(material?.price, data)
 
       //initializing payment sheet
-      const { error } = await initPaymentSheet({
-        merchantDisplayName: "The Right Guru",
+      const {error} = await initPaymentSheet({
+        merchantDisplayName: 'The Right Guru',
         // customerId: customer,
         // customerEphemeralKeySecret: ephemeralKey,
         paymentIntentClientSecret: data.paymentIntent,
@@ -121,13 +136,12 @@ const MaterialModal = ({ navigation, route }) => {
       // const res2 = await buyMaterial({ userId: user._id, materialId: material?._id })
       //go back
       // Alert.alert("Payment Success!", "Your material is added to my material screen :)")
-      navigation.goBack()
-
+      navigation.goBack();
     } catch (error) {
-      console.log(error)
-      Alert.alert("Something went wrong...")
+      console.log(error);
+      Alert.alert('Something went wrong...');
     }
-  }
+  };
 
   return (
     <Modal
@@ -148,9 +162,10 @@ const MaterialModal = ({ navigation, route }) => {
           style={{
             backgroundColor: '#fff',
             width: '90%',
-            height: '40%',
+            height: 'auto',
             borderRadius: 8,
             position: 'relative',
+            paddingBottom: 20,
           }}>
           <Text
             style={{
@@ -199,26 +214,48 @@ const MaterialModal = ({ navigation, route }) => {
             </TouchableOpacity>
           </View>
 
-          <View style={{ width: "100%", marginHorizontal: 30, marginVertical: 10 }}>
-            <Text>Name : {material?.title}</Text>
-            <Text>Description : {material?.description}</Text>
-            <Text>Price : {material?.price}Rs</Text>
-            <Text></Text>
-            <Text>Note: Material is added to my material screen after successful payment :)</Text>
+          <View
+            style={{
+              width: '90%',
+              alignSelf: 'center',
+              marginBottom: 20,
+              gap: 5,
+            }}>
+            <Text style={{color: colors.textColor}}>
+              Material name : {material?.title}
+            </Text>
+            <Text style={{color: colors.textColor}}>
+              Class : {material?.class}
+            </Text>
+            <Text style={{color: colors.textColor}}>
+              Description : {material?.description}
+            </Text>
+            <Text style={{color: colors.textColor}}>
+              Price : <IconFA name="rupee" size={13} color="#000" />{' '}
+              {material?.price}
+            </Text>
+
+            <Text style={{color: colors.textColor, flexWrap: 'wrap'}}>
+              Note : Material will added to my material screen after successful
+              payment :
+            </Text>
           </View>
 
-
-          {material?.isPaid ? <TouchableOpacity
-            onPress={() => {
-              handleCheckout(material)
-            }}>
-            <Text style={styles.openBtn}>Buy</Text>
-          </TouchableOpacity> : <TouchableOpacity
-            onPress={() => {
-              navigation.navigate('pdf_screen', { uri: material?.pdfUrl });
-            }}>
-            <Text style={styles.openBtn}>Open</Text>
-          </TouchableOpacity>}
+          {material?.isPaid ? (
+            <TouchableOpacity
+              onPress={() => {
+                handleCheckout(material);
+              }}>
+              <Text style={styles.openBtn}>Buy</Text>
+            </TouchableOpacity>
+          ) : (
+            <TouchableOpacity
+              onPress={() => {
+                navigation.navigate('pdf_screen', {uri: material?.pdfUrl});
+              }}>
+              <Text style={styles.openBtn}>Open</Text>
+            </TouchableOpacity>
+          )}
         </View>
       </View>
     </Modal>

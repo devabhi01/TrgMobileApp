@@ -50,6 +50,8 @@ import MaterialModal from '../components/material/MaterialModal';
 import OnBoardingScreen from '../screen/OnBoardingScreen';
 import MyMaterial from '../components/MyMaterial';
 
+import Loader from '../components/courses/template/loading';
+
 
 const Stack = createStackNavigator();
 
@@ -420,7 +422,13 @@ const StudentStack = () => {
         />
 
         {/* Misc Screen refers */}
-        
+        <Stack.Screen
+          name="loader"
+          component={Loader}
+          options={{
+            headerShown: false,
+          }}
+        />
       </Stack.Navigator>
     </>
   );

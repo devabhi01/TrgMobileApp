@@ -9,9 +9,10 @@ import {
   Share,
   Modal,
   TouchableWithoutFeedback,
-  Linking
+  Linking,
 } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import IconIo from 'react-native-vector-icons/Ionicons';
 import AnnouncmentIcon from './announcement.png';
 import {useNavigation} from '@react-navigation/native';
 
@@ -24,7 +25,8 @@ const HeaderThreeDots = props => {
   const onShare = async () => {
     try {
       const result = await Share.share({
-        message: 'Download the App on Playstore : https://play.google.com/store/apps/details?id=com.trgmobileapp',
+        message:
+          'Download the App on Playstore : https://play.google.com/store/apps/details?id=com.trgmobileapp',
       });
       if (result.action === Share.sharedAction) {
         if (result.activityType) {
@@ -42,17 +44,30 @@ const HeaderThreeDots = props => {
 
   // opening on playstore
   const openPlayStore = () => {
-    Linking.openURL('market://details?id=com.trgmobileapp')
-      .catch((err) => console.error('An error occurred', err));
+    Linking.openURL('market://details?id=com.trgmobileapp').catch(err =>
+      console.error('An error occurred', err),
+    );
   };
 
   return (
     <View style={{marginRight: 20, flexDirection: 'row'}}>
-      <TouchableOpacity style={{marginRight: 10}} onPress={() => {navigation.navigate('announcement')}}>
+      <TouchableOpacity
+        style={{paddingHorizontal: 5}}
+        onPress={() => {
+          navigation.navigate('announcement');
+        }}>
         <Image source={AnnouncmentIcon} style={{height: 24, width: 24}} />
       </TouchableOpacity>
 
       <TouchableOpacity
+        style={{paddingHorizontal: 5}}
+        onPress={() => {
+          navigation.navigate('setting_screen');
+        }}>
+        <IconIo name="settings" size={24} color="#fff" />
+      </TouchableOpacity>
+
+      <TouchableOpacity style={{paddingHorizontal: 5}}
         onPress={() => {
           setIsClicked(!isClicked);
         }}>
@@ -68,7 +83,9 @@ const HeaderThreeDots = props => {
           <View style={styles.modalOverlay}>
             <View style={styles.modalContainer}>
               <View style={{flexDirection: 'column'}}>
-                <TouchableOpacity style={{marginBottom: 15}} onPress={openPlayStore} >
+                <TouchableOpacity
+                  style={{marginBottom: 15}}
+                  onPress={openPlayStore}>
                   <Text style={{color: '#0a0a0a', fontSize: 16}}>Rate App</Text>
                 </TouchableOpacity>
                 <TouchableOpacity
@@ -77,8 +94,9 @@ const HeaderThreeDots = props => {
                   <Text style={{color: '#0a0a0a', fontSize: 16}}>
                     Share App
                   </Text>
-                </TouchableOpacity >
-                <TouchableOpacity onPress={() => navigation.navigate('helpsupport')}>
+                </TouchableOpacity>
+                <TouchableOpacity
+                  onPress={() => navigation.navigate('helpsupport')}>
                   <Text style={{color: '#0a0a0a', fontSize: 16}}>
                     Contact Us
                   </Text>
