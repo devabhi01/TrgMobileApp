@@ -1,10 +1,13 @@
-import {Image, StyleSheet, Text, View, Dimensions} from 'react-native';
-import React, {useState} from 'react';
+import { Image, StyleSheet, Text, View, Dimensions } from 'react-native';
+import React, { useState } from 'react';
 import AppIntroSlider from 'react-native-app-intro-slider';
-import {useNavigation} from '@react-navigation/native';
+import { useNavigation } from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import { TouchableOpacity } from 'react-native-gesture-handler';
+import { useUserContext } from '../utils/userContext';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
-const {width, height} = Dimensions.get('screen');
+const { width, height } = Dimensions.get('screen');
 const slides = [
   {
     key: 1,
@@ -29,7 +32,16 @@ const slides = [
   },
 ];
 export default function OnBoardingScreen() {
-  const [showOnboard, setShowOnboard] = useState(false);
+  const {isOldUser, setIsOldUser} = useUserContext();
+
+  const getStarted = async () =>{
+    try {
+      setIsOldUser(true)
+      await AsyncStorage.setItem('isOldUser',JSON.stringify(true));
+    } catch (error) {
+      console.log(error)
+    }
+  }
 
   const nextBtn = label => {
     return (
@@ -47,7 +59,7 @@ export default function OnBoardingScreen() {
   const skipBtn = label => {
     return (
       <View>
-        <Text style={{color: '#dc3545', paddingHorizontal: 10}}>{label}</Text>
+        <Text style={{ color: '#dc3545', paddingHorizontal: 10 }}>{label}</Text>
       </View>
     );
   };
@@ -55,12 +67,13 @@ export default function OnBoardingScreen() {
     return (
       <View>
         <Text
+          onPress={getStarted}
           style={{
             color: '#dc3545',
             paddingHorizontal: 10,
             paddingVertical: 5,
-            borderColor: '#023e8a',
-            borderWidth: 1,
+            // borderColor: '#023e8a',
+            // borderWidth: 1,
             borderRadius: 10,
           }}>
           {label}
@@ -69,17 +82,17 @@ export default function OnBoardingScreen() {
     );
   };
 
-  if (!showOnboard) {
+  if (!isOldUser) {
     return (
       <AppIntroSlider
         data={slides}
-        renderItem={({item}) => {
+        renderItem={({ item }) => {
           return (
             <View style={styles.slide}>
               <Image
                 source={item.image}
                 resizeMode="contain"
-                style={{height: 250, marginBottom: 50}}
+                style={{ height: 250, marginBottom: 50 }}
               />
               <View style={styles.innterCont}>
                 <View style={styles.innerStrip}>
@@ -87,19 +100,19 @@ export default function OnBoardingScreen() {
                     name="square"
                     size={16}
                     color="#fff"
-                    style={{marginLeft: 10}}
+                    style={{ marginLeft: 10 }}
                   />
                   <Icon
                     name="circle"
                     size={16}
                     color="#fff"
-                    style={{marginLeft: 5}}
+                    style={{ marginLeft: 5 }}
                   />
                   <Icon
                     name="triangle"
                     size={16}
                     color="#fff"
-                    style={{marginLeft: 5}}
+                    style={{ marginLeft: 5 }}
                   />
                 </View>
                 <Image style={styles.emoji} source={item.emoji} />
@@ -110,18 +123,13 @@ export default function OnBoardingScreen() {
           );
         }}
         showSkipButton
-        activeDotStyle={{backgroundColor: '#dc3545', width: 20}}
+        activeDotStyle={{ backgroundColor: '#dc3545', width: 20 }}
         renderNextButton={() => nextBtn('Next')}
         renderSkipButton={() => skipBtn('Skip')}
         renderDoneButton={() => getStartedBtn('Get Started')}
       />
     );
   }
-  return (
-    <View>
-      <Text>Abc</Text>
-    </View>
-  );
 }
 
 const styles = StyleSheet.create({

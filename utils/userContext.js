@@ -9,9 +9,10 @@ export const UserProvider = ({ children }) => {
   const [user, setUser] = useState(null); // Initialize user state as null
   const [jwtoken, setJwtoken] = useState("")
   const [downloads, setDownloads] = useState([]);
+  const [isOldUser, setIsOldUser] = useState(false)
 
   return (
-    <UserContext.Provider value={{ user, setUser, jwtoken, setJwtoken, downloads, setDownloads }}>
+    <UserContext.Provider value={{ user, setUser, jwtoken, setJwtoken, downloads, setDownloads, isOldUser, setIsOldUser }}>
       {children}
     </UserContext.Provider>
   );

@@ -1,4 +1,4 @@
-import React, {useRef, useState, useEffect} from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import {
   SafeAreaView,
   ScrollView,
@@ -8,15 +8,36 @@ import {
   Text,
   TextInput,
   TouchableOpacity,
+  Alert,
 } from 'react-native';
 import LottieView from 'lottie-react-native';
+import { sentOtp, verifyOTP } from '../utils/APIs';
+import { useNavigation } from '@react-navigation/native';
 
-const {width, height} = Dimensions.get('screen');
+const { width, height } = Dimensions.get('screen');
 const ForgotPass = () => {
+  const navigation = useNavigation()
   const [animationStarted, setAnimationStarted] = useState(false);
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
+  const [cpassword, setCpassword] = useState('')
 
-  const handleButtonPress = () => {
+  const handleButtonPress = async () => {
     setAnimationStarted(true); // Update state to start animation
+    // checking password match
+    if (password !== cpassword) {
+      return Alert.alert("passwords doens't match");
+    }
+    try {
+      //sending otp
+      const res = await sentOtp({email})
+      if(res.ok){
+        return Alert.alert(`OTP send to ${email}`)
+      }
+    } catch (error) {
+      console.log(error)
+      return Alert.alert("Something went wrong...");
+    }
   };
 
   const et1 = useRef();
@@ -42,16 +63,26 @@ const ForgotPass = () => {
     };
   }, [count]);
 
-  const ValidateOTP = () => {
-    let enteredOTP = f1 + f2 + f3 + f4;
-    if (enteredOTP == otp) {
-      Alert.alert('Otp Matched');
-    } else {
-      Alert.alert('Wrong OTP');
+  const ValidateOTP = async () => {
+    let verifyCode = f1 + f2 + f3 + f4;
+    try {
+      const res = await verifyOTP({email, verifyCode, password })
+      const data = await res.json()
+      console.log(res)
+      if (res.ok) {
+        Alert.alert("Password changed Successfully!");
+        navigation.navigate('Login')
+      }
+      else{
+        if(res.status === 401) return Alert.alert(data.msg);
+      }
+    } catch (error) {
+      console.log(error)
+      return Alert.alert("Something went wrong...");
     }
   };
   return (
-    <SafeAreaView style={{flex: 1}}>
+    <SafeAreaView style={{ flex: 1 }}>
       <ScrollView>
         <View style={styles.container}>
           <LottieView
@@ -76,6 +107,7 @@ const ForgotPass = () => {
             placeholderTextColor={'#241D20'}
             cursorColor={'#dc3545'}
             keyboardType="default"
+            onChangeText={(text) => { setEmail(text) }}
           />
           <TextInput
             style={styles.input}
@@ -83,6 +115,7 @@ const ForgotPass = () => {
             placeholderTextColor={'#241D20'}
             cursorColor={'#dc3545'}
             keyboardType="default"
+            onChangeText={(text) => { setPassword(text) }}
           />
           <TextInput
             style={styles.input}
@@ -90,15 +123,16 @@ const ForgotPass = () => {
             placeholderTextColor={'#241D20'}
             cursorColor={'#dc3545'}
             keyboardType="default"
+            onChangeText={(text) => { setCpassword(text) }}
           />
-          <TouchableOpacity style={[styles.btn, {flexDirection: 'row'}]} onPress={handleButtonPress}>
-            <Text style={{color: '#fff'}}>Send OTP</Text>
+          <TouchableOpacity style={[styles.btn, { flexDirection: 'row' }]} onPress={handleButtonPress}>
+            <Text style={{ color: '#fff' }}>Send OTP</Text>
             {animationStarted && (
               <LottieView
                 source={require('../assets/msgSent.json')}
                 autoPlay
                 loop={false}
-                style={{width: 50, height: 50, marginLeft: 10}}
+                style={{ width: 50, height: 50, marginLeft: 10 }}
               />
             )}
           </TouchableOpacity>
@@ -130,7 +164,7 @@ const ForgotPass = () => {
                 ref={et1}
                 style={[
                   styles.inputview,
-                  {borderColor: f1.length >= 1 ? '#dc3545' : '#444444'},
+                  { borderColor: f1.length >= 1 ? '#dc3545' : '#444444' },
                 ]}
                 keyboardType="number-pad"
                 maxLength={1}
@@ -148,7 +182,7 @@ const ForgotPass = () => {
                 ref={et2}
                 style={[
                   styles.inputview,
-                  {borderColor: f2.length >= 1 ? '#dc3545' : '#444444'},
+                  { borderColor: f2.length >= 1 ? '#dc3545' : '#444444' },
                 ]}
                 keyboardType="number-pad"
                 maxLength={1}
@@ -166,7 +200,7 @@ const ForgotPass = () => {
                 ref={et3}
                 style={[
                   styles.inputview,
-                  {borderColor: f3.length >= 1 ? '#dc3545' : '#444444'},
+                  { borderColor: f3.length >= 1 ? '#dc3545' : '#444444' },
                 ]}
                 keyboardType="number-pad"
                 maxLength={1}
@@ -184,7 +218,7 @@ const ForgotPass = () => {
                 ref={et4}
                 style={[
                   styles.inputview,
-                  {borderColor: f4.length >= 1 ? '#dc3545' : '#444444'},
+                  { borderColor: f4.length >= 1 ? '#dc3545' : '#444444' },
                 ]}
                 keyboardType="number-pad"
                 maxLength={1}
@@ -199,7 +233,7 @@ const ForgotPass = () => {
                 }}
               />
             </View>
-            <View style={{flexDirection: 'row', justifyContent: 'center'}}>
+            <View style={{ flexDirection: 'row', justifyContent: 'center' }}>
               <TouchableOpacity
                 disabled={count == 0 ? false : true}
                 onPress={() => {
@@ -208,13 +242,13 @@ const ForgotPass = () => {
                 <Text
                   style={[
                     styles.resendview,
-                    {color: count == 0 ? '#dc3545' : '#444444'},
+                    { color: count == 0 ? '#dc3545' : '#444444' },
                   ]}>
                   Resend
                 </Text>
               </TouchableOpacity>
               {count !== 0 ? (
-                <Text style={{color: '#0a0a0a', marginLeft: 10, fontSize: 16}}>
+                <Text style={{ color: '#0a0a0a', marginLeft: 10, fontSize: 16 }}>
                   in {count} seconds
                 </Text>
               ) : (
