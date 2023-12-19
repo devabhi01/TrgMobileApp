@@ -72,8 +72,8 @@ export default function OnBoardingScreen() {
             color: '#dc3545',
             paddingHorizontal: 10,
             paddingVertical: 5,
-            // borderColor: '#023e8a',
-            // borderWidth: 1,
+            borderColor: '#023e8a',
+            borderWidth: 1,
             borderRadius: 10,
           }}>
           {label}

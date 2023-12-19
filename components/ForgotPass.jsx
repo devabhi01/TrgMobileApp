@@ -1,4 +1,4 @@
-import React, { useRef, useState, useEffect } from 'react';
+import React, {useRef, useState, useEffect} from 'react';
 import {
   SafeAreaView,
   ScrollView,
@@ -11,16 +11,19 @@ import {
   Alert,
 } from 'react-native';
 import LottieView from 'lottie-react-native';
-import { sentOtp, verifyOTP } from '../utils/APIs';
-import { useNavigation } from '@react-navigation/native';
+import {sentOtp, verifyOTP} from '../utils/APIs';
+import {useNavigation} from '@react-navigation/native';
 
-const { width, height } = Dimensions.get('screen');
+const {width, height} = Dimensions.get('screen');
 const ForgotPass = () => {
-  const navigation = useNavigation()
+  const navigation = useNavigation();
   const [animationStarted, setAnimationStarted] = useState(false);
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
-  const [cpassword, setCpassword] = useState('')
+
+  const [showVerifySection, setShowVerifySection] = useState(false);
+
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [cpassword, setCpassword] = useState('');
 
   const handleButtonPress = async () => {
     setAnimationStarted(true); // Update state to start animation
@@ -30,13 +33,15 @@ const ForgotPass = () => {
     }
     try {
       //sending otp
-      const res = await sentOtp({email})
-      if(res.ok){
-        return Alert.alert(`OTP send to ${email}`)
+      const res = await sentOtp({email});
+      if (res.ok) {
+        Alert.alert(`OTP send to ${email}`);
+        setShowVerifySection(true);
+        setAnimationStarted(true);
       }
     } catch (error) {
-      console.log(error)
-      return Alert.alert("Something went wrong...");
+      console.log(error);
+      return Alert.alert('Something went wrong...');
     }
   };
 
@@ -66,23 +71,23 @@ const ForgotPass = () => {
   const ValidateOTP = async () => {
     let verifyCode = f1 + f2 + f3 + f4;
     try {
-      const res = await verifyOTP({email, verifyCode, password })
-      const data = await res.json()
-      console.log(res)
+      const res = await verifyOTP({email, verifyCode, password});
+      const data = await res.json();
+      console.log(res);
       if (res.ok) {
-        Alert.alert("Password changed Successfully!");
-        navigation.navigate('Login')
-      }
-      else{
-        if(res.status === 401) return Alert.alert(data.msg);
+        Alert.alert('Password changed Successfully!');
+        navigation.navigate('Login');
+      } else {
+        if (res.status === 401) return Alert.alert(data.msg);
       }
     } catch (error) {
-      console.log(error)
-      return Alert.alert("Something went wrong...");
+      console.log(error);
+      return Alert.alert('Something went wrong...');
     }
   };
+
   return (
-    <SafeAreaView style={{ flex: 1 }}>
+    <SafeAreaView style={{flex: 1}}>
       <ScrollView>
         <View style={styles.container}>
           <LottieView
@@ -107,32 +112,42 @@ const ForgotPass = () => {
             placeholderTextColor={'#241D20'}
             cursorColor={'#dc3545'}
             keyboardType="default"
-            onChangeText={(text) => { setEmail(text) }}
+            onChangeText={text => {
+              setEmail(text);
+            }}
           />
           <TextInput
             style={styles.input}
             placeholder="New Password"
             placeholderTextColor={'#241D20'}
+            secureTextEntry={true}
             cursorColor={'#dc3545'}
             keyboardType="default"
-            onChangeText={(text) => { setPassword(text) }}
+            onChangeText={text => {
+              setPassword(text);
+            }}
           />
           <TextInput
             style={styles.input}
             placeholder="Confirm New Password"
             placeholderTextColor={'#241D20'}
+            secureTextEntry={true}
             cursorColor={'#dc3545'}
             keyboardType="default"
-            onChangeText={(text) => { setCpassword(text) }}
+            onChangeText={text => {
+              setCpassword(text);
+            }}
           />
-          <TouchableOpacity style={[styles.btn, { flexDirection: 'row' }]} onPress={handleButtonPress}>
-            <Text style={{ color: '#fff' }}>Send OTP</Text>
+          <TouchableOpacity
+            style={[styles.btn, {flexDirection: 'row'}]}
+            onPress={handleButtonPress}>
+            <Text style={{color: '#fff'}}>Send OTP</Text>
             {animationStarted && (
               <LottieView
                 source={require('../assets/msgSent.json')}
                 autoPlay
                 loop={false}
-                style={{ width: 50, height: 50, marginLeft: 10 }}
+                style={{width: 50, height: 50, marginLeft: 10}}
               />
             )}
           </TouchableOpacity>
@@ -147,141 +162,147 @@ const ForgotPass = () => {
               style={{width: 50, height: 50,marginLeft:10}}
             />
           </TouchableOpacity> */}
-
-          <Text
-            style={{
-              fontSize: 18,
-              color: '#dc3545',
-              textAlign: 'center',
-              fontWeight: 600,
-              marginVertical: 15,
-            }}>
-            Verify Otp
-          </Text>
-          <View>
-            <View style={styles.otpview}>
-              <TextInput
-                ref={et1}
-                style={[
-                  styles.inputview,
-                  { borderColor: f1.length >= 1 ? '#dc3545' : '#444444' },
-                ]}
-                keyboardType="number-pad"
-                maxLength={1}
-                value={f1}
-                onChangeText={txt => {
-                  setF1(txt);
-                  if (txt.length >= 1) {
-                    et2.current.focus();
-                  } else if (txt.length < 1) {
-                    et1.current.focus();
-                  }
-                }}
-              />
-              <TextInput
-                ref={et2}
-                style={[
-                  styles.inputview,
-                  { borderColor: f2.length >= 1 ? '#dc3545' : '#444444' },
-                ]}
-                keyboardType="number-pad"
-                maxLength={1}
-                value={f2}
-                onChangeText={txt => {
-                  setF2(txt);
-                  if (txt.length >= 1) {
-                    et3.current.focus();
-                  } else if (txt.length < 1) {
-                    et1.current.focus();
-                  }
-                }}
-              />
-              <TextInput
-                ref={et3}
-                style={[
-                  styles.inputview,
-                  { borderColor: f3.length >= 1 ? '#dc3545' : '#444444' },
-                ]}
-                keyboardType="number-pad"
-                maxLength={1}
-                value={f3}
-                onChangeText={txt => {
-                  setF3(txt);
-                  if (txt.length >= 1) {
-                    et4.current.focus();
-                  } else if (txt.length < 1) {
-                    et2.current.focus();
-                  }
-                }}
-              />
-              <TextInput
-                ref={et4}
-                style={[
-                  styles.inputview,
-                  { borderColor: f4.length >= 1 ? '#dc3545' : '#444444' },
-                ]}
-                keyboardType="number-pad"
-                maxLength={1}
-                value={f4}
-                onChangeText={txt => {
-                  setF4(txt);
-                  if (txt.length >= 1) {
-                    et4.current.focus();
-                  } else if (txt.length < 1) {
-                    et3.current.focus();
-                  }
-                }}
-              />
-            </View>
-            <View style={{ flexDirection: 'row', justifyContent: 'center' }}>
-              <TouchableOpacity
-                disabled={count == 0 ? false : true}
-                onPress={() => {
-                  setCount(60);
-                }}>
-                <Text
-                  style={[
-                    styles.resendview,
-                    { color: count == 0 ? '#dc3545' : '#444444' },
-                  ]}>
-                  Resend
-                </Text>
-              </TouchableOpacity>
-              {count !== 0 ? (
-                <Text style={{ color: '#0a0a0a', marginLeft: 10, fontSize: 16 }}>
-                  in {count} seconds
-                </Text>
-              ) : (
-                ''
-              )}
-            </View>
-            <TouchableOpacity
-              style={[
-                styles.btn,
-                {
-                  backgroundColor:
-                    f1 !== '' && f2 !== '' && f3 !== '' && f4 !== ''
-                      ? '#dc3545'
-                      : '#666666',
-                  marginBottom: 50,
-                },
-              ]}
-              disabled={
-                f1 !== '' && f2 !== '' && f3 !== '' && f4 !== '' ? false : true
-              }
-              onPress={() => ValidateOTP()}>
+          {showVerifySection && (
+            <>
               <Text
                 style={{
-                  color: '#eee',
-                  textAlign: 'center',
-                  justifyContent: 'center',
                   fontSize: 18,
-                  fontWeight: 500,
+                  color: '#dc3545',
+                  textAlign: 'center',
+                  fontWeight: 600,
+                  marginVertical: 15,
                 }}>
-                Submit
+                Verify Otp
               </Text>
-            </TouchableOpacity>
-          </View>
+              <View>
+                <View style={styles.otpview}>
+                  <TextInput
+                    ref={et1}
+                    style={[
+                      styles.inputview,
+                      {borderColor: f1.length >= 1 ? '#dc3545' : '#444444'},
+                    ]}
+                    keyboardType="number-pad"
+                    maxLength={1}
+                    value={f1}
+                    onChangeText={txt => {
+                      setF1(txt);
+                      if (txt.length >= 1) {
+                        et2.current.focus();
+                      } else if (txt.length < 1) {
+                        et1.current.focus();
+                      }
+                    }}
+                  />
+                  <TextInput
+                    ref={et2}
+                    style={[
+                      styles.inputview,
+                      {borderColor: f2.length >= 1 ? '#dc3545' : '#444444'},
+                    ]}
+                    keyboardType="number-pad"
+                    maxLength={1}
+                    value={f2}
+                    onChangeText={txt => {
+                      setF2(txt);
+                      if (txt.length >= 1) {
+                        et3.current.focus();
+                      } else if (txt.length < 1) {
+                        et1.current.focus();
+                      }
+                    }}
+                  />
+                  <TextInput
+                    ref={et3}
+                    style={[
+                      styles.inputview,
+                      {borderColor: f3.length >= 1 ? '#dc3545' : '#444444'},
+                    ]}
+                    keyboardType="number-pad"
+                    maxLength={1}
+                    value={f3}
+                    onChangeText={txt => {
+                      setF3(txt);
+                      if (txt.length >= 1) {
+                        et4.current.focus();
+                      } else if (txt.length < 1) {
+                        et2.current.focus();
+                      }
+                    }}
+                  />
+                  <TextInput
+                    ref={et4}
+                    style={[
+                      styles.inputview,
+                      {borderColor: f4.length >= 1 ? '#dc3545' : '#444444'},
+                    ]}
+                    keyboardType="number-pad"
+                    maxLength={1}
+                    value={f4}
+                    onChangeText={txt => {
+                      setF4(txt);
+                      if (txt.length >= 1) {
+                        et4.current.focus();
+                      } else if (txt.length < 1) {
+                        et3.current.focus();
+                      }
+                    }}
+                  />
+                </View>
+                <View style={{flexDirection: 'row', justifyContent: 'center'}}>
+                  <TouchableOpacity
+                    disabled={count == 0 ? false : true}
+                    onPress={() => {
+                      setCount(60);
+                    }}>
+                    <Text
+                      style={[
+                        styles.resendview,
+                        {color: count == 0 ? '#dc3545' : '#444444'},
+                      ]}>
+                      Resend
+                    </Text>
+                  </TouchableOpacity>
+                  {count !== 0 ? (
+                    <Text
+                      style={{color: '#0a0a0a', marginLeft: 10, fontSize: 16}}>
+                      in {count} seconds
+                    </Text>
+                  ) : (
+                    ''
+                  )}
+                </View>
+                <TouchableOpacity
+                  style={[
+                    styles.btn,
+                    {
+                      backgroundColor:
+                        f1 !== '' && f2 !== '' && f3 !== '' && f4 !== ''
+                          ? '#dc3545'
+                          : '#666666',
+                      marginBottom: 50,
+                    },
+                  ]}
+                  disabled={
+                    f1 !== '' && f2 !== '' && f3 !== '' && f4 !== ''
+                      ? false
+                      : true
+                  }
+                  onPress={() => ValidateOTP()}>
+                  <Text
+                    style={{
+                      color: '#eee',
+                      textAlign: 'center',
+                      justifyContent: 'center',
+                      fontSize: 18,
+                      fontWeight: 500,
+                    }}>
+                    Submit
+                  </Text>
+                </TouchableOpacity>
+              </View>
+            </>
+          )}
         </View>
       </ScrollView>
     </SafeAreaView>
