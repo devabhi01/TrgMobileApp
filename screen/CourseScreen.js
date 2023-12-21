@@ -127,6 +127,9 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     paddingLeft: 20,
     alignItems: 'center',
+    borderWidth: 1,
+    borderColor: colors.primary,
+    borderRadius: 10,
   },
   textBtn: {
     fontWeight: 'bold',

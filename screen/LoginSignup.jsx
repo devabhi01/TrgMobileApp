@@ -5,10 +5,10 @@ import {
   TouchableOpacity,
   Image,
   ScrollView,
-  Dimensions
+  Dimensions,
 } from 'react-native';
 import React from 'react';
-
+import LottieView from 'lottie-react-native';
 
 const {width, height} = Dimensions.get('screen');
 
@@ -17,8 +17,14 @@ const LoginSignup = props => {
     <SafeAreaView style={{flex: 1}}>
       <ScrollView>
         <View>
-          <View style={{alignItems: 'center'}}>
-            <Image
+          <View style={{alignItems: 'center',marginTop:20}}>
+            <LottieView
+              source={require('../assets/loginsignup.json')}
+              autoPlay
+              loop
+              style={{height: width, width: width * 0.9}}
+            />
+            {/* <Image
               style={{
                 height: 350,
                 width: width,
@@ -26,7 +32,7 @@ const LoginSignup = props => {
                 borderBottomRightRadius: 30,
               }}
               source={require('../assets/img/OnboardLogin.jpg')}
-            />
+            /> */}
           </View>
           <View
             style={{
@@ -53,6 +59,7 @@ const LoginSignup = props => {
               flexDirection: 'row',
               justifyContent: 'space-evenly',
               marginBottom: 50,
+              
             }}>
             <TouchableOpacity
               onPress={() => {

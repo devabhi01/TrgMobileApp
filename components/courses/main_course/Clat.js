@@ -90,7 +90,7 @@ const Clat = () => {
                   fontWeight: '400',
                 }}>
                 Class Timing :{' '}
-                <Text style={{fontWeight: '600'}}>8:00 AM to 8: PM PM</Text>{' '}
+                <Text style={{fontWeight: '600'}}>8:00 AM to 8:00 PM</Text>{' '}
               </Text>
               <View
                 style={{
@@ -313,7 +313,7 @@ const Clat = () => {
         </View>
       </ScrollView>
       <TouchableOpacity style={styles.buyBtn}>
-        <Text style={{fontSize: 18, color: '#fff'}}>Buy Now</Text>
+        <Text style={{fontSize: 18, color: '#fff'}}>Join Now</Text>
       </TouchableOpacity>
     </SafeAreaView>
   );

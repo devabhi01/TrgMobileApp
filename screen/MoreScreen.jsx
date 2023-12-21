@@ -66,14 +66,14 @@ const MoreScreen = props => {
             backgroundColor={'#dc3545'}
           />
         </View> */}
-        <View style={styles.btnCont}>
+        {/* <View style={styles.btnCont}>
           <MoreOptBtn
             name={'OnBoarding'}
             IocnName={'settings'}
             onPress={() => props.navigation.navigate('onBoarding')}
             backgroundColor={'#dc3545'}
           />
-        </View>
+        </View> */}
 
       </ScrollView>
     </SafeAreaView>

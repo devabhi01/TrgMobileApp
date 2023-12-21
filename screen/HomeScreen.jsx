@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, {useState, useEffect} from 'react';
 import {
   View,
   Text,
@@ -8,12 +8,12 @@ import {
   TouchableOpacity,
   Linking,
   Image,
-  ActivityIndicator
+  ActivityIndicator,
 } from 'react-native';
-import { Searchbar, Avatar } from 'react-native-paper';
+import {Searchbar, Avatar} from 'react-native-paper';
 
-import { windowWidth } from '../utils/Dimensions';
-import { colors } from '../constants';
+import {windowWidth} from '../utils/Dimensions';
+import {colors} from '../constants';
 import Carousel from 'react-native-reanimated-carousel';
 
 // Images here
@@ -26,17 +26,17 @@ import trgIcon from '../assets/img/trgIcon.png';
 // import { useUserContext } from '../utils/userContext';
 // import Geolocation from '@react-native-community/geolocation';
 import Qotd from '../components/courses/template/Qotd';
-import { fetchCarousel, fetchQod } from '../utils/APIs';
+import {fetchCarousel, fetchQod} from '../utils/APIs';
 
 // Course details
 const courses = [
-  { name: 'cbse', screen: 'cbse', img: require('../assets/img/cbse.png') },
-  { name: 'icse', screen: 'icse', img: require('../assets/img/icse.png') },
-  { name: 'ssc', screen: 'ssc', img: require('../assets/img/ssc.png') },
-  { name: 'cuet', screen: 'cuet', img: require('../assets/img/cuet.png') },
-  { name: 'clat', screen: 'clat', img: require('../assets/img/clat.png') },
-  { name: 'dsssb', screen: 'dsssb', img: require('../assets/img/dsssb.png') },
-  { name: 'police', screen: 'police', img: require('../assets/img/police.png') },
+  {name: 'cbse', screen: 'cbse', img: require('../assets/img/cbse.png')},
+  {name: 'icse', screen: 'icse', img: require('../assets/img/icse.png')},
+  {name: 'ssc', screen: 'ssc', img: require('../assets/img/ssc.png')},
+  {name: 'cuet', screen: 'cuet', img: require('../assets/img/cuet.png')},
+  {name: 'clat', screen: 'clat', img: require('../assets/img/clat.png')},
+  {name: 'dsssb', screen: 'dsssb', img: require('../assets/img/dsssb.png')},
+  {name: 'police', screen: 'police', img: require('../assets/img/police.png')},
   {
     name: 'others',
     screen: 'other_comp',
@@ -45,7 +45,6 @@ const courses = [
 ];
 
 const HomeScreen = props => {
-
   // // user context for fetching details
   // const { setLocation } = useUserContext();
   // //setting location
@@ -83,35 +82,33 @@ const HomeScreen = props => {
   // };
 
   // getting slider/carousel
-  const [sliderData, setSliderData] = useState([])
+  const [sliderData, setSliderData] = useState([]);
   useEffect(() => {
     const getSliderData = async () => {
       try {
-        setIsCarouselLoading(true)
-        setIsQodLoading(true)
+        setIsCarouselLoading(true);
+        setIsQodLoading(true);
         const res = await fetchCarousel();
         const carousel = await res.json();
-        setSliderData(carousel)
-        setIsCarouselLoading(false)
+        setSliderData(carousel);
+        setIsCarouselLoading(false);
 
         const res2 = await fetchQod();
         const qodData = await res2.json();
-        console.log(qodData)
-        setIsQodLoading(qodData)
-        setIsQodLoading(false)
+        console.log(qodData);
+        setIsQodLoading(qodData);
+        setIsQodLoading(false);
       } catch (error) {
         console.log(error);
       }
-    }
+    };
 
     getSliderData();
-
-  }, [])
-
+  }, []);
 
   return (
-    <SafeAreaView style={{ flex: 1, backgroundColor: colors.graylight }}>
-      <ScrollView style={{ paddingVertical: 10 }}>
+    <SafeAreaView style={{flex: 1, backgroundColor: colors.graylight}}>
+      <ScrollView style={{paddingVertical: 10}}>
         <View style={styles.container}>
           {/* <View style={styles.topbar}>
             <View >
@@ -167,32 +164,43 @@ const HomeScreen = props => {
           </Text> */}
           <View>
             <View
-              style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-              {isCarouselLoading?<ActivityIndicator style={{paddingVertical: 90,justifyContent: 'center', alignItems:'center'}} />:<Carousel
-                loop
-                width={windowWidth - 40}
-                height={windowWidth / 2}
-                autoPlay={true}
-                autoPlayInterval={5000}
-                data={sliderData}
-                renderItem={({ item, index }) => (
-                  <View
-                    key={index}
-                    style={{
-                      flex: 1,
-                      justifyContent: 'center',
-                    }}>
-                    <Image
-                      source={{uri:item.imgUrl}}
+              style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+              {isCarouselLoading ? (
+                <ActivityIndicator
+                  color={'#dc3545'}
+                  style={{
+                    paddingVertical: 90,
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                  }}
+                />
+              ) : (
+                <Carousel
+                  loop
+                  width={windowWidth - 40}
+                  height={windowWidth / 2}
+                  autoPlay={true}
+                  autoPlayInterval={5000}
+                  data={sliderData}
+                  renderItem={({item, index}) => (
+                    <View
+                      key={index}
                       style={{
-                        width: '100%',
-                        height: '100%',
-                        resizeMode: 'contain',
-                      }}
-                    />
-                  </View>
-                )}
-              />}
+                        flex: 1,
+                        justifyContent: 'center',
+                      }}>
+                      <Image
+                        source={{uri: item.imgUrl}}
+                        style={{
+                          width: '100%',
+                          height: '100%',
+                          resizeMode: 'contain',
+                        }}
+                      />
+                    </View>
+                  )}
+                />
+              )}
             </View>
           </View>
           <View
@@ -212,7 +220,7 @@ const HomeScreen = props => {
               }}>
               Question of the Day
             </Text>
-            <View style={{ marginHorizontal: 20, marginTop: 10 }}>
+            <View style={{marginHorizontal: 20, marginTop: 10}}>
               <Qotd />
             </View>
           </View>
@@ -228,12 +236,8 @@ const HomeScreen = props => {
               marginTop: 20,
               elevation: 3,
             }}
-            onPress={() =>
-              Linking.openURL(
-                'https://www.therightguru.com/',
-              )
-            }>
-            <Text style={{ color: '#fff', fontSize: 18, textAlign: 'center' }}>
+            onPress={() => Linking.openURL('https://www.therightguru.com/')}>
+            <Text style={{color: '#fff', fontSize: 18, textAlign: 'center'}}>
               Book Free Trial Class
             </Text>
           </TouchableOpacity>

@@ -45,7 +45,7 @@ const Announcement = () => {
 
   return (
     <SafeAreaView style={{ flex: 1,marginBottom:20 }}>
-        {isLoading ? <ActivityIndicator style={{ paddingVertical: 100, justifyContent: "center", alignItems: 'center' }} /> :
+        {isLoading ? <ActivityIndicator size={'medium'} color='#dc3545' style={{ paddingVertical: 100, justifyContent: "center",  }} /> :
           <FlatList
             data={announcements}
             keyExtractor={(item, index) => index.toString()}

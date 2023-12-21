@@ -30,7 +30,46 @@ const Downloads = () => {
 
   return (
     <SafeAreaView style={{flex: 1}}>
-      {downloads.map(material => {
+      {downloads.length === 0 ? (
+        <View style={{justifyContent: 'center', alignItems: 'center', flex: 1}}>
+          <Text style={{color: '#0a0a0a'}}>No Downloads</Text>
+        </View>
+      ) : (
+        downloads.map(material => {
+          return (
+            <View style={{margin: 20, marginBottom: 0}} key={material?._id}>
+              <TouchableOpacity
+                style={styles.button}
+                onPress={() => {
+                  navigation.navigate('pdf_screen', {uri: material?.pdfUrl});
+                }}>
+                <View style={{flexDirection: 'column'}}>
+                  <Text style={styles.subjectText}>{material?.title}</Text>
+                  <Text style={styles.descText}>
+                    {' '}
+                    {material?.type} - Class : {material?.class}
+                  </Text>
+                </View>
+                <View
+                  style={{
+                    flexDirection: 'row',
+                    alignItems: 'center',
+                    paddingHorizontal: 10,
+                  }}>
+                  <TouchableOpacity
+                    onPress={() => {
+                      handleDelete(material);
+                    }}>
+                    <FAIcon name="delete" size={24} color="#fff" />
+                  </TouchableOpacity>
+                </View>
+              </TouchableOpacity>
+            </View>
+          );
+        })
+      )}
+
+      {/* {downloads.map(material => {
         return (
           <View style={{margin: 20, marginBottom: 0}} key={material?._id}>
             <TouchableOpacity
@@ -61,7 +100,7 @@ const Downloads = () => {
             </TouchableOpacity>
           </View>
         );
-      })}
+      })} */}
       {/* In case of no downloads */}
       {/* <View style={{justifyContent:'center',alignItems:'center',flex:1}}>
         <Text style={{color:'#0a0a0a'}}>No Downloads</Text>
