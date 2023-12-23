@@ -2,6 +2,7 @@ import {StyleSheet, SafeAreaView, Text, View, ScrollView} from 'react-native';
 import {colors} from '../constants';
 import React from 'react';
 import MoreOptBtn from '../components/courses/template/MoreOptBtn';
+import VideoPlayer from '../components/courses/template/VideoPlayer';
 
 const MoreScreen = props => {
   return (
@@ -74,6 +75,7 @@ const MoreScreen = props => {
             backgroundColor={'#dc3545'}
           />
         </View> */}
+
 
       </ScrollView>
     </SafeAreaView>
