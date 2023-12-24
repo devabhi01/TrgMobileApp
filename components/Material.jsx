@@ -9,9 +9,10 @@ import {
   Alert,
 } from 'react-native';
 import {colors} from '../constants';
-import React,{useState} from 'react';
+import React, {useState} from 'react';
 import MoreOptBtn from './courses/template/MoreOptBtn';
 import {useNavigation} from '@react-navigation/native';
+import ToastManager, {Toast} from 'toastify-react-native';
 import {
   courseList,
   classData,
@@ -19,14 +20,14 @@ import {
   subjectListForafter10,
 } from '../model';
 import CustomDropdown from './courses/template/CustomDropdown';
-import { fetchMaterials } from '../utils/APIs';
-import { useUserContext } from '../utils/userContext';
+import {fetchMaterials} from '../utils/APIs';
+import {useUserContext} from '../utils/userContext';
 
 const {width, height} = Dimensions.get('screen');
 
 const Material = props => {
   const navigation = useNavigation();
-  const {user} = useUserContext()
+  const {user} = useUserContext();
 
   const [course, setCourse] = useState('');
   const [classNo, setClassNo] = useState('');
@@ -83,46 +84,50 @@ const Material = props => {
 
   const handleFilter = async () => {
     try {
-      const res = await fetchMaterials({course, subject, "class":classNo, type},user?._id)
-      const materials = await res.json()
-      props.navigation.navigate('materialList', {data: materials})
+      const res = await fetchMaterials(
+        {course, subject, class: classNo, type},
+        user?._id,
+      );
+      const materials = await res.json();
+      props.navigation.navigate('materialList', {data: materials});
     } catch (error) {
-      console.log(error)
-      Alert.alert("Something went wrong...")
+      console.log(error);
+      Toast.error('Something went wrong...');
     }
-  }
+  };
 
   return (
     <SafeAreaView style={{flex: 1, margin: 20}}>
-        <View style={styles.conatiner}>
-          <CustomDropdown
-            initialValue={material}
-            innerList={'materialName'}
-            displayName={'Material'}
-            menuHeight={200}
-            setData={setType}
-          />
-          <CustomDropdown
-            initialValue={courseList}
-            innerList={'courseName'}
-            displayName={'Course'}
-            setData={setCourse}
-          />
-          <CustomDropdown
-            initialValue={classData}
-            innerList={'class'}
-            displayName={'Class'}
-            menuHeight={200}
-            setData={setClassNo}
-          />
-          <CustomDropdown
-            initialValue={subjects}
-            innerList={'subjectName'}
-            displayName={'Subject'}
-            menuHeight={200}
-            setData={setSubject}
-          />
-        </View>
+      <ToastManager height={55} width={'auto'} />
+      <View style={styles.conatiner}>
+        <CustomDropdown
+          initialValue={material}
+          innerList={'materialName'}
+          displayName={'Material'}
+          menuHeight={200}
+          setData={setType}
+        />
+        <CustomDropdown
+          initialValue={courseList}
+          innerList={'courseName'}
+          displayName={'Course'}
+          setData={setCourse}
+        />
+        <CustomDropdown
+          initialValue={classData}
+          innerList={'class'}
+          displayName={'Class'}
+          menuHeight={200}
+          setData={setClassNo}
+        />
+        <CustomDropdown
+          initialValue={subjects}
+          innerList={'subjectName'}
+          displayName={'Subject'}
+          menuHeight={200}
+          setData={setSubject}
+        />
+      </View>
 
       <TouchableOpacity style={styles.buyBtn} onPress={handleFilter}>
         <Text style={{fontSize: 18, color: '#fff'}}>Submit</Text>

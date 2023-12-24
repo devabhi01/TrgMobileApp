@@ -8,7 +8,7 @@ import Icse from '../components/courses/main_course/Icse';
 import Ssc from '../components/courses/main_course/Ssc';
 import Cuet from '../components/courses/main_course/Cuet';
 import Dsssb from '../components/courses/main_course/Dsssb';
-import Quiz from '../components/courses/main_course/Quiz';
+
 
 import Clat from '../components/courses/main_course/Clat';
 

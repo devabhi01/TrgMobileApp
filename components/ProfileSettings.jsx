@@ -14,7 +14,7 @@ import trgIcon from '../assets/img/trgIcon.png';
 import React, {useState} from 'react';
 import ImagePicker, {openPicker} from 'react-native-image-crop-picker';
 import storage from '@react-native-firebase/storage';
-
+import ToastManager, {Toast} from 'toastify-react-native';
 import {colors} from '../constants';
 import Avatar from '../assets/img/user.png';
 import Ionicon from 'react-native-vector-icons/Ionicons';
@@ -74,18 +74,20 @@ const ProfileSettings = () => {
         // setting global variables
         setUser(data.response);
 
-        Alert.alert('Congrats', 'Profile Image updated successfully!');
+        Toast.success('Profile Image updated');
       } else {
         throw new Error(data?.msg || 'Something went wrong!');
       }
     } catch (e) {
-      console.log('Error : ', e);
+      Toast.error(e.message);
     }
   };
 
   return (
     <SafeAreaView style={{flex: 1, backgroundColor: colors.primary}}>
+      
       <ScrollView style={{paddingVertical: 10}}>
+      
         <View style={styles.container}>
           <View style={styles.wraper}>
             {showProgress
@@ -237,6 +239,7 @@ const ProfileSettings = () => {
           </View>
         </View>
       </ScrollView>
+      <ToastManager height={55} width={350} />
     </SafeAreaView>
   );
 };

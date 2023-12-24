@@ -1,4 +1,4 @@
-import {StyleSheet, Text, View} from 'react-native';
+import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import React, {useState, useEffect} from 'react';
 import {ActivityIndicator, RadioButton} from 'react-native-paper';
 import {fetchQod} from '../../../utils/APIs';
@@ -6,7 +6,7 @@ import {fetchQod} from '../../../utils/APIs';
 const Qotd = () => {
   // loading status
   const [isQodLoading, setIsQodLoading] = useState(false);
-
+  const [showAnswer, setShowAnswer] = useState(false); // State to manage answer visibility
   //qod data
   const [qod, setQod] = useState({});
 
@@ -25,18 +25,20 @@ const Qotd = () => {
     getQodData();
   }, []);
 
-  // const [value, setValue] = useState('');
   return (
     <>
       <View
         style={{
-          backgroundColor: '#f5f5f5',
+          backgroundColor: '#fff',
           borderRadius: 8,
           paddingVertical: 10,
           elevation: 3,
         }}>
         {isQodLoading ? (
           <ActivityIndicator
+            animating={true}
+            color={'#dc3545'}
+            size={20}
             style={{
               paddingVertical: 30,
               justifyContent: 'center',
@@ -46,31 +48,20 @@ const Qotd = () => {
         ) : (
           <>
             <Text style={styles.quesstions}>{qod?.question} </Text>
-            <Text style={styles.correctAns}>{qod?.answer} </Text>
+            {showAnswer && (
+              <Text style={styles.correctAns}>{qod?.answer} </Text>
+            )}
+            <TouchableOpacity
+              style={styles.btn}
+              onPress={() => setShowAnswer(!showAnswer)}>
+              
+              {/* Toggle showAnswer state */}
+              <Text style={{color: '#0a0a0a', textAlign: 'center'}}>
+                {showAnswer ? 'Hide Answer' : 'Show Answer'}
+              </Text>
+            </TouchableOpacity>
           </>
         )}
-
-        {/* <RadioButton.Group
-        color={'#dc3545'}
-          onValueChange={newValue => setValue(newValue)}
-          value={value}>
-          <View style={styles.options}>
-            <RadioButton value="first" />
-            <Text style={styles.ans}>Amit Sah</Text>
-          </View>
-          <View style={styles.options}>
-            <RadioButton value="second" />
-            <Text style={styles.ans}>Narendra Modi</Text>
-          </View>
-          <View style={styles.options}>
-            <RadioButton value="third" />
-            <Text style={styles.ans}>Narendra Modi</Text>
-          </View>
-          <View style={styles.options}>
-            <RadioButton value="fourth" />
-            <Text style={styles.ans}>Narendra Modi</Text>
-          </View>
-        </RadioButton.Group> */}
       </View>
     </>
   );
@@ -108,5 +99,20 @@ const styles = StyleSheet.create({
     fontSize: 16,
     paddingTop: 10,
     display: 'none',
+  },
+
+  btn: {
+    paddingHorizontal: 10,
+    paddingVertical: 5,
+    borderColor: '#dc3545',
+    borderWidth: 1,
+    width: 120,
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    alignSelf: 'flex-end',
+    marginRight: 20,
+    marginTop: 10,
+    borderRadius: 5,
   },
 });

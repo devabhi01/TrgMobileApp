@@ -10,7 +10,6 @@ import {
 } from 'react-native';
 import React from 'react';
 import {colors} from '../../../constants';
-import Fa6 from 'react-native-vector-icons/FontAwesome6';
 import {useNavigation} from '@react-navigation/native';
 
 const {height, width} = Dimensions.get('window');
@@ -64,15 +63,28 @@ const Icse = props => {
               }}>
               Duration : <Text style={{fontWeight: '600'}}>12 Months</Text>{' '}
             </Text>
-            {/* <Text
+            <Text
                 style={{
                   color: colors.textColor,
                   fontSize: 16,
                   fontWeight: '400',
                 }}>
                 Fee :{' '}
-                <Text style={{fontWeight: '600'}}>Rs. 15,000/- (6 Month)</Text>{' '}
-              </Text> */}
+                <Text
+              onPress={() =>
+                navigation.navigate('pdf_screen', {
+                  uri: 'https://therightguru-website.s3.ap-south-1.amazonaws.com/TnC.pdf',
+                })
+              }
+                style={{
+                  fontWeight: '600',
+                  color: '#dc3545',
+                  textAlign: 'center',
+                  alignSelf: 'center',
+                }}>
+                Click here to know more
+              </Text>
+              </Text>
             <Text
               style={{
                 color: colors.textColor,

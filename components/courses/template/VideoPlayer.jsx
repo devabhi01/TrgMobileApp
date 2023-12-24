@@ -13,8 +13,8 @@ const VideoPlayer = ({ videoId }) => {
   }, []);
 
   const deviceWidth = width;
-  const videoWidth = deviceWidth - 40; // Adjust as per your layout
-  const videoHeight = (9 / 16) * videoWidth; // Assuming 16:9 aspect ratio
+  const videoWidth = deviceWidth - 40; 
+  const videoHeight = (9 / 16) * videoWidth; 
 
   return (
     <YoutubePlayer
@@ -22,15 +22,10 @@ const VideoPlayer = ({ videoId }) => {
       width={videoWidth}
       play={playing}
       videoId={videoId}
-      webViewStyle={{ opacity: 0.99 }} // Adjust the opacity of the webview
+      webViewStyle={{ opacity: 0.99 }} 
     />
   );
 };
 
 export default VideoPlayer;
 
-const styles = StyleSheet.create({
-  container: {
-    // Define any other styles for the container view if needed
-  },
-});

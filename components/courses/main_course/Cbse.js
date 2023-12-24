@@ -10,7 +10,6 @@ import {
 } from 'react-native';
 import React from 'react';
 import {colors} from '../../../constants';
-import Fa6 from 'react-native-vector-icons/FontAwesome6';
 import {useNavigation} from '@react-navigation/native';
 
 const {height, width} = Dimensions.get('window');
@@ -18,12 +17,12 @@ const {height, width} = Dimensions.get('window');
 const Cbse = props => {
   const navigation = useNavigation();
   return (
-    <SafeAreaView style={{flex: 1,padding:20}}>
+    <SafeAreaView style={{flex: 1, padding: 20}}>
       <ScrollView>
-        <View >
+        <View>
           <Text style={{color: colors.primary, fontSize: 18}}>
-            "TRG's 1-Year CBSE Board Comprehensive Tuition
-            Classes, opt for Online, Offline, or Home Learning!"
+            "TRG's 1-Year CBSE Board Comprehensive Tuition Classes, opt for
+            Online, Offline, or Home Learning!"
           </Text>
           <Text style={{color: colors.primary, fontSize: 18}}>
             by The Right Guru
@@ -64,15 +63,28 @@ const Cbse = props => {
               }}>
               Duration : <Text style={{fontWeight: '600'}}>12 Months</Text>{' '}
             </Text>
-            {/* <Text
+            <Text
+              style={{
+                color: colors.textColor,
+                fontSize: 16,
+                fontWeight: '400',
+              }}>
+              Fee : {' '}
+              <Text
+              onPress={() =>
+                navigation.navigate('pdf_screen', {
+                  uri: 'https://therightguru-website.s3.ap-south-1.amazonaws.com/TnC.pdf',
+                })
+              }
                 style={{
-                  color: colors.textColor,
-                  fontSize: 16,
-                  fontWeight: '400',
+                  fontWeight: '600',
+                  color: '#dc3545',
+                  textAlign: 'center',
+                  alignSelf: 'center',
                 }}>
-                Fee :{' '}
-                <Text style={{fontWeight: '600'}}>Rs. 15,000/- (6 Month)</Text>{' '}
-              </Text> */}
+                Click here to know more
+              </Text>
+            </Text>
             <Text
               style={{
                 color: colors.textColor,
@@ -280,7 +292,7 @@ const Cbse = props => {
                 Education is not one-size-fits-all. We recognize your unique
                 learning needs and adapt our teaching methods to cater to them.
                 Our goal is to help you grasp concepts, develop critical
-                thinking skills, and ace your exams. 
+                thinking skills, and ace your exams.
               </Text>
             </View>
             <View
@@ -302,35 +314,35 @@ const Cbse = props => {
             </View>
           </View>
           <View
-              style={{
-                marginVertical: 10,
-                marginBottom: 100,
-                justifyContent: 'center',
-                alignItems: 'flex-end',
-              }}>
-              <TouchableOpacity
-                onPress={() =>
-                  navigation.navigate('pdf_screen', {
-                    uri: 'https://therightguru-website.s3.ap-south-1.amazonaws.com/TnC.pdf',
-                  })
-                }>
-                <Text
-                  style={{
-                    color: colors.textColor,
-                    textAlign: 'right',
-                    fontSize: 18,
-                    borderWidth: 1,
-                    padding: 5,
-                    borderRadius: 8,
-                    borderColor: colors.primary,
-                  }}>
-                  Know more...
-                </Text>
-              </TouchableOpacity>
-            </View>
+            style={{
+              marginVertical: 10,
+              marginBottom: 100,
+              justifyContent: 'center',
+              alignItems: 'flex-end',
+            }}>
+            <TouchableOpacity
+              onPress={() =>
+                navigation.navigate('pdf_screen', {
+                  uri: 'https://therightguru-website.s3.ap-south-1.amazonaws.com/TnC.pdf',
+                })
+              }>
+              <Text
+                style={{
+                  color: colors.textColor,
+                  textAlign: 'right',
+                  fontSize: 18,
+                  borderWidth: 1,
+                  padding: 5,
+                  borderRadius: 8,
+                  borderColor: colors.primary,
+                }}>
+                Know more...
+              </Text>
+            </TouchableOpacity>
+          </View>
         </View>
       </ScrollView>
-      
+
       <TouchableOpacity style={styles.buyBtn}>
         <Text style={{fontSize: 18, color: '#fff'}}>Join Now</Text>
       </TouchableOpacity>
@@ -364,7 +376,7 @@ const styles = StyleSheet.create({
     paddingLeft: 10,
     color: '#dc3545',
   },
- buyBtn: {
+  buyBtn: {
     width: '100%',
     height: 50,
     backgroundColor: colors.primary,

@@ -13,6 +13,7 @@ import {
 import LottieView from 'lottie-react-native';
 import {sentOtp, verifyOTP} from '../utils/APIs';
 import {useNavigation} from '@react-navigation/native';
+import ToastManager, {Toast} from 'toastify-react-native';
 
 const {width, height} = Dimensions.get('screen');
 const ForgotPass = () => {
@@ -29,19 +30,18 @@ const ForgotPass = () => {
     setAnimationStarted(true); // Update state to start animation
     // checking password match
     if (password !== cpassword) {
-      return Alert.alert("passwords doens't match");
+      return Toast.error('Password does not match');
     }
     try {
       //sending otp
       const res = await sentOtp({email});
       if (res.ok) {
-        Alert.alert(`OTP send to ${email}`);
+        Toast.success(`OTP send to ${email}`);
         setShowVerifySection(true);
         setAnimationStarted(true);
       }
     } catch (error) {
-      console.log(error);
-      return Alert.alert('Something went wrong...');
+      return Toast.error('Something went wrong');
     }
   };
 
@@ -75,19 +75,20 @@ const ForgotPass = () => {
       const data = await res.json();
       console.log(res);
       if (res.ok) {
-        Alert.alert('Password changed Successfully!');
+        Toast.success('Password changed Successfully!');
         navigation.navigate('Login');
       } else {
         if (res.status === 401) return Alert.alert(data.msg);
       }
     } catch (error) {
-      console.log(error);
-      return Alert.alert('Something went wrong...');
+      
+      return Toast.error('Something went wrong');
     }
   };
 
   return (
     <SafeAreaView style={{flex: 1}}>
+      <ToastManager height={55} width={'auto'} />
       <ScrollView>
         <View style={styles.container}>
           <LottieView

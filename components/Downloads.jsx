@@ -12,6 +12,7 @@ import FAIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 import {useNavigation} from '@react-navigation/native';
 import {useUserContext} from '../utils/userContext';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import ToastManager, {Toast} from 'toastify-react-native';
 
 const Downloads = () => {
   const navigation = useNavigation();
@@ -22,14 +23,15 @@ const Downloads = () => {
       const newDownloads = downloads.filter(item => item._id !== material._id);
       await AsyncStorage.setItem('downloads', JSON.stringify(newDownloads));
       setDownloads(newDownloads);
-      Alert.alert('Material deleted from downloads');
+      Toast.success('Material deleted from downloads');
     } catch (error) {
-      console.log(error);
+      Toast.error(error.message);
     }
   };
 
   return (
     <SafeAreaView style={{flex: 1}}>
+      <ToastManager height={55} width={'auto'} />
       {downloads.length === 0 ? (
         <View style={{justifyContent: 'center', alignItems: 'center', flex: 1}}>
           <Text style={{color: '#0a0a0a'}}>No Downloads</Text>

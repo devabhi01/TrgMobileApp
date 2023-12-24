@@ -110,28 +110,7 @@ const HomeScreen = props => {
     <SafeAreaView style={{flex: 1, backgroundColor: colors.graylight}}>
       <ScrollView style={{paddingVertical: 10}}>
         <View style={styles.container}>
-          {/* <View style={styles.topbar}>
-            <View >
-              <Image source={trgIcon} style={{width:60,height:50,}} resizeMode='contain' />
-            </View>
-            <View >
-              <Text style={{color: '#eee', fontSize: 20, color: '#dc3545',}}>
-                Hello
-              </Text>
-              <Text
-                style={{
-                  color: '#eee',
-                  fontSize: 20,
-                  fontWeight: 600,
-                  color: '#dc3545',
-                }}>
-                {user.name}
-              </Text>
-            </View>
-            <Text style={{color: '#eee', fontSize: 28, fontWeight: 600}}>
-              TRG
-            </Text>
-          </View> */}
+          
           {/* <View style={{ marginTop: 10 }}>
             <Searchbar
               placeholder="Search"
@@ -151,23 +130,15 @@ const HomeScreen = props => {
             />
           </View> */}
 
-          {/* <Text
-            style={{
-              color: '#dc3545',
-              fontSize: 16,
-              fontWeight: 700,
-              marginHorizontal: 20,
-              marginTop: 20,
-              marginBottom: 10,
-            }}>
-            Carousal
-          </Text> */}
+          
           <View>
             <View
               style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
               {isCarouselLoading ? (
                 <ActivityIndicator
                   color={'#dc3545'}
+                  animating={true}
+                  size={30}
                   style={{
                     paddingVertical: 90,
                     justifyContent: 'center',
@@ -277,6 +248,7 @@ const HomeScreen = props => {
               );
             })}
           </View>
+
         </View>
       </ScrollView>
     </SafeAreaView>

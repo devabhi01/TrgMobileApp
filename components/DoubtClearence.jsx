@@ -12,6 +12,7 @@ import React, { useState } from 'react';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { submitDoubt } from '../utils/APIs';
 import { useUserContext } from '../utils/userContext';
+import ToastManager, {Toast} from 'toastify-react-native';
 
 const DoubtClearence = () => {
   const [topic, setTopic] = useState("")
@@ -30,7 +31,7 @@ const DoubtClearence = () => {
       const res = await submitDoubt({topic, question, userId:user._id})
       const data = await res.json()
       if(res.ok){
-        console.log("Doubt Submitted Successfully!")
+        Toast.success("Doubt Submitted Successfully!")
         Alert.alert("Thank you!","Doubt submitted successfully. You will get the solution soon...")
         setTopic("")
         setQuestion("")
@@ -38,13 +39,14 @@ const DoubtClearence = () => {
         Alert.alert("Sorry!",data.error)
       }
     } catch (error) {
-      console.log(error)
+      Toast.error(error.message);
     }
   }
 
   return (
     <SafeAreaView style={{ flex: 1 }}>
       <ScrollView>
+      <ToastManager height={55} width={'auto'} />
         <View style={styles.container}>
           <Text style={styles.txt}> Topic : </Text>
           <View

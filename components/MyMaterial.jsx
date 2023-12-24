@@ -43,6 +43,8 @@ const MyMaterial = () => {
           </View>
         );
       })} */}
+
+      
       {/* In case of no downloads */}
       <View style={{justifyContent:'center',alignItems:'center',flex:1}}>
           <Text style={{color:'#0a0a0a'}}>No Materials(Paid)</Text>
