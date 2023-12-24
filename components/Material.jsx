@@ -87,7 +87,7 @@ const Material = props => {
       props.navigation.navigate('materialList', {data: materials});
     } catch (error) {
       console.log(error);
-      Toast.error('Something went wrong...');
+      Alert.alert('Something went wrong...');
     }
   };
 

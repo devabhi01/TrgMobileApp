@@ -185,7 +185,7 @@ const BoardScreen = ({route}) => {
             </TouchableOpacity>
           )}
         </View>
-        <Modal
+        {/* <Modal
           animationType="slide"
           transparent={true}
           visible={modalVisible}
@@ -250,7 +250,7 @@ const BoardScreen = ({route}) => {
               </View>
             </View>
           </View>
-        </Modal>
+        </Modal> */}
       </View>
     </View>
   );

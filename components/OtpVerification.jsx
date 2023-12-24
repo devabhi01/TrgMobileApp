@@ -13,6 +13,8 @@ import React, {useRef, useState, useEffect} from 'react';
 import {useUserContext} from '../utils/userContext';
 import {verifyOTP} from '../utils/APIs';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import ToastManager, {Toast} from 'toastify-react-native';
+
 
 const OtpVerification = () => {
   // taking user data
@@ -55,7 +57,7 @@ const OtpVerification = () => {
         // setting global variables
         setUser(data.response);
 
-        Alert.alert('Congrats!', 'Email Verified...');
+        Toast.success('Congrats!','Email Verified.');
       } else {
         throw new Error(data?.msg || 'Something went wrong!');
       }
@@ -66,6 +68,7 @@ const OtpVerification = () => {
 
   return (
     <SafeAreaView style={styles.container}>
+      <ToastManager height={55} width={'auto'} />
       <ScrollView>
         <View style={styles.wraper}>
           <View style={styles.image}>

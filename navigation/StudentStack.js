@@ -1,5 +1,5 @@
 import React from 'react';
-import { createStackNavigator } from '@react-navigation/stack';
+import {createStackNavigator} from '@react-navigation/stack';
 
 // impoterted Component
 import Cbse from '../components/courses/main_course/Cbse';
@@ -39,9 +39,7 @@ import MaterialList from '../components/material/MaterialList';
 import MaterialModal from '../components/material/MaterialModal';
 import OnBoardingScreen from '../screen/OnBoardingScreen';
 import MyMaterial from '../components/MyMaterial';
-
-
-
+import Result from '../components/testseries/Result';
 
 const Stack = createStackNavigator();
 
@@ -52,13 +50,13 @@ const StudentStack = () => {
       <Stack.Navigator
         screenOptions={{
           headerShown: true,
-          headerStyle: { backgroundColor: '#dc3545' },
+          headerStyle: {backgroundColor: '#dc3545'},
         }}>
         {/* nesting bottom nav */}
         <Stack.Screen
           name="home"
           component={DrawerNav}
-          options={{ headerShown: false }}
+          options={{headerShown: false}}
         />
 
         <Stack.Screen
@@ -287,17 +285,27 @@ const StudentStack = () => {
             headerTitleAlign: 'center',
           }}
         />
+        <Stack.Screen
+          name="test_result"
+          component={Result}
+          options={{
+            headerTintColor: '#fff',
+            title: 'Test Result',
+            headerTitleAlign: 'center',
+            headerLeft: null,
+          }}
+        />
 
         {/* Pdf viewer refers */}
         <Stack.Screen
           name="pdf_viewer"
           component={PdfViewer}
-          options={{ headerShown: false }}
+          options={{headerShown: false}}
         />
         <Stack.Screen
           name="pdf_screen"
           component={PdfScreen}
-          options={{ headerShown: false }}
+          options={{headerShown: false}}
         />
 
         {/* Material Section Refers */}
@@ -349,7 +357,6 @@ const StudentStack = () => {
         />
 
         {/* Misc Screen refers */}
-
       </Stack.Navigator>
     </>
   );

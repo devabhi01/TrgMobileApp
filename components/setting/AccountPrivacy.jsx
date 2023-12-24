@@ -5,6 +5,7 @@ import { TextInput, Button } from 'react-native-paper';
 import { useUserContext } from '../../utils/userContext';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { updateUser } from '../../utils/APIs';
+import ToastManager, {Toast} from 'toastify-react-native';
 
 const AccountPrivacy = (props) => {
 
@@ -43,7 +44,7 @@ const AccountPrivacy = (props) => {
                 // setting global variables
                 setUser(data.response)
 
-                Alert.alert('Congrats','Profile updated successfully!')
+                Toast.success('Congrats','Profile updated successfully!')
                 props.navigation.navigate('Settings')
             } else {
                 throw new Error(data?.msg || "Something went wrong!")
@@ -53,11 +54,11 @@ const AccountPrivacy = (props) => {
             // console.log(e)
             Alert.alert("Error : ", error.message)
         }
-    }
+    }   
 
     return (
         <SafeAreaView style={{ flex: 1, backgroundColor: colors.graylight }}>
-            
+            <ToastManager height={55} width={'auto'} />
             <ScrollView>
                 <View style={styles.wraper}>
                     <View style={{ marginVertical: 30 }}>

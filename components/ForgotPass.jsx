@@ -41,7 +41,7 @@ const ForgotPass = () => {
         setAnimationStarted(true);
       }
     } catch (error) {
-      return Toast.error('Something went wrong');
+      return Alert.alert('Something went wrong');
     }
   };
 
@@ -82,7 +82,7 @@ const ForgotPass = () => {
       }
     } catch (error) {
       
-      return Toast.error('Something went wrong');
+      return Alert.alert('Something went wrong');
     }
   };
 

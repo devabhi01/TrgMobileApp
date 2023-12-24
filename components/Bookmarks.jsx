@@ -64,6 +64,7 @@ const Bookmarks = () => {
 
   return (
     <SafeAreaView style={{ flex: 1 }}>
+      
       <ScrollView>
         <Text style={styles.title}>Study Materials</Text>
         {materialBookmarks.map((bookmark) => {

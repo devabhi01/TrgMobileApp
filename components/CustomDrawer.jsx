@@ -26,6 +26,8 @@ import ImagePicker, { openPicker } from 'react-native-image-crop-picker';
 import storage from '@react-native-firebase/storage';
 import { updateUser } from '../utils/APIs';
 // import Avatar from 'react-native-paper/lib/typescript/components/Avatar/AvatarIcon';
+import ToastManager, {Toast} from 'toastify-react-native';
+
 
 const { width, height } = Dimensions.get('screen');
 
@@ -85,7 +87,7 @@ const CustomDrawer = props => {
         // setting global variables
         setUser(data.response)
 
-        Alert.alert('Congrats', 'Profile Image updated successfully!')
+        Toast.success('Image updated !')
       }
       else {
         throw new Error(data?.msg || "Something went wrong!")
@@ -96,6 +98,7 @@ const CustomDrawer = props => {
   }
   return (
     <View style={{ flex: 1, backgroundColor: colors.graylight, marginTop: -10 }}>
+      <ToastManager height={55} width={'auto'} />
       <DrawerContentScrollView {...props} >
         {/* <ImageBackground
           style={{ height: 140 }}
