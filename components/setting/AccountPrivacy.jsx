@@ -35,7 +35,6 @@ const AccountPrivacy = (props) => {
 
             // taking updated user data
             const data = await res.json()
-            // console.log(data)
             if (res.ok) {
                 // async storing
                 await AsyncStorage.setItem('user', JSON.stringify(data.response));
@@ -50,7 +49,6 @@ const AccountPrivacy = (props) => {
             }
         }
         catch (error) {
-            // console.log(e)
             Alert.alert("Error : ", error.message)
         }
     }

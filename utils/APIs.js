@@ -203,19 +203,6 @@ export const createPaymentIntent = async (body) => {
     return await fetch(route, options)
 }
 
-//------------ check buyMaterial --------------------
-// export const buyMaterial = async (body) => { //now used as webhook
-//     const route = `${root}/payment/buyMaterial`
-//     const options = {
-//         method: "POST",
-//         headers: {
-//             "Content-Type": "application/json"
-//         },
-//         body: JSON.stringify(body)
-//     }
-//     return await fetch(route, options)
-// }
-
 //------------ creating payment intent --------------------
 export const sentOtp = async (body) => {
     const route = `${root}/api/send-otp`

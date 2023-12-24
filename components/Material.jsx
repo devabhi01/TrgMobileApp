@@ -10,19 +10,14 @@ import {
 } from 'react-native';
 import {colors} from '../constants';
 import React,{useState} from 'react';
-import MoreOptBtn from './courses/template/MoreOptBtn';
 import {useNavigation} from '@react-navigation/native';
 import {
   courseList,
   classData,
-  subjectListForbelow11,
-  subjectListForafter10,
 } from '../model';
 import CustomDropdown from './courses/template/CustomDropdown';
 import { fetchMaterials } from '../utils/APIs';
 import { useUserContext } from '../utils/userContext';
-
-const {width, height} = Dimensions.get('screen');
 
 const Material = props => {
   const navigation = useNavigation();

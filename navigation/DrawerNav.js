@@ -3,13 +3,11 @@ import {colors} from '../constants';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import React from 'react';
 import BottomNav from './BottomNav';
-import {useNavigation} from '@react-navigation/native';
 import CustomDrawer from '../components/CustomDrawer';
 
 const Drawer = createDrawerNavigator();
 
 const DrawerNav = () => {
-  const navigation = useNavigation();
   return (
     <Drawer.Navigator
       drawerContent={props => <CustomDrawer {...props} />}

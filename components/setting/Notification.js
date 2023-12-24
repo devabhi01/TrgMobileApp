@@ -8,7 +8,7 @@ import {
 } from 'react-native';
 import React, {useState} from 'react';
 import {colors} from '../../constants';
-import {Checkbox, RadioButton, Button} from 'react-native-paper';
+import {Checkbox, Button} from 'react-native-paper';
 
 const Notification = () => {
   const [checked, setChecked] = useState('');

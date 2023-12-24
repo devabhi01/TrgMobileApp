@@ -10,7 +10,7 @@ import {
 import React from 'react';
 import LottieView from 'lottie-react-native';
 
-const {width, height} = Dimensions.get('screen');
+const {width} = Dimensions.get('screen');
 
 const LoginSignup = props => {
   return (
@@ -24,15 +24,6 @@ const LoginSignup = props => {
               loop
               style={{height: width, width: width * 0.9}}
             />
-            {/* <Image
-              style={{
-                height: 350,
-                width: width,
-                borderBottomLeftRadius: 30,
-                borderBottomRightRadius: 30,
-              }}
-              source={require('../assets/img/OnboardLogin.jpg')}
-            /> */}
           </View>
           <View
             style={{

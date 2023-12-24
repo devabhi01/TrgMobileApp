@@ -1,25 +1,21 @@
 import React from 'react';
-import {createStackNavigator} from '@react-navigation/stack';
+import { createStackNavigator } from '@react-navigation/stack';
 
 // impoterted Component
-import HomeScreen from '../screen/HomeScreen';
 import Cbse from '../components/courses/main_course/Cbse';
 import Icse from '../components/courses/main_course/Icse';
 import Ssc from '../components/courses/main_course/Ssc';
 import Cuet from '../components/courses/main_course/Cuet';
 import Dsssb from '../components/courses/main_course/Dsssb';
-import Quiz from '../components/courses/main_course/Quiz';
 
 import Clat from '../components/courses/main_course/Clat';
 
 import AccountPrivacy from '../components/setting/AccountPrivacy';
 import Notification from '../components/setting/Notification';
 import Helpsupport from '../components/setting/Helpsupport';
-import BottomNav from './BottomNav';
 import ProfileSettings from '../components/ProfileSettings';
 import TestDetail from '../components/testseries/TestDetail';
 import BoardScreen from '../components/testseries/BoardScreen';
-import ResultScreen from '../components/testseries/ResultScreen';
 import OthersComp from '../components/courses/main_course/OthersComp';
 import Police from '../components/courses/main_course/Police';
 import SettingScreen from '../screen/SettingScreen';
@@ -30,11 +26,6 @@ import Material from '../components/Material';
 
 import PdfViewer from '../components/courses/template/PdfViewer';
 import PdfScreen from '../components/courses/template/PdfScreen';
-import Assignments from '../components/material/Assignments';
-import NcertBooks from '../components/material/NcertBooks';
-import PreviousYearQP from '../components/material/PreviousYearQP';
-import SupportMaterial from '../components/material/SupportMaterial';
-import Sylabus from '../components/material/Sylabus';
 import RivisionNotes from '../components/material/RivisionNotes';
 import DoubtClearence from '../components/DoubtClearence';
 import Bookmarks from '../components/Bookmarks';
@@ -42,7 +33,6 @@ import Bookmarks from '../components/Bookmarks';
 import Announcement from '../components/header/Announcement';
 import DrawerNav from './DrawerNav';
 import Downloads from '../components/Downloads';
-import NcertSoln from '../components/material/NcertSoln';
 import ListScreen from '../components/courses/template/ListScreen';
 import TestList from '../components/testseries/TestList';
 import MaterialList from '../components/material/MaterialList';
@@ -62,13 +52,13 @@ const StudentStack = () => {
       <Stack.Navigator
         screenOptions={{
           headerShown: true,
-          headerStyle: {backgroundColor: '#dc3545'},
+          headerStyle: { backgroundColor: '#dc3545' },
         }}>
         {/* nesting bottom nav */}
         <Stack.Screen
           name="home"
           component={DrawerNav}
-          options={{headerShown: false}}
+          options={{ headerShown: false }}
         />
 
         <Stack.Screen
@@ -289,15 +279,6 @@ const StudentStack = () => {
           }}
         />
         <Stack.Screen
-          name="result_screen"
-          component={ResultScreen}
-          options={{
-            headerTintColor: '#fff',
-            title: 'Result',
-            headerTitleAlign: 'center',
-          }}
-        />
-        <Stack.Screen
           name="testlist"
           component={TestList}
           options={{
@@ -311,12 +292,12 @@ const StudentStack = () => {
         <Stack.Screen
           name="pdf_viewer"
           component={PdfViewer}
-          options={{headerShown: false}}
+          options={{ headerShown: false }}
         />
         <Stack.Screen
           name="pdf_screen"
           component={PdfScreen}
-          options={{headerShown: false}}
+          options={{ headerShown: false }}
         />
 
         {/* Material Section Refers */}
@@ -348,60 +329,6 @@ const StudentStack = () => {
             headerTitleAlign: 'center',
           }}
         />
-        <Stack.Screen
-          name="assignments"
-          component={Assignments}
-          options={{
-            headerTintColor: '#fff',
-            title: 'Assignments',
-            headerTitleAlign: 'center',
-          }}
-        />
-        <Stack.Screen
-          name="ncertSoln"
-          component={NcertSoln}
-          options={{
-            headerTintColor: '#fff',
-            title: 'NCERT Solutions',
-            headerTitleAlign: 'center',
-          }}
-        />
-        <Stack.Screen
-          name="ncertbooks"
-          component={NcertBooks}
-          options={{
-            headerTintColor: '#fff',
-            title: 'NcertBooks',
-            headerTitleAlign: 'center',
-          }}
-        />
-        <Stack.Screen
-          name="previous_year_qp"
-          component={PreviousYearQP}
-          options={{
-            headerTintColor: '#fff',
-            title: 'PreviousYearQP',
-            headerTitleAlign: 'center',
-          }}
-        />
-        <Stack.Screen
-          name="support_material"
-          component={SupportMaterial}
-          options={{
-            headerTintColor: '#fff',
-            title: 'SupportMaterial',
-            headerTitleAlign: 'center',
-          }}
-        />
-        <Stack.Screen
-          name="sylabus"
-          component={Sylabus}
-          options={{
-            headerTintColor: '#fff',
-            title: 'Sylabus',
-            headerTitleAlign: 'center',
-          }}
-        />
 
         {/* material screen refers */}
         <Stack.Screen
@@ -422,7 +349,7 @@ const StudentStack = () => {
         />
 
         {/* Misc Screen refers */}
-        
+
       </Stack.Navigator>
     </>
   );

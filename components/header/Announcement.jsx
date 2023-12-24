@@ -1,4 +1,4 @@
-import { SafeAreaView, ScrollView, StyleSheet, Text, View, FlatList } from 'react-native';
+import { SafeAreaView, StyleSheet, Text, View, FlatList, Alert } from 'react-native';
 import React, { useState, useEffect } from 'react';
 import { getDate } from '../../constants';
 import { fetchAnnouncements } from '../../utils/APIs';
@@ -16,10 +16,10 @@ const Announcement = () => {
         const res = await fetchAnnouncements()
         const announceData = await res.json();
         setAnnouncements(announceData);
-        // console.log(announcements)
         setIsLoading(false)
       } catch (error) {
         console.log(error)
+        Alert.alert("Something went wrong...","You might be offline")
       }
     }
     getAnnouncements();
@@ -48,7 +48,7 @@ const Announcement = () => {
         {isLoading ? <ActivityIndicator size={'medium'} color='#dc3545' style={{ paddingVertical: 100, justifyContent: "center",  }} /> :
           <FlatList
             data={announcements}
-            keyExtractor={(item, index) => index.toString()}
+            keyExtractor={(index) => index?._id}
             renderItem={renderItem}
           />
         }

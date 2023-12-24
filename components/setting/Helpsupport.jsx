@@ -10,7 +10,6 @@ import {
 } from 'react-native';
 import React from 'react';
 import {colors} from '../../constants';
-import {ElevationLevels} from 'react-native-paper/lib/typescript/types';
 
 const Helpsupport = () => {
   return (
@@ -18,16 +17,6 @@ const Helpsupport = () => {
       <ScrollView>
         <View style={styles.wraper}>
           <View style={{marginVertical: 0}}>
-            {/* <TouchableOpacity
-                            onPress={() => { }}
-                            style={styles.btn}>
-                            <Image
-                                style={{ width: 22, height: 22 }}
-                                color={'#dc3545'}
-                                source={require('../../assets/img/help.png')}
-                            />
-                            <Text style={styles.btnText}>Help</Text>
-                        </TouchableOpacity> */}
             <View>
               <TouchableOpacity onPress={() => {}} disabled style={styles.btn}>
                 <Image

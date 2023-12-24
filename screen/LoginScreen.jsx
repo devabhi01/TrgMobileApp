@@ -9,18 +9,16 @@ import {
   Dimensions,
   ScrollView,
 } from 'react-native';
-import React, {useState} from 'react';
-import {colors} from '../constants';
-import {useUserContext} from '../utils/userContext';
+import React, { useState } from 'react';
+import { colors } from '../constants';
+import { useUserContext } from '../utils/userContext';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import {loginUser} from '../utils/APIs';
+import { loginUser } from '../utils/APIs';
 import Icon from 'react-native-vector-icons/Ionicons';
-
-const {width, height} = Dimensions.get('screen');
 
 const LoginScreen = props => {
   //taking function to set global variables
-  const {setUser, setJwtoken} = useUserContext();
+  const { setUser, setJwtoken } = useUserContext();
 
   // login info
   const [loginInfo, setLoginInfo] = useState({
@@ -30,7 +28,7 @@ const LoginScreen = props => {
 
   // handling input change
   const handleChange = (fieldName, value) => {
-    setLoginInfo({...loginInfo, [fieldName]: value});
+    setLoginInfo({ ...loginInfo, [fieldName]: value });
   };
 
   // loggin in...
@@ -104,7 +102,7 @@ const LoginScreen = props => {
                 fontWeight: 500,
               }}>
               been missed by
-              <Text style={{color: '#dc3545', fontWeight: 500}}> TRG</Text>
+              <Text style={{ color: '#dc3545', fontWeight: 500 }}> TRG</Text>
             </Text>
           </View>
           <View>
@@ -188,47 +186,11 @@ const LoginScreen = props => {
               Login
             </Text>
           </TouchableOpacity>
-          {/* <Text
-          style={{
-            color: '#462530',
-            textAlign: 'center',
-            marginVertical: 20,
-            fontSize: 12,
-          }}>
-          or continue with
-        </Text> */}
-          {/* <View
-          style={{
-            flexDirection: 'row',
-            justifyContent: 'space-evenly',
-            marginVertical: 30,
-          }}>
-          <TouchableOpacity
-            style={{
-              borderColor: '#dc3545',
-              borderWidth: 2,
-              borderRadius: 10,
-              padding: 8,
-              justifyContent: 'center',
-            }}  onPress={() => onGoogleButtonPress().then(() => console.log('Signed in with Google!'))}>
-            <GoogleSVG height={30} width={30} />
-          </TouchableOpacity>
-          <TouchableOpacity
-            style={{
-              borderColor: '#dc3545',
-              borderWidth: 2,
-              borderRadius: 10,
-              padding: 8,
-              justifyContent: 'center',
-            }}>
-            <AppleSVG height={35} width={35} />
-          </TouchableOpacity>
-        </View> */}
-          <View style={{flexDirection: 'row', justifyContent: 'center'}}>
-            <Text style={{color: '#462530'}}>Not a member? </Text>
+          <View style={{ flexDirection: 'row', justifyContent: 'center' }}>
+            <Text style={{ color: '#462530' }}>Not a member? </Text>
             <TouchableOpacity
               onPress={() => props.navigation.navigate('Signup')}>
-              <Text style={{color: '#A32734', fontWeight: 500}}>
+              <Text style={{ color: '#A32734', fontWeight: 500 }}>
                 Signup now
               </Text>
             </TouchableOpacity>

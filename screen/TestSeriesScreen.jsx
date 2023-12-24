@@ -79,11 +79,6 @@ const TestSeriesScreen = props => {
 
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: colors.graylight }}>
-      {/* <Image
-          style={styles.img}
-          source={require('../assets/img/materials_pos.png')}
-        /> */}
-
       <View style={styles.container}>
         <View style={{ paddingHorizontal: 30 }}>
           <View style={{ marginVertical: 10 }}>
@@ -120,7 +115,6 @@ const TestSeriesScreen = props => {
             <TouchableOpacity
               style={styles.btn}
               onPress={handleFilter}>
-              {/* <MaterialIcon name="bookshelf" size={30} color={colors.white} /> */}
               <Text style={styles.textBtn}>Lets Go</Text>
             </TouchableOpacity>
 

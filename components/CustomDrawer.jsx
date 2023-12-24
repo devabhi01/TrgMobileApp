@@ -16,7 +16,6 @@ import { colors } from '../constants';
 import trgIcon from '../assets/img/trgIcon.png';
 import {
   DrawerContentScrollView,
-  DrawerItemList,
 } from '@react-navigation/drawer';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import IconFA from 'react-native-vector-icons/FontAwesome5';
@@ -25,7 +24,6 @@ import { useNavigation } from '@react-navigation/native';
 import ImagePicker, { openPicker } from 'react-native-image-crop-picker';
 import storage from '@react-native-firebase/storage';
 import { updateUser } from '../utils/APIs';
-// import Avatar from 'react-native-paper/lib/typescript/components/Avatar/AvatarIcon';
 
 const { width, height } = Dimensions.get('screen');
 
@@ -97,20 +95,11 @@ const CustomDrawer = props => {
   return (
     <View style={{ flex: 1, backgroundColor: colors.graylight, marginTop: -10 }}>
       <DrawerContentScrollView {...props} >
-        {/* <ImageBackground
-          style={{ height: 140 }}
-          source={require('../assets/img/wall.jpg')}>
-          
-        </ImageBackground> */}
         <TouchableOpacity onPress={ImgPickAndUpload} >
             <Image
               style={styles.userImg}
-              // source={require('../assets/img/person.jpg')}
               source={user?.profilePic ? { uri: user?.profilePic } : require('../assets/img/person.jpg')}
             /></TouchableOpacity>
-        {/* <View style={styles.drawerList}>
-          <DrawerItemList {...props} />
-        </View> */}
         <View style={styles.drawerList}>
           <TouchableOpacity
             style={styles.btn}
