@@ -1,4 +1,4 @@
-import {View, Text, Button, StyleSheet, StatusBar} from 'react-native';
+import {StyleSheet} from 'react-native';
 import React, {useState, useEffect} from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import DecideStack from './navigation/DecideStack';

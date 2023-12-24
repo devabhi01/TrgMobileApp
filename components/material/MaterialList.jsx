@@ -20,7 +20,6 @@ const MaterialList = ({route}) => {
   const {user} = useUserContext();
 
   const materials = route.params?.data || [];
-  // console.log(materials)
 
   const navigateToModal = async material => {
     try {

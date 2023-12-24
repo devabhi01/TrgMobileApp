@@ -9,10 +9,9 @@ import {
 import React, {memo} from 'react';
 import {colors} from '../../constants';
 
-const {height, width} = Dimensions.get('window');
+const {width} = Dimensions.get('window');
 
 const QuestionItem = memo(({data, selectedOption}) => {
-  console.log(data)
   return (
     <View style={{width: width}}>
       <Text style={styles.ques}>{data.question}</Text>

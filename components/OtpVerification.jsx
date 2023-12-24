@@ -44,9 +44,6 @@ const OtpVerification = () => {
   const ValidateOTP = async () => {
     const email = user.email;
     let enteredOTP = f1 + f2 + f3 + f4;
-    // if (enteredOTP == otp) {
-    //     Alert.alert('Otp Matched')
-    // } else { Alert.alert('Wrong OTP') }
     try {
       const res = await verifyOTP({email, verifyCode: enteredOTP});
       const data = await res.json();

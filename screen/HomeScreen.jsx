@@ -10,21 +10,10 @@ import {
   Image,
   ActivityIndicator,
 } from 'react-native';
-import {Searchbar, Avatar} from 'react-native-paper';
 
 import {windowWidth} from '../utils/Dimensions';
 import {colors} from '../constants';
 import Carousel from 'react-native-reanimated-carousel';
-
-// Images here
-import ManSVG from '../assets/img/Man.svg';
-import CbseSVG from '../assets/img/cbse.svg';
-import trgIcon from '../assets/img/trgIcon.png';
-
-// import {sliderData} from '../model/Data';
-// import BannerSlider from '../components/BannerSlider';
-// import { useUserContext } from '../utils/userContext';
-// import Geolocation from '@react-native-community/geolocation';
 import Qotd from '../components/courses/template/Qotd';
 import {fetchCarousel, fetchQod} from '../utils/APIs';
 
@@ -45,41 +34,9 @@ const courses = [
 ];
 
 const HomeScreen = props => {
-  // // user context for fetching details
-  // const { setLocation } = useUserContext();
-  // //setting location
-  // Geolocation.getCurrentPosition(info => setLocation([info.coords.latitude, info.coords.longitude]));
 
   // loading status
   const [isCarouselLoading, setIsCarouselLoading] = useState(false);
-
-  // search query
-  // const [searchQuery, setSearchQuery] = useState('');
-
-  // filtered course state
-  // const [filteredCourses, setFilteredCourses] = useState(courses);
-
-  // const onChangeSearch = query => {
-  //   setSearchQuery(query);
-  //   // Convert the query to lowercase for case-insensitive search
-  //   const lowercaseQuery = query.toLowerCase();
-
-  //   // Use Array.prototype.filter() to filter objects based on the query
-  //   const filteredCourses = courses.filter(item => {
-  //     // Check if any property of the item contains the query string (case-insensitive)
-  //     return Object.values(item).some(
-  //       value =>
-  //         typeof value === 'string' &&
-  //         value.toLowerCase().includes(lowercaseQuery),
-  //     );
-  //   });
-
-  //   setFilteredCourses(filteredCourses);
-  // };
-
-  // const renderBanner = ({ item, index }) => {
-  //   return <BannerSlider data={item} />;
-  // };
 
   // getting slider/carousel
   const [sliderData, setSliderData] = useState([]);
@@ -110,27 +67,6 @@ const HomeScreen = props => {
     <SafeAreaView style={{flex: 1, backgroundColor: colors.graylight}}>
       <ScrollView style={{paddingVertical: 10}}>
         <View style={styles.container}>
-          
-          {/* <View style={{ marginTop: 10 }}>
-            <Searchbar
-              placeholder="Search"
-              placeholderTextColor={'#241D20'}
-              cursorColor={'#dc3545'}
-              onChangeText={onChangeSearch}
-              value={searchQuery}
-              iconColor="#dc3545"
-              style={{
-                marginHorizontal: 20,
-                borderRadius: 10,
-                backgroundColor: '#f5f5f5',
-              }}
-              onTouchCancel={() => {
-                setSearchQuery('');
-              }}
-            />
-          </View> */}
-
-          
           <View>
             <View
               style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>

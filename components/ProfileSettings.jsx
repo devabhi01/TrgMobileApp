@@ -20,7 +20,6 @@ import Avatar from '../assets/img/user.png';
 import Ionicon from 'react-native-vector-icons/Ionicons';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-import MaterialIcon from 'react-native-vector-icons/MaterialIcons';
 import {useUserContext} from '../utils/userContext';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {updateUser} from '../utils/APIs';
@@ -42,7 +41,6 @@ const ProfileSettings = () => {
       const imgUrl = image.path;
 
       // path to existing file on filesystem
-      // fileName = imgUrl.substring(imgUrl.lastIndexOf('/') + 1);
       const fileName = `${user.name}-${Date.now()}`;
       // uploading the file
       setShowProgress(true);
@@ -118,10 +116,6 @@ const ProfileSettings = () => {
               </Text>
             </View>
             <View style={{marginVertical: 20}}>
-              {/* <View style={styles.InfoDetail}>
-                <Ionicon name="location" size={24} color={colors.primary} />
-                <Text style={styles.TextInfo}>{user?.address}</Text>
-              </View> */}
               <View style={styles.InfoDetail}>
                 <Icon name="phone" size={24} color={colors.primary} />
                 <Text style={styles.TextInfo}>{user?.phoneNo}</Text>
@@ -141,19 +135,7 @@ const ProfileSettings = () => {
                 </Text>
               </View>
             </View>
-            <View style={{height: 2, backgroundColor: colors.primary}}></View>
-            {/* <TouchableOpacity style={styles.btn}>
-              <Icon name="account-edit" size={25} color={colors.primary} />
-              <Text style={styles.btnText}>Edit Details</Text>
-            </TouchableOpacity> */}
-            <TouchableOpacity style={styles.btn}>
-              <MaterialIcon name="payment" size={25} color={colors.primary} />
-              <Text style={styles.btnText}>Payment History</Text>
-            </TouchableOpacity>
-            {/* <TouchableOpacity style={styles.btn}>
-              <MaterialIcon name="contact-support" size={25} color={colors.primary} />
-              <Text style={styles.btnText}>Support</Text>
-            </TouchableOpacity> */}
+            <View style={{height: 2, backgroundColor: colors.primary, marginBottom:80}}></View>
 
             <View style={{marginVertical: 10}}>
               <Image

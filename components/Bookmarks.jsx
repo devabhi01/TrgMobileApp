@@ -9,7 +9,6 @@ import {
 import { colors } from '../constants';
 import React, { useState, useEffect } from 'react';
 import Icon from 'react-native-vector-icons/Ionicons';
-import FAIcon from 'react-native-vector-icons/FontAwesome6';
 import { useNavigation } from '@react-navigation/native';
 import { checkIfBookmarked, fetchBookmarks, fetchQuiz } from '../utils/APIs';
 import { useUserContext } from '../utils/userContext';
@@ -26,7 +25,6 @@ const Bookmarks = () => {
       try {
         const res = await fetchBookmarks(user?._id);
         const bookmarks = await res.json();
-        // console.log(bookmarks)
         setMaterialBookmarks(bookmarks?.materialBookmarks);
         setQuizBookmarks(bookmarks?.quizBookmarks);
       } catch (error) {
@@ -93,10 +91,6 @@ const Bookmarks = () => {
             </TouchableOpacity>
           </View>
         })}
-
-        {/* <View style={{justifyContent:'center',alignItems:'center',flex:1}}>
-        <Text style={{color:'#0a0a0a'}}>No Downloads</Text>
-      </View> */}
 
         <Text style={styles.title}>Test Series</Text>
         {quizBookmarks.map((bookmark) => {

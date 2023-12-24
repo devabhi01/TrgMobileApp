@@ -58,8 +58,6 @@ const SignUpScreen = props => {
         // setting global variables
         setUser(data.response.user);
         setJwtoken(data.response.token);
-
-        console.log('Verification code sent! and user registered!');
         props.navigation.navigate('Otp-verify');
       } else {
         throw new Error(data?.msg || 'Something went wrong!');
@@ -68,19 +66,6 @@ const SignUpScreen = props => {
       Alert.alert('Error :', error.message);
     }
   };
-
-  // // sending OTP
-  // const handleNext = async (props) => {
-  //   try {
-  //     const res = await sentCodeToMail(userInfo.email)
-  //     const data = res.json()
-  //     console.log(data)
-  //     props.navigation.navigate('Otp-verify')
-  //   }
-  //   catch (error) {
-  //     Alert.alert("Error :", error.message)
-  //   }
-  // }
 
   const [selectGender, setSelectGender] = useState(null);
   const handleGenderSelect = selectGender => {

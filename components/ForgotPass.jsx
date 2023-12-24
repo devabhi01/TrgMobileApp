@@ -152,17 +152,6 @@ const ForgotPass = () => {
               />
             )}
           </TouchableOpacity>
-
-          {/* In Case of otp Sent */}
-          {/* <TouchableOpacity style={[styles.btn,{flexDirection:'row'}]}>
-            <Text style={{color: '#fff'}}>OTP Sent</Text>
-            <LottieView
-              source={require('../assets/msgSent.json')}
-              autoPlay
-              loop={false}                            
-              style={{width: 50, height: 50,marginLeft:10}}
-            />
-          </TouchableOpacity> */}
           {showVerifySection && (
             <>
               <Text

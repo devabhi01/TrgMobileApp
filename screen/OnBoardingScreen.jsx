@@ -7,7 +7,6 @@ import { TouchableOpacity } from 'react-native-gesture-handler';
 import { useUserContext } from '../utils/userContext';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-const { width, height } = Dimensions.get('screen');
 const slides = [
   {
     key: 1,

@@ -87,7 +87,6 @@ const DoubtClearence = () => {
           </View>
 
           <Text style={{ color: '#8F8F8F', marginTop: 50 }}>
-            {' '}
             Note : Your solution will be send to your registered email.
           </Text>
           <View style={{ alignItems: 'center' }}>

@@ -20,16 +20,6 @@ const CourseScreen = props => {
         <View style={styles.container}>
           <View style={{paddingHorizontal: 30}}>
             <View style={{marginVertical: 10}}>
-              {/* <TouchableOpacity
-                onPress={() => props.navigation.navigate('my_course')}
-                style={styles.btn}>
-                <MaterialIcon
-                  name="bookshelf"
-                  size={30}
-                  color={colors.primary}
-                />
-                <Text style={styles.textBtn}>Your Courses</Text>
-              </TouchableOpacity> */}
               <TouchableOpacity
                 onPress={() => props.navigation.navigate('cbse')}
                 style={styles.btn}>

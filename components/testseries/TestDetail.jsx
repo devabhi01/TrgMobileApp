@@ -61,7 +61,6 @@ const TestDetail = (props) => {
         //   currencyCode:'INR'
         // }
       });
-      // console.log(error)
 
       if (!error) {
         // presenting payment sheet
