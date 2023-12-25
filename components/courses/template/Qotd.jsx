@@ -33,7 +33,7 @@ const Qotd = () => {
           borderRadius: 8,
           paddingVertical: 10,
           elevation: 3,
-          paddingVertical:20
+          paddingVertical: 20,
         }}>
         {isQodLoading ? (
           <ActivityIndicator
@@ -49,17 +49,19 @@ const Qotd = () => {
         ) : (
           <>
             <Text style={styles.quesstions}>{qod?.question} </Text>
-            <View style={{flexDirection:'row', justifyContent:'space-between'}}>
-            <Text style={styles.correctAns}>{showAnswer?qod?.answer:null} </Text>
-            <TouchableOpacity
-              style={styles.btn}
-              onPress={() => setShowAnswer(!showAnswer)}>
-              
-              {/* Toggle showAnswer state */}
-              <Text style={{color: '#0a0a0a', textAlign: 'center'}}>
-                {showAnswer ? 'Hide Answer' : 'Show Answer'}
+            <View
+              style={{flexDirection: 'row', justifyContent: 'space-between'}}>
+              <Text style={styles.correctAns}>
+                {showAnswer ? qod?.answer : null}{' '}
               </Text>
-            </TouchableOpacity>
+              <TouchableOpacity
+                style={styles.btn}
+                onPress={() => setShowAnswer(!showAnswer)}>
+                {/* Toggle showAnswer state */}
+                <Text style={{color: '#0a0a0a', textAlign: 'center'}}>
+                  {showAnswer ? 'Hide Answer' : 'Show Answer'}
+                </Text>
+              </TouchableOpacity>
             </View>
           </>
         )}

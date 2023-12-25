@@ -46,8 +46,9 @@ const SignUpScreen = props => {
   const handleNext = async props => {
     try {
       // submiting info through api
+      console.log(userInfo);
       const res = await registerUser(userInfo);
-
+      
       const data = await res.json();
 
       if (res.ok && res.status == 201) {
@@ -67,11 +68,8 @@ const SignUpScreen = props => {
     }
   };
 
-  const [selectGender, setSelectGender] = useState(null);
-  const handleGenderSelect = selectGender => {
-    setSelectGender(selectGender);
-  };
-
+  const [selectGender, setSelectGender] = useState('');
+  
   const genderData = [
     {
       gender: 'Male',
@@ -159,9 +157,10 @@ const SignUpScreen = props => {
                 <CustomDropdown
                   initialValue={genderData}
                   innerList="gender"
-                  onSelect={handleGenderSelect}
+                  
                   borderColor={'#dc3545'}
                   borderWidth={1}
+                  setData={setSelectGender}
                   displayName={'Gender'}
                 />
               </View>
@@ -201,7 +200,7 @@ const SignUpScreen = props => {
                 marginVertical: 12,
                 height: 50,
                 borderRadius: 10,
-                padding: 8,
+                padding: 15,
                 color: '#241D20',
                 marginHorizontal: 30,
               }}>
@@ -287,7 +286,7 @@ const styles = StyleSheet.create({
     marginVertical: 12,
     height: 50,
     borderRadius: 10,
-    padding: 8,
+    padding: 15,
     color: '#241D20',
     marginHorizontal: 30,
   },

@@ -20,7 +20,7 @@ const VideoPlayer = ({ videoId }) => {
     <YoutubePlayer
       height={videoHeight}
       width={videoWidth}
-      play={playing}
+      play={false}
       videoId={videoId}
       webViewStyle={{ opacity: 0.99 }} 
     />

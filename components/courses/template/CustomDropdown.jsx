@@ -63,7 +63,7 @@ const CustomDropdown = props => {
                   borderColor: '#8e8e8e',
                 }}
                 onPress={() => handleSelect(item)}>
-                <Text style={{fontWeight: '600', color: '#0a0a0a'}}>
+                <Text style={{fontWeight: '600', color: '#241D20'}}>
                   {item[props.innerList]}
                 </Text>
               </TouchableOpacity>
