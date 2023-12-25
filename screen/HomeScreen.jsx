@@ -16,6 +16,7 @@ import {colors} from '../constants';
 import Carousel from 'react-native-reanimated-carousel';
 import Qotd from '../components/courses/template/Qotd';
 import {fetchCarousel, fetchQod} from '../utils/APIs';
+import VideoPlayer from '../components/courses/template/VideoPlayer';
 
 // Course details
 const courses = [
@@ -183,6 +184,9 @@ const HomeScreen = props => {
                 </TouchableOpacity>
               );
             })}
+          </View> 
+          <View>
+            <VideoPlayer videoId={irqbmMNs2Bo} />
           </View>
 
         </View>
