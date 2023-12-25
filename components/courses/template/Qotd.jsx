@@ -1,6 +1,6 @@
 import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import React, {useState, useEffect} from 'react';
-import {ActivityIndicator, RadioButton} from 'react-native-paper';
+import {ActivityIndicator} from 'react-native-paper';
 import {fetchQod} from '../../../utils/APIs';
 
 const Qotd = () => {
@@ -33,6 +33,7 @@ const Qotd = () => {
           borderRadius: 8,
           paddingVertical: 10,
           elevation: 3,
+          paddingVertical:20
         }}>
         {isQodLoading ? (
           <ActivityIndicator
@@ -48,9 +49,8 @@ const Qotd = () => {
         ) : (
           <>
             <Text style={styles.quesstions}>{qod?.question} </Text>
-            {showAnswer && (
-              <Text style={styles.correctAns}>{qod?.answer} </Text>
-            )}
+            <View style={{flexDirection:'row', justifyContent:'space-between'}}>
+            <Text style={styles.correctAns}>{showAnswer?qod?.answer:null} </Text>
             <TouchableOpacity
               style={styles.btn}
               onPress={() => setShowAnswer(!showAnswer)}>
@@ -60,6 +60,7 @@ const Qotd = () => {
                 {showAnswer ? 'Hide Answer' : 'Show Answer'}
               </Text>
             </TouchableOpacity>
+            </View>
           </>
         )}
       </View>
@@ -107,12 +108,11 @@ const styles = StyleSheet.create({
     borderColor: '#dc3545',
     borderWidth: 1,
     width: 120,
-    flex: 1,
+    // flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
     alignSelf: 'flex-end',
     marginRight: 20,
-    marginTop: 10,
     borderRadius: 5,
   },
 });

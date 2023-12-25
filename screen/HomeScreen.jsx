@@ -45,17 +45,10 @@ const HomeScreen = props => {
     const getSliderData = async () => {
       try {
         setIsCarouselLoading(true);
-        setIsQodLoading(true);
         const res = await fetchCarousel();
         const carousel = await res.json();
         setSliderData(carousel);
         setIsCarouselLoading(false);
-
-        const res2 = await fetchQod();
-        const qodData = await res2.json();
-        console.log(qodData);
-        setIsQodLoading(qodData);
-        setIsQodLoading(false);
       } catch (error) {
         console.log(error);
       }
