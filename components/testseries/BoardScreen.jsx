@@ -7,17 +7,23 @@ import {
   View,
   Modal,
 } from 'react-native';
-import React, {useState, useRef} from 'react';
+import React, {useState, useRef, useEffect} from 'react';
 import {colors} from '../../constants';
 import {testData} from './testData';
 import QuestionItem from './QuestionItem';
 import Animated from 'react-native-reanimated';
+import {useNavigation} from '@react-navigation/native';
+import Timer from '../courses/template/Timer';
 
 const BoardScreen = ({route}) => {
-  // getting questions for quiz 
+  const navigation = useNavigation();
+  // getting questions for quiz
   const questionsData = route.params?.data || {};
 
   const {height, width} = Dimensions.get('window');
+
+  const [currentTime, setCurrentTime] = useState(600);
+  const [timerRunning, setTimerRunning] = useState(true);
 
   const [currentIndex, setCurrentIndex] = useState(1);
   const [questions, setQuestions] = useState(questionsData);
@@ -49,7 +55,6 @@ const BoardScreen = ({route}) => {
       return marks + (item.marked === item.correct ? 1 : 0);
     }, 0);
   };
-  
 
   const resetTest = () => {
     const tempData = questions;
@@ -63,6 +68,30 @@ const BoardScreen = ({route}) => {
     setQuestions(temp);
   };
 
+  useEffect(() => {
+    let interval;
+
+    if (timerRunning) {
+      interval = setInterval(() => {
+        setCurrentTime(prevTime => {
+          if (prevTime === 0) {
+            clearInterval(interval);
+            setTimerRunning(false);
+
+            // Auto-submit and navigate to the test result here
+            
+            navigation.navigate('test_result');
+
+            // Additional logic for submission if needed
+          }
+          return prevTime - 1;
+        });
+      }, 1000);
+    }
+
+    return () => clearInterval(interval);
+  }, [timerRunning, navigation]);
+
   return (
     <View style={styles.container}>
       <View style={styles.wraper}>
@@ -72,7 +101,9 @@ const BoardScreen = ({route}) => {
             justifyContent: 'space-between',
             marginTop: 20,
           }}>
-          <Text style={styles.subject}>Time : 9:00PM</Text>
+          <Text style={[styles.subject, {color: '#595959'}]}>
+            Time Remaining : <Timer initialTime={600} fontSize={16} />
+          </Text>
           <Text
             style={{
               color: colors.gray,
@@ -93,7 +124,7 @@ const BoardScreen = ({route}) => {
         </Text>
         <View style={{marginTop: -10}}>
           <FlatList
-            keyExtractor={(item) => item?._id}
+            keyExtractor={item => item?._id}
             showsHorizontalScrollIndicator={false}
             pagingEnabled
             ref={listRef}
@@ -157,6 +188,7 @@ const BoardScreen = ({route}) => {
               }}
               onPress={() => {
                 setModalVisible(true);
+                navigation.navigate('test_result');
               }}>
               <Text style={{color: 'white', fontSize: 14}}>Submit</Text>
             </TouchableOpacity>
@@ -268,7 +300,7 @@ const styles = StyleSheet.create({
     borderRadius: 10,
   },
   subject: {
-    fontSize: 18,
+    fontSize: 16,
     color: '#0a0a0a',
     fontWeight: '600',
     textAlign: 'left',

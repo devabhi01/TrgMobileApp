@@ -5,6 +5,7 @@ import {colors} from '../../constants';
 import {testData} from './testData';
 import Icon from 'react-native-vector-icons/Ionicons';
 import FAIcon from 'react-native-vector-icons/FontAwesome6';
+import { useNavigation } from '@react-navigation/native';
 import {
   addRemoveBookmark,
   checkIfBookmarked,
@@ -17,6 +18,7 @@ import {
 } from '@stripe/stripe-react-native';
 
 const TestDetail = props => {
+  const navigation = useNavigation();
   // user context
   const {user} = useUserContext();
   // quiz details
@@ -172,7 +174,7 @@ const TestDetail = props => {
           <TouchableOpacity
             style={styles.button}
             onPress={() =>
-              props.props.navigation.navigate('test_board', {
+              props.navigation.navigate('test_board', {
                 data: quiz?.questions,
               })
             }>

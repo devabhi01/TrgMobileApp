@@ -39,7 +39,8 @@ import MaterialList from '../components/material/MaterialList';
 import MaterialModal from '../components/material/MaterialModal';
 import OnBoardingScreen from '../screen/OnBoardingScreen';
 import MyMaterial from '../components/MyMaterial';
-import Result from '../components/testseries/Result';
+import Result from '../components/testseries/TestResult';
+import Timer from '../components/courses/template/Timer';
 
 const Stack = createStackNavigator();
 
@@ -357,6 +358,16 @@ const StudentStack = () => {
         />
 
         {/* Misc Screen refers */}
+        <Stack.Screen
+          name="timer"        
+          component={Timer}
+          options={{
+            headerTintColor: '#fff',
+            title: 'Choose Subject',
+            headerTitleAlign: 'center',
+          }}
+        />
+
       </Stack.Navigator>
     </>
   );
