@@ -9,7 +9,6 @@ import {
 } from 'react-native';
 import React from 'react';
 import {colors} from '../constants';
-import MaterialIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 import CbseSVG from '../assets/img/cbse.svg';
 
 const CourseScreen = props => {
