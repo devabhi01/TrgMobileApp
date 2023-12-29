@@ -16,6 +16,7 @@ import {colors} from '../constants';
 import Carousel from 'react-native-reanimated-carousel';
 import Qotd from '../components/courses/template/Qotd';
 import {fetchCarousel, fetchQod} from '../utils/APIs';
+import VideoPlayer from '../components/courses/template/VideoPlayer';
 
 // Course details
 const courses = [
@@ -34,7 +35,6 @@ const courses = [
 ];
 
 const HomeScreen = props => {
-
   // loading status
   const [isCarouselLoading, setIsCarouselLoading] = useState(false);
 
@@ -60,7 +60,7 @@ const HomeScreen = props => {
     <SafeAreaView style={{flex: 1, backgroundColor: colors.graylight}}>
       <ScrollView style={{paddingVertical: 10}}>
         <View style={styles.container}>
-          <View>
+          <View style={{marginTop:20}}>
             <View
               style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
               {isCarouselLoading ? (
@@ -94,6 +94,7 @@ const HomeScreen = props => {
                         style={{
                           width: '100%',
                           height: '100%',
+                          borderRadius: 5,
                           resizeMode: 'contain',
                         }}
                       />
@@ -164,7 +165,7 @@ const HomeScreen = props => {
               flexDirection: 'row',
               flexWrap: 'wrap',
               justifyContent: 'space-around',
-              marginBottom: 50,
+              marginBottom: 20,
             }}>
             {courses.map((course, index) => {
               return (
@@ -177,7 +178,20 @@ const HomeScreen = props => {
               );
             })}
           </View>
-
+          <Text
+            style={{
+              color: '#dc3545',
+              fontSize: 16,
+              fontWeight: 700,
+              marginHorizontal: 20,
+              marginBottom: 20,
+            }}>
+            Featured Video
+          </Text>
+          <View style={{justifyContent:'center',flexDirection:'row',flexWrap:'wrap',gap:20,marginBottom:20}}>
+            <VideoPlayer videoId={'irqbmMNs2Bo'} />
+            
+          </View>
         </View>
       </ScrollView>
     </SafeAreaView>

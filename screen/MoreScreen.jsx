@@ -60,9 +60,9 @@ const MoreScreen = props => {
         </View>
         <View style={styles.btnCont}>
           <MoreOptBtn
-            name={'Test Result'}
+            name={'stopwatch'}
             IocnName={'bookmarks'}
-            onPress={() => props.navigation.navigate('test_result')}
+            onPress={() => props.navigation.navigate('timer')}
             backgroundColor={'#17AADD'}
           />
         </View>
