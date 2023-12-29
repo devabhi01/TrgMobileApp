@@ -69,10 +69,11 @@ const AccountPrivacy = (props) => {
                             activeOutlineColor='#dc3545'
                             mode='outlined'
                             keyboardType='default'
-                            readOnly
-                            style={{ marginBottom: 30 }}
+                            disabled
+                            style={{ marginBottom: 5 }}
                             value={updateInfo.email}
                         />
+                        <Text style={{ color: 'red',textAlign:'right',fontSize:12,marginBottom:30 }}>You can't change email here.</Text>
 
                         <Text style={{ color: colors.textColor, fontWeight: 500, marginBottom: 10 }}>Your Phone Number : </Text>
                         <TextInput
@@ -81,11 +82,14 @@ const AccountPrivacy = (props) => {
                             activeOutlineColor='#dc3545'
                             keyboardType='numeric'
                             mode='outlined'
+                            style={{ marginBottom: 5 }}
                             maxLength={10}
-                            readOnly
-                            style={{ marginBottom: 30 }}
+                            disabled
+                            
                             value={updateInfo.phoneNo}
+                            
                         />
+                        <Text style={{ color: 'red',textAlign:'right',fontSize:12,marginBottom:30 }}>You can't change email here.</Text>
 
                         <Text style={{ color: colors.textColor, fontWeight: 500, marginBottom: 10 }}>Change Password</Text>
                         <TextInput

@@ -58,14 +58,14 @@ const MoreScreen = props => {
             backgroundColor={'#17AADD'}
           />
         </View>
-        <View style={styles.btnCont}>
+        {/* <View style={styles.btnCont}>
           <MoreOptBtn
             name={'stopwatch'}
             IocnName={'bookmarks'}
             onPress={() => props.navigation.navigate('timer')}
             backgroundColor={'#17AADD'}
           />
-        </View>
+        </View> */}
         
       </ScrollView>
     </SafeAreaView>

@@ -16,9 +16,9 @@ const MyMaterial = () => {
   return (
     <SafeAreaView style={{flex: 1}}>
       {/* In case of no downloads */}
-      <View style={{justifyContent:'center',alignItems:'center',flex:1}}>
-          <Text style={{color:'#0a0a0a'}}>No Materials(Paid)</Text>
-        </View>
+      <View style={{justifyContent: 'center', alignItems: 'center', flex: 1}}>
+        <Text style={{color: '#0a0a0a'}}>No Materials(Paid)</Text>
+      </View>
     </SafeAreaView>
   );
 };

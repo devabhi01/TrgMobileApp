@@ -157,7 +157,7 @@ const TestDetail = props => {
           </DataTable>
         </View>
         <View style={{width: '100%', marginHorizontal: 10}}>
-          <Text style={styles.paraText}>Price : {quiz?.price}Rs</Text>
+        <Text style={[styles.paraText,{fontSize:18}]}>Price : {' '} <FAIcon name='indian-rupee-sign' size={15} color="red"/> {quiz?.price}</Text>
 
           <Text style={[styles.paraText,{color:'#dc3545'}]}>
             Note: This test series will be added to my test series screen after
