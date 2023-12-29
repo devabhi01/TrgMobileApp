@@ -8,7 +8,6 @@ import FAIcon from 'react-native-vector-icons/FontAwesome6';
 import { useNavigation } from '@react-navigation/native';
 import {
   addRemoveBookmark,
-  checkIfBookmarked,
   createPaymentIntent,
 } from '../../utils/APIs';
 import { useUserContext } from '../../utils/userContext';
@@ -18,12 +17,12 @@ import {
 } from '@stripe/stripe-react-native';
 
 const TestDetail = props => {
-  const navigation = useNavigation();
   // user context
-  const { user } = useUserContext();
+  const { user, setQuizData } = useUserContext();
   // quiz details
   const quiz = props.route.params?.data || {};
   const bookmarked = props.route.params?.bookmarked;
+
   const [isBookmarked, setIsBookmarked] = useState(bookmarked);
   const [isDisabled, setIsDisabled] = useState(false);
 
@@ -87,7 +86,8 @@ const TestDetail = props => {
       // const res2 = await buyMaterial({ userId: user._id, materialId: material?._id })
       //go back
       // Alert.alert("Payment Success!", "Your material is added to my material screen :)")
-      props.navigation.goBack();
+      // props.navigation.goBack();
+      props.navigation.navigate('my_material');
     } catch (error) {
       console.log(error);
       Alert.alert('Something went wrong...');
@@ -110,9 +110,9 @@ const TestDetail = props => {
               <Icon name="bookmarks-outline" size={25} color="red" />
             )}
           </TouchableOpacity>
-          <TouchableOpacity>
+          {/* <TouchableOpacity>
             <FAIcon name="download" size={25} color="red" />
-          </TouchableOpacity>
+          </TouchableOpacity> */}
         </View>
 
         <Text style={[styles.heading]}>{quiz?.title}</Text>
@@ -157,12 +157,15 @@ const TestDetail = props => {
           </DataTable>
         </View>
         <View style={{ width: '100%', marginHorizontal: 10 }}>
-          <Text style={styles.paraText}>Price : {quiz?.price}Rs</Text>
-
-          <Text style={[styles.paraText, { color: '#dc3545' }]}>
-            Note: This test series will be added to my test series screen after
-            successful payment.
-          </Text>
+          {quiz?.isPaid && (<>
+            <Text style={{ color: colors.textColor }}>
+              Price : <FAIcon name="rupee" size={13} color="#000" />{' '}
+              {material?.price}
+            </Text>
+            <Text style={{ color: colors.textColor, flexWrap: 'wrap' }}>
+              Note : Quiz will added to my materials screen after successful
+              payment :
+            </Text></>)}
         </View>
         {quiz?.isPaid ? (
           <TouchableOpacity
@@ -173,10 +176,13 @@ const TestDetail = props => {
         ) : (
           <TouchableOpacity
             style={styles.button}
-            onPress={() =>
+            onPress={() => {
+              // setting quiz data to use it globally
+              setQuizData(quiz)
               props.navigation.navigate('test_board', {
                 data: quiz?.questions,
               })
+            }
             }>
             <Text style={styles.buttonText}>Start Test</Text>
           </TouchableOpacity>

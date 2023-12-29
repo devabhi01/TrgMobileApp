@@ -14,11 +14,11 @@ const {width} = Dimensions.get('window');
 const QuestionItem = memo(({data, selectedOption}) => {
   return (
     <View style={{width: width}}>
-      <Text style={styles.ques}>{data.question}</Text>
+      <Text style={styles.ques}>{data?.question}</Text>
       <View style={{marginTop: 20}}>
         <FlatList
-          keyExtractor={(item, index) => index.toString()}
-          data={data.options}
+          keyExtractor={(index) => index.toString()}
+          data={data?.options}
           renderItem={({item, index}) => {
             return (
               <TouchableOpacity

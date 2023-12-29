@@ -15,7 +15,7 @@ import {windowWidth} from '../utils/Dimensions';
 import {colors} from '../constants';
 import Carousel from 'react-native-reanimated-carousel';
 import Qotd from '../components/courses/template/Qotd';
-import {fetchCarousel, fetchQod} from '../utils/APIs';
+import {fetchCarousel} from '../utils/APIs';
 import VideoPlayer from '../components/courses/template/VideoPlayer';
 
 // Course details

@@ -120,7 +120,7 @@ const CustomDrawer = props => {
             style={styles.btn}
             onPress={() => navigation.navigate('doubt_clearence')}>
             <IconFA name="question" size={22} color={colors.graylight} />
-            <Text style={styles.btnText}>Doubt CLearence</Text>
+            <Text style={styles.btnText}>Doubt Clearence</Text>
           </TouchableOpacity>
           <TouchableOpacity
             style={styles.btn}

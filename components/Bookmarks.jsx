@@ -13,6 +13,7 @@ import { useNavigation } from '@react-navigation/native';
 import { checkIfBookmarked, fetchBookmarks, fetchQuiz } from '../utils/APIs';
 import { useUserContext } from '../utils/userContext';
 import { ScrollView } from 'react-native-gesture-handler';
+import FAIcon from 'react-native-vector-icons/FontAwesome';
 
 const Bookmarks = () => {
   const navigation = useNavigation();
@@ -64,7 +65,7 @@ const Bookmarks = () => {
 
   return (
     <SafeAreaView style={{ flex: 1 }}>
-      
+
       <ScrollView>
         <Text style={styles.title}>Study Materials</Text>
         {materialBookmarks.map((bookmark) => {
@@ -88,7 +89,18 @@ const Bookmarks = () => {
                   </View>
                 </View>
               </View>
-
+              {bookmark?.material?.isPaid ? (
+                <Text
+                  style={{
+                    fontSize: 20,
+                    color: 'white',
+                    textAlign: 'right',
+                    marginHorizontal: 100,
+                    justifyContent: 'center',
+                  }}>
+                  <FAIcon name="rupee" size={20} color="#fff" /> {bookmark?.material?.price}
+                </Text>
+              ) : null}
             </TouchableOpacity>
           </View>
         })}
@@ -114,6 +126,18 @@ const Bookmarks = () => {
                   </View>
                 </View>
               </View>
+              {bookmark?.quiz?.isPaid ? (
+                <Text
+                  style={{
+                    fontSize: 20,
+                    color: 'white',
+                    textAlign: 'right',
+                    marginHorizontal: 100,
+                    justifyContent: 'center',
+                  }}>
+                  <FAIcon name="rupee" size={20} color="#fff" /> {bookmark?.quiz?.price}
+                </Text>
+              ) : null}
             </TouchableOpacity>
           </View>
         })}
