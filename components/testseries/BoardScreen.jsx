@@ -5,7 +5,7 @@ import {
   Text,
   TouchableOpacity,
   View,
-  // Modal,
+  
 } from 'react-native';
 import React, {useState, useRef, useEffect} from 'react';
 import {colors} from '../../constants';
@@ -28,25 +28,20 @@ const BoardScreen = ({route}) => {
 
   const listRef = useRef();
 
-  const [modalVisible, setModalVisible] = useState(false);
+
 
   const OnSelectOption = (index, x) => {
-    const tempData = questions;
-    tempData.map((item, ind) => {
-      if (index == ind) {
-        if (item.marked !== -1) {
-          item.marked = -1;
-        } else {
-          item.marked = x;
+    setQuestions(prevQuestions => {
+      const updatedQuestions = prevQuestions.map((item, ind) => {
+        if (index === ind) {
+          return { ...item, marked: item.marked === x ? -1 : x };
         }
-      }
+        return item;
+      });
+      return updatedQuestions;
     });
-    let temp = [];
-    tempData.map(item => {
-      temp.push(item);
-    });
-    setQuestions(temp);
   };
+  
 
   // const getResults = () => {
   //   return questions.reduce((marks, item) => {
@@ -64,6 +59,7 @@ const BoardScreen = ({route}) => {
       temp.push(item);
     });
     setQuestions(temp);
+    
   };
 
   useEffect(() => {
@@ -100,7 +96,7 @@ const BoardScreen = ({route}) => {
             marginTop: 20,
           }}>
           <Text style={[styles.subject, {color: '#595959'}]}>
-            Time Remaining : <Timer initialTime={600} fontSize={16} />
+            Time Remaining : <Timer initialTime={currentTime} fontSize={16} />
           </Text>
           <Text
             style={{
@@ -185,7 +181,7 @@ const BoardScreen = ({route}) => {
                 alignItems: 'center',
               }}
               onPress={() => {
-                setModalVisible(true);
+                
                 navigation.navigate('test_result',{data:questions},{data:questions});
               }}>
               <Text style={{color: 'white', fontSize: 14}}>Submit</Text>
@@ -215,72 +211,7 @@ const BoardScreen = ({route}) => {
             </TouchableOpacity>
           )}
         </View>
-        {/* <Modal
-          animationType="slide"
-          transparent={true}
-          visible={modalVisible}
-          onRequestClose={() => {
-            setModalVisible(!modalVisible);
-          }}>
-          <View
-            style={{
-              flex: 1,
-              backgroundColor: 'rgba(0,0,0,0.5)',
-              justifyContent: 'center',
-              alignItems: 'center',
-            }}>
-            <View
-              style={{
-                backgroundColor: '#fff',
-                width: '90%',
-                height: '30%',
-                borderRadius: 8,
-              }}>
-              <Text
-                style={{
-                  color: colors.textColor,
-                  fontSize: 20,
-                  textAlign: 'center',
-                  marginTop: 20,
-                }}>
-                Test Result
-              </Text>
-              <View style={{marginLeft: 20, marginTop: 20}}>
-                <Text style={{color: colors.textColor, fontSize: 16}}>
-                  Maximum Marks :{' '}
-                  <Text style={{fontSize: 18, fontWeight: '700'}}>
-                    {questionsData.length}
-                  </Text>
-                </Text>
-                <Text style={{color: colors.textColor, fontSize: 16}}>
-                  Obtained Marks :{' '}
-                  <Text
-                    style={{color: 'green', fontWeight: '700', fontSize: 18}}>
-                    {getResults()}
-                  </Text>
-                </Text>
-              </View>
-              <View style={{flex: 1, alignItems: 'center', marginTop: 50}}>
-                <TouchableOpacity
-                  style={{
-                    backgroundColor: colors.primary,
-                    borderColor: colors.gray,
-                    width: 100,
-                    height: 40,
-                    borderRadius: 10,
-                  }}
-                  onPress={() => {
-                    setModalVisible(false);
-                  }}>
-                  <Text
-                    style={{textAlign: 'center', color: '#fff', padding: 10}}>
-                    Close
-                  </Text>
-                </TouchableOpacity>
-              </View>
-            </View>
-          </View>
-        </Modal> */}
+        
       </View>
     </View>
   );

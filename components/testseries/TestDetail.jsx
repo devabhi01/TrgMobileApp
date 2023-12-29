@@ -156,15 +156,6 @@ const TestDetail = props => {
             </DataTable.Row>
           </DataTable>
         </View>
-<<<<<<< HEAD
-        <View style={{width: '100%', marginHorizontal: 10}}>
-        <Text style={[styles.paraText,{fontSize:18}]}>Price : {' '} <FAIcon name='indian-rupee-sign' size={15} color="red"/> {quiz?.price}</Text>
-
-          <Text style={[styles.paraText,{color:'#dc3545'}]}>
-            Note: This test series will be added to my test series screen after
-            successful payment.
-          </Text>
-=======
         <View style={{ width: '100%', marginHorizontal: 10 }}>
           {quiz?.isPaid && (<>
             <Text style={{ color: colors.textColor }}>
@@ -175,7 +166,6 @@ const TestDetail = props => {
               Note : Quiz will added to my materials screen after successful
               payment :
             </Text></>)}
->>>>>>> 8e9535acda69fada601e4d088b3aae662a39d018
         </View>
         {quiz?.isPaid ? (
           <TouchableOpacity

@@ -114,13 +114,6 @@ const MyMaterial = () => {
 
 
   return (
-<<<<<<< HEAD
-    <SafeAreaView style={{flex: 1}}>
-      {/* In case of no downloads */}
-      <View style={{justifyContent: 'center', alignItems: 'center', flex: 1}}>
-        <Text style={{color: '#0a0a0a'}}>No Materials(Paid)</Text>
-      </View>
-=======
     <SafeAreaView style={{ flex: 1 }}>
       <ScrollView>
         <Text style={styles.title}>Paid Study Materials</Text>
@@ -202,7 +195,6 @@ const MyMaterial = () => {
             })}
       </ScrollView>
 
->>>>>>> 8e9535acda69fada601e4d088b3aae662a39d018
     </SafeAreaView>
   );
 };

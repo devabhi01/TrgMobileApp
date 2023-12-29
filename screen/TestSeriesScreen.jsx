@@ -115,7 +115,7 @@ const TestSeriesScreen = props => {
             <TouchableOpacity
               style={styles.btn}
               onPress={handleFilter}>
-              <Text style={styles.textBtn}>Lets Go</Text>
+              <Text style={styles.textBtn}>Start</Text>
             </TouchableOpacity>
 
           </View>
