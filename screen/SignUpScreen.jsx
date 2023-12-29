@@ -156,14 +156,14 @@ const SignUpScreen = props => {
                   width: windowWidth - 60,
                   marginLeft: 30,
                 }}>
-                <CustomDropdown
+                {/* <CustomDropdown
                   initialValue={genderData}
                   innerList="gender"
                   onSelect={handleGenderSelect}
                   borderColor={'#dc3545'}
                   borderWidth={1}
                   displayName={'Gender'}
-                />
+                /> */}
               </View>
             </ScrollView>
 

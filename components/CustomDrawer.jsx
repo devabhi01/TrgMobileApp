@@ -1,13 +1,11 @@
 import {
   View,
   Text,
-  ImageBackground,
   Image,
   Dimensions,
   StyleSheet,
   TouchableOpacity,
   Linking,
-  Alert
 } from 'react-native';
 import React, { useState } from 'react';
 import { useUserContext } from '../utils/userContext';
@@ -16,17 +14,16 @@ import { colors } from '../constants';
 import trgIcon from '../assets/img/trgIcon.png';
 import {
   DrawerContentScrollView,
-  DrawerItemList,
 } from '@react-navigation/drawer';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import IconFA from 'react-native-vector-icons/FontAwesome5';
 import IconIo from 'react-native-vector-icons/Ionicons';
 import { useNavigation } from '@react-navigation/native';
-import ImagePicker, { openPicker } from 'react-native-image-crop-picker';
+import ImagePicker from 'react-native-image-crop-picker';
 import storage from '@react-native-firebase/storage';
 import { updateUser } from '../utils/APIs';
 // import Avatar from 'react-native-paper/lib/typescript/components/Avatar/AvatarIcon';
-import ToastManager, {Toast} from 'toastify-react-native';
+import ToastManager, { Toast } from 'toastify-react-native';
 
 
 const { width, height } = Dimensions.get('screen');
@@ -100,20 +97,11 @@ const CustomDrawer = props => {
     <View style={{ flex: 1, backgroundColor: colors.graylight, marginTop: -10 }}>
       <ToastManager height={55} width={'auto'} />
       <DrawerContentScrollView {...props} >
-        {/* <ImageBackground
-          style={{ height: 140 }}
-          source={require('../assets/img/wall.jpg')}>
-          
-        </ImageBackground> */}
         <TouchableOpacity onPress={ImgPickAndUpload} >
-            <Image
-              style={styles.userImg}
-              // source={require('../assets/img/person.jpg')}
-              source={user?.profilePic ? { uri: user?.profilePic } : require('../assets/img/person.jpg')}
-            /></TouchableOpacity>
-        {/* <View style={styles.drawerList}>
-          <DrawerItemList {...props} />
-        </View> */}
+          <Image
+            style={styles.userImg}
+            source={user?.profilePic ? { uri: user?.profilePic } : require('../assets/img/person.jpg')}
+          /></TouchableOpacity>
         <View style={styles.drawerList}>
           <TouchableOpacity
             style={styles.btn}
@@ -157,7 +145,7 @@ const CustomDrawer = props => {
 
           <TouchableOpacity style={styles.logoutBtn} onPress={handleLogout}>
             <Icon name="logout" size={25} color={colors.primary} />
-            <Text style={[styles.btnText,{color:colors.primary}]}>Logout</Text>
+            <Text style={[styles.btnText, { color: colors.primary }]}>Logout</Text>
           </TouchableOpacity>
 
           <View

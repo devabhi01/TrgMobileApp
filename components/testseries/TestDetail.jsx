@@ -1,24 +1,26 @@
-import {Alert, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
-import React, {useState, useEffect} from 'react';
-import {DataTable} from 'react-native-paper';
-import {colors} from '../../constants';
-import {testData} from './testData';
+import { Alert, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { DataTable } from 'react-native-paper';
+import { colors } from '../../constants';
+import { testData } from './testData';
 import Icon from 'react-native-vector-icons/Ionicons';
 import FAIcon from 'react-native-vector-icons/FontAwesome6';
+import { useNavigation } from '@react-navigation/native';
 import {
   addRemoveBookmark,
   checkIfBookmarked,
   createPaymentIntent,
 } from '../../utils/APIs';
-import {useUserContext} from '../../utils/userContext';
+import { useUserContext } from '../../utils/userContext';
 import {
   initPaymentSheet,
   presentPaymentSheet,
 } from '@stripe/stripe-react-native';
 
 const TestDetail = props => {
+  const navigation = useNavigation();
   // user context
-  const {user} = useUserContext();
+  const { user } = useUserContext();
   // quiz details
   const quiz = props.route.params?.data || {};
   const bookmarked = props.route.params?.bookmarked;
@@ -29,7 +31,7 @@ const TestDetail = props => {
     try {
       setIsDisabled(!isDisabled);
       // updating bookmark in db
-      await addRemoveBookmark({userId: user._id, materialId: quiz._id});
+      await addRemoveBookmark({ userId: user._id, materialId: quiz._id });
       setIsDisabled(false);
     } catch (error) {
       console.log(error);
@@ -53,7 +55,7 @@ const TestDetail = props => {
       // console.log(quiz?.price, data)
 
       //initializing payment sheet
-      const {error} = await initPaymentSheet({
+      const { error } = await initPaymentSheet({
         merchantDisplayName: 'The Right Guru',
         // customerId: customer,
         // customerEphemeralKeySecret: ephemeralKey,
@@ -154,10 +156,10 @@ const TestDetail = props => {
             </DataTable.Row>
           </DataTable>
         </View>
-        <View style={{width: '100%', marginHorizontal: 10}}>
+        <View style={{ width: '100%', marginHorizontal: 10 }}>
           <Text style={styles.paraText}>Price : {quiz?.price}Rs</Text>
 
-          <Text style={[styles.paraText,{color:'#dc3545'}]}>
+          <Text style={[styles.paraText, { color: '#dc3545' }]}>
             Note: This test series will be added to my test series screen after
             successful payment.
           </Text>
@@ -172,7 +174,7 @@ const TestDetail = props => {
           <TouchableOpacity
             style={styles.button}
             onPress={() =>
-              props.props.navigation.navigate('test_board', {
+              props.navigation.navigate('test_board', {
                 data: quiz?.questions,
               })
             }>

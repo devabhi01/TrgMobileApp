@@ -215,3 +215,15 @@ export const sentOtp = async (body) => {
     }
     return await fetch(route, options)
 }
+
+//------------ fetch quiz --------------------
+export const fetchPaidMaterials = async (userId) => {
+    const route = `${root}/api/fetch-paid-materials/${userId}`
+    const options = {
+        method: "GET",
+        headers: {
+            "Content-Type": "application/json"
+        }
+    }
+    return await fetch(route, options)
+}

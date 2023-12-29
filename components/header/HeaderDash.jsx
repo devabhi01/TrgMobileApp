@@ -1,12 +1,8 @@
 import { StyleSheet, Text, View,TouchableOpacity } from 'react-native'
 import React from 'react'
 import Icon from 'react-native-vector-icons/FontAwesome6';
-import DrawerNav from '../../navigation/DrawerNav';
-
-import { useNavigation } from '@react-navigation/native';
 
 const HeaderDash = (props) => {
-  const navigation = useNavigation();
   return (
     
       <TouchableOpacity style={{marginLeft:20}}>
