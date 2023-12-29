@@ -1,29 +1,28 @@
-import {Alert, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
-import React, {useState, useEffect} from 'react';
-import {DataTable} from 'react-native-paper';
-import {colors} from '../../constants';
-import {testData} from './testData';
+import { Alert, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { DataTable } from 'react-native-paper';
+import { colors } from '../../constants';
+import { testData } from './testData';
 import Icon from 'react-native-vector-icons/Ionicons';
 import FAIcon from 'react-native-vector-icons/FontAwesome6';
 import { useNavigation } from '@react-navigation/native';
 import {
   addRemoveBookmark,
-  checkIfBookmarked,
   createPaymentIntent,
 } from '../../utils/APIs';
-import {useUserContext} from '../../utils/userContext';
+import { useUserContext } from '../../utils/userContext';
 import {
   initPaymentSheet,
   presentPaymentSheet,
 } from '@stripe/stripe-react-native';
 
 const TestDetail = props => {
-  const navigation = useNavigation();
   // user context
-  const {user} = useUserContext();
+  const { user, setQuizData } = useUserContext();
   // quiz details
   const quiz = props.route.params?.data || {};
   const bookmarked = props.route.params?.bookmarked;
+
   const [isBookmarked, setIsBookmarked] = useState(bookmarked);
   const [isDisabled, setIsDisabled] = useState(false);
 
@@ -31,7 +30,7 @@ const TestDetail = props => {
     try {
       setIsDisabled(!isDisabled);
       // updating bookmark in db
-      await addRemoveBookmark({userId: user._id, materialId: quiz._id});
+      await addRemoveBookmark({ userId: user._id, materialId: quiz._id });
       setIsDisabled(false);
     } catch (error) {
       console.log(error);
@@ -55,7 +54,7 @@ const TestDetail = props => {
       // console.log(quiz?.price, data)
 
       //initializing payment sheet
-      const {error} = await initPaymentSheet({
+      const { error } = await initPaymentSheet({
         merchantDisplayName: 'The Right Guru',
         // customerId: customer,
         // customerEphemeralKeySecret: ephemeralKey,
@@ -87,7 +86,8 @@ const TestDetail = props => {
       // const res2 = await buyMaterial({ userId: user._id, materialId: material?._id })
       //go back
       // Alert.alert("Payment Success!", "Your material is added to my material screen :)")
-      props.navigation.goBack();
+      // props.navigation.goBack();
+      props.navigation.navigate('my_material');
     } catch (error) {
       console.log(error);
       Alert.alert('Something went wrong...');
@@ -110,9 +110,9 @@ const TestDetail = props => {
               <Icon name="bookmarks-outline" size={25} color="red" />
             )}
           </TouchableOpacity>
-          <TouchableOpacity>
+          {/* <TouchableOpacity>
             <FAIcon name="download" size={25} color="red" />
-          </TouchableOpacity>
+          </TouchableOpacity> */}
         </View>
 
         <Text style={[styles.heading]}>{quiz?.title}</Text>
@@ -156,6 +156,7 @@ const TestDetail = props => {
             </DataTable.Row>
           </DataTable>
         </View>
+<<<<<<< HEAD
         <View style={{width: '100%', marginHorizontal: 10}}>
         <Text style={[styles.paraText,{fontSize:18}]}>Price : {' '} <FAIcon name='indian-rupee-sign' size={15} color="red"/> {quiz?.price}</Text>
 
@@ -163,6 +164,18 @@ const TestDetail = props => {
             Note: This test series will be added to my test series screen after
             successful payment.
           </Text>
+=======
+        <View style={{ width: '100%', marginHorizontal: 10 }}>
+          {quiz?.isPaid && (<>
+            <Text style={{ color: colors.textColor }}>
+              Price : <FAIcon name="rupee" size={13} color="#000" />{' '}
+              {material?.price}
+            </Text>
+            <Text style={{ color: colors.textColor, flexWrap: 'wrap' }}>
+              Note : Quiz will added to my materials screen after successful
+              payment :
+            </Text></>)}
+>>>>>>> 8e9535acda69fada601e4d088b3aae662a39d018
         </View>
         {quiz?.isPaid ? (
           <TouchableOpacity
@@ -173,10 +186,13 @@ const TestDetail = props => {
         ) : (
           <TouchableOpacity
             style={styles.button}
-            onPress={() =>
+            onPress={() => {
+              // setting quiz data to use it globally
+              setQuizData(quiz)
               props.navigation.navigate('test_board', {
                 data: quiz?.questions,
               })
+            }
             }>
             <Text style={styles.buttonText}>Start Test</Text>
           </TouchableOpacity>

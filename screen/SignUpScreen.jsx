@@ -154,7 +154,7 @@ const SignUpScreen = props => {
                   width: windowWidth - 60,
                   marginLeft: 30,
                 }}>
-                <CustomDropdown
+                {/* <CustomDropdown
                   initialValue={genderData}
                   innerList="gender"
                   
@@ -162,7 +162,7 @@ const SignUpScreen = props => {
                   borderWidth={1}
                   setData={setSelectGender}
                   displayName={'Gender'}
-                />
+                /> */}
               </View>
             </ScrollView>
 

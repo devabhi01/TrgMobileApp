@@ -5,13 +5,11 @@ import {
   Text,
   TouchableOpacity,
   View,
-  Modal,
+  // Modal,
 } from 'react-native';
 import React, {useState, useRef, useEffect} from 'react';
 import {colors} from '../../constants';
-import {testData} from './testData';
 import QuestionItem from './QuestionItem';
-import Animated from 'react-native-reanimated';
 import {useNavigation} from '@react-navigation/native';
 import Timer from '../courses/template/Timer';
 
@@ -50,11 +48,11 @@ const BoardScreen = ({route}) => {
     setQuestions(temp);
   };
 
-  const getResults = () => {
-    return questions.reduce((marks, item) => {
-      return marks + (item.marked === item.correct ? 1 : 0);
-    }, 0);
-  };
+  // const getResults = () => {
+  //   return questions.reduce((marks, item) => {
+  //     return marks + (item.marked === item.correct ? 1 : 0);
+  //   }, 0);
+  // };
 
   const resetTest = () => {
     const tempData = questions;
@@ -80,7 +78,7 @@ const BoardScreen = ({route}) => {
 
             // Auto-submit and navigate to the test result here
             
-            navigation.navigate('test_result');
+            navigation.navigate('test_result',{data:questions});
 
             // Additional logic for submission if needed
           }
@@ -188,7 +186,7 @@ const BoardScreen = ({route}) => {
               }}
               onPress={() => {
                 setModalVisible(true);
-                navigation.navigate('test_result');
+                navigation.navigate('test_result',{data:questions},{data:questions});
               }}>
               <Text style={{color: 'white', fontSize: 14}}>Submit</Text>
             </TouchableOpacity>

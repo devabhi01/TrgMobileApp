@@ -1,5 +1,5 @@
-import {ScrollView, StyleSheet, Text, View,TouchableOpacity} from 'react-native';
-import React, {useRef, useState} from 'react';
+import { ScrollView, StyleSheet, Text, View, TouchableOpacity } from 'react-native';
+import React, { useState, useEffect } from 'react';
 import Animated, {
   Easing,
   useSharedValue,
@@ -7,13 +7,21 @@ import Animated, {
   withTiming,
 } from 'react-native-reanimated';
 import { useNavigation } from '@react-navigation/native';
+import { useUserContext } from '../../utils/userContext';
 
-import Timer from '../courses/template/Timer';
-
-export default function TestDetail() {
+export default function TestDetail({ route }) {
+  //user context
+  const { quizData } = useUserContext();
   const navigation = useNavigation();
-  const currentDate =  new Date().toDateString();
-  const [correctAns, setCorrectAns] = useState(false);
+  // taking all data here
+  const questionsData = route.params?.data || {};
+
+  const currentDate = new Date().toDateString();
+
+  const [decisionArr, setDecisionArr] = useState([])
+  const [correctCount, setCorrectCount] = useState(0)
+  const [wrongCount, setWrongCount] = useState(0)
+
   const translateY = useSharedValue(500); // Initial position off the screen
 
   // Animation to move the component from bottom to top
@@ -24,9 +32,43 @@ export default function TestDetail() {
 
   const animatedStyle = useAnimatedStyle(() => {
     return {
-      transform: [{translateY: translateY.value}],
+      transform: [{ translateY: translateY.value }],
     };
   });
+
+  // function to get array of 0s and 1s i.e. correct or not
+  const calculateMarksArray = (questions) => {
+    return questions.map((question) => {
+      return question.options[question.marked - 1] === question.answer ? 1 : 0;
+    });
+  };
+
+  // to count correct ans
+  const countCorrectAnswers = (marksArray) => {
+    return marksArray.reduce((total, mark) => total + mark, 0);
+  };
+
+  // to count wrong ans
+   const countWrongAnswers = (marksArray) => {
+    return marksArray.reduce((total, mark) => total + (mark === 0 ? 1 : 0), 0);
+  };
+
+  useEffect(() => {
+    const checking = async () => {
+      const arr = await calculateMarksArray(questionsData);
+      setDecisionArr(arr)
+
+      console.log(decisionArr)
+
+      //count correct ones
+      setCorrectCount(await countCorrectAnswers(arr))
+      // count wrong ones
+      setWrongCount(await countWrongAnswers(arr))
+    }
+
+    checking()
+  }, [])
+
 
   return (
     <Animated.View style={[styles.container, animatedStyle]}>
@@ -39,9 +81,9 @@ export default function TestDetail() {
               color: '#595959',
               textAlign: 'center',
             }}>
-           {currentDate}
+            {currentDate}
           </Text>
-          
+
           <Text
             style={{
               marginTop: 10,
@@ -50,7 +92,7 @@ export default function TestDetail() {
               color: '#595959',
               textAlign: 'center',
             }}>
-            Class: 12
+            Class: {quizData?.class}
           </Text>
           <Text
             style={{
@@ -60,7 +102,7 @@ export default function TestDetail() {
               color: '#595959',
               textAlign: 'center',
             }}>
-            Subject: Maths
+            Subject: {quizData?.subject}
           </Text>
           <View
             style={{
@@ -73,26 +115,26 @@ export default function TestDetail() {
           />
 
           <View>
-            <Text style={{color: '#000', fontSize: 16, marginTop: 20}}>
-              Maximum Marks :{' '}
+            <Text style={{ color: '#000', fontSize: 16, marginTop: 20 }}>
+              Maximum Marks :
               <Text
                 style={{
                   color: 'green',
                   fontWeight: '700',
                   fontSize: 18,
                 }}>
-                10
+                {quizData?.totalMarks}
               </Text>
             </Text>
-            <Text style={{color: '#000', fontSize: 16}}>
-              Obtained Marks :{' '}
+            <Text style={{ color: '#000', fontSize: 16 }}>
+              Obtained Marks :
               <Text
                 style={{
                   color: 'green',
                   fontWeight: '700',
                   fontSize: 18,
                 }}>
-                8
+                { correctCount*(quizData?.markForEach)}
               </Text>
             </Text>
           </View>
@@ -102,15 +144,15 @@ export default function TestDetail() {
               flexDirection: 'row',
               marginTop: 30,
             }}>
-            <View style={{flexDirection: 'row', alignItems: 'center'}}>
+            <View style={{ flexDirection: 'row', alignItems: 'center' }}>
               <Text
                 style={[
                   styles.answers,
-                  {backgroundColor: 'green', width: 30, height: 30},
+                  { backgroundColor: 'green', width: 30, height: 30 },
                 ]}>
-                0
+                {correctCount}
               </Text>
-              <Text style={{fontSize: 16, fontWeight: '500', color: '#595959'}}>
+              <Text style={{ fontSize: 16, fontWeight: '500', color: '#595959' }}>
                 {'  '} : Correct Answer
               </Text>
             </View>
@@ -122,11 +164,11 @@ export default function TestDetail() {
               <Text
                 style={[
                   styles.answers,
-                  {backgroundColor: 'red', width: 30, height: 30},
+                  { backgroundColor: 'red', width: 30, height: 30 },
                 ]}>
-                0
+                {wrongCount}
               </Text>
-              <Text style={{fontSize: 16, fontWeight: '500', color: '#595959'}}>
+              <Text style={{ fontSize: 16, fontWeight: '500', color: '#595959' }}>
                 {'  '} : Wrong Answer
               </Text>
             </View>
@@ -143,102 +185,22 @@ export default function TestDetail() {
         </View>
 
         <View style={styles.answerContainer}>
-          <Text
+          {decisionArr.map((isCorrect, index)=>{return <Text
+            key={index}
             style={[
               styles.answers,
               {
-                backgroundColor: correctAns ? 'green' : 'red',
+                backgroundColor: isCorrect === 1 ? 'green' : 'red',
               },
             ]}>
-            1
-          </Text>
-          <Text
-            style={[
-              styles.answers,
-              {
-                backgroundColor: correctAns ? 'green' : 'red',
-              },
-            ]}>
-            2
-          </Text>
-          <Text
-            style={[
-              styles.answers,
-              {
-                backgroundColor: correctAns ? 'green' : 'red',
-              },
-            ]}>
-            3
-          </Text>
-          <Text
-            style={[
-              styles.answers,
-              {
-                backgroundColor: correctAns ? 'green' : 'red',
-              },
-            ]}>
-            4
-          </Text>
-          <Text
-            style={[
-              styles.answers,
-              {
-                backgroundColor: correctAns ? 'green' : 'red',
-              },
-            ]}>
-            5
-          </Text>
-          <Text
-            style={[
-              styles.answers,
-              {
-                backgroundColor: correctAns ? 'green' : 'red',
-              },
-            ]}>
-            6
-          </Text>
-          <Text
-            style={[
-              styles.answers,
-              {
-                backgroundColor: correctAns ? 'green' : 'red',
-              },
-            ]}>
-            7
-          </Text>
-          <Text
-            style={[
-              styles.answers,
-              {
-                backgroundColor: correctAns ? 'green' : 'red',
-              },
-            ]}>
-            8
-          </Text>
-          <Text
-            style={[
-              styles.answers,
-              {
-                backgroundColor: correctAns ? 'green' : 'red',
-              },
-            ]}>
-            9
-          </Text>
-          <Text
-            style={[
-              styles.answers,
-              {
-                backgroundColor: correctAns ? 'green' : 'red',
-              },
-            ]}>
-            10
-          </Text>
+            {index+1}
+          </Text>})}
         </View>
         <TouchableOpacity
-              style={styles.btn}
-              onPress={() => {navigation.navigate('TestSeries')}}>
-              <Text style={{fontSize:18,color:'#fafafafa'}}>Go to TestSeries</Text>
-            </TouchableOpacity>
+          style={styles.btn}
+          onPress={() => { navigation.navigate('TestSeries') }}>
+          <Text style={{ fontSize: 18, color: '#fafafafa' }}>Go to TestSeries</Text>
+        </TouchableOpacity>
       </ScrollView>
     </Animated.View>
   );

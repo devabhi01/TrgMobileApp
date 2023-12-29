@@ -1,23 +1,22 @@
-import React, {useState, useEffect} from 'react';
-import {StyleSheet, Text, View, TouchableOpacity, Modal} from 'react-native';
-import {colors} from '../../constants';
+import React, { useState, useEffect } from 'react';
+import { StyleSheet, Text, View, TouchableOpacity, Modal } from 'react-native';
+import { colors } from '../../constants';
 import Icon from 'react-native-vector-icons/Ionicons';
 import IconFA from 'react-native-vector-icons/FontAwesome';
 
 import FAIcon from 'react-native-vector-icons/FontAwesome6';
 import {
   addRemoveBookmark,
-  buyMaterial,
   createPaymentIntent,
 } from '../../utils/APIs';
-import {useUserContext} from '../../utils/userContext';
+import { useUserContext } from '../../utils/userContext';
 import RNFetchBlob from 'rn-fetch-blob';
-import {Alert} from 'react-native';
+import { Alert } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import {useStripe} from '@stripe/stripe-react-native';
+import { useStripe } from '@stripe/stripe-react-native';
 
-const MaterialModal = ({navigation, route}) => {
-  const {user, downloads, setDownloads} = useUserContext();
+const MaterialModal = ({ navigation, route }) => {
+  const { user, downloads, setDownloads } = useUserContext();
   // material details
   const material = route.params?.data || {};
   const bookmarked = route.params?.bookmarked;
@@ -27,7 +26,7 @@ const MaterialModal = ({navigation, route}) => {
   const [isDisabled, setIsDisabled] = useState(false);
 
   //payment inits
-  const {initPaymentSheet, presentPaymentSheet} = useStripe();
+  const { initPaymentSheet, presentPaymentSheet } = useStripe();
   // const [loading, setLoading] = useState(false);
 
   const toggleBookmark = async () => {
@@ -35,7 +34,7 @@ const MaterialModal = ({navigation, route}) => {
       // console.log(isBookmarked)
       setIsDisabled(!isDisabled);
       // updating bookmark in db
-      await addRemoveBookmark({userId: user._id, materialId: material?._id});
+      await addRemoveBookmark({ userId: user._id, materialId: material?._id });
       setIsBookmarked(!isBookmarked);
       setIsDisabled(false);
     } catch (error) {
@@ -46,7 +45,7 @@ const MaterialModal = ({navigation, route}) => {
 
   const handleDownload = async () => {
     try {
-      const {fs} = RNFetchBlob;
+      const { fs } = RNFetchBlob;
       const rootDir = fs.dirs.DownloadDir;
       const folderName = 'TheRightGuru';
       const folderPath = `${rootDir}/${folderName}`;
@@ -64,13 +63,13 @@ const MaterialModal = ({navigation, route}) => {
         fileCache: true,
         addAndroidDownloads: {
           useDownloadManager: true,
-          notification: true,
+          notification: false,
           path: filePath,
         },
       }).fetch('GET', material?.pdfUrl);
 
       //saving downloaded material in user context and async store
-      const materialWithPath = {...material, pdfUrl: filePath};
+      const materialWithPath = { ...material, pdfUrl: filePath };
       await AsyncStorage.setItem(
         'downloads',
         JSON.stringify([...downloads, materialWithPath]),
@@ -103,7 +102,7 @@ const MaterialModal = ({navigation, route}) => {
       // console.log(material?.price, data)
 
       //initializing payment sheet
-      const {error} = await initPaymentSheet({
+      const { error } = await initPaymentSheet({
         merchantDisplayName: 'The Right Guru',
         // customerId: customer,
         // customerEphemeralKeySecret: ephemeralKey,
@@ -136,7 +135,7 @@ const MaterialModal = ({navigation, route}) => {
       // const res2 = await buyMaterial({ userId: user._id, materialId: material?._id })
       //go back
       // Alert.alert("Payment Success!", "Your material is added to my material screen :)")
-      navigation.goBack();
+      navigation.navigate('my_material');
     } catch (error) {
       console.log(error);
       Alert.alert('Something went wrong...');
@@ -209,9 +208,9 @@ const MaterialModal = ({navigation, route}) => {
                 <Icon name="bookmarks-outline" size={25} color="red" />
               )}
             </TouchableOpacity>
-            <TouchableOpacity onPress={handleDownload}>
+            {!material?.isPaid && <TouchableOpacity onPress={handleDownload}>
               <FAIcon name="download" size={25} color="red" />
-            </TouchableOpacity>
+            </TouchableOpacity>}
           </View>
 
           <View
@@ -221,24 +220,25 @@ const MaterialModal = ({navigation, route}) => {
               marginBottom: 20,
               gap: 5,
             }}>
-            <Text style={{color: colors.textColor}}>
+            <Text style={{ color: colors.textColor }}>
               Material name : {material?.title}
             </Text>
-            <Text style={{color: colors.textColor}}>
+            <Text style={{ color: colors.textColor }}>
               Class : {material?.class}
             </Text>
-            <Text style={{color: colors.textColor}}>
+            <Text style={{ color: colors.textColor }}>
               Description : {material?.description}
             </Text>
-            <Text style={{color: colors.textColor}}>
-              Price : <IconFA name="rupee" size={13} color="#000" />{' '}
-              {material?.price}
-            </Text>
 
-            <Text style={{color: colors.textColor, flexWrap: 'wrap'}}>
-              Note : Material will added to my material screen after successful
-              payment :
-            </Text>
+            {material?.isPaid && (<>
+              <Text style={{ color: colors.textColor }}>
+                Price : <IconFA name="rupee" size={13} color="#000" />{' '}
+                {material?.price}
+              </Text>
+              <Text style={{ color: colors.textColor, flexWrap: 'wrap' }}>
+                Note : Material will added to my materials screen after successful
+                payment :
+              </Text></>)}
           </View>
 
           {material?.isPaid ? (
@@ -251,7 +251,7 @@ const MaterialModal = ({navigation, route}) => {
           ) : (
             <TouchableOpacity
               onPress={() => {
-                navigation.navigate('pdf_screen', {uri: material?.pdfUrl});
+                navigation.navigate('pdf_screen', { uri: material?.pdfUrl });
               }}>
               <Text style={styles.openBtn}>Open</Text>
             </TouchableOpacity>
