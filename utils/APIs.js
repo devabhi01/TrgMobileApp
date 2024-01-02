@@ -239,3 +239,15 @@ export const fetchPaidQuizes = async (userId) => {
     }
     return await fetch(route, options)
 }
+
+//------------ fetch videos --------------------
+export const fetchVideos = async () => {
+    const route = `${root}/api/fetch-videos`
+    const options = {
+        method: "GET",
+        headers: {
+            "Content-Type": "application/json"
+        }
+    }
+    return await fetch(route, options)
+}
