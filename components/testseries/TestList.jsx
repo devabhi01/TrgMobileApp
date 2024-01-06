@@ -22,7 +22,6 @@ const TestList = ({ route }) => {
   const { user } = useUserContext();
 
   const quizes = route.params?.data || [];
-  // console.log(quizes)
 
   const navigateToTestDetails = async quizId => {
     try {

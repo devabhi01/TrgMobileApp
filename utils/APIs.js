@@ -1,6 +1,6 @@
 const root = "https://trgbackend-production.up.railway.app"
 // const root = "http://172.20.10.2:1222"
-// const root = "https://ea38-2409-4050-e9f-2638-9038-37ea-e7da-5c14.ngrok-free.app"
+// const root = "https://a092-2405-204-312f-9387-8cf4-39ca-9be7-14cb.ngrok-free.app"
 
 // ---------- register user ------------------
 export const registerUser = async (body) => {
@@ -190,20 +190,6 @@ export const fetchBookmarks = async (userId) => {
 }
 
 //------------ creating payment intent --------------------
-export const createPaymentIntent = async (body) => {
-    const route = `${root}/payment/intent`
-    const options = {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json",
-            'Accept': 'application/json'
-        },
-        body: JSON.stringify(body)
-    }
-    return await fetch(route, options)
-}
-
-//------------ creating payment intent --------------------
 export const sentOtp = async (body) => {
     const route = `${root}/api/send-otp`
     const options = {
@@ -248,6 +234,20 @@ export const fetchVideos = async () => {
         headers: {
             "Content-Type": "application/json"
         }
+    }
+    return await fetch(route, options)
+}
+
+//------------ creating order --------------------
+export const createOrder = async (body) => {
+    const route = `${root}/payment/create-order`
+    const options = {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+            'Accept': 'application/json'
+        },
+        body: JSON.stringify(body)
     }
     return await fetch(route, options)
 }

@@ -3,17 +3,17 @@ import { StyleSheet, Text, View, TouchableOpacity, Modal } from 'react-native';
 import { colors } from '../../constants';
 import Icon from 'react-native-vector-icons/Ionicons';
 import IconFA from 'react-native-vector-icons/FontAwesome';
-
 import FAIcon from 'react-native-vector-icons/FontAwesome6';
 import {
   addRemoveBookmark,
-  createPaymentIntent,
+  createOrder,
 } from '../../utils/APIs';
 import { useUserContext } from '../../utils/userContext';
 import RNFetchBlob from 'rn-fetch-blob';
 import { Alert } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { useStripe } from '@stripe/stripe-react-native';
+import RazorpayCheckout from 'react-native-razorpay';
+import {RAZORPAY_KEY_ID} from '@env'
 
 const MaterialModal = ({ navigation, route }) => {
   const { user, downloads, setDownloads } = useUserContext();
@@ -24,10 +24,6 @@ const MaterialModal = ({ navigation, route }) => {
   // console.log(bookmarked, material);
   const [isBookmarked, setIsBookmarked] = useState(bookmarked);
   const [isDisabled, setIsDisabled] = useState(false);
-
-  //payment inits
-  const { initPaymentSheet, presentPaymentSheet } = useStripe();
-  // const [loading, setLoading] = useState(false);
 
   const toggleBookmark = async () => {
     try {
@@ -88,59 +84,47 @@ const MaterialModal = ({ navigation, route }) => {
   };
 
   // checkout function
-  const handleCheckout = async material => {
+  const handleCheckout = async (material) =>{
     try {
-      console.log('payment initialted...');
-      // creating payment intend
+      // creating payment order
       const price = material?.price;
-      const res = await createPaymentIntent({
+      const res = await createOrder({
         amount: Math.floor(price * 100),
         userId: user?._id,
         materialId: material?._id,
       });
       const data = await res.json();
-      // console.log(material?.price, data)
 
-      //initializing payment sheet
-      const { error } = await initPaymentSheet({
-        merchantDisplayName: 'The Right Guru',
-        // customerId: customer,
-        // customerEphemeralKeySecret: ephemeralKey,
-        paymentIntentClientSecret: data.paymentIntent,
-        // Set `allowsDelayedPaymentMethods` to true if your business can handle payment
-        //methods that complete payment after a delay, like SEPA Debit and Sofort.
-        allowsDelayedPaymentMethods: true,
-        // defaultBillingDetails: {
-        //   name: user?.name,
-        // },
-        // googlePay:{
-        //   merchantCountryCode:'IND',
-        //   testEnv:true,
-        //   currencyCode:'INR'
-        // }
-      });
-      // console.log(error)
-
-      if (!error) {
-        // presenting payment sheet
-        // setLoading(true);
-        const errRes = await presentPaymentSheet();
-        if (errRes) {
-          // Alert.alert("Payment flow was intrupted ;(");
-          // return;
-        }
+      // proceeding with payment for orderId
+      var options = {
+        description: material?.description,
+        image: {uri:require('../../assets/img/trgIcon.png')},
+        currency: 'INR',
+        key: RAZORPAY_KEY_ID,
+        amount: material?.price*100,
+        name: 'The Right Guru',
+        order_id: data.order.id,
+        prefill: {
+          email: user?.email,
+          contact: user?.phoneNo,
+          name: user?.name
+        },
+        theme: {color: '#ff0000'},
+        notes: data.order.notes,
       }
-
-      // adding paid material to user account
-      // const res2 = await buyMaterial({ userId: user._id, materialId: material?._id })
-      //go back
-      // Alert.alert("Payment Success!", "Your material is added to my material screen :)")
-      navigation.navigate('my_material');
+      RazorpayCheckout.open(options).then((data) => {
+        // handle success
+        navigation.navigate('my_material');
+      }).catch((error) => {
+        // handle failure
+        console.log(`Error: ${error.code} | ${error.description}`);
+        Alert.alert(`Something went wrong`);
+      });
     } catch (error) {
       console.log(error);
       Alert.alert('Something went wrong...');
     }
-  };
+  }
 
   return (
     <Modal

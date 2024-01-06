@@ -5,6 +5,7 @@ import {
   SafeAreaView,
   TouchableOpacity,
   Alert,
+  BackHandler,
 } from 'react-native';
 import { colors } from '../constants';
 import React, { useState, useEffect } from 'react';
@@ -35,7 +36,6 @@ const MyMaterial = () => {
         const res = await fetchPaidMaterials(user?._id);
         const paidMaterials = await res.json();
         setPaidMaterials(paidMaterials)
-        console.log(paidMaterials)
 
         // fetching paid quizes
         const res2 = await fetchPaidQuizes(user?._id)
@@ -59,7 +59,6 @@ const MyMaterial = () => {
       const folderName = 'TheRightGuru';
       const folderPath = `${rootDir}/${folderName}`;
       const filePath = `${folderPath}/${material?.title}`; // Path to the file to be downloaded
-      // console.log(filePath)
 
       // Check if the folder exists, create it if it doesn't
       const folderExists = await fs.isDir(folderPath);
@@ -85,7 +84,6 @@ const MyMaterial = () => {
       );
       setDownloads([...downloads, materialWithPath]);
 
-      // console.log('File downloaded:', response);
       Alert.alert(
         'File Downloaded!',
         'Your download are available now in My Downloads',
@@ -112,6 +110,21 @@ const MyMaterial = () => {
     }
   };
 
+  // controlling back button
+  useEffect(() => {
+    const backAction = () => {
+      navigation.navigate('More');
+      return true;
+    };
+
+    const backHandler = BackHandler.addEventListener(
+      'hardwareBackPress',
+      backAction,
+    );
+
+    return () => backHandler.remove();
+  }, [navigation]);
+
 
   return (
     <SafeAreaView style={{ flex: 1 }}>
@@ -123,7 +136,7 @@ const MyMaterial = () => {
           </View></>
           : isLoading ? <ActivityIndicator style={{ marginVertical: 40 }} />
             : paidMaterials.map((item) => {
-              return <View key={item._id} style={{ marginHorizontal: 20, }}>
+              return <View key={item._id} style={{ marginHorizontal: 20, marginVertical:10 }}>
                 <TouchableOpacity
                   style={styles.button}
                   onPress={() => navigation.navigate('pdf_screen', { uri: item?.pdfUrl })}>

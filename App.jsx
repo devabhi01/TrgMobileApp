@@ -5,7 +5,6 @@ import DecideStack from './navigation/DecideStack';
 import {UserProvider, useUserContext} from './utils/userContext';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import Splash from './components/Splash';
-import {StripeProvider} from '@stripe/stripe-react-native';
 import OnBoardingScreen from './screen/OnBoardingScreen';
 
 const NavComponent = () => {
@@ -42,12 +41,10 @@ const NavComponent = () => {
 const App = () => {
   return (
     <>
-      <StripeProvider publishableKey="pk_test_51OIpBHSBoBUkzh0Q83JSOVvCiumj2kgG8EAQdRx0hIcp3mTPxYLAuneKiVk3uZO3LhQeT6ENc98f7HqXXAefA7Sf00aCzFZE09">
         {/* // wrapping with context provide */}
         <UserProvider>
           <NavComponent />
         </UserProvider>
-      </StripeProvider>
     </>
   );
 };

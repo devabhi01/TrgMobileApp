@@ -61,8 +61,6 @@ const Videos = () => {
               </View>
             })
         }
-
-
       </ScrollView>
     </SafeAreaView>
   );

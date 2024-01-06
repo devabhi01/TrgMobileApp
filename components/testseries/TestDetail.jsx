@@ -2,19 +2,15 @@ import { Alert, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import React, { useState, useEffect } from 'react';
 import { DataTable } from 'react-native-paper';
 import { colors } from '../../constants';
-import { testData } from './testData';
 import Icon from 'react-native-vector-icons/Ionicons';
-import FAIcon from 'react-native-vector-icons/FontAwesome6';
-import { useNavigation } from '@react-navigation/native';
+import FAIcon from 'react-native-vector-icons/FontAwesome';
 import {
   addRemoveBookmark,
-  createPaymentIntent,
+  createOrder,
 } from '../../utils/APIs';
 import { useUserContext } from '../../utils/userContext';
-import {
-  initPaymentSheet,
-  presentPaymentSheet,
-} from '@stripe/stripe-react-native';
+import RazorpayCheckout from 'react-native-razorpay';
+import {RAZORPAY_KEY_ID} from '@env'
 
 const TestDetail = props => {
   // user context
@@ -40,54 +36,42 @@ const TestDetail = props => {
   };
 
   // checkout function
-  const handleCheckout = async quiz => {
+  const handleCheckout = async (quiz) => {
     try {
-      console.log('payment initialted...');
-      // creating payment intend
-      const price = quiz?.price;
-      const res = await createPaymentIntent({
-        amount: Math.floor(price * 100),
-        userId: user?._id,
-        materialId: quiz?._id,
-      });
-      const data = await res.json();
-      // console.log(quiz?.price, data)
+       // creating payment order
+       const price = quiz?.price;
+       const res = await createOrder({
+         amount: Math.floor(price * 100),
+         userId: user?._id,
+         materialId: quiz?._id,
+       });
+       const data = await res.json();
 
-      //initializing payment sheet
-      const { error } = await initPaymentSheet({
-        merchantDisplayName: 'The Right Guru',
-        // customerId: customer,
-        // customerEphemeralKeySecret: ephemeralKey,
-        paymentIntentClientSecret: data.paymentIntent,
-        // Set `allowsDelayedPaymentMethods` to true if your business can handle payment
-        //methods that complete payment after a delay, like SEPA Debit and Sofort.
-        allowsDelayedPaymentMethods: true,
-        // defaultBillingDetails: {
-        //   name: user?.name,
-        // },
-        // googlePay:{
-        //   merchantCountryCode:'IND',
-        //   testEnv:true,
-        //   currencyCode:'INR'
-        // }
-      });
-
-      if (!error) {
-        // presenting payment sheet
-        // setLoading(true);
-        const errRes = await presentPaymentSheet();
-        if (errRes) {
-          // Alert.alert("Payment flow was intrupted ;(");
-          // return;
-        }
+      // proceeding with payment for orderId
+      var options = {
+        description: quiz?.description,
+        image: {uri:require('../../assets/img/trgIcon.png')},
+        currency: 'INR',
+        key: RAZORPAY_KEY_ID,
+        amount: quiz?.price*100,
+        name: 'The Right Guru',
+        order_id: data.order.id,
+        prefill: {
+          email: user?.email,
+          contact: user?.phoneNo,
+          name: user?.name
+        },
+        theme: {color: '#ff0000'},
+        notes: data.order.notes,
       }
-
-      // adding paid material to user account
-      // const res2 = await buyMaterial({ userId: user._id, materialId: material?._id })
-      //go back
-      // Alert.alert("Payment Success!", "Your material is added to my material screen :)")
-      // props.navigation.goBack();
-      props.navigation.navigate('my_material');
+      RazorpayCheckout.open(options).then((data) => {
+        // handle success
+        props.navigation.navigate('my_material');
+      }).catch((error) => {
+        // handle failure
+        console.log(`Error: ${error}`);
+        Alert.alert(`Something went wrong`);
+      });
     } catch (error) {
       console.log(error);
       Alert.alert('Something went wrong...');
@@ -110,9 +94,6 @@ const TestDetail = props => {
               <Icon name="bookmarks-outline" size={25} color="red" />
             )}
           </TouchableOpacity>
-          {/* <TouchableOpacity>
-            <FAIcon name="download" size={25} color="red" />
-          </TouchableOpacity> */}
         </View>
 
         <Text style={[styles.heading]}>{quiz?.title}</Text>
@@ -160,7 +141,7 @@ const TestDetail = props => {
           {quiz?.isPaid && (<>
             <Text style={{ color: colors.textColor }}>
               Price : <FAIcon name="rupee" size={13} color="#000" />{' '}
-              {material?.price}
+              {quiz?.price}
             </Text>
             <Text style={{ color: colors.textColor, flexWrap: 'wrap' }}>
               Note : Quiz will added to my materials screen after successful
